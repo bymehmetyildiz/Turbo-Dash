@@ -111,7 +111,7 @@ public class Player : MonoBehaviour
             transform.position = new Vector3(
                 xPos,
                 startPosition.y + yOffset,
-                startPosition.z
+                transform.position.z
             );
 
             elapsed += Time.deltaTime;
@@ -119,8 +119,7 @@ public class Player : MonoBehaviour
         }
 
         // Snap to final lane position
-        transform.position = endPosition;
-       
+        transform.position = new Vector3(endPosition.x, endPosition.y, transform.position.z);
 
         currentLane = targetLane;
         isChangingLane = false;
