@@ -16,6 +16,8 @@ public class Player : MonoBehaviour
     public ChangeLaneState changeLaneState;   
     public JumpState jumpState;
     public AirState airState;
+    public RollState rollState;
+    public DeathState deathState;
 
     // Idle properties
     public bool isStarted;
@@ -29,6 +31,7 @@ public class Player : MonoBehaviour
     public bool isChangingLane = false;
     public float[] lanePositions = { -2.15f, 0f, 2.15f };
     public int currentLane = 1;
+    public float jumpHeight = -10f;
 
     private void Awake()
     {
@@ -40,6 +43,8 @@ public class Player : MonoBehaviour
         changeLaneState = new ChangeLaneState(stateMachine, "ChangeLane", this, controller);        
         jumpState = new JumpState(stateMachine, "Jump", this, controller);
         airState = new AirState(stateMachine, "Fall", this, controller);
+        rollState = new RollState(stateMachine, "Roll", this, controller);
+        deathState = new DeathState(stateMachine, "Death", this, controller);
     }
 
     void Start()
@@ -59,15 +64,7 @@ public class Player : MonoBehaviour
     }
 
     //Check if Turn Animation Ended
-    public void TriggerCalled()
-    {
-        if(stateMachine.currentstate == turnState)
-            turnState.AnimationTrigger();
-        else if(stateMachine.currentstate == changeLaneState)
-            changeLaneState.AnimationTrigger();
-
-    }
-    
+    public void TriggerCalled() => stateMachine.currentstate.AnimationTrigger();
 
     // Turn
     public IEnumerator Turn()
@@ -86,6 +83,7 @@ public class Player : MonoBehaviour
             transform.rotation = endRotation;        
     }
 
+    // Change Lane with a hop
     public IEnumerator ChangeLane(int targetLane)
     {
         isChangingLane = true;
@@ -125,6 +123,55 @@ public class Player : MonoBehaviour
         isChangingLane = false;
     }
 
-    
+
+    //Death
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        Vehicle vehicle = hit.gameObject.GetComponent<Vehicle>();
+
+        if (vehicle != null)
+        {            
+            stateMachine.ChangeState(deathState);
+            isStarted = false;
+            Vehicle[] vehicles = FindObjectsOfType<Vehicle>();
+            foreach (Vehicle v in vehicles)
+            {
+                v.speed = 0;
+            }
+            StartCoroutine(DeathBounce());
+        }
+    }
+
+    private IEnumerator DeathBounce()
+    {
+        Vector3 startPosition = transform.position;
+        Vector3 endPosition = transform.position + Vector3.back * 5;
+
+        float duration = 1f; // slightly longer for the hop
+        float elapsed = 0f;
+
+        float hopHeight = 2.5f; // how high the hop goes
+
+        while (elapsed < duration)
+        {
+            float t = Mathf.Clamp01(elapsed / duration);
+
+            // Horizontal movement
+            float zPos = Mathf.Lerp(startPosition.z, endPosition.z, t);
+
+            // Vertical hop arc (parabola)
+            float yOffset = hopHeight * Mathf.Sin(t * Mathf.PI);
+
+            transform.position = new Vector3(
+                transform.position.x,
+                startPosition.y + yOffset,
+                zPos
+            );
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.position = endPosition;
+    }
 
 }

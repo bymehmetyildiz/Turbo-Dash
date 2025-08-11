@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class JumpState : PlayerState
 {
-    private float jumpHeight = 2f; // Jump height in Unity units
+    
 
     public JumpState(StateMachine stateMachine, string animBoolName, Player player, CharacterController controller)
         : base(stateMachine, animBoolName, player, controller)
@@ -15,7 +15,7 @@ public class JumpState : PlayerState
     public override void Enter()
     {
         base.Enter();       
-        player.verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * player.gravity);
+        player.verticalVelocity = Mathf.Sqrt(player.jumpHeight * player.gravity);
         stateTimer = 0.5f; // Duration of the jump state
     }
 

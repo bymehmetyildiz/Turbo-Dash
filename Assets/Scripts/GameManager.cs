@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject[] vehicles;
     [SerializeField] private GameObject[] obstacles;
     [SerializeField] private float spawnInterval;
+    private float minSpawnInterval = 1f;
+    private float maxSpawnInterval = 3f;
     [SerializeField] private float spawnTimer;
     [SerializeField] private float spawnDistance;
 
@@ -32,7 +34,13 @@ public class GameManager : MonoBehaviour
             {
                 SpawnVehicle();
                 spawnTimer = 0f;
-                spawnInterval = Random.Range(0.5f, 2f); // Randomize the next spawn interval
+                spawnInterval = Random.Range(minSpawnInterval, maxSpawnInterval);
+
+                if(minSpawnInterval > 0.25f)
+                    minSpawnInterval -= minSpawnInterval * 0.01f; 
+
+                if(maxSpawnInterval > 0.75f)
+                    maxSpawnInterval -= maxSpawnInterval * 0.01f;
             }
         }
        
@@ -71,6 +79,19 @@ public class GameManager : MonoBehaviour
                 );
                 Instantiate(vehicle, spawnPos, Quaternion.Euler(0, 180, 0));
             }
+        }
+
+        float middleLane = 0f;
+
+        if(Random.value < 0.5f )
+        {
+            GameObject obstacle = obstacles[Random.Range(0, obstacles.Length)];
+            Vector3 spawnPos = new Vector3(
+                middleLane,
+                0.1f,
+                player.transform.position.z + spawnDistance
+            );
+            Instantiate(obstacle, spawnPos, Quaternion.Euler(0, 0, 0));
         }
     }
 
