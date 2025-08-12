@@ -93,6 +93,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7962622059401196726}
   - component: {fileID: 4071634391659564687}
+  - component: {fileID: 3119204415421258090}
+  - component: {fileID: 2035288036120665604}
+  - component: {fileID: 2207885657396543033}
   m_Layer: 0
   m_Name: ParkingBollard 1
   m_TagString: Untagged
@@ -132,6 +135,69 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetRotation: {x: 0, y: 0, z: 0, w: 0}
+--- !u!65 &3119204415421258090
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1201743553150898893}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.4161806, y: 0.7693206, z: 0.07203929}
+  m_Center: {x: 0.00000003973643, y: 1.0275735, z: -0.002620697}
+--- !u!65 &2035288036120665604
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1201743553150898893}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.10089421, y: 0.6422023, z: 0.09300999}
+  m_Center: {x: -0.5791191, y: 0.3204529, z: -0.002620717}
+--- !u!65 &2207885657396543033
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1201743553150898893}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.089114904, y: 0.64612854, z: 0.09300999}
+  m_Center: {x: 0.5810822, y: 0.31848973, z: -0.002620717}
 --- !u!1 &1504242892372886520
 GameObject:
   m_ObjectHideFlags: 0

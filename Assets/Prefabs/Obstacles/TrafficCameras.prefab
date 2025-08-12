@@ -259,6 +259,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3986100838320227649}
   - component: {fileID: 3616438600638745478}
+  - component: {fileID: 4296952275805629915}
   m_Layer: 0
   m_Name: TrafficCameras
   m_TagString: Untagged
@@ -298,6 +299,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetRotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
+--- !u!65 &4296952275805629915
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4626608022938510865}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.4522909, y: 1.2413117, z: 0.39881134}
+  m_Center: {x: 0.0029446483, y: 0.61718804, z: -0.13663483}
 --- !u!1 &6417777422724773568
 GameObject:
   m_ObjectHideFlags: 0

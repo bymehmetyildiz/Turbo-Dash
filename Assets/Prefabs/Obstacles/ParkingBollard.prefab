@@ -176,6 +176,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7686745944208774789}
   - component: {fileID: 4630327372412330706}
+  - component: {fileID: 7682953045928080787}
   m_Layer: 0
   m_Name: ParkingBollard
   m_TagString: Untagged
@@ -214,6 +215,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetRotation: {x: 0, y: 0, z: 0, w: 0}
+--- !u!65 &7682953045928080787
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5492396575846617083}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.2395167, y: 0.6484867, z: 0.10424805}
+  m_Center: {x: 0.00000011920929, y: 0.32188472, z: 0.0021629333}
 --- !u!1 &9093351822765636400
 GameObject:
   m_ObjectHideFlags: 0

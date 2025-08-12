@@ -11,8 +11,8 @@ public class RollState : GroundedState
     public override void Enter()
     {
         base.Enter();
-        controller.center = new Vector3(0, 0.45f, 0);
-        controller.height = 0.7f;
+        controller.center = new Vector3(0, 0.1f, 0);
+        controller.height = 0.1f;
     }
 
     public override void Exit()

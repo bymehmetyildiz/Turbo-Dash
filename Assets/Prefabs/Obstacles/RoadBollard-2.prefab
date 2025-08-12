@@ -259,6 +259,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1186191507935069132}
   - component: {fileID: 4671032648544982208}
+  - component: {fileID: 7713156254043765403}
   m_Layer: 0
   m_Name: RoadBollard-2
   m_TagString: Untagged
@@ -298,6 +299,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetRotation: {x: 0, y: 0, z: 0, w: 0}
+--- !u!65 &7713156254043765403
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5154840313739542945}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.6054139, y: 1.5978718, z: 0.5937538}
+  m_Center: {x: 0.002944693, y: 0.79716253, z: -0.01149559}
 --- !u!1 &7017660442022046482
 GameObject:
   m_ObjectHideFlags: 0
