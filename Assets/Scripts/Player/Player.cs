@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     public AirState airState;
     public RollState rollState;
     public DeathState deathState;
+    public HitState hitState;
 
     // Idle properties
     public bool isStarted;
@@ -45,6 +46,7 @@ public class Player : MonoBehaviour
         airState = new AirState(stateMachine, "Fall", this, controller);
         rollState = new RollState(stateMachine, "Roll", this, controller);
         deathState = new DeathState(stateMachine, "Death", this, controller);
+        hitState = new HitState(stateMachine, "Hit", this, controller);
     }
 
     void Start()
@@ -124,7 +126,7 @@ public class Player : MonoBehaviour
     }
 
 
-    //Death
+    // Collider
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
         Vehicle vehicle = hit.gameObject.GetComponent<Vehicle>();
@@ -140,8 +142,22 @@ public class Player : MonoBehaviour
             }
             StartCoroutine(DeathBounce());
         }
+
+        Obstacles obstacle = hit.gameObject.GetComponent<Obstacles>();
+
+        if (obstacle != null)
+        {
+            stateMachine.ChangeState(hitState);
+            isStarted = false;
+            Vehicle[] vehicles = FindObjectsOfType<Vehicle>();
+            foreach (Vehicle v in vehicles)
+            {
+                v.speed = 0;
+            }
+        }
     }
 
+    //Death 
     private IEnumerator DeathBounce()
     {
         Vector3 startPosition = transform.position;

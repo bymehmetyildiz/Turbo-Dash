@@ -8,7 +8,7 @@ public class Obstacles : MonoBehaviour
 
     void Start()
     {
-        transform.rotation = targetRotation;
+        transform.rotation = targetRotation;        
     }
 
     
@@ -16,4 +16,6 @@ public class Obstacles : MonoBehaviour
     {
         
     }
+
+   
 }

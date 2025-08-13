@@ -12647,7 +12647,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!143 &161348438
 CharacterController:
   m_ObjectHideFlags: 0
@@ -25961,8 +25961,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.11589148, y: 0.002097796, z: -0.0002447665, w: 0.99325967}
-  m_LocalPosition: {x: -0.737, y: 4.097, z: -65.925995}
+  m_LocalRotation: {x: 0.11462594, y: 0.0023299558, z: -0.00026884617, w: 0.993406}
+  m_LocalPosition: {x: 0, y: 4.1, z: -66}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -66588,8 +66588,8 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 10
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 1937554764}
-  m_Follow: {fileID: 161348441}
+  m_LookAt: {fileID: 1141283530}
+  m_Follow: {fileID: 1296371197}
   m_Lens:
     FieldOfView: 30.3
     OrthographicSize: 5
@@ -66617,8 +66617,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 890188460}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.11589148, y: 0.002097796, z: -0.0002447665, w: 0.99325967}
-  m_LocalPosition: {x: -0.737, y: 4.097, z: -65.925995}
+  m_LocalRotation: {x: 0.11462594, y: 0.0023299558, z: -0.00026884617, w: 0.993406}
+  m_LocalPosition: {x: 0, y: 4.1, z: -66}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -87367,6 +87367,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1137196290}
   m_Mesh: {fileID: 4300000, guid: 32f3dd0dfd032f84386e82882b3b4059, type: 3}
+--- !u!4 &1141283530 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8700783698680967558, guid: 65463024993d97f4da3e10e64e76d590,
+    type: 3}
+  m_PrefabInstance: {fileID: 720530089}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1141336242
 GameObject:
   m_ObjectHideFlags: 0
@@ -98737,7 +98743,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!95 &1296371196
 Animator:
   serializedVersion: 5
@@ -146691,12 +146697,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1936985304}
   m_Mesh: {fileID: 4300006, guid: 50beeb50839481d4aba76e0c83f6fd10, type: 3}
---- !u!4 &1937554764 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8700783698680967558, guid: 55c639a531007b141b199e7e5f40a98f,
-    type: 3}
-  m_PrefabInstance: {fileID: 656426342}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1939671247
 GameObject:
   m_ObjectHideFlags: 0

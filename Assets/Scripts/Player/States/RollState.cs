@@ -13,6 +13,7 @@ public class RollState : GroundedState
         base.Enter();
         controller.center = new Vector3(0, 0.1f, 0);
         controller.height = 0.1f;
+        controller.radius = 0.1f;
     }
 
     public override void Exit()
@@ -21,6 +22,7 @@ public class RollState : GroundedState
 
         controller.center = new Vector3(0, 0.9f, 0);
         controller.height = 1.4f;
+        controller.radius = 0.3f;  
     }
 
     public override void Update()
