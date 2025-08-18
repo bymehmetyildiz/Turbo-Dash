@@ -50,12 +50,12 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 0; i < platforms.Length; i++)
         {
-            if (player.transform.position.z > platforms[i].transform.position.z + 75f)
+            if (player.transform.position.z > platforms[i].transform.position.z + 150f)
             {
                 platforms[i].transform.position = new Vector3(
                     platforms[i].transform.position.x,
                     platforms[i].transform.position.y,
-                    platforms[i].transform.position.z + 360f
+                    platforms[i].transform.position.z + 315f
                 );
             }
 

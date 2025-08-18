@@ -23,14 +23,7 @@ public class MoveState : GroundedState
     {
         base.Update();
 
-        if (controller.isGrounded)
-        {
-            player.verticalVelocity = -1f;        
-        }
-        else
-        {
-            player.verticalVelocity += player.gravity * Time.deltaTime;
-        }
+       
 
         player.moveDirection = Vector3.up * player.verticalVelocity + Vector3.forward * player.moveSpeed;
 

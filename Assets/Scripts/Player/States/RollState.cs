@@ -38,7 +38,7 @@ public class RollState : GroundedState
             player.verticalVelocity += player.gravity * Time.deltaTime;
         }
 
-        player.moveDirection = Vector3.up * player.verticalVelocity + Vector3.forward * player.moveSpeed;
+        player.moveDirection = Vector3.forward * player.moveSpeed;
 
         controller.Move(player.moveDirection * Time.deltaTime);
 

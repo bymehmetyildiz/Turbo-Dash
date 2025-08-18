@@ -29,15 +29,6 @@ public class IdleState : GroundedState
             stateMachine.ChangeState(player.turnState);
         }
 
-        if (controller.isGrounded)
-        {
-            player.verticalVelocity = -1f; // small push down to keep grounded            
-        }
-        else
-        {
-            player.verticalVelocity += player.gravity * Time.deltaTime; // falling
-        }
-
         player.moveDirection = Vector3.up * player.verticalVelocity; // apply vertical velocity to move direction
 
         controller.Move(player.moveDirection * Time.deltaTime);

@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
     //Movement properties
     public float moveSpeed = 5f;    
     public bool isChangingLane = false;
-    public float[] lanePositions = { -2.15f, 0f, 2.15f };
+    public float[] lanePositions = { -1.2f, 0f, 1.2f };
     public int currentLane = 1;
     public float jumpHeight = -10f;
 

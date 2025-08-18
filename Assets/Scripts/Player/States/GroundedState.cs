@@ -21,5 +21,14 @@ public class GroundedState : PlayerState
     public override void Update()
     {
         base.Update();
+
+        if (controller.isGrounded)
+        {
+            player.verticalVelocity = -1f;
+        }
+        else
+        {
+            player.verticalVelocity += player.gravity * Time.deltaTime;
+        }
     }
 }
