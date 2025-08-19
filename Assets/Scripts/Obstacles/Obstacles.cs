@@ -4,18 +4,24 @@ using UnityEngine;
 
 public class Obstacles : MonoBehaviour
 {
-    [SerializeField] private Quaternion targetRotation;
+    public ObstacleType obstacleType;
+    public GameObject Door;
 
     void Start()
     {
-        transform.rotation = targetRotation;        
+               
     }
 
     
     void Update()
     {
         
-    }
+    }   
+}
 
-   
+public enum ObstacleType
+{
+    Door,
+    Single,
+    Multiple,
 }

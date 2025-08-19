@@ -34,6 +34,9 @@ public class Player : MonoBehaviour
     public int currentLane = 1;
     public float jumpHeight = -10f;
 
+    //Collectibles
+    public int keys;
+
     private void Awake()
     {
         stateMachine = new StateMachine();
@@ -149,12 +152,26 @@ public class Player : MonoBehaviour
         {
             stateMachine.ChangeState(hitState);
             isStarted = false;
-            Vehicle[] vehicles = FindObjectsOfType<Vehicle>();
-            foreach (Vehicle v in vehicles)
-            {
-                v.speed = 0;
-            }
         }
+
+        Doors door = hit.gameObject.GetComponent<Doors>();
+
+        if (door != null)
+        {
+            if(keys > 0 && door.isOpen == false)
+            {
+                keys--;
+                door.isOpen = true;
+                StartCoroutine(door.OpenDoor());
+            }
+            else if(keys <= 0)
+            {
+                stateMachine.ChangeState(hitState);
+                isStarted = false;
+            }
+
+        }
+        
     }
 
     //Death 

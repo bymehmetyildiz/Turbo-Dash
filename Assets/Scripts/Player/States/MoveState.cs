@@ -23,8 +23,6 @@ public class MoveState : GroundedState
     {
         base.Update();
 
-       
-
         player.moveDirection = Vector3.up * player.verticalVelocity + Vector3.forward * player.moveSpeed;
 
         controller.Move(player.moveDirection * Time.deltaTime);

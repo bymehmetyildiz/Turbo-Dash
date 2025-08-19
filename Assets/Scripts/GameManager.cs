@@ -64,7 +64,8 @@ public class GameManager : MonoBehaviour
 
     private void SpawnVehicle()
     {
-        float[] lanes = { -2.15f, 2.15f };
+        /*
+        float[] lanes = { -1.2f, 1.2f };
 
         foreach (float laneX in lanes)
         {
@@ -80,15 +81,26 @@ public class GameManager : MonoBehaviour
                 Instantiate(vehicle, spawnPos, Quaternion.Euler(0, 180, 0));
             }
         }
+        */
 
-        float middleLane = 0f;
+        float[] lanes = {1.2f, 0, -1.2f};
 
         if(Random.value < 0.5f )
         {
             GameObject obstacle = obstacles[Random.Range(0, obstacles.Length)];
+            float lane;
+            if(obstacle.GetComponent<Obstacles>().obstacleType == ObstacleType.Single)
+            {
+                lane = lanes[Random.Range(0, lanes.Length)];
+            }
+            else
+            {
+                lane = lanes[1];
+            }
+
             Vector3 spawnPos = new Vector3(
-                middleLane,
-                0.1f,
+                lane,
+                0,
                 player.transform.position.z + spawnDistance
             );
             Instantiate(obstacle, spawnPos, Quaternion.Euler(0, 0, 0));
