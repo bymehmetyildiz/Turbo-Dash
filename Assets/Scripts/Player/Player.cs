@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
     public StateMachine stateMachine { get; private set; }
-    public Animator anim;
+    public Animator anim;   
     public CharacterController controller;
 
     // States
@@ -16,7 +17,7 @@ public class Player : MonoBehaviour
     public ChangeLaneState changeLaneState;   
     public JumpState jumpState;
     public AirState airState;
-    public RollState rollState;
+    public SlideState slideState;
     public DeathState deathState;
     public HitState hitState;
 
@@ -47,7 +48,7 @@ public class Player : MonoBehaviour
         changeLaneState = new ChangeLaneState(stateMachine, "ChangeLane", this, controller);        
         jumpState = new JumpState(stateMachine, "Jump", this, controller);
         airState = new AirState(stateMachine, "Fall", this, controller);
-        rollState = new RollState(stateMachine, "Roll", this, controller);
+        slideState = new SlideState(stateMachine, "Roll", this, controller);
         deathState = new DeathState(stateMachine, "Death", this, controller);
         hitState = new HitState(stateMachine, "Hit", this, controller);
     }
@@ -55,6 +56,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         stateMachine.InitializeState(idleState);
+    
     }
 
     
@@ -66,6 +68,13 @@ public class Player : MonoBehaviour
         {
             isStarted = true;
         }
+
+        if (isStarted)
+        {
+            moveSpeed += moveSpeed * Time.deltaTime * 0.001f;
+            anim.speed += Time.deltaTime * 0.001f;
+        }
+
     }
 
     //Check if Turn Animation Ended
@@ -96,7 +105,7 @@ public class Player : MonoBehaviour
         Vector3 startPosition = transform.position;
         Vector3 endPosition = new Vector3(lanePositions[targetLane], transform.position.y, transform.position.z);
 
-        float duration = 0.25f; // slightly longer for the hop
+        float duration = 0.3f; // slightly longer for the hop
         float elapsed = 0f;
 
         float hopHeight = 0.6f; // how high the hop goes
@@ -128,7 +137,6 @@ public class Player : MonoBehaviour
         isChangingLane = false;
     }
 
-
     // Collider
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
@@ -146,32 +154,37 @@ public class Player : MonoBehaviour
             StartCoroutine(DeathBounce());
         }
 
-        Obstacles obstacle = hit.gameObject.GetComponent<Obstacles>();
-
-        if (obstacle != null)
+        if (hit.gameObject.tag == "Obstacle")
         {
             stateMachine.ChangeState(hitState);
             isStarted = false;
         }
 
-        Doors door = hit.gameObject.GetComponent<Doors>();
-
+        
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        Doors door = other.GetComponent<Doors>();
         if (door != null)
         {
-            if(keys > 0 && door.isOpen == false)
+            if (keys > 0 && !door.isOpen)  // make a bool in Doors to track open state
             {
                 keys--;
-                door.isOpen = true;
                 StartCoroutine(door.OpenDoor());
+                door.isOpen = true;
             }
-            else if(keys <= 0)
+            else if (!door.isOpen) // block player if no key and not open
             {
                 stateMachine.ChangeState(hitState);
                 isStarted = false;
             }
-
         }
-        
+
+        Collectible collectible = other.GetComponent<Collectible>();
+        if(collectible != null)
+        {
+           collectible.Collect(this);
+        }
     }
 
     //Death 

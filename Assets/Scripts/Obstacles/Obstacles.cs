@@ -4,24 +4,22 @@ using UnityEngine;
 
 public class Obstacles : MonoBehaviour
 {
+    private Rigidbody[] rbs;
     public ObstacleType obstacleType;
-    public GameObject Door;
 
-    void Start()
+    private void Start()
     {
-               
+        rbs = GetComponentsInChildren<Rigidbody>();
+
+        foreach (Rigidbody rb in rbs)
+        {
+            rb.isKinematic = true;
+        }
     }
-
-    
-    void Update()
-    {
-        
-    }   
 }
 
 public enum ObstacleType
-{
-    Door,
+{    
     Single,
     Multiple,
 }

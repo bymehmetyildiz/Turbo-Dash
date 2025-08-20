@@ -43,7 +43,7 @@ public class MoveState : GroundedState
         }
         else if (Input.GetKeyDown(KeyCode.S) && controller.isGrounded && !player.isChangingLane)
         {
-            stateMachine.ChangeState(player.rollState);
+            stateMachine.ChangeState(player.slideState);
         }
 
       

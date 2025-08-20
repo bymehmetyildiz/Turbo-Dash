@@ -37,13 +37,15 @@ public class GameManager : MonoBehaviour
                 spawnInterval = Random.Range(minSpawnInterval, maxSpawnInterval);
 
                 if(minSpawnInterval > 0.25f)
-                    minSpawnInterval -= minSpawnInterval * 0.01f; 
+                    minSpawnInterval -= minSpawnInterval * 0.001f; 
 
-                if(maxSpawnInterval > 0.75f)
-                    maxSpawnInterval -= maxSpawnInterval * 0.01f;
+                if(maxSpawnInterval > 1f)
+                    maxSpawnInterval -= maxSpawnInterval * 0.001f;
             }
         }
-       
+
+        float[] lanes = { -1.2f, 1.2f };
+
     }
 
     private void SpawnPlatform()
@@ -84,27 +86,30 @@ public class GameManager : MonoBehaviour
         */
 
         float[] lanes = {1.2f, 0, -1.2f};
-
-        if(Random.value < 0.5f )
+        
+        GameObject obstacle = obstacles[Random.Range(0, obstacles.Length)];
+        float lane;
+        Vector3 spawnPos;
+        if (obstacle.GetComponent<Obstacles>().obstacleType == ObstacleType.Single)
         {
-            GameObject obstacle = obstacles[Random.Range(0, obstacles.Length)];
-            float lane;
-            if(obstacle.GetComponent<Obstacles>().obstacleType == ObstacleType.Single)
-            {
-                lane = lanes[Random.Range(0, lanes.Length)];
-            }
-            else
-            {
-                lane = lanes[1];
-            }
-
-            Vector3 spawnPos = new Vector3(
-                lane,
-                0,
-                player.transform.position.z + spawnDistance
-            );
-            Instantiate(obstacle, spawnPos, Quaternion.Euler(0, 0, 0));
+           lane = lanes[Random.Range(0, lanes.Length)];
+           spawnPos = new Vector3(
+               lane,
+               0,
+               player.transform.position.z + spawnDistance
+       );
         }
+        else
+        {
+            lane = lanes[1];
+            spawnPos = new Vector3(
+               lane,
+               2.2f,
+               player.transform.position.z + spawnDistance
+       );
+        }
+        Instantiate(obstacle, spawnPos, Quaternion.Euler(0, 0, 0));
+        
     }
 
 

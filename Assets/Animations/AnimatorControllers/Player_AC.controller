@@ -327,7 +327,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: ChangeLane
-  m_Speed: 3
+  m_Speed: 2.5
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 7315561669313459066}
@@ -340,7 +340,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 574768c12413a254dab11179f661ec46, type: 2}
+  m_Motion: {fileID: 7400000, guid: 1cc726e95144b4545aafc122d1c4b967, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -412,7 +412,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: RollForward
+  m_Name: Slide
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -453,8 +453,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -7456572021986824454, guid: 1fecba2fe5f96a44c804c7cc202bea0b,
-    type: 3}
+  m_Motion: {fileID: 106691755926767590, guid: 161dba752bb0176419cf25220683d87b, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -593,7 +592,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7784348987769117624, guid: df9d283c78d89c7499ff37ad0d959bb0,
+  m_Motion: {fileID: 7784348987769117624, guid: 68e5357fc721baa47b9315a36886bebe,
     type: 3}
   m_Tag: 
   m_SpeedParameter: 

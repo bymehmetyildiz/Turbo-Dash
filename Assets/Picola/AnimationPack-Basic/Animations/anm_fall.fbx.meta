@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: df9d283c78d89c7499ff37ad0d959bb0
+guid: 68e5357fc721baa47b9315a36886bebe
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -38,8 +38,8 @@ ModelImporter:
       name: anm_jump01
       takeName: Picola_Male_anm_jump01
       internalID: 7784348987769117624
-      firstFrame: 61
-      lastFrame: 61
+      firstFrame: 55
+      lastFrame: 66
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
