@@ -20,22 +20,27 @@ public class Player : MonoBehaviour
     public SlideState slideState;
     public DeathState deathState;
     public HitState hitState;
+    public JetState jetState;
 
-    // Idle properties
+    [Header("Idle")]
     public bool isStarted;
     public float gravity = -9.81f;
+    public float gravityScale = 2f;
     public float verticalVelocity;
     public bool triggerCalled;
     public Vector3 moveDirection;
 
-    //Movement properties
+    [Header("Move")]
     public float moveSpeed = 5f;    
     public bool isChangingLane = false;
     public float[] lanePositions = { -1.2f, 0f, 1.2f };
     public int currentLane = 1;
     public float jumpHeight = -10f;
 
-    //Collectibles
+    [Header("Fly")]
+    public GameObject jetPack;
+
+    [Header("Collectibles")]
     public int keys;
 
     private void Awake()
@@ -51,12 +56,13 @@ public class Player : MonoBehaviour
         slideState = new SlideState(stateMachine, "Roll", this, controller);
         deathState = new DeathState(stateMachine, "Death", this, controller);
         hitState = new HitState(stateMachine, "Hit", this, controller);
+        jetState = new JetState(stateMachine, "Fly", this, controller);
     }
 
     void Start()
     {
         stateMachine.InitializeState(idleState);
-    
+        jetPack.SetActive(false);
     }
 
     
@@ -98,7 +104,7 @@ public class Player : MonoBehaviour
     }
 
     // Change Lane with a hop
-    public IEnumerator ChangeLane(int targetLane)
+    public IEnumerator ChangeLane(int targetLane, float hopHeight)
     {
         isChangingLane = true;
 
@@ -107,9 +113,6 @@ public class Player : MonoBehaviour
 
         float duration = 0.3f; // slightly longer for the hop
         float elapsed = 0f;
-
-        float hopHeight = 0.6f; // how high the hop goes
-
         while (elapsed < duration)
         {
             float t = Mathf.Clamp01(elapsed / duration);
@@ -154,10 +157,23 @@ public class Player : MonoBehaviour
             StartCoroutine(DeathBounce());
         }
 
-        if (hit.gameObject.tag == "Obstacle")
+        Obstacles obstacle = hit.gameObject.GetComponent<Obstacles>();
+
+        if (obstacle != null)
         {
-            stateMachine.ChangeState(hitState);
-            isStarted = false;
+            if (stateMachine.currentstate == jetState)
+            {
+                stateMachine.ChangeState(deathState);
+                isStarted = false;
+                jetPack.SetActive(false);
+            }
+            else
+            {
+                stateMachine.ChangeState(hitState);
+                isStarted = false;
+                obstacle.ActivateRigidbodies();
+            }
+                
         }
 
         

@@ -48688,6 +48688,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4639554053791052215}
   - component: {fileID: -1991506672966821718}
+  - component: {fileID: 5848481147690751915}
+  - component: {fileID: 5216871047742411097}
+  - component: {fileID: 8779550023972842213}
   m_Layer: 0
   m_Name: Fortress-3
   m_TagString: Obstacle
@@ -49153,6 +49156,69 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstacleType: 1
+--- !u!65 &5848481147690751915
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7741479645860638341}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4.83293, y: 4.418814, z: 1.1986828}
+  m_Center: {x: 3.622585, y: -2.0366085, z: 0.19868374}
+--- !u!65 &5216871047742411097
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7741479645860638341}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4.724315, y: 4.3565383, z: 1.227066}
+  m_Center: {x: -3.5380974, y: -2.0856154, z: 0.19868279}
+--- !u!65 &8779550023972842213
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7741479645860638341}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.3500645, y: 2.3523922, z: 0.8835106}
+  m_Center: {x: 0.00000025544847, y: -3.103982, z: 0.058244705}
 --- !u!1 &7746194195000886573
 GameObject:
   m_ObjectHideFlags: 0

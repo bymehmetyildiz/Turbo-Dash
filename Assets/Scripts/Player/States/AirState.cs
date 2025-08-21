@@ -21,8 +21,8 @@ public class AirState : PlayerState
     public override void Update()
     {
         base.Update();
-        
-        player.verticalVelocity += player.gravity * Time.deltaTime * 10;        
+
+        player.verticalVelocity += player.gravity * player.gravityScale * Time.deltaTime;
 
         player.moveDirection = Vector3.up * player.verticalVelocity + Vector3.forward * player.moveSpeed;
 
@@ -30,11 +30,11 @@ public class AirState : PlayerState
         
         if (Input.GetKeyDown(KeyCode.D) && player.currentLane < player.lanePositions.Length - 1 && !player.isChangingLane)
         {
-            player.StartCoroutine(player.ChangeLane(player.currentLane + 1));
+            player.StartCoroutine(player.ChangeLane(player.currentLane + 1, 0));
         }
         else if (Input.GetKeyDown(KeyCode.A) && player.currentLane > 0 && !player.isChangingLane)
         {
-            player.StartCoroutine(player.ChangeLane(player.currentLane - 1));
+            player.StartCoroutine(player.ChangeLane(player.currentLane - 1, 0));
         }
 
         if (controller.isGrounded)

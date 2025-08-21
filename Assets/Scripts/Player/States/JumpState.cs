@@ -14,8 +14,8 @@ public class JumpState : PlayerState
 
     public override void Enter()
     {
-        base.Enter();       
-        player.verticalVelocity = Mathf.Sqrt(player.jumpHeight * player.gravity);
+        base.Enter();
+        player.verticalVelocity = Mathf.Sqrt(player.jumpHeight * player.gravity * player.gravityScale);
         stateTimer = 0.5f; // Duration of the jump state
       
     }
@@ -31,7 +31,7 @@ public class JumpState : PlayerState
         base.Update();
 
         // Apply gravity each frame
-        player.verticalVelocity += player.gravity * Time.deltaTime;
+        player.verticalVelocity += player.gravity * player.gravityScale * Time.deltaTime;
 
         // Move player (forward + vertical)
         player.moveDirection = Vector3.forward * player.moveSpeed + Vector3.up * player.verticalVelocity;
@@ -45,11 +45,11 @@ public class JumpState : PlayerState
         }
         else if (Input.GetKeyDown(KeyCode.D) && player.currentLane < player.lanePositions.Length - 1 && !player.isChangingLane)
         {
-            player.StartCoroutine(player.ChangeLane(player.currentLane + 1));            
+            player.StartCoroutine(player.ChangeLane(player.currentLane + 1, 0));            
         }
         else if (Input.GetKeyDown(KeyCode.A) && player.currentLane > 0 && !player.isChangingLane)
         {
-            player.StartCoroutine(player.ChangeLane(player.currentLane - 1));            
+            player.StartCoroutine(player.ChangeLane(player.currentLane - 1, 0));            
         }
         else if (stateTimer <= 0)
         {
