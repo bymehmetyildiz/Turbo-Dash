@@ -2,15 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DeathState : PlayerState
+public class FastHitState : PlayerState
 {
-    public DeathState(StateMachine stateMachine, string animBoolName, Player player, CharacterController controller) : base(stateMachine, animBoolName, player, controller)
+    public FastHitState(StateMachine stateMachine, string animBoolName, Player player, CharacterController controller) : base(stateMachine, animBoolName, player, controller)
     {
     }
 
     public override void Enter()
     {
-        base.Enter();        
+        base.Enter();   
+        
+        player.transform.rotation = Quaternion.Euler(0f, 0f, 0f);      
     }
 
     public override void Exit()

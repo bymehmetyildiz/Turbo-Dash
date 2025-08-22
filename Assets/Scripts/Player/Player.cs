@@ -18,9 +18,10 @@ public class Player : MonoBehaviour
     public JumpState jumpState;
     public AirState airState;
     public SlideState slideState;
-    public DeathState deathState;
+    public FastHitState fastHitState;
     public HitState hitState;
     public JetState jetState;
+    public DriveState driveState;
 
     [Header("Idle")]
     public bool isStarted;
@@ -40,6 +41,10 @@ public class Player : MonoBehaviour
     [Header("Fly")]
     public GameObject jetPack;
 
+    [Header("Drive")]
+    public GameObject car;
+    public Vector3 drivePosition;  
+
     [Header("Collectibles")]
     public int keys;
 
@@ -54,15 +59,17 @@ public class Player : MonoBehaviour
         jumpState = new JumpState(stateMachine, "Jump", this, controller);
         airState = new AirState(stateMachine, "Fall", this, controller);
         slideState = new SlideState(stateMachine, "Roll", this, controller);
-        deathState = new DeathState(stateMachine, "Death", this, controller);
+        fastHitState = new FastHitState(stateMachine, "Death", this, controller);
         hitState = new HitState(stateMachine, "Hit", this, controller);
         jetState = new JetState(stateMachine, "Fly", this, controller);
+        driveState = new DriveState(stateMachine, "Drive", this, controller);
     }
 
     void Start()
     {
         stateMachine.InitializeState(idleState);
         jetPack.SetActive(false);
+        car.SetActive(false);
     }
 
     
@@ -111,7 +118,7 @@ public class Player : MonoBehaviour
         Vector3 startPosition = transform.position;
         Vector3 endPosition = new Vector3(lanePositions[targetLane], transform.position.y, transform.position.z);
 
-        float duration = 0.3f; // slightly longer for the hop
+        float duration = 0.2f; // slightly longer for the hop
         float elapsed = 0f;
         while (elapsed < duration)
         {
@@ -147,7 +154,7 @@ public class Player : MonoBehaviour
 
         if (vehicle != null)
         {            
-            stateMachine.ChangeState(deathState);
+            stateMachine.ChangeState(fastHitState);
             isStarted = false;
             Vehicle[] vehicles = FindObjectsOfType<Vehicle>();
             foreach (Vehicle v in vehicles)
@@ -163,9 +170,11 @@ public class Player : MonoBehaviour
         {
             if (stateMachine.currentstate == jetState)
             {
-                stateMachine.ChangeState(deathState);
+                stateMachine.ChangeState(fastHitState);
+                StartCoroutine(DeathBounce());
                 isStarted = false;
                 jetPack.SetActive(false);
+                obstacle.PushRigidBodies();
             }
             else
             {
@@ -204,7 +213,7 @@ public class Player : MonoBehaviour
     }
 
     //Death 
-    private IEnumerator DeathBounce()
+    public IEnumerator DeathBounce()
     {
         Vector3 startPosition = transform.position;
         Vector3 endPosition = transform.position + Vector3.back * 5;

@@ -35,6 +35,23 @@ public class Obstacles : MonoBehaviour
         }
     }
 
+    public void PushRigidBodies()
+    {
+        Collider[] collider = GetComponents<Collider>();
+
+        foreach (Collider col in collider)
+        {
+            col.enabled = false;
+        }
+
+        foreach (Rigidbody rb in rbs)
+        {
+            rb.isKinematic = false;
+            rb.AddForce(new Vector3(Random.Range(-1f, 1f), Random.Range(3 ,5), Random.Range(5, 7)), ForceMode.Impulse);
+        }
+    }
+
+
     private void Update()
     {
         if(IsPlayerPast())
