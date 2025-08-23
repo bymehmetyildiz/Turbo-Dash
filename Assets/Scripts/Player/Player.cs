@@ -42,8 +42,8 @@ public class Player : MonoBehaviour
     public GameObject jetPack;
 
     [Header("Drive")]
+    public GameObject carPrefab;
     public GameObject car;
-    public Vector3 drivePosition;  
 
     [Header("Collectibles")]
     public int keys;
@@ -69,7 +69,6 @@ public class Player : MonoBehaviour
     {
         stateMachine.InitializeState(idleState);
         jetPack.SetActive(false);
-        car.SetActive(false);
     }
 
     
@@ -211,6 +210,10 @@ public class Player : MonoBehaviour
            collectible.Collect(this);
         }
     }
+
+    //Instantiate Car
+    public void InstantiateCar() => car = Instantiate(carPrefab, new Vector3(0, 0, transform.position.z), Quaternion.identity);
+    public void DestroyCar() => Destroy(car);
 
     //Death 
     public IEnumerator DeathBounce()

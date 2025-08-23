@@ -31,7 +31,7 @@ public class JetState : PlayerState
 
         if (player.transform.position.y < jetHeight)
         {
-            player.moveDirection = Vector3.forward * player.moveSpeed * 3 + Vector3.up * (jetHeight/2);
+            player.moveDirection = Vector3.forward * player.moveSpeed * 3 + Vector3.up * jetHeight;
             targetRotation = Quaternion.Euler(-45, 0, 0); // Tilt down
         }
         else

@@ -47,7 +47,7 @@ public class Obstacles : MonoBehaviour
         foreach (Rigidbody rb in rbs)
         {
             rb.isKinematic = false;
-            rb.AddForce(new Vector3(Random.Range(-1f, 1f), Random.Range(3 ,5), Random.Range(5, 7)), ForceMode.Impulse);
+            rb.AddForce(new Vector3(Random.Range(-3f, 3f), Random.Range(3, 5), Random.Range(5, 7)), ForceMode.Impulse);
         }
     }
 
@@ -60,7 +60,7 @@ public class Obstacles : MonoBehaviour
 
     private bool IsPlayerPast()
     {
-        if(player.transform.position.z > transform.position.z + 10)
+        if(player.transform.position.z > transform.position.z + 50)
             return true;
 
         return false;
