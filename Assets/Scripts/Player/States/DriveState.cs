@@ -18,6 +18,9 @@ public class DriveState : PlayerState
         player.transform.localPosition = Vector3.zero; // snap exactly to seat
 
         stateTimer = 10f;
+       
+        controller.height = 0.1f;
+        controller.radius = 0.1f;
     }
 
     public override void Exit()
@@ -28,8 +31,13 @@ public class DriveState : PlayerState
         player.transform.SetParent(null);
         player.DestroyCar();
 
-        player.transform.position = new Vector3(0, player.transform.position.y, player.transform.position.z);
-        player.currentLane = 1;
+        player.currentLane = player.car.GetComponent<CarController>().currentLane;
+        player.transform.position = new Vector3(player.lanePositions[player.currentLane], player.transform.position.y, player.transform.position.z);
+
+        player.StartCoroutine(player.ActivateShield());
+    
+        controller.height = 1.5f;
+        controller.radius = 0.15f;
     }
 
     public override void Update()

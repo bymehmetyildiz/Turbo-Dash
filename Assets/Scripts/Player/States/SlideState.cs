@@ -11,7 +11,7 @@ public class SlideState : GroundedState
     public override void Enter()
     {
         base.Enter();
-        controller.center = new Vector3(0, 0.1f, 0);
+        controller.center = new Vector3(0, -0.7f, 0);
         controller.height = 0.1f;
         controller.radius = 0.1f;
     }
@@ -20,7 +20,7 @@ public class SlideState : GroundedState
     {
         base.Exit();
 
-        controller.center = new Vector3(0, 0.7f, 0);
+        controller.center = new Vector3(0, 0, 0);
         controller.height = 1.5f;
         controller.radius = 0.15f;        
     }

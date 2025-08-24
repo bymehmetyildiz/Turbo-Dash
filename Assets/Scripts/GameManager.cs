@@ -11,8 +11,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject[] vehicles;
     [SerializeField] private GameObject[] obstacles;
     [SerializeField] private float spawnInterval;
-    private float minSpawnInterval = 1f;
-    private float maxSpawnInterval = 2.5f;
+    private float minSpawnInterval = 0.75f;
+    private float maxSpawnInterval = 1.5f;
     [SerializeField] private float spawnTimer;
     [SerializeField] private float spawnDistance;
 
@@ -37,8 +37,6 @@ public class GameManager : MonoBehaviour
                 spawnInterval = Random.Range(minSpawnInterval, maxSpawnInterval);
             }
         }
-
-        float[] lanes = { -1.2f, 1.2f };
 
     }
 

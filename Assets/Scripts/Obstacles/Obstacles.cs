@@ -60,7 +60,7 @@ public class Obstacles : MonoBehaviour
 
     private bool IsPlayerPast()
     {
-        if(player.transform.position.z > transform.position.z + 50)
+        if(player.transform.position.z > transform.position.z + 30)
             return true;
 
         return false;

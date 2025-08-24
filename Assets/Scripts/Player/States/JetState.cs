@@ -21,6 +21,7 @@ public class JetState : PlayerState
     public override void Exit()
     {
         base.Exit();
+        player.StartCoroutine(player.ActivateShield());
     }
 
     public override void Update()
@@ -52,11 +53,11 @@ public class JetState : PlayerState
         // Lane change
         if (Input.GetKeyDown(KeyCode.D) && player.currentLane < player.lanePositions.Length - 1 && !player.isChangingLane)
         {
-            player.StartCoroutine(player.ChangeLane(player.currentLane + 1, 0));
+            player.StartCoroutine(player.ChangeLane(player.currentLane + 1, 0, -30, 0.3f));
         }
         else if (Input.GetKeyDown(KeyCode.A) && player.currentLane > 0 && !player.isChangingLane)
         {
-            player.StartCoroutine(player.ChangeLane(player.currentLane - 1, 0));
+            player.StartCoroutine(player.ChangeLane(player.currentLane - 1, 0, 30, 0.3f));
         }
 
         // Timer

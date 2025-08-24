@@ -39,8 +39,10 @@ public class GroundedState : PlayerState
         {
             stateMachine.ChangeState(player.driveState);
         }
-        
-
+        else if(Input.GetKeyDown(KeyCode.H) && !player.isChangingLane && player.isStarted)
+        {
+            stateMachine.ChangeState(player.planeState);
+        }
 
     }
 }

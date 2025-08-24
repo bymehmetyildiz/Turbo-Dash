@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.Burst.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class Player : MonoBehaviour
     public HitState hitState;
     public JetState jetState;
     public DriveState driveState;
+    public PlaneState planeState;
 
     [Header("Idle")]
     public bool isStarted;
@@ -40,6 +42,8 @@ public class Player : MonoBehaviour
 
     [Header("Fly")]
     public GameObject jetPack;
+    public GameObject shiledParticle;
+    public GameObject plane;
 
     [Header("Drive")]
     public GameObject carPrefab;
@@ -63,12 +67,15 @@ public class Player : MonoBehaviour
         hitState = new HitState(stateMachine, "Hit", this, controller);
         jetState = new JetState(stateMachine, "Fly", this, controller);
         driveState = new DriveState(stateMachine, "Drive", this, controller);
+        planeState = new PlaneState(stateMachine, "Drive", this, controller);
     }
 
     void Start()
     {
         stateMachine.InitializeState(idleState);
         jetPack.SetActive(false);
+        shiledParticle.SetActive(false);
+        plane.SetActive(false);
     }
 
     
@@ -110,15 +117,18 @@ public class Player : MonoBehaviour
     }
 
     // Change Lane with a hop
-    public IEnumerator ChangeLane(int targetLane, float hopHeight)
+    public IEnumerator ChangeLane(int targetLane, float hopHeight, float angle, float duration)
     {
         isChangingLane = true;
 
         Vector3 startPosition = transform.position;
         Vector3 endPosition = new Vector3(lanePositions[targetLane], transform.position.y, transform.position.z);
 
-        float duration = 0.2f; // slightly longer for the hop
+
+        Quaternion startRotation = transform.rotation;
+        Quaternion tiltRotation = Quaternion.Euler(0, 0, angle);        
         float elapsed = 0f;
+
         while (elapsed < duration)
         {
             float t = Mathf.Clamp01(elapsed / duration);
@@ -131,9 +141,24 @@ public class Player : MonoBehaviour
 
             transform.position = new Vector3(
                 xPos,
-                startPosition.y + yOffset,
+                transform.position.y,
                 transform.position.z
             );
+
+            if(stateMachine.currentstate == jetState || stateMachine.currentstate == planeState)
+            {
+                // Rotation tilt forward, then back
+                if (t < 0.5f)
+                {
+                    // First half: tilt to target angle
+                    transform.rotation = Quaternion.Slerp(startRotation, tiltRotation, t * 2f);
+                }
+                else
+                {
+                    // Second half: tilt back to upright
+                    transform.rotation = Quaternion.Slerp(tiltRotation, Quaternion.identity, (t - 0.5f) * 2f);
+                }
+            }
 
             elapsed += Time.deltaTime;
             yield return null;
@@ -141,6 +166,7 @@ public class Player : MonoBehaviour
 
         // Snap to final lane position
         transform.position = new Vector3(endPosition.x, endPosition.y, transform.position.z);
+        transform.rotation = Quaternion.identity;
 
         currentLane = targetLane;
         isChangingLane = false;
@@ -214,6 +240,16 @@ public class Player : MonoBehaviour
     //Instantiate Car
     public void InstantiateCar() => car = Instantiate(carPrefab, new Vector3(0, 0, transform.position.z), Quaternion.identity);
     public void DestroyCar() => Destroy(car);
+
+    //Shield Mode
+    public IEnumerator ActivateShield()
+    {
+        controller.excludeLayers = LayerMask.GetMask("Obstacle");
+        shiledParticle.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        shiledParticle.SetActive(false);
+        controller.excludeLayers = LayerMask.GetMask("None");
+    }
 
     //Death 
     public IEnumerator DeathBounce()
