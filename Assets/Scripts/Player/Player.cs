@@ -46,8 +46,9 @@ public class Player : MonoBehaviour
     public GameObject plane;
 
     [Header("Drive")]
-    public GameObject carPrefab;
-    public GameObject car;
+    public GameObject[] vehiclePrefab;
+    public GameObject vehicle;
+    public int vehicleIndex;
 
     [Header("Collectibles")]
     public int keys;
@@ -238,8 +239,8 @@ public class Player : MonoBehaviour
     }
 
     //Instantiate Car
-    public void InstantiateCar() => car = Instantiate(carPrefab, new Vector3(0, 0, transform.position.z), Quaternion.identity);
-    public void DestroyCar() => Destroy(car);
+    public void InstantiateCar() => vehicle = Instantiate(vehiclePrefab[vehicleIndex], new Vector3(0, 0, transform.position.z), Quaternion.identity);
+    public void DestroyCar() => Destroy(vehicle);
 
     //Shield Mode
     public IEnumerator ActivateShield()

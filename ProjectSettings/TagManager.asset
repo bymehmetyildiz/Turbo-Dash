@@ -8,6 +8,7 @@ TagManager:
   - SmallBlock
   - Menu
   - Obstacle
+  - FxTemporaire
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - Player
   - Vehicle
   - Obstacle
-  - 
+  - Projectile
   - 
   - 
   - 

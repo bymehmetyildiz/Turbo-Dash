@@ -14,7 +14,7 @@ public class DriveState : PlayerState
         player.InstantiateCar();
 
         // Attach player to the seat
-        player.transform.SetParent(player.car.GetComponent<CarController>().playerPosition);
+        player.transform.SetParent(player.vehicle.GetComponent<VehicleController>().playerPosition);
         player.transform.localPosition = Vector3.zero; // snap exactly to seat
 
         stateTimer = 10f;
@@ -31,7 +31,7 @@ public class DriveState : PlayerState
         player.transform.SetParent(null);
         player.DestroyCar();
 
-        player.currentLane = player.car.GetComponent<CarController>().currentLane;
+        player.currentLane = player.vehicle.GetComponent<VehicleController>().currentLane;
         player.transform.position = new Vector3(player.lanePositions[player.currentLane], player.transform.position.y, player.transform.position.z);
 
         player.StartCoroutine(player.ActivateShield());
@@ -44,10 +44,10 @@ public class DriveState : PlayerState
     {
         base.Update();
 
-        if (player.car != null)
+        if (player.vehicle != null)
         {
-            player.transform.position = player.car
-                .GetComponent<CarController>()
+            player.transform.position = player.vehicle
+                .GetComponent<VehicleController>()
                 .playerPosition.position;
         }
 

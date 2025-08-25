@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 
 
-public class CarController : MonoBehaviour
+public class VehicleController : MonoBehaviour
 {
     public float speed = 10f;
     public Transform playerPosition;
@@ -13,6 +13,8 @@ public class CarController : MonoBehaviour
     private bool isChangingLane = false;
     private float[] lanePositions = { -1.2f, 0f, 1.2f };
     public int currentLane = 1;
+
+    public VehicleType vehicleType;
 
     void Start()
     {
@@ -85,5 +87,11 @@ public class CarController : MonoBehaviour
         isChangingLane = false;
     }
 
+}
+
+public enum VehicleType
+{
+    Car,
+    Tank,
 }
 
