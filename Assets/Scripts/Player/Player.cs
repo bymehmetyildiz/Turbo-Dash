@@ -200,7 +200,7 @@ public class Player : MonoBehaviour
                 StartCoroutine(DeathBounce());
                 isStarted = false;
                 jetPack.SetActive(false);
-                obstacle.PushRigidBodies();
+                obstacle.PushRigidBodies(Random.Range(-3f, 3f), Random.Range(3, 5), Random.Range(5, 7));
             }
             else
             {

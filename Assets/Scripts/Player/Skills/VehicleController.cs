@@ -16,9 +16,13 @@ public class VehicleController : MonoBehaviour
 
     public VehicleType vehicleType;
 
-    void Start()
+    public GameObject bomb;
+    public Transform bombPos;
+    public bool canShoot = true;
+
+    private void OnEnable()
     {
-             
+        canShoot = true;        
     }
 
     void Update()
@@ -30,6 +34,16 @@ public class VehicleController : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.A) && currentLane > 0 && !isChangingLane)        
             StartCoroutine(ChangeLane(currentLane - 1, -15));
 
+        if (vehicleType == VehicleType.Tank && Input.GetKeyDown(KeyCode.Mouse0) && canShoot)
+            StartCoroutine(ReleaseBomb());
+    }
+
+    private IEnumerator ReleaseBomb()
+    {
+        canShoot = false;
+        Instantiate(bomb, bombPos.position, Quaternion.Euler(-90, 90, 90));        
+        yield return new WaitForSeconds(3f);
+        canShoot = true;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -38,7 +52,7 @@ public class VehicleController : MonoBehaviour
 
         if (obstacle != null)
         {      
-            obstacle.PushRigidBodies();
+            obstacle.PushRigidBodies(Random.Range(-3f, 3f), Random.Range(3, 5), Random.Range(5, 7));
         }
     }
 

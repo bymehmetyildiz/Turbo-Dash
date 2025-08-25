@@ -35,7 +35,7 @@ public class Obstacles : MonoBehaviour
         }
     }
 
-    public void PushRigidBodies()
+    public void PushRigidBodies(float x, float y, float z)
     {
         Collider[] collider = GetComponents<Collider>();
 
@@ -47,7 +47,7 @@ public class Obstacles : MonoBehaviour
         foreach (Rigidbody rb in rbs)
         {
             rb.isKinematic = false;
-            rb.AddForce(new Vector3(Random.Range(-3f, 3f), Random.Range(3, 5), Random.Range(5, 7)), ForceMode.Impulse);
+            rb.AddForce(new Vector3(x, y, z), ForceMode.Impulse);
         }
     }
 
