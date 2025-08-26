@@ -10,9 +10,9 @@ public class GameManager : MonoBehaviour
     //Vehicles
     [SerializeField] private GameObject[] vehicles;
     [SerializeField] private GameObject[] obstacles;
-    [SerializeField] private float spawnInterval;
+    private float spawnInterval;
     private float minSpawnInterval = 0.75f;
-    private float maxSpawnInterval = 1.5f;
+    private float maxSpawnInterval = 2f;
     [SerializeField] private float spawnTimer;
     [SerializeField] private float spawnDistance;
 
@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
         Vector3 spawnPos, spawnPos2 = Vector3.zero;
         bool spawnSecond = false;
 
-        if (obstacle.GetComponent<Obstacles>().obstacleType == ObstacleType.Single)
+        if (obstacle.GetComponent<Obstacles>().obstacleType != ObstacleType.Multiple)
         {
             lane = lanes[Random.Range(0, lanes.Length)];
             lane2 = lanes[Random.Range(0, lanes.Length)];
@@ -97,8 +97,13 @@ public class GameManager : MonoBehaviour
 
         if (spawnSecond)
         {
-            Instantiate(obstacle, spawnPos2, Quaternion.identity);
-            spawnSecond = false;
+            GameObject obstacle2 = obstacles[Random.Range(0, obstacles.Length)];
+
+            if (obstacle2.GetComponent<Obstacles>().obstacleType != ObstacleType.Multiple)
+            {
+                Instantiate(obstacle2, spawnPos2, Quaternion.identity);
+                spawnSecond = false;
+            }
         }
 
     }

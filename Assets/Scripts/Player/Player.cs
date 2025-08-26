@@ -42,7 +42,6 @@ public class Player : MonoBehaviour
 
     [Header("Fly")]
     public GameObject jetPack;
-    public GameObject shiledParticle;
     public GameObject plane;
 
     [Header("Drive")]
@@ -52,6 +51,10 @@ public class Player : MonoBehaviour
 
     [Header("Collectibles")]
     public int keys;
+
+    [Header("Shield")]
+    public GameObject shiledParticle;
+    public bool isShielded = false;
 
     private void Awake()
     {
@@ -93,6 +96,11 @@ public class Player : MonoBehaviour
         {
             moveSpeed += moveSpeed * Time.deltaTime * 0.001f;
             anim.speed += Time.deltaTime * 0.001f;
+        }
+
+        if(Input.GetKeyDown(KeyCode.V))
+        {
+            StartCoroutine(ActivateShield());
         }
 
     }
@@ -194,13 +202,29 @@ public class Player : MonoBehaviour
 
         if (obstacle != null)
         {
+            if (isShielded)
+                return;
+           
+            if (obstacle.obstacleType == ObstacleType.Explosive)
+            {
+                if (isShielded)
+                    return; // ignore collision when shielded
+
+                stateMachine.ChangeState(fastHitState);
+                StartCoroutine(DeathBounce());
+                isStarted = false;
+                jetPack.SetActive(false);
+                obstacle.anim.SetBool("Attack", true);
+                obstacle.Explode();
+            }
+
             if (stateMachine.currentstate == jetState)
             {
                 stateMachine.ChangeState(fastHitState);
                 StartCoroutine(DeathBounce());
                 isStarted = false;
                 jetPack.SetActive(false);
-                obstacle.PushRigidBodies(Random.Range(-3f, 3f), Random.Range(3, 5), Random.Range(5, 7));
+                obstacle.PushRigidBodies(hit.point, 20f, 10f);
             }
             else
             {
@@ -208,10 +232,21 @@ public class Player : MonoBehaviour
                 isStarted = false;
                 obstacle.ActivateRigidbodies();
             }
-                
         }
 
-        
+        Projectile projectile = hit.gameObject.GetComponent<Projectile>();
+        if (projectile != null)
+        {
+            if (isShielded)
+                return;
+
+            stateMachine.ChangeState(fastHitState);
+            StartCoroutine(DeathBounce());
+            isStarted = false;
+            jetPack.SetActive(false);
+        }
+
+
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -239,17 +274,20 @@ public class Player : MonoBehaviour
     }
 
     //Instantiate Car
-    public void InstantiateCar() => vehicle = Instantiate(vehiclePrefab[vehicleIndex], new Vector3(0, 0, transform.position.z), Quaternion.identity);
+    public void InstantiateCar() => vehicle = Instantiate(vehiclePrefab[vehicleIndex], 
+        new Vector3(lanePositions[currentLane], 0, transform.position.z), Quaternion.identity);
     public void DestroyCar() => Destroy(vehicle);
 
     //Shield Mode
     public IEnumerator ActivateShield()
     {
+        isShielded = true;
         controller.excludeLayers = LayerMask.GetMask("Obstacle");
         shiledParticle.SetActive(true);
         yield return new WaitForSeconds(3f);
         shiledParticle.SetActive(false);
-        controller.excludeLayers = LayerMask.GetMask("None");
+        controller.excludeLayers = 0;
+        isShielded = false;
     }
 
     //Death 

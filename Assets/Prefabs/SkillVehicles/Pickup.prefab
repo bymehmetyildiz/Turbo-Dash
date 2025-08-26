@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5494017212442415946}
   - component: {fileID: 3370979470553154933}
   - component: {fileID: 7750286336537330198}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bl_Wheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -128,7 +128,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6822811832071885522}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wheels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,7 +163,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2138034091533627198}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bone.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -197,7 +197,7 @@ GameObject:
   - component: {fileID: 1279855375428591443}
   - component: {fileID: 5892549508977769117}
   - component: {fileID: 8569310738644596287}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SteeringWheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -280,7 +280,7 @@ GameObject:
   - component: {fileID: 159924351813345973}
   - component: {fileID: 286476343516355404}
   - component: {fileID: 3490814780950925437}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: fuel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -363,7 +363,7 @@ GameObject:
   - component: {fileID: 2990455540134149403}
   - component: {fileID: 8459330635756964958}
   - component: {fileID: 7326289408249704301}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BackWheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -448,7 +448,7 @@ GameObject:
   - component: {fileID: 6322816442106350116}
   - component: {fileID: 8783825364929629861}
   - component: {fileID: 2086734231899144064}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Fl_Wheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -565,7 +565,7 @@ GameObject:
   - component: {fileID: 6633824459755770949}
   - component: {fileID: 6704654225194672564}
   - component: {fileID: 7377392427709041574}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: carBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -659,9 +659,9 @@ GameObject:
   - component: {fileID: 5734287404796121614}
   - component: {fileID: 8410964681922655175}
   - component: {fileID: 5323997064772851407}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Pickup
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -747,6 +747,9 @@ MonoBehaviour:
   playerPosition: {fileID: 9178902284919232434}
   currentLane: 1
   vehicleType: 0
+  bomb: {fileID: 0}
+  bombPos: {fileID: 0}
+  canShoot: 1
 --- !u!1 &4639970755674817204
 GameObject:
   m_ObjectHideFlags: 0
@@ -756,7 +759,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6616588890407066823}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bone.006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -788,7 +791,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7800048762769775430}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bone.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -820,7 +823,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 656951335283782722}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bone.006_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -852,7 +855,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5896302213007020438}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bone.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -885,7 +888,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4343320088205836697}
   - component: {fileID: 7893000175168707528}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: antennaMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -979,7 +982,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7769015859546470108}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bone.006_end_end_end_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1010,7 +1013,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7068454143615779513}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bone.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1046,7 +1049,7 @@ GameObject:
   - component: {fileID: 2423415584458996260}
   - component: {fileID: 650595289272749986}
   - component: {fileID: 677089410371504172}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FR_Wheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1161,7 +1164,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3283113943674940936}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1195,7 +1198,7 @@ GameObject:
   - component: {fileID: 7565634235124340597}
   - component: {fileID: 5391249846198976298}
   - component: {fileID: 6210906578053186156}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: DoorLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1277,7 +1280,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1360441724806570340}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bone.006_end_end_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1340,7 +1343,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8142080823099354599}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bone.006_end_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1376,7 +1379,7 @@ GameObject:
   - component: {fileID: 475804477123757791}
   - component: {fileID: 7655498148369287828}
   - component: {fileID: 4824031516588118522}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BR_Wheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1491,7 +1494,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6574703506446624507}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: antenna
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1523,7 +1526,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7149430220630758191}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bone.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1557,7 +1560,7 @@ GameObject:
   - component: {fileID: 7363646194605309883}
   - component: {fileID: 6065829681851931492}
   - component: {fileID: 9220615542009248345}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: DoorRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -8,6 +8,7 @@ public class VehicleController : MonoBehaviour
 {
     public float speed = 10f;
     public Transform playerPosition;
+    private Player player;
 
     private Rigidbody rb;
     private bool isChangingLane = false;
@@ -22,7 +23,13 @@ public class VehicleController : MonoBehaviour
 
     private void OnEnable()
     {
-        canShoot = true;        
+        canShoot = true;
+    }
+
+    private void Start()
+    {
+        player = FindObjectOfType<Player>();
+        currentLane = player.currentLane;
     }
 
     void Update()
@@ -42,17 +49,33 @@ public class VehicleController : MonoBehaviour
     {
         canShoot = false;
         Instantiate(bomb, bombPos.position, Quaternion.Euler(-90, 90, 90));        
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
         canShoot = true;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         Obstacles obstacle = collision.gameObject.GetComponent<Obstacles>();
-
         if (obstacle != null)
-        {      
-            obstacle.PushRigidBodies(Random.Range(-3f, 3f), Random.Range(3, 5), Random.Range(5, 7));
+        {
+            if(obstacle.obstacleType == ObstacleType.Explosive)
+            {
+                obstacle.Explode();
+                gameObject.SetActive(false);
+                player.stateMachine.ChangeState(player.airState);                
+            }
+            else
+            {
+                Vector3 hitPoint = collision.contacts[0].point;
+                obstacle.PushRigidBodies(hitPoint, 30f, 10f);
+            }   
+        }
+
+        Projectile projectile = collision.gameObject.GetComponent<Projectile>();
+        if (projectile != null)
+        { 
+            gameObject.SetActive(false);
+            player.stateMachine.ChangeState(player.airState);
         }
     }
 

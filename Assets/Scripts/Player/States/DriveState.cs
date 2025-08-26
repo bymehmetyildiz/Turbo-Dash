@@ -26,8 +26,10 @@ public class DriveState : PlayerState
     public override void Exit()
     {
         base.Exit();
+        
+        controller.height = 1.5f;
+        controller.radius = 0.15f;
 
-        // Detach player from car
         player.transform.SetParent(null);
         player.DestroyCar();
 
@@ -36,8 +38,7 @@ public class DriveState : PlayerState
 
         player.StartCoroutine(player.ActivateShield());
     
-        controller.height = 1.5f;
-        controller.radius = 0.15f;
+        
     }
 
     public override void Update()
@@ -53,5 +54,6 @@ public class DriveState : PlayerState
 
         if (stateTimer <= 0f)
             stateMachine.ChangeState(player.airState);
+
     }
 }
