@@ -85,10 +85,9 @@ public class Obstacles : MonoBehaviour
             }
         }
 
-        if (obstacleType == ObstacleType.Armed && IsPlayerDetected() && !isShooting)
-        {
+        if (obstacleType == ObstacleType.Armed && IsPlayerDetected() && !isShooting)        
             StartCoroutine(Shoot());
-        }
+        
     }
 
     private bool IsPlayerPast()
@@ -110,15 +109,18 @@ public class Obstacles : MonoBehaviour
 
     private IEnumerator Shoot()
     {
-        isShooting = true;
-
-        while (IsPlayerDetected()) // keep firing only while player is detected
+        if (player.isStarted)
         {
-            Instantiate(cannonBall, cannonPos.position, Quaternion.identity);
-            yield return new WaitForSeconds(2f);
-        }
+            isShooting = true;
 
-        isShooting = false;
+            while (IsPlayerDetected()) // keep firing only while player is detected
+            {
+                Instantiate(cannonBall, cannonPos.position, Quaternion.identity);
+                yield return new WaitForSeconds(2f);
+            }
+
+            isShooting = false;
+        }
     }
 
     private bool IsPlayerDetected()

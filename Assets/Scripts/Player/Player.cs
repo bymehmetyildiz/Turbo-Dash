@@ -217,8 +217,7 @@ public class Player : MonoBehaviour
                 obstacle.anim.SetBool("Attack", true);
                 obstacle.Explode();
             }
-
-            if (stateMachine.currentstate == jetState)
+            else if (stateMachine.currentstate == jetState)
             {
                 stateMachine.ChangeState(fastHitState);
                 StartCoroutine(DeathBounce());

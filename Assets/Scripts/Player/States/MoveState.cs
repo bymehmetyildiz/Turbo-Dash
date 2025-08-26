@@ -29,12 +29,12 @@ public class MoveState : GroundedState
 
         if (Input.GetKeyDown(KeyCode.D) && player.currentLane < player.lanePositions.Length - 1 && !player.isChangingLane)
         {
-            player.StartCoroutine(player.ChangeLane(player.currentLane + 1, 0.5f, 0, 0.2f));
+            player.StartCoroutine(player.ChangeLane(player.currentLane + 1, 0.5f, 0, 0.1f));
             stateMachine.ChangeState(player.changeLaneState);
         }
         else if (Input.GetKeyDown(KeyCode.A) && player.currentLane > 0 && !player.isChangingLane)
         {
-            player.StartCoroutine(player.ChangeLane(player.currentLane - 1, 0.5f, 0, 0.2f));
+            player.StartCoroutine(player.ChangeLane(player.currentLane - 1, 0.5f, 0, 0.1f));
             stateMachine.ChangeState(player.changeLaneState);
         }
         else if(Input.GetKeyDown(KeyCode.Space) && controller.isGrounded && !player.isChangingLane)

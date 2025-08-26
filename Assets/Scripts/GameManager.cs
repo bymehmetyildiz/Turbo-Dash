@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     private Player player;
 
     //Vehicles
-    [SerializeField] private GameObject[] vehicles;
+    [SerializeField] private GameObject[] aircrafts;
     [SerializeField] private GameObject[] obstacles;
     private float spawnInterval;
     private float minSpawnInterval = 0.75f;
@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         SpawnPlatform();
+        
 
         if (player.isStarted)
         {
@@ -33,6 +34,7 @@ public class GameManager : MonoBehaviour
             if (spawnTimer >= spawnInterval)
             {
                 SpawnObstacle();
+                SpawnAircraft();
                 spawnTimer = 0f;
                 spawnInterval = Random.Range(minSpawnInterval, maxSpawnInterval);
             }
@@ -106,6 +108,35 @@ public class GameManager : MonoBehaviour
             }
         }
 
+    }
+
+    private void SpawnAircraft()
+    {
+        if ((player.stateMachine.currentstate == player.planeState
+            || player.stateMachine.currentstate == player.jetState) && player.transform.position.y > 9)
+        {
+            float[] lanes = { 1.2f, 0, -1.2f };
+            float lane = lanes[Random.Range(0, lanes.Length)];
+            Vector3 spawnPos = new Vector3(
+                lane,
+                9.5f,
+                player.transform.position.z + spawnDistance);
+            GameObject aircraft = aircrafts[Random.Range(0, aircrafts.Length)];
+            Instantiate(aircraft, spawnPos, Quaternion.Euler(0, 180, 0));
+
+            /* Spawn Second Plane
+            float lane2 = lanes[Random.Range(0, lanes.Length)];
+            if(lane2 != lane)
+            {
+                Vector3 spawnPos2 = new Vector3(
+                    lane2,
+                    9.5f,
+                    player.transform.position.z + spawnDistance + 30f);
+                Instantiate(aircrafts[Random.Range(0, aircrafts.Length)], spawnPos2, Quaternion.Euler(0, 180, 0));
+            }
+            */
+        }
+       
     }
 
 }

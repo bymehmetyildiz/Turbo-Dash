@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class JetState : PlayerState
 {
-    private float jetHeight = 5;
+    private float jetHeight = 10f;
 
     public JetState(StateMachine stateMachine, string animBoolName, Player player, CharacterController controller)
         : base(stateMachine, animBoolName, player, controller)
