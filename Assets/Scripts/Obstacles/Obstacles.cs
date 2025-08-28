@@ -92,7 +92,7 @@ public class Obstacles : MonoBehaviour
 
     private bool IsPlayerPast()
     {
-        if(player.transform.position.z > transform.position.z + 30)
+        if(player.transform.position.z > transform.position.z + 75f)
             return true;
 
         return false;
@@ -113,10 +113,10 @@ public class Obstacles : MonoBehaviour
         {
             isShooting = true;
 
-            while (IsPlayerDetected()) // keep firing only while player is detected
+            while (IsPlayerDetected())
             {
                 Instantiate(cannonBall, cannonPos.position, Quaternion.identity);
-                yield return new WaitForSeconds(2f);
+                yield return new WaitForSeconds(3f);
             }
 
             isShooting = false;
@@ -127,8 +127,7 @@ public class Obstacles : MonoBehaviour
     {
         RaycastHit hit;
 
-        // Try both forward and backward depending on prefab orientation
-        if (Physics.Raycast(cannonPos.transform.position, -transform.forward, out hit, 50f)) // limit distance
+        if (Physics.Raycast(cannonPos.transform.position, -transform.forward, out hit, 30f))
         {
             if (hit.collider.CompareTag("Player"))
                 return true;
@@ -136,8 +135,6 @@ public class Obstacles : MonoBehaviour
 
         return false;
     }
-
-
 }
 
 public enum ObstacleType

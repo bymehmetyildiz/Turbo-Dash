@@ -22,6 +22,7 @@ public class JetState : PlayerState
     {
         base.Exit();
         player.StartCoroutine(player.ActivateShield());
+        player.jetPack.SetActive(false);
     }
 
     public override void Update()
@@ -50,6 +51,13 @@ public class JetState : PlayerState
 
         controller.Move(player.moveDirection * Time.deltaTime);
 
+        if (!player.isChangingLane && player.transform.position.x != player.lanePositions[player.currentLane])
+        {
+            controller.transform.position = Vector3.Lerp(player.transform.position, new Vector3(player.lanePositions[player.currentLane],
+            player.transform.position.y,
+            player.transform.position.z), 0.1f);
+        }
+
         // Lane change
         if (Input.GetKeyDown(KeyCode.D) && player.currentLane < player.lanePositions.Length - 1 && !player.isChangingLane)
         {
@@ -62,8 +70,7 @@ public class JetState : PlayerState
 
         // Timer
         if (stateTimer <= 0f)
-        {
-            player.jetPack.SetActive(false);
+        {            
             stateMachine.ChangeState(player.airState);
         }
     }

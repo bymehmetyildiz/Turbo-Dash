@@ -38,8 +38,8 @@ ModelImporter:
       name: anm_jump01
       takeName: Picola_Male_anm_jump01
       internalID: 7784348987769117624
-      firstFrame: 55
-      lastFrame: 66
+      firstFrame: 0
+      lastFrame: 120
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

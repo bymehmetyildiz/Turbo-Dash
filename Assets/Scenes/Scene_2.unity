@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17945117, g: 0.29881093, b: 0.35260785, a: 1}
+  m_IndirectSpecularColor: {r: 0.17944686, g: 0.29880273, b: 0.35260284, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -525,7 +525,7 @@ MonoBehaviour:
   m_BindingMode: 4
   m_FollowOffset: {x: 0, y: 2.5, z: -10}
   m_XDamping: 0
-  m_YDamping: 0
+  m_YDamping: 0.15
   m_ZDamping: 0.15
   m_AngularDampingMode: 0
   m_PitchDamping: 0
@@ -709,6 +709,10 @@ MonoBehaviour:
   - {fileID: 4184828265478357090, guid: 89b9123007c26284cbbabf8ff6f22442, type: 3}
   spawnTimer: 0
   spawnDistance: 120
+  coinPrefab: {fileID: 7206554128912018888, guid: 2510a6ae04cf70b4a8658f5b831c1eac,
+    type: 3}
+  coinPerRow: 10
+  coinSpacing: 2
 --- !u!4 &741060980
 Transform:
   m_ObjectHideFlags: 0
@@ -2351,7 +2355,7 @@ PrefabInstance:
     - target: {fileID: 5467697751569452511, guid: db73295f8cbda7a44ad3a3163e6e2861,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5467697751569452511, guid: db73295f8cbda7a44ad3a3163e6e2861,
         type: 3}

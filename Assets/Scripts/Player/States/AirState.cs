@@ -27,7 +27,14 @@ public class AirState : PlayerState
         player.moveDirection = Vector3.up * player.verticalVelocity + Vector3.forward * player.moveSpeed;
 
         controller.Move(player.moveDirection * Time.deltaTime);
-        
+
+        if (!player.isChangingLane && player.transform.position.x != player.lanePositions[player.currentLane])
+        {
+            controller.transform.position = Vector3.Lerp(player.transform.position, new Vector3(player.lanePositions[player.currentLane],
+            player.transform.position.y,
+            player.transform.position.z), 0.1f);
+        }
+
         if (Input.GetKeyDown(KeyCode.D) && player.currentLane < player.lanePositions.Length - 1 && !player.isChangingLane)
         {
             player.StartCoroutine(player.ChangeLane(player.currentLane + 1, 0, 0, 0.1f));

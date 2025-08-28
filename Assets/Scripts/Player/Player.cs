@@ -15,7 +15,6 @@ public class Player : MonoBehaviour
     public IdleState idleState;
     public MoveState moveState;
     public TurnState turnState;
-    public ChangeLaneState changeLaneState;   
     public JumpState jumpState;
     public AirState airState;
     public SlideState slideState;
@@ -56,14 +55,16 @@ public class Player : MonoBehaviour
     public GameObject shiledParticle;
     public bool isShielded = false;
 
+    [Header("Shield")]
+    public int coinAmount;    
+
     private void Awake()
     {
         stateMachine = new StateMachine();
 
         idleState = new IdleState(stateMachine, "Idle", this, controller);
         moveState = new MoveState(stateMachine, "Move", this, controller);
-        turnState = new TurnState(stateMachine, "Turn", this, controller);
-        changeLaneState = new ChangeLaneState(stateMachine, "ChangeLane", this, controller);        
+        turnState = new TurnState(stateMachine, "Turn", this, controller);               
         jumpState = new JumpState(stateMachine, "Jump", this, controller);
         airState = new AirState(stateMachine, "Fall", this, controller);
         slideState = new SlideState(stateMachine, "Roll", this, controller);
@@ -132,8 +133,6 @@ public class Player : MonoBehaviour
 
         Vector3 startPosition = transform.position;
         Vector3 endPosition = new Vector3(lanePositions[targetLane], transform.position.y, transform.position.z);
-
-
         Quaternion startRotation = transform.rotation;
         Quaternion tiltRotation = Quaternion.Euler(0, 0, angle);        
         float elapsed = 0f;
@@ -172,9 +171,8 @@ public class Player : MonoBehaviour
             elapsed += Time.deltaTime;
             yield return null;
         }
-
-        // Snap to final lane position
-        transform.position = new Vector3(endPosition.x, endPosition.y, transform.position.z);
+        
+        transform.position = new Vector3(endPosition.x, transform.position.y, transform.position.z);
         transform.rotation = Quaternion.identity;
 
         currentLane = targetLane;
@@ -249,26 +247,12 @@ public class Player : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        Doors door = other.GetComponent<Doors>();
-        if (door != null)
-        {
-            if (keys > 0 && !door.isOpen)  // make a bool in Doors to track open state
-            {
-                keys--;
-                StartCoroutine(door.OpenDoor());
-                door.isOpen = true;
-            }
-            else if (!door.isOpen) // block player if no key and not open
-            {
-                stateMachine.ChangeState(hitState);
-                isStarted = false;
-            }
-        }
+        Coin coin = other.GetComponent<Coin>();
 
-        Collectible collectible = other.GetComponent<Collectible>();
-        if(collectible != null)
+        if(coin != null)
         {
-           collectible.Collect(this);
+            coinAmount++;
+            Destroy(coin.gameObject);
         }
     }
 

@@ -50,6 +50,13 @@ public class PlaneState : PlayerState
 
         controller.Move(player.moveDirection * Time.deltaTime);
 
+        if (!player.isChangingLane && player.transform.position.x != player.lanePositions[player.currentLane])
+        {
+            controller.transform.position = Vector3.Lerp(player.transform.position, new Vector3(player.lanePositions[player.currentLane],
+            player.transform.position.y,
+            player.transform.position.z), 0.1f);
+        }
+
         // Lane change
         if (Input.GetKeyDown(KeyCode.D) && player.currentLane < player.lanePositions.Length - 1 && !player.isChangingLane)
         {

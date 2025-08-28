@@ -37,6 +37,13 @@ public class JumpState : PlayerState
         player.moveDirection = Vector3.forward * player.moveSpeed + Vector3.up * player.verticalVelocity;
         controller.Move(player.moveDirection * Time.deltaTime);
 
+        if (!player.isChangingLane && player.transform.position.x != player.lanePositions[player.currentLane])
+        {
+            controller.transform.position = Vector3.Lerp(player.transform.position, new Vector3(player.lanePositions[player.currentLane],
+            player.transform.position.y,
+            player.transform.position.z), 0.1f);
+        }
+
         // When grounded, go back to MoveState
         if (controller.isGrounded)
         {

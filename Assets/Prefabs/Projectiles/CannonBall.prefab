@@ -5005,7 +5005,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitEffect: {fileID: 7717370513742289159, guid: 6665f874cdb213a4db59c96ac8457c1d,
     type: 3}
-  speed: -25
+  speed: -20
 --- !u!54 &5065101709446550812
 Rigidbody:
   m_ObjectHideFlags: 0

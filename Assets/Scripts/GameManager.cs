@@ -7,15 +7,17 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject[] platforms;
     private Player player;
 
-    //Vehicles
+    //Obstacles
     [SerializeField] private GameObject[] aircrafts;
     [SerializeField] private GameObject[] obstacles;
-    private float spawnInterval;
-    private float minSpawnInterval = 0.75f;
-    private float maxSpawnInterval = 2f;
+    private float spawnInterval = 2f;
     [SerializeField] private float spawnTimer;
     [SerializeField] private float spawnDistance;
 
+    //Coins
+    [SerializeField] private GameObject coinPrefab;
+    [SerializeField] private int coinPerRow;
+    [SerializeField] private float coinSpacing;
 
     void Start()
     {
@@ -26,7 +28,6 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         SpawnPlatform();
-        
 
         if (player.isStarted)
         {
@@ -36,7 +37,6 @@ public class GameManager : MonoBehaviour
                 SpawnObstacle();
                 SpawnAircraft();
                 spawnTimer = 0f;
-                spawnInterval = Random.Range(minSpawnInterval, maxSpawnInterval);
             }
         }
 
@@ -61,52 +61,61 @@ public class GameManager : MonoBehaviour
     private void SpawnObstacle()
     {
         float[] lanes = { 1.2f, 0, -1.2f };
-
+        float lane1;
+        float lane2;
         GameObject obstacle = obstacles[Random.Range(0, obstacles.Length)];
-        float lane, lane2;
+        GameObject obstacle2;
+        do
+        {
+            obstacle2 = obstacles[Random.Range(0, obstacles.Length)];
+        } while (obstacle2 == obstacle && obstacle2.GetComponent<Obstacles>().obstacleType == ObstacleType.Multiple);
+
         Vector3 spawnPos, spawnPos2 = Vector3.zero;
-        bool spawnSecond = false;
+        bool canSpawn;
+
+        int laneIndex1 = Random.Range(0, lanes.Length);
+        int laneIndex2;
+
+        do
+        {
+            laneIndex2 = Random.Range(0, lanes.Length);
+        } while (laneIndex1 == laneIndex2);
+
+        lane1 = lanes[laneIndex1];
+        lane2 = lanes[laneIndex2];
 
         if (obstacle.GetComponent<Obstacles>().obstacleType != ObstacleType.Multiple)
         {
-            lane = lanes[Random.Range(0, lanes.Length)];
-            lane2 = lanes[Random.Range(0, lanes.Length)];
-
+            canSpawn = true;
             spawnPos = new Vector3(
-                lane,
+                lane1,
                 0,
                 player.transform.position.z + spawnDistance);
 
-            if (lane != lane2)
-            {
-                spawnPos2 = new Vector3(
-                    lane2,
-                    0,
-                    player.transform.position.z + spawnDistance);
-                spawnSecond = true;
-            }
+            spawnPos2 = new Vector3(
+                lane2,
+                0,
+                player.transform.position.z + spawnDistance);
         }
         else
         {
-            lane = lanes[1];
+            canSpawn = false;
+            lane1 = lanes[1];
             spawnPos = new Vector3(
-                lane,
+                lane1,
                 2.2f,
                 player.transform.position.z + spawnDistance);
         }
 
         Instantiate(obstacle, spawnPos, Quaternion.identity);
-
-        if (spawnSecond)
+        if (canSpawn)
         {
-            GameObject obstacle2 = obstacles[Random.Range(0, obstacles.Length)];
-
-            if (obstacle2.GetComponent<Obstacles>().obstacleType != ObstacleType.Multiple)
-            {
+            if(Random.value > 0.5f)
                 Instantiate(obstacle2, spawnPos2, Quaternion.identity);
-                spawnSecond = false;
-            }
+            else
+                SpawnCoin(spawnPos2.z, lane2);
         }
+
 
     }
 
@@ -137,6 +146,23 @@ public class GameManager : MonoBehaviour
             */
         }
        
+    }
+
+    private void SpawnCoin(float zPos, float lane)
+    {
+        float[] lanes = { 1.2f, 0, -1.2f };
+        Vector3 spawnPos = new Vector3(
+        lane,
+        0.5f, // coin height
+        zPos
+        );
+
+        for (int i = 0; i < coinPerRow; i++)
+        {
+            Vector3 pos = spawnPos + new Vector3(0, 0, i * coinSpacing);
+            Instantiate(coinPrefab, pos, Quaternion.identity);
+        }
+
     }
 
 }
