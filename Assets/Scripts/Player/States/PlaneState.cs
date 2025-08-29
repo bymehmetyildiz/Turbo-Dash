@@ -15,6 +15,7 @@ public class PlaneState : PlayerState
         base.Enter();
         stateTimer = 10f;
         player.plane.SetActive(true);
+        player.lanePositions = new float[] { -3.5f, 0f, 3.5f };
     }
 
     public override void Exit()
@@ -22,6 +23,7 @@ public class PlaneState : PlayerState
         base.Exit();
         player.StartCoroutine(player.ActivateShield());
         player.plane.SetActive(false);
+        player.lanePositions = new float[] { -1.2f, 0f, 1.2f };
     }
 
     public override void Update()

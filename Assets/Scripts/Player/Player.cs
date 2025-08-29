@@ -7,6 +7,8 @@ using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
+    public static Player instance;
+
     public StateMachine stateMachine { get; private set; }
     public Animator anim;   
     public CharacterController controller;
@@ -60,6 +62,11 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
+        if (instance == null)
+            instance = this;
+        else
+            Destroy(gameObject);
+
         stateMachine = new StateMachine();
 
         idleState = new IdleState(stateMachine, "Idle", this, controller);

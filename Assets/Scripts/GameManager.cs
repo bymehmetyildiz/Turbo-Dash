@@ -61,70 +61,55 @@ public class GameManager : MonoBehaviour
     private void SpawnObstacle()
     {
         float[] lanes = { 1.2f, 0, -1.2f };
-        float lane1;
-        float lane2;
+
         GameObject obstacle = obstacles[Random.Range(0, obstacles.Length)];
-        GameObject obstacle2;
-        do
+        ObstacleType type = obstacle.GetComponent<Obstacles>().obstacleType;
+
+        if (type == ObstacleType.Multiple)
         {
-            obstacle2 = obstacles[Random.Range(0, obstacles.Length)];
-        } while (obstacle2 == obstacle && obstacle2.GetComponent<Obstacles>().obstacleType == ObstacleType.Multiple);
+            // Always center lane, elevated
+            Vector3 spawnPosMulti = new Vector3(0, 2.2f, player.transform.position.z + spawnDistance);
+            Instantiate(obstacle, spawnPosMulti, Quaternion.identity);
+            return;
+        }
 
-        Vector3 spawnPos, spawnPos2 = Vector3.zero;
-        bool canSpawn;
-
+        // Otherwise it's a Single
         int laneIndex1 = Random.Range(0, lanes.Length);
         int laneIndex2;
-
         do
         {
             laneIndex2 = Random.Range(0, lanes.Length);
         } while (laneIndex1 == laneIndex2);
 
-        lane1 = lanes[laneIndex1];
-        lane2 = lanes[laneIndex2];
+        float lane1 = lanes[laneIndex1];
+        float lane2 = lanes[laneIndex2];
 
-        if (obstacle.GetComponent<Obstacles>().obstacleType != ObstacleType.Multiple)
+        Vector3 spawnPos1 = new Vector3(lane1, 0, player.transform.position.z + spawnDistance);
+        Vector3 spawnPos2 = new Vector3(lane2, 0, player.transform.position.z + spawnDistance);
+
+        Instantiate(obstacle, spawnPos1, Quaternion.identity);
+
+        // Pick second obstacle (must be Single)
+        GameObject obstacle2;
+        do
         {
-            canSpawn = true;
-            spawnPos = new Vector3(
-                lane1,
-                0,
-                player.transform.position.z + spawnDistance);
+            obstacle2 = obstacles[Random.Range(0, obstacles.Length)];
+        } while (obstacle2.GetComponent<Obstacles>().obstacleType == ObstacleType.Multiple);
 
-            spawnPos2 = new Vector3(
-                lane2,
-                0,
-                player.transform.position.z + spawnDistance);
-        }
+        if (Random.value > 0.5f)
+            Instantiate(obstacle2, spawnPos2, Quaternion.identity);
         else
-        {
-            canSpawn = false;
-            lane1 = lanes[1];
-            spawnPos = new Vector3(
-                lane1,
-                2.2f,
-                player.transform.position.z + spawnDistance);
-        }
-
-        Instantiate(obstacle, spawnPos, Quaternion.identity);
-        if (canSpawn)
-        {
-            if(Random.value > 0.5f)
-                Instantiate(obstacle2, spawnPos2, Quaternion.identity);
-            else
-                SpawnCoin(spawnPos2.z, lane2);
-        }
-
-
+            SpawnCoin(spawnPos2.z, lane2);
     }
+
+
 
     private void SpawnAircraft()
     {
         if ((player.stateMachine.currentstate == player.planeState
             || player.stateMachine.currentstate == player.jetState) && player.transform.position.y > 9)
         {
-            float[] lanes = { 1.2f, 0, -1.2f };
+            float[] lanes = { -3.5f, 0f, 3.5f };
             float lane = lanes[Random.Range(0, lanes.Length)];
             Vector3 spawnPos = new Vector3(
                 lane,
@@ -133,9 +118,9 @@ public class GameManager : MonoBehaviour
             GameObject aircraft = aircrafts[Random.Range(0, aircrafts.Length)];
             Instantiate(aircraft, spawnPos, Quaternion.Euler(0, 180, 0));
 
-            /* Spawn Second Plane
+            //Spawn Second Plane
             float lane2 = lanes[Random.Range(0, lanes.Length)];
-            if(lane2 != lane)
+            if (lane2 != lane)
             {
                 Vector3 spawnPos2 = new Vector3(
                     lane2,
@@ -143,9 +128,9 @@ public class GameManager : MonoBehaviour
                     player.transform.position.z + spawnDistance + 30f);
                 Instantiate(aircrafts[Random.Range(0, aircrafts.Length)], spawnPos2, Quaternion.Euler(0, 180, 0));
             }
-            */
+
         }
-       
+
     }
 
     private void SpawnCoin(float zPos, float lane)

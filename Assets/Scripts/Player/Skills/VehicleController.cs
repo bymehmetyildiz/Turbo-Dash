@@ -77,6 +77,18 @@ public class VehicleController : MonoBehaviour
             gameObject.SetActive(false);
             player.stateMachine.ChangeState(player.airState);
         }
+
+       
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Coin coin = other.GetComponent<Coin>();
+        if (coin != null)
+        {
+            player.coinAmount++;
+            Destroy(coin.gameObject);
+        }
     }
 
     public IEnumerator ChangeLane(int targetLane, int angle)
