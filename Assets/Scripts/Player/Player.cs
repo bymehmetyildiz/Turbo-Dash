@@ -95,11 +95,6 @@ public class Player : MonoBehaviour
     {
         stateMachine.currentstate.Update();
 
-        if(Input.GetKeyDown(KeyCode.Q) && !isStarted)
-        {
-            isStarted = true;
-        }
-
         if (isStarted)
         {
             moveSpeed += moveSpeed * Time.deltaTime * 0.001f;
@@ -112,6 +107,8 @@ public class Player : MonoBehaviour
         }
 
     }
+
+
 
     //Check if Turn Animation Ended
     public void TriggerCalled() => stateMachine.currentstate.AnimationTrigger();
