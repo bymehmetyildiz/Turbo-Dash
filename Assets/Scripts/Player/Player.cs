@@ -263,8 +263,12 @@ public class Player : MonoBehaviour
     }
 
     //Instantiate Car
-    public void InstantiateCar() => vehicle = Instantiate(vehiclePrefab[vehicleIndex], 
+    public void InstantiateCar()
+    {
+        vehicle = Instantiate(vehiclePrefab[vehicleIndex], 
         new Vector3(lanePositions[currentLane], 0, transform.position.z), Quaternion.identity);
+    }
+
     public void DestroyCar() => Destroy(vehicle);
 
     //Shield Mode

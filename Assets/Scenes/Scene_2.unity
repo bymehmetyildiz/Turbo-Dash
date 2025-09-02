@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17944686, g: 0.29880273, b: 0.35260284, a: 1}
+  m_IndirectSpecularColor: {r: 0.17945117, g: 0.29881093, b: 0.35260785, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2821,7 +2821,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 2.5, z: -10}
+  m_FollowOffset: {x: 0, y: 4, z: -10}
   m_XDamping: 0
   m_YDamping: 0.15
   m_ZDamping: 0.15
@@ -5259,8 +5259,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1044371378}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.11854491, y: 0.0030162658, z: -0.0003601038, w: 0.99294406}
-  m_LocalPosition: {x: 0, y: 3.4029999, z: -4.665}
+  m_LocalRotation: {x: 0.18569297, y: 0.0029848532, z: -0.0005640794, w: 0.98260313}
+  m_LocalPosition: {x: 0, y: 4.903, z: -4.665}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8650,8 +8650,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2089000822}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.11854491, y: 0.0030162658, z: -0.0003601038, w: 0.99294406}
-  m_LocalPosition: {x: 0, y: 3.4029999, z: -4.665}
+  m_LocalRotation: {x: 0.18569297, y: 0.0029848532, z: -0.0005640794, w: 0.98260313}
+  m_LocalPosition: {x: 0, y: 4.903, z: -4.665}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9978,7 +9978,7 @@ PrefabInstance:
         type: 3}
       propertyPath: vehiclePrefab.Array.data[0]
       value: 
-      objectReference: {fileID: 4424638016580486371, guid: ece6691f68d5b474abb25cceced8c24f,
+      objectReference: {fileID: 9139794482837106823, guid: d6c28f1afb813b040a3a8bb382a09e10,
         type: 3}
     - target: {fileID: 8833459768900002967, guid: db73295f8cbda7a44ad3a3163e6e2861,
         type: 3}

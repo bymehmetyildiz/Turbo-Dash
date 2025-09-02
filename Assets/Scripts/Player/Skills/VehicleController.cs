@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -21,6 +22,12 @@ public class VehicleController : MonoBehaviour
     public Transform bombPos;
     public bool canShoot = true;
 
+    public CarCollection cars; // assign in inspector
+    public int carIndex;       // upgrade index
+    public int colorIndex;     // color index
+
+    private GameObject activeCar;
+
     private void OnEnable()
     {
         canShoot = true;
@@ -30,7 +37,29 @@ public class VehicleController : MonoBehaviour
     {
         player = FindObjectOfType<Player>();
         currentLane = player.currentLane;
+        SetupCar(carIndex, colorIndex);
     }
+
+    public void SetupCar(int _carIndex, int _colorIndex)
+    {
+        if (vehicleType == VehicleType.Modified)
+        {
+            for (int i = 0; i < cars.colors.Length; i++)
+            {
+                for (int j = 0; j < cars.colors[i].upgradeLevels.Length; j++)
+                {
+                    cars.colors[i].upgradeLevels[j].SetActive(false);
+                }
+            }
+
+            activeCar = null;
+
+            // Activate chosen car
+            activeCar = cars.colors[_colorIndex].upgradeLevels[_carIndex];
+            activeCar.SetActive(true);
+        }
+    }
+
 
     void Update()
     {
@@ -142,5 +171,17 @@ public enum VehicleType
 {
     Car,
     Tank,
+    Modified,
 }
 
+[Serializable]
+public class Car
+{
+    public GameObject[] upgradeLevels; // 0 = base, 1 = upgraded, etc.
+}
+
+[Serializable]
+public class CarCollection
+{
+    public Car[] colors; // 0 = Black, 1 = Blue, 2 = Cyan, etc.
+}
