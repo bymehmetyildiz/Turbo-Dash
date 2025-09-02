@@ -4,6 +4,8 @@ using UnityEngine;
 using TMPro;
 using DG.Tweening;
 using Cinemachine;
+using System.Runtime.CompilerServices;
+using System;
 
 public class UIManager : MonoBehaviour
 {
@@ -13,6 +15,7 @@ public class UIManager : MonoBehaviour
     [Header("Menus")]
     [SerializeField] private RectTransform upgradeMenu;
     [SerializeField] private RectTransform gameMenu;
+    [SerializeField] private RectTransform garageMenu;
 
     [Header("Upgrade Menu")]
     [SerializeField] private TMP_Text[] upgradeText;
@@ -31,10 +34,18 @@ public class UIManager : MonoBehaviour
     private Vector3 originalCamPos;
     private Quaternion originalCamRot;
 
+    [Header("Garage Menu")]
+    [SerializeField] private RectTransform carDetails;
+    [SerializeField] private float carFirstPos, carLastPos;
+    
+
 
     void Start()
     {
         player = Player.instance;
+        garageMenu.gameObject.SetActive(false);
+        carDetails.anchoredPosition = new Vector2(carFirstPos, carDetails.anchoredPosition.y);
+
     }
 
     private void OnValidate()
@@ -82,6 +93,8 @@ public class UIManager : MonoBehaviour
     {
         if (!isGarageOpen)
         {
+            garageMenu.gameObject.SetActive(true);
+            carDetails.DOAnchorPosX(carLastPos, 1f).SetEase(Ease.OutBack);
             // Save the original camera position & rotation
             originalCamPos = virtualCamera.transform.position;
             originalCamRot = virtualCamera.transform.rotation;
@@ -93,12 +106,14 @@ public class UIManager : MonoBehaviour
             virtualCamera.transform.DOMove(garageCamPos.position, 0.5f);
             virtualCamera.transform.DORotateQuaternion(garageCamPos.rotation, 0.5f);
 
-            startButton.SetActive(false);
+            gameMenu.gameObject.SetActive(false);
             isGarageOpen = true;
         }
         else
         {
             virtualCamera.LookAt = camLookAt;
+            carDetails.DOAnchorPosX(carFirstPos, 0.5f).SetEase(Ease.InBack);
+            
 
             // Smooth move back to original position & rotation
             virtualCamera.transform.DOMove(originalCamPos, 0.5f);
@@ -108,8 +123,9 @@ public class UIManager : MonoBehaviour
             DOVirtual.DelayedCall(0.5f, () =>
             {
                 virtualCamera.Follow = player.transform;
-                startButton.SetActive(true);
+                gameMenu.gameObject.SetActive(true);
                 isGarageOpen = false;
+                garageMenu.gameObject.SetActive(false);
             });
         }
     }
@@ -118,3 +134,4 @@ public class UIManager : MonoBehaviour
 
 
 }
+

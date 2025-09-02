@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Burst.CompilerServices;
@@ -49,6 +50,7 @@ public class Player : MonoBehaviour
     public GameObject[] vehiclePrefab;
     public GameObject vehicle;
     public int vehicleIndex;
+  
 
     [Header("Collectibles")]
     public int keys;
@@ -311,3 +313,4 @@ public class Player : MonoBehaviour
     }
 
 }
+
