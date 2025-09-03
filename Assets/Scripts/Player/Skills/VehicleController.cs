@@ -37,7 +37,6 @@ public class VehicleController : MonoBehaviour
     {
         player = FindObjectOfType<Player>();
         currentLane = player.currentLane;
-        SetupCar(carIndex, colorIndex);
     }
 
     public void SetupCar(int _carIndex, int _colorIndex)
@@ -163,6 +162,23 @@ public class VehicleController : MonoBehaviour
 
         currentLane = targetLane;
         isChangingLane = false;
+    }
+
+    [ContextMenu("Delete Wheels")]
+    public void DeleteWheels()
+    {
+        Wheels[] wheels = GetComponentsInChildren<Wheels>();
+        MeshCollider[] colliders = GetComponentsInChildren<MeshCollider>();
+
+        foreach (Wheels wheel in wheels)
+        {
+            DestroyImmediate(wheel);
+        }
+
+        foreach (MeshCollider col in colliders)
+        {
+            DestroyImmediate(col);
+        }
     }
 
 }

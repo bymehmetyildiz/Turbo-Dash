@@ -630,7 +630,7 @@ GameObject:
   - component: {fileID: 2570994387071593887}
   m_Layer: 7
   m_Name: Circle.007
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -713,7 +713,7 @@ GameObject:
   - component: {fileID: 8127647253279982027}
   m_Layer: 7
   m_Name: Plane.010
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1641,7 +1641,7 @@ GameObject:
   - component: {fileID: 6995870671327165264}
   m_Layer: 7
   m_Name: Cylinder.005
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3237,7 +3237,7 @@ GameObject:
   - component: {fileID: 2462918982860336328}
   m_Layer: 7
   m_Name: Plane.008
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3752,7 +3752,7 @@ GameObject:
   - component: {fileID: 763902049874100926}
   m_Layer: 7
   m_Name: Plane.009
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3962,7 +3962,7 @@ GameObject:
   - component: {fileID: 2321272591307156752}
   m_Layer: 7
   m_Name: Cube.010
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4477,7 +4477,7 @@ GameObject:
   - component: {fileID: 6425352695875064723}
   m_Layer: 7
   m_Name: Body.002
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4828,7 +4828,7 @@ GameObject:
   - component: {fileID: 1143647758374172242}
   m_Layer: 7
   m_Name: Cube.012
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6408,7 +6408,7 @@ GameObject:
   - component: {fileID: 2031251914938293027}
   m_Layer: 7
   m_Name: Cube.004
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6523,7 +6523,7 @@ GameObject:
   - component: {fileID: 4013520199650074624}
   m_Layer: 7
   m_Name: AirPlane
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6537,7 +6537,7 @@ Transform:
   m_GameObject: {fileID: 5467697751569452511}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.113, y: -1.786, z: -0.36100006}
+  m_LocalPosition: {x: -0.058, y: -1.709, z: -0.463}
   m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -7367,7 +7367,7 @@ GameObject:
   - component: {fileID: 1931250953450437894}
   m_Layer: 7
   m_Name: Cylinder.006
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8572,7 +8572,7 @@ GameObject:
   - component: {fileID: 5657353655067337153}
   m_Layer: 7
   m_Name: Plane.011
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9354,7 +9354,7 @@ GameObject:
   - component: {fileID: 7235622111569024020}
   m_Layer: 7
   m_Name: Spitfire
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9442,7 +9442,7 @@ GameObject:
   - component: {fileID: 7278225426009414669}
   m_Layer: 7
   m_Name: Cube.009
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9885,7 +9885,7 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 3
   m_Height: 1.5
-  m_Radius: 0.15
+  m_Radius: 0.25
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
@@ -9922,13 +9922,16 @@ MonoBehaviour:
   jetPack: {fileID: 2734216405090288251}
   plane: {fileID: 5467697751569452511}
   vehiclePrefab:
-  - {fileID: 4424638016580486371, guid: ece6691f68d5b474abb25cceced8c24f, type: 3}
+  - {fileID: 9139794482837106823, guid: d6c28f1afb813b040a3a8bb382a09e10, type: 3}
   - {fileID: 7078512193388702134, guid: b1a656a1027a83044aaa5c9b2615c48e, type: 3}
-  vehicle: {fileID: 0}
-  vehicleIndex: 1
+  activeVehicle: {fileID: 0}
+  vehicleIndex: 0
+  carIndex: 0
+  colorIndex: 0
   keys: 0
   shiledParticle: {fileID: 5805404756945119342}
   isShielded: 0
+  coinAmount: 0
 --- !u!1 &7311360032936379147
 GameObject:
   m_ObjectHideFlags: 0
@@ -10044,7 +10047,7 @@ GameObject:
   - component: {fileID: 834368890475426541}
   m_Layer: 7
   m_Name: Circle.006
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10223,7 +10226,7 @@ GameObject:
   - component: {fileID: 7607792033210877425}
   m_Layer: 7
   m_Name: Body.001
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10434,7 +10437,7 @@ GameObject:
   - component: {fileID: 1673516226719711931}
   m_Layer: 7
   m_Name: Standard Bomb.001
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10866,7 +10869,7 @@ GameObject:
   - component: {fileID: 5654620188731697590}
   m_Layer: 7
   m_Name: Cube.011
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11546,7 +11549,7 @@ GameObject:
   - component: {fileID: 7030304606194133821}
   m_Layer: 7
   m_Name: Circle.008
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12092,7 +12095,7 @@ GameObject:
   - component: {fileID: 2232269775133335952}
   m_Layer: 7
   m_Name: pico_chan_chr_pico_00
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12222,6 +12225,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4772634663576830964, guid: e1385af346f4e624eb313ec1ea4fcd7e,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 8018385630816773118, guid: e1385af346f4e624eb313ec1ea4fcd7e,
         type: 3}

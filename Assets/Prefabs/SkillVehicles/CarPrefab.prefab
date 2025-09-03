@@ -171,8 +171,8 @@ MonoBehaviour:
       - {fileID: 679156259473210900}
       - {fileID: 286242734570245432}
       - {fileID: 7261880955828417108}
-  carIndex: 2
-  colorIndex: 2
+  carIndex: 0
+  colorIndex: 0
 --- !u!54 &9118511816132345358
 Rigidbody:
   m_ObjectHideFlags: 0

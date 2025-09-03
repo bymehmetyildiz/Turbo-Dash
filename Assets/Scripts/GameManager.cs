@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     //Obstacles
     [SerializeField] private GameObject[] aircrafts;
     [SerializeField] private GameObject[] obstacles;
-    private float spawnInterval = 2f;
+    private float spawnInterval = 1.5f;
     [SerializeField] private float spawnTimer;
     [SerializeField] private float spawnDistance;
 

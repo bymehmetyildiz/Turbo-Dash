@@ -22,7 +22,7 @@ public class SlideState : GroundedState
 
         controller.center = new Vector3(0, 0, 0);
         controller.height = 1.5f;
-        controller.radius = 0.15f;        
+        controller.radius = 0.25f;        
     }
 
     public override void Update()

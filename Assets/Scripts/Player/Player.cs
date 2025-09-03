@@ -48,9 +48,11 @@ public class Player : MonoBehaviour
 
     [Header("Drive")]
     public GameObject[] vehiclePrefab;
-    public GameObject vehicle;
+    public GameObject activeVehicle;
     public int vehicleIndex;
-  
+    public int carIndex;
+    public int colorIndex;
+
 
     [Header("Collectibles")]
     public int keys;
@@ -107,10 +109,7 @@ public class Player : MonoBehaviour
         {
             StartCoroutine(ActivateShield());
         }
-
     }
-
-
 
     //Check if Turn Animation Ended
     public void TriggerCalled() => stateMachine.currentstate.AnimationTrigger();
@@ -265,11 +264,12 @@ public class Player : MonoBehaviour
     //Instantiate Car
     public void InstantiateCar()
     {
-        vehicle = Instantiate(vehiclePrefab[vehicleIndex], 
+        activeVehicle = Instantiate(vehiclePrefab[vehicleIndex],
         new Vector3(lanePositions[currentLane], 0, transform.position.z), Quaternion.identity);
+        activeVehicle.GetComponent<VehicleController>().SetupCar(carIndex, colorIndex);
     }
 
-    public void DestroyCar() => Destroy(vehicle);
+    public void DestroyCar() => Destroy(activeVehicle);
 
     //Shield Mode
     public IEnumerator ActivateShield()
