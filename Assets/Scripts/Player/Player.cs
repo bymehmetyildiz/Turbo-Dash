@@ -187,20 +187,6 @@ public class Player : MonoBehaviour
     // Collider
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        Vehicle vehicle = hit.gameObject.GetComponent<Vehicle>();
-
-        if (vehicle != null)
-        {            
-            stateMachine.ChangeState(fastHitState);
-            isStarted = false;
-            Vehicle[] vehicles = FindObjectsOfType<Vehicle>();
-            foreach (Vehicle v in vehicles)
-            {
-                v.speed = 0;
-            }
-            StartCoroutine(DeathBounce());
-        }
-
         Obstacles obstacle = hit.gameObject.GetComponent<Obstacles>();
 
         if (obstacle != null)

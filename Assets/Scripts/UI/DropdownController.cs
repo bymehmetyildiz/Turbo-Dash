@@ -8,8 +8,8 @@ using TMPro;
 
 public class DropdownController : MonoBehaviour
 {
-    private TMP_Dropdown dropdown;
-    public VehicleController vehicle;
+    public TMP_Dropdown dropdown;
+    
 
     void Start()
     {
@@ -26,8 +26,7 @@ public class DropdownController : MonoBehaviour
         dropdown.options.Add(new TMP_Dropdown.OptionData("Yellow", CreateColorSprite(Color.yellow)));
 
         dropdown.RefreshShownValue();
-
-        ChangeColor();
+    
     }
 
     // Helper: makes a small square sprite in given color
@@ -41,20 +40,4 @@ public class DropdownController : MonoBehaviour
 
         return Sprite.Create(tex, new Rect(0, 0, 16, 16), new Vector2(0.5f, 0.5f));
     }
-
-    public void ChangeColor()
-    {
-        Player.instance.colorIndex = dropdown.value;
-        vehicle.SetupCar(Player.instance.carIndex, Player.instance.colorIndex);
-
-        // If a vehicle is currently active, refresh it
-        if (Player.instance.activeVehicle != null)
-        {
-            // Destroy current car and spawn with new color
-            Player.instance.DestroyCar();
-            Player.instance.InstantiateCar();
-        }
-    }
-    
-
 }

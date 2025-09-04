@@ -10,6 +10,7 @@ public class VehicleController : MonoBehaviour
     public float speed = 10f;
     public Transform playerPosition;
     private Player player;
+    public bool isUnlocked = false;
 
     private Rigidbody rb;
     private bool isChangingLane = false;
