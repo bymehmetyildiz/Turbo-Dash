@@ -12,6 +12,8 @@ public class GarageController : MonoBehaviour
     [SerializeField] private GameObject vehicleProps;
     [SerializeField] private TMP_Text vehicleName;
     [SerializeField] private TMP_Text vehiclePrice;
+    [SerializeField] private GameObject lockedText;
+    [SerializeField] private GameObject lockedImage;
     [SerializeField] private GameObject coinImage;
     private int index;
 
@@ -38,11 +40,19 @@ public class GarageController : MonoBehaviour
             vehicleProps.SetActive(false);
 
         if (!activeVehicle.GetComponent<Vehicle>().isUnlocked)
+        {
             vehiclePrice.text = activeVehicle.GetComponent<Vehicle>().price.ToString();
+            lockedText.SetActive(true);
+            vehicleProps.SetActive(false);
+            lockedImage.SetActive(true);
+        }
         else
         {
             vehiclePrice.text = "Equip";
             coinImage.SetActive(false);
+            lockedText.SetActive(false);
+            vehicleProps.SetActive(true);
+            lockedImage.SetActive(false);
         }
     }
 
@@ -75,13 +85,26 @@ public class GarageController : MonoBehaviour
         activeVehicle = vehicle[index];
         ShowVehicleProps();
         vehicleName.text = activeVehicle.GetComponent<Vehicle>().vehicleName;
-        if (!activeVehicle.GetComponent<Vehicle>().isUnlocked)
 
+        if (!activeVehicle.GetComponent<Vehicle>().isUnlocked)
+        {
             vehiclePrice.text = activeVehicle.GetComponent<Vehicle>().price.ToString();
+            lockedText.SetActive(true);
+            vehicleProps.SetActive(false);
+            coinImage.SetActive(true);
+            lockedImage.SetActive(true);
+        }
         else
         {
             vehiclePrice.text = "Equip";
             coinImage.SetActive(false);
+            lockedText.SetActive(false);
+            lockedImage.SetActive(false);
+
+            if (activeVehicle.GetComponent<Vehicle>().type == VehicleType.Modified)
+                vehicleProps.SetActive(true);
+            else
+                vehicleProps.SetActive(false);
         }
     }
 
@@ -90,5 +113,27 @@ public class GarageController : MonoBehaviour
         Vehicle vehicle = activeVehicle.GetComponent<Vehicle>();
         vehicle.SetupCar(vehicle.carIndex, dropdownController.dropdown.value);
     }
+
+    public void PurchaseVehicle()
+    {
+        if (Player.instance.coinAmount >= activeVehicle.GetComponent<Vehicle>().price)
+        {
+            activeVehicle.GetComponent<Vehicle>().isUnlocked = true;
+            vehiclePrice.text = "Equiped";
+            coinImage.SetActive(false);
+            lockedText.SetActive(false);
+            lockedImage.SetActive(false);
+
+            if (activeVehicle.GetComponent<Vehicle>().type == VehicleType.Modified)
+                vehicleProps.SetActive(true);
+            else
+                vehicleProps.SetActive(false);
+
+            Player.instance.coinAmount -= activeVehicle.GetComponent<Vehicle>().price;
+            Player.instance.vehicleIndex = activeVehicle.GetComponent<Vehicle>().vehicleIndex;
+        }
+
+    }
+
 
 }

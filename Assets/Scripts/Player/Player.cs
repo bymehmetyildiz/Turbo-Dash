@@ -61,7 +61,7 @@ public class Player : MonoBehaviour
     public GameObject shiledParticle;
     public bool isShielded = false;
 
-    [Header("Shield")]
+    [Header("Coin")]
     public int coinAmount;    
 
     private void Awake()

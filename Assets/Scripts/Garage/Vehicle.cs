@@ -8,8 +8,8 @@ public class Vehicle : MonoBehaviour
     public CarCollection cars;
     public GameObject activeCar;
     public int vehicleIndex;
-    public int carIndex;       // upgrade index
-    public int colorIndex;     // color index
+    public int carIndex;
+    public int colorIndex; 
     public bool isUnlocked;
     public string vehicleName;
     public int price;
