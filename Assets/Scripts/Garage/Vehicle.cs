@@ -7,9 +7,13 @@ public class Vehicle : MonoBehaviour
     public VehicleType type;
     public CarCollection cars;
     public GameObject activeCar;
+    public int vehicleIndex;
     public int carIndex;       // upgrade index
     public int colorIndex;     // color index
     public bool isUnlocked;
+    public string vehicleName;
+    public int price;
+
 
     void Start()
     {
@@ -41,5 +45,7 @@ public class Vehicle : MonoBehaviour
             activeCar.SetActive(true);
         }
     }
+
+
 
 }

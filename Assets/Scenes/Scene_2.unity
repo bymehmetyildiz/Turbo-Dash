@@ -3329,6 +3329,10 @@ MonoBehaviour:
   activeVehicle: {fileID: 0}
   vehicleLock: {fileID: 951819884}
   vehicleProps: {fileID: 939481047}
+  vehicleName: {fileID: 499913331}
+  vehiclePrice: {fileID: 474616026}
+  coinImage: {fileID: 0}
+  dropdownController: {fileID: 884161669}
 --- !u!1 &658057507
 GameObject:
   m_ObjectHideFlags: 0
@@ -4749,9 +4753,9 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 884161669}
-        m_TargetAssemblyTypeName: DropdownController, Assembly-CSharp
-        m_MethodName: ChangeColor
+      - m_Target: {fileID: 644074055}
+        m_TargetAssemblyTypeName: GarageController, Assembly-CSharp
+        m_MethodName: SelectColor
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5610,7 +5614,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1044371378}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.094855055, y: 0.0030239853, z: -0.00028814084, w: 0.9954865}
+  m_LocalRotation: {x: 0.094855055, y: 0.0030239942, z: -0.00028814163, w: 0.9954865}
   m_LocalPosition: {x: 0, y: 2.9029999, z: -4.665}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -8980,7 +8984,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2089000822}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.094855055, y: 0.0030239853, z: -0.00028814084, w: 0.9954865}
+  m_LocalRotation: {x: 0.094855055, y: 0.0030239942, z: -0.00028814163, w: 0.9954865}
   m_LocalPosition: {x: 0, y: 2.9029999, z: -4.665}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -33098,9 +33102,12 @@ MonoBehaviour:
   cars:
     colors: []
   activeCar: {fileID: 0}
+  vehicleIndex: 1
   carIndex: 0
   colorIndex: 0
   isUnlocked: 0
+  vehicleName: Pickup
+  price: 25000
 --- !u!1 &6937486943104953571
 GameObject:
   m_ObjectHideFlags: 0
@@ -43841,9 +43848,12 @@ MonoBehaviour:
       - {fileID: 286242735967259161}
       - {fileID: 7261880956545824117}
   activeCar: {fileID: 0}
+  vehicleIndex: 0
   carIndex: 0
   colorIndex: 0
   isUnlocked: 0
+  vehicleName: Vapor
+  price: 15000
 --- !u!1 &9160205235086749466
 GameObject:
   m_ObjectHideFlags: 0
