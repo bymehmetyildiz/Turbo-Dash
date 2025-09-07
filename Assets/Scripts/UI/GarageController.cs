@@ -17,6 +17,10 @@ public class GarageController : MonoBehaviour
     [SerializeField] private GameObject coinImage;
     private int index;
 
+    private int upgradeIndex = 0;
+    [SerializeField] private int upgradePrice;
+    [SerializeField] private TMP_Text upgradePriceText;
+
     [SerializeField] private DropdownController dropdownController;
 
 
