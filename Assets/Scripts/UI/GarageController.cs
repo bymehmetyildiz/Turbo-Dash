@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
 
 public class GarageController : MonoBehaviour
 {  
@@ -16,10 +17,9 @@ public class GarageController : MonoBehaviour
     [SerializeField] private GameObject lockedImage;
     [SerializeField] private GameObject coinImage;
     private int index;
-
-    private int upgradeIndex = 0;
-    [SerializeField] private int upgradePrice;
+  
     [SerializeField] private TMP_Text upgradePriceText;
+    [SerializeField] private Button upgradeButton;
 
     [SerializeField] private DropdownController dropdownController;
 
@@ -49,6 +49,7 @@ public class GarageController : MonoBehaviour
             lockedText.SetActive(true);
             vehicleProps.SetActive(false);
             lockedImage.SetActive(true);
+            upgradePriceText.text = activeVehicle.GetComponent<Vehicle>().upgradePrice.ToString();
         }
         else
         {
@@ -58,11 +59,6 @@ public class GarageController : MonoBehaviour
             vehicleProps.SetActive(true);
             lockedImage.SetActive(false);
         }
-    }
-
-    void Update()
-    {
-        
     }
 
     public void SelectVehicle(bool right)
@@ -97,10 +93,10 @@ public class GarageController : MonoBehaviour
             vehicleProps.SetActive(false);
             coinImage.SetActive(true);
             lockedImage.SetActive(true);
+           
         }
         else
-        {
-            vehiclePrice.text = "Equip";
+        {            
             coinImage.SetActive(false);
             lockedText.SetActive(false);
             lockedImage.SetActive(false);
@@ -109,6 +105,12 @@ public class GarageController : MonoBehaviour
                 vehicleProps.SetActive(true);
             else
                 vehicleProps.SetActive(false);
+
+            if (vehicle[index].GetComponent<Vehicle>().isEquipped)            
+                vehiclePrice.text = "Equiped";                
+            
+            else
+                vehiclePrice.text = "Equip";
         }
     }
 
@@ -116,28 +118,79 @@ public class GarageController : MonoBehaviour
     {
         Vehicle vehicle = activeVehicle.GetComponent<Vehicle>();
         vehicle.SetupCar(vehicle.carIndex, dropdownController.dropdown.value);
+        Player.instance.vehicleIndex = activeVehicle.GetComponent<Vehicle>().vehicleIndex;
+        Player.instance.carIndex = vehicle.carIndex;
+        Player.instance.colorIndex = dropdownController.dropdown.value;
     }
+
+    public void Upgrade()
+    {
+        if (activeVehicle.GetComponent<Vehicle>().carIndex >= 3)
+        {
+            upgradePriceText.text = "Max";
+            upgradeButton.interactable = false;           
+            return;
+        }
+        else if (Player.instance.coinAmount >= activeVehicle.GetComponent<Vehicle>().upgradePrice 
+            && activeVehicle.GetComponent<Vehicle>().carIndex <= 3)
+        {            
+            Player.instance.coinAmount -= activeVehicle.GetComponent<Vehicle>().upgradePrice;
+            activeVehicle.GetComponent<Vehicle>().carIndex++;
+            activeVehicle.GetComponent<Vehicle>().upgradePrice *= Mathf.RoundToInt(3);
+            upgradePriceText.text = activeVehicle.GetComponent<Vehicle>().upgradePrice.ToString();
+            activeVehicle.GetComponent<Vehicle>().SetupCar(activeVehicle.GetComponent<Vehicle>().carIndex, dropdownController.dropdown.value);
+            Player.instance.carIndex = activeVehicle.GetComponent<Vehicle>().carIndex;
+            Player.instance.vehicleIndex = activeVehicle.GetComponent<Vehicle>().vehicleIndex;
+        }
+        
+    }
+
 
     public void PurchaseVehicle()
     {
-        if (Player.instance.coinAmount >= activeVehicle.GetComponent<Vehicle>().price)
+        if (activeVehicle.GetComponent<Vehicle>().isUnlocked == false)
         {
-            activeVehicle.GetComponent<Vehicle>().isUnlocked = true;
-            vehiclePrice.text = "Equiped";
-            coinImage.SetActive(false);
-            lockedText.SetActive(false);
-            lockedImage.SetActive(false);
+            if (Player.instance.coinAmount >= activeVehicle.GetComponent<Vehicle>().price)
+            {
+                activeVehicle.GetComponent<Vehicle>().isUnlocked = true;
 
-            if (activeVehicle.GetComponent<Vehicle>().type == VehicleType.Modified)
-                vehicleProps.SetActive(true);
-            else
-                vehicleProps.SetActive(false);
+                for (int i = 0; i < vehicle.Length; i++)
+                {
+                    vehicle[i].GetComponent<Vehicle>().isEquipped = false;                    
+                }
 
-            Player.instance.coinAmount -= activeVehicle.GetComponent<Vehicle>().price;
-            Player.instance.vehicleIndex = activeVehicle.GetComponent<Vehicle>().vehicleIndex;
+                activeVehicle.GetComponent<Vehicle>().isEquipped = true;
+                vehiclePrice.text = "Equiped";
+                coinImage.SetActive(false);
+                lockedText.SetActive(false);
+                lockedImage.SetActive(false);
+
+                if (activeVehicle.GetComponent<Vehicle>().type == VehicleType.Modified)
+                    vehicleProps.SetActive(true);
+                else
+                    vehicleProps.SetActive(false);
+
+                Player.instance.coinAmount -= activeVehicle.GetComponent<Vehicle>().price;
+                Player.instance.vehicleIndex = activeVehicle.GetComponent<Vehicle>().vehicleIndex;
+            }
         }
-
+        else
+        {
+            if (vehicle[index].GetComponent<Vehicle>().isEquipped)
+            {
+                vehiclePrice.text = "Equip";
+                vehicle[index].GetComponent<Vehicle>().isEquipped = false;
+            }
+            else
+            {
+                for (int i = 0; i < vehicle.Length; i++)
+                {
+                    vehicle[i].GetComponent<Vehicle>().isEquipped = false;
+                    vehiclePrice.text = "Equip";
+                }
+                vehicle[index].GetComponent<Vehicle>().isEquipped = true;
+                vehiclePrice.text = "Equiped";
+            }
+        }
     }
-
-
 }

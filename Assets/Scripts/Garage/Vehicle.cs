@@ -11,8 +11,11 @@ public class Vehicle : MonoBehaviour
     public int carIndex;
     public int colorIndex; 
     public bool isUnlocked;
+    public bool isEquipped;
     public string vehicleName;
     public int price;
+    public int upgradePrice;
+
 
 
     void Start()
