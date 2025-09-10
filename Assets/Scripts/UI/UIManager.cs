@@ -9,13 +9,15 @@ using System;
 
 public class UIManager : MonoBehaviour
 {
+    public static UIManager instance;
+
     private Player player;
     [SerializeField] private GameObject startButton;
 
     [Header("Menus")]
-    [SerializeField] private RectTransform upgradeMenu;
-    [SerializeField] private RectTransform gameMenu;
-    [SerializeField] private RectTransform garageMenu;
+    public RectTransform upgradeMenu;
+    public RectTransform gameMenu;
+    public RectTransform garageMenu;
 
     [Header("Upgrade Menu")]
     [SerializeField] private TMP_Text[] upgradeText;
@@ -37,9 +39,15 @@ public class UIManager : MonoBehaviour
     [Header("Garage Menu")]
     [SerializeField] private RectTransform carDetails;
     [SerializeField] private float carFirstPos, carLastPos;
-    
 
 
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+        else
+            Destroy(gameObject);
+    }
     void Start()
     {
         player = Player.instance;

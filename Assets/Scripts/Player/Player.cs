@@ -1,3 +1,4 @@
+using Cinemachine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -26,6 +27,8 @@ public class Player : MonoBehaviour
     public JetState jetState;
     public DriveState driveState;
     public PlaneState planeState;
+
+    public DanceState northernDanceState;
 
     [Header("Idle")]
     public bool isStarted;
@@ -62,7 +65,11 @@ public class Player : MonoBehaviour
     public bool isShielded = false;
 
     [Header("Coin")]
-    public int coinAmount;    
+    public int coinAmount;
+
+    [Header("Camera")]
+    public CinemachineVirtualCamera virtualCamera;
+    public int danceIndex;
 
     private void Awake()
     {
@@ -84,6 +91,8 @@ public class Player : MonoBehaviour
         jetState = new JetState(stateMachine, "Fly", this, controller);
         driveState = new DriveState(stateMachine, "Drive", this, controller);
         planeState = new PlaneState(stateMachine, "Drive", this, controller);
+
+        northernDanceState = new DanceState(stateMachine, "Dance", this, controller);
     }
 
     void Start()

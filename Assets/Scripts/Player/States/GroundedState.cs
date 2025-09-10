@@ -43,6 +43,10 @@ public class GroundedState : PlayerState
         {
             stateMachine.ChangeState(player.planeState);
         }
+        else if (Input.GetKeyDown(KeyCode.N) && !player.isStarted)
+        {
+            stateMachine.ChangeState(player.northernDanceState);
+        }
 
     }
 }
