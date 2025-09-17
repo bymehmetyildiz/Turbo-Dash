@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17945117, g: 0.29881093, b: 0.35260785, a: 1}
+  m_IndirectSpecularColor: {r: 0.17944686, g: 0.29880273, b: 0.35260284, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -9461,7 +9461,7 @@ GameObject:
   - component: {fileID: 1576735153}
   - component: {fileID: 1576735152}
   m_Layer: 5
-  m_Name: AnimationBG
+  m_Name: GestureBG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9612,9 +9612,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1600015873}
   - component: {fileID: 1600015875}
+  - component: {fileID: 1600015876}
   - component: {fileID: 1600015874}
   m_Layer: 5
-  m_Name: AnimationMenu
+  m_Name: GestureMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9678,6 +9679,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1600015872}
   m_CullTransparentMesh: 1
+--- !u!114 &1600015876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1600015872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 321fbd6f8e2df0248a21e1655f80a568, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1611459801
 GameObject:
   m_ObjectHideFlags: 0
