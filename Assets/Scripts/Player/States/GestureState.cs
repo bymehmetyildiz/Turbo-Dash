@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DanceState : PlayerState
+public class GestureState : PlayerState
 {   
-    public DanceState(StateMachine stateMachine, string animBoolName, Player player, CharacterController controller) : base(stateMachine, animBoolName, player, controller)
+    public GestureState(StateMachine stateMachine, string animBoolName, Player player, CharacterController controller) : base(stateMachine, animBoolName, player, controller)
     {
     }
 
@@ -17,7 +17,7 @@ public class DanceState : PlayerState
         controller.height = 0.1f;
         controller.radius = 0.1f;
         player.anim.SetInteger("DanceIndex", player.danceIndex);
-        UIManager.instance.gameMenu.gameObject.SetActive(false);
+       
 
     }
 
@@ -29,8 +29,11 @@ public class DanceState : PlayerState
         player.transform.position = new Vector3(0, player.transform.position.y, player.transform.position.z);
         controller.center = new Vector3(0, 0, 0);
         controller.height = 1.5f;
-        controller.radius = 0.25f;
-        UIManager.instance.gameMenu.gameObject.SetActive(true);
+        controller.radius = 0.25f;        
+
+        GestureManager.instance.currentGesture.isPlaying = false;
+        GestureManager.instance.currentGesture.gesturePriceText.text = "Play";
+        GestureManager.instance.currentGesture = null;
     }
 
     public override void Update()

@@ -819,10 +819,20 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 144587356}
     m_Modifications:
+    - target: {fileID: 2489712116322075172, guid: fd12eabccce8d164293536fd85047b34,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1600015876}
+    - target: {fileID: 2489712116322075172, guid: fd12eabccce8d164293536fd85047b34,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PurchaseGesture
+      objectReference: {fileID: 0}
     - target: {fileID: 2842553376077907448, guid: fd12eabccce8d164293536fd85047b34,
         type: 3}
       propertyPath: m_Name
-      value: AnimationBG (3)
+      value: AnimationBG (4)
       objectReference: {fileID: 0}
     - target: {fileID: 4280511098166199403, guid: fd12eabccce8d164293536fd85047b34,
         type: 3}
@@ -923,6 +933,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8051426770671485782, guid: fd12eabccce8d164293536fd85047b34,
+        type: 3}
+      propertyPath: price
+      value: 15000
+      objectReference: {fileID: 0}
+    - target: {fileID: 8051426770671485782, guid: fd12eabccce8d164293536fd85047b34,
+        type: 3}
+      propertyPath: gestureID
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8051426770671485782, guid: fd12eabccce8d164293536fd85047b34,
+        type: 3}
+      propertyPath: gestureName
+      value: Flair
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1064,6 +1089,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 61485340}
   m_CullTransparentMesh: 1
+--- !u!1 &108046793 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9092207320467828569, guid: fd12eabccce8d164293536fd85047b34,
+    type: 3}
+  m_PrefabInstance: {fileID: 4108910673417362987}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &135969782
 GameObject:
   m_ObjectHideFlags: 0
@@ -1226,6 +1257,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6717927}
+  - {fileID: 2099430384}
   - {fileID: 639248935}
   - {fileID: 479876392}
   - {fileID: 2097400099}
@@ -1233,7 +1265,6 @@ RectTransform:
   - {fileID: 1087291433}
   - {fileID: 676377192}
   - {fileID: 1709843889}
-  - {fileID: 2099430384}
   m_Father: {fileID: 1115827026}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
@@ -2567,7 +2598,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 15
+  m_ScrollSensitivity: 30
   m_Viewport: {fileID: 1115827026}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 2036428552}
@@ -2825,10 +2856,20 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 144587356}
     m_Modifications:
+    - target: {fileID: 2489712116322075172, guid: fd12eabccce8d164293536fd85047b34,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1600015876}
+    - target: {fileID: 2489712116322075172, guid: fd12eabccce8d164293536fd85047b34,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PurchaseGesture
+      objectReference: {fileID: 0}
     - target: {fileID: 2842553376077907448, guid: fd12eabccce8d164293536fd85047b34,
         type: 3}
       propertyPath: m_Name
-      value: AnimationBG (8)
+      value: AnimationBG (1)
       objectReference: {fileID: 0}
     - target: {fileID: 4280511098166199403, guid: fd12eabccce8d164293536fd85047b34,
         type: 3}
@@ -2929,6 +2970,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8051426770671485782, guid: fd12eabccce8d164293536fd85047b34,
+        type: 3}
+      propertyPath: price
+      value: 7000
+      objectReference: {fileID: 0}
+    - target: {fileID: 8051426770671485782, guid: fd12eabccce8d164293536fd85047b34,
+        type: 3}
+      propertyPath: gestureID
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8051426770671485782, guid: fd12eabccce8d164293536fd85047b34,
+        type: 3}
+      propertyPath: gestureName
+      value: Jump Jaks
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4081,7 +4137,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1054141308}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: OpenGarage
+        m_MethodName: OpenGestureMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4137,10 +4193,20 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 144587356}
     m_Modifications:
+    - target: {fileID: 2489712116322075172, guid: fd12eabccce8d164293536fd85047b34,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1600015876}
+    - target: {fileID: 2489712116322075172, guid: fd12eabccce8d164293536fd85047b34,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PurchaseGesture
+      objectReference: {fileID: 0}
     - target: {fileID: 2842553376077907448, guid: fd12eabccce8d164293536fd85047b34,
         type: 3}
       propertyPath: m_Name
-      value: AnimationBG (1)
+      value: AnimationBG (2)
       objectReference: {fileID: 0}
     - target: {fileID: 4280511098166199403, guid: fd12eabccce8d164293536fd85047b34,
         type: 3}
@@ -4241,6 +4307,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8051426770671485782, guid: fd12eabccce8d164293536fd85047b34,
+        type: 3}
+      propertyPath: price
+      value: 10000
+      objectReference: {fileID: 0}
+    - target: {fileID: 8051426770671485782, guid: fd12eabccce8d164293536fd85047b34,
+        type: 3}
+      propertyPath: gestureID
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8051426770671485782, guid: fd12eabccce8d164293536fd85047b34,
+        type: 3}
+      propertyPath: gestureName
+      value: North Soul
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5627,10 +5708,20 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 144587356}
     m_Modifications:
+    - target: {fileID: 2489712116322075172, guid: fd12eabccce8d164293536fd85047b34,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1600015876}
+    - target: {fileID: 2489712116322075172, guid: fd12eabccce8d164293536fd85047b34,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PurchaseGesture
+      objectReference: {fileID: 0}
     - target: {fileID: 2842553376077907448, guid: fd12eabccce8d164293536fd85047b34,
         type: 3}
       propertyPath: m_Name
-      value: AnimationBG (7)
+      value: AnimationBG (8)
       objectReference: {fileID: 0}
     - target: {fileID: 4280511098166199403, guid: fd12eabccce8d164293536fd85047b34,
         type: 3}
@@ -5731,6 +5822,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8051426770671485782, guid: fd12eabccce8d164293536fd85047b34,
+        type: 3}
+      propertyPath: price
+      value: 35000
+      objectReference: {fileID: 0}
+    - target: {fileID: 8051426770671485782, guid: fd12eabccce8d164293536fd85047b34,
+        type: 3}
+      propertyPath: gestureID
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8051426770671485782, guid: fd12eabccce8d164293536fd85047b34,
+        type: 3}
+      propertyPath: gestureName
+      value: Head Spin
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6002,10 +6108,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 144587356}
     m_Modifications:
+    - target: {fileID: 2489712116322075172, guid: fd12eabccce8d164293536fd85047b34,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1600015876}
+    - target: {fileID: 2489712116322075172, guid: fd12eabccce8d164293536fd85047b34,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PurchaseGesture
+      objectReference: {fileID: 0}
     - target: {fileID: 2842553376077907448, guid: fd12eabccce8d164293536fd85047b34,
         type: 3}
       propertyPath: m_Name
-      value: AnimationBG (6)
+      value: AnimationBG (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3924626777847131570, guid: fd12eabccce8d164293536fd85047b34,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 3924626777847131570, guid: fd12eabccce8d164293536fd85047b34,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 4280511098166199403, guid: fd12eabccce8d164293536fd85047b34,
         type: 3}
@@ -6106,6 +6232,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8051426770671485782, guid: fd12eabccce8d164293536fd85047b34,
+        type: 3}
+      propertyPath: price
+      value: 30000
+      objectReference: {fileID: 0}
+    - target: {fileID: 8051426770671485782, guid: fd12eabccce8d164293536fd85047b34,
+        type: 3}
+      propertyPath: gestureID
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8051426770671485782, guid: fd12eabccce8d164293536fd85047b34,
+        type: 3}
+      propertyPath: gestureName
+      value: Gangnam Style
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6728,6 +6869,9 @@ MonoBehaviour:
   carDetails: {fileID: 810627285}
   carFirstPos: -315
   carLastPos: 365
+  gestureMenu: {fileID: 1600015873}
+  gestureFirstPos: 0
+  gestureLastPos: -800
 --- !u!224 &1087291433 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4280511098166199403, guid: fd12eabccce8d164293536fd85047b34,
@@ -7403,10 +7547,20 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 144587356}
     m_Modifications:
+    - target: {fileID: 2489712116322075172, guid: fd12eabccce8d164293536fd85047b34,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1600015876}
+    - target: {fileID: 2489712116322075172, guid: fd12eabccce8d164293536fd85047b34,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PurchaseGesture
+      objectReference: {fileID: 0}
     - target: {fileID: 2842553376077907448, guid: fd12eabccce8d164293536fd85047b34,
         type: 3}
       propertyPath: m_Name
-      value: AnimationBG (4)
+      value: AnimationBG (5)
       objectReference: {fileID: 0}
     - target: {fileID: 4280511098166199403, guid: fd12eabccce8d164293536fd85047b34,
         type: 3}
@@ -7507,6 +7661,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8051426770671485782, guid: fd12eabccce8d164293536fd85047b34,
+        type: 3}
+      propertyPath: price
+      value: 20000
+      objectReference: {fileID: 0}
+    - target: {fileID: 8051426770671485782, guid: fd12eabccce8d164293536fd85047b34,
+        type: 3}
+      propertyPath: gestureID
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8051426770671485782, guid: fd12eabccce8d164293536fd85047b34,
+        type: 3}
+      propertyPath: gestureName
+      value: Breakdance
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8250,7 +8419,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.77178323, g: 1, b: 0, a: 1}
+  m_Color: {r: 0.10980393, g: 0.38431376, b: 0.08235294, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -8678,7 +8847,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1348818481}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1054141308}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: OpenGestureMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1348818481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8731,10 +8912,20 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 144587356}
     m_Modifications:
+    - target: {fileID: 2489712116322075172, guid: fd12eabccce8d164293536fd85047b34,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1600015876}
+    - target: {fileID: 2489712116322075172, guid: fd12eabccce8d164293536fd85047b34,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PurchaseGesture
+      objectReference: {fileID: 0}
     - target: {fileID: 2842553376077907448, guid: fd12eabccce8d164293536fd85047b34,
         type: 3}
       propertyPath: m_Name
-      value: AnimationBG (2)
+      value: AnimationBG (3)
       objectReference: {fileID: 0}
     - target: {fileID: 4280511098166199403, guid: fd12eabccce8d164293536fd85047b34,
         type: 3}
@@ -8835,6 +9026,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8051426770671485782, guid: fd12eabccce8d164293536fd85047b34,
+        type: 3}
+      propertyPath: price
+      value: 12500
+      objectReference: {fileID: 0}
+    - target: {fileID: 8051426770671485782, guid: fd12eabccce8d164293536fd85047b34,
+        type: 3}
+      propertyPath: gestureID
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8051426770671485782, guid: fd12eabccce8d164293536fd85047b34,
+        type: 3}
+      propertyPath: gestureName
+      value: North Soul 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9636,11 +9842,11 @@ RectTransform:
   - {fileID: 1576735151}
   m_Father: {fileID: 1054141307}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: -800, y: 0}
+  m_SizeDelta: {x: 725.47595, y: 1058}
+  m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1600015874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9691,6 +9897,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 321fbd6f8e2df0248a21e1655f80a568, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gestures: []
+  currentGesture: {fileID: 0}
 --- !u!1 &1611459801
 GameObject:
   m_ObjectHideFlags: 0
@@ -10096,10 +10304,20 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 144587356}
     m_Modifications:
+    - target: {fileID: 2489712116322075172, guid: fd12eabccce8d164293536fd85047b34,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1600015876}
+    - target: {fileID: 2489712116322075172, guid: fd12eabccce8d164293536fd85047b34,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PurchaseGesture
+      objectReference: {fileID: 0}
     - target: {fileID: 2842553376077907448, guid: fd12eabccce8d164293536fd85047b34,
         type: 3}
       propertyPath: m_Name
-      value: AnimationBG (5)
+      value: AnimationBG (6)
       objectReference: {fileID: 0}
     - target: {fileID: 4280511098166199403, guid: fd12eabccce8d164293536fd85047b34,
         type: 3}
@@ -10200,6 +10418,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8051426770671485782, guid: fd12eabccce8d164293536fd85047b34,
+        type: 3}
+      propertyPath: price
+      value: 25000
+      objectReference: {fileID: 0}
+    - target: {fileID: 8051426770671485782, guid: fd12eabccce8d164293536fd85047b34,
+        type: 3}
+      propertyPath: gestureID
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8051426770671485782, guid: fd12eabccce8d164293536fd85047b34,
+        type: 3}
+      propertyPath: gestureName
+      value: Breakdance 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -26324,6 +26557,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 144587356}
     m_Modifications:
+    - target: {fileID: 2489712116322075172, guid: fd12eabccce8d164293536fd85047b34,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1600015876}
+    - target: {fileID: 2489712116322075172, guid: fd12eabccce8d164293536fd85047b34,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PurchaseGesture
+      objectReference: {fileID: 0}
     - target: {fileID: 2842553376077907448, guid: fd12eabccce8d164293536fd85047b34,
         type: 3}
       propertyPath: m_Name
@@ -26429,6 +26672,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8051426770671485782, guid: fd12eabccce8d164293536fd85047b34,
+        type: 3}
+      propertyPath: coin
+      value: 
+      objectReference: {fileID: 108046793}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

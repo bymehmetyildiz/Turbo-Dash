@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
     public DriveState driveState;
     public PlaneState planeState;
 
-    public DanceState northernDanceState;
+    public GestureState gestureState;
 
     [Header("Idle")]
     public bool isStarted;
@@ -92,7 +92,7 @@ public class Player : MonoBehaviour
         driveState = new DriveState(stateMachine, "Drive", this, controller);
         planeState = new PlaneState(stateMachine, "Drive", this, controller);
 
-        northernDanceState = new DanceState(stateMachine, "Dance", this, controller);
+        gestureState = new GestureState(stateMachine, "Dance", this, controller);
     }
 
     void Start()

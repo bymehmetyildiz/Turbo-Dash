@@ -40,6 +40,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private RectTransform carDetails;
     [SerializeField] private float carFirstPos, carLastPos;
 
+    [Header("Gesture Menu")]
+    [SerializeField] private RectTransform gestureMenu;
+    [SerializeField] private float gestureFirstPos, gestureLastPos;
 
     private void Awake()
     {
@@ -135,6 +138,20 @@ public class UIManager : MonoBehaviour
                 isGarageOpen = false;
                 garageMenu.gameObject.SetActive(false);
             });
+        }
+    }
+
+    public void OpenGestureMenu()
+    {
+        if (gestureMenu.anchoredPosition.x != gestureLastPos)
+        {
+            gestureMenu.DOAnchorPosX(gestureLastPos, 0.5f).SetEase(Ease.InBack);
+            gameMenu.gameObject.SetActive(true);            
+        }
+        else
+        {
+            gestureMenu.DOAnchorPosX(gestureFirstPos, 0.5f).SetEase(Ease.OutBack);
+            gameMenu.gameObject.SetActive(false);
         }
     }
 
