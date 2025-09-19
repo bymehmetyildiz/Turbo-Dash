@@ -68,19 +68,15 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        
-    }
-
     public void StartGame()
-    {
-        
+    {        
         if (player.isStarted == false)
             player.isStarted = true;
 
         if(startButton.activeSelf)
             startButton.SetActive(false);
+
+        gameMenu.gameObject.SetActive(false);
     }
 
     public void OpenUpgradeMenu()
