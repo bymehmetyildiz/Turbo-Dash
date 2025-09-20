@@ -65,7 +65,12 @@ public class Player : MonoBehaviour
     public bool isShielded = false;
 
     [Header("Coin")]
-    public int coinAmount;
+    public int currentCoinAmount;
+    public int totalCoinAmount;
+
+    [Header("Distance")]
+    public int distanceTraveled;
+    public int highScore;
 
     [Header("Camera")]
     public CinemachineVirtualCamera virtualCamera;
@@ -251,7 +256,8 @@ public class Player : MonoBehaviour
 
         if(coin != null)
         {
-            coinAmount++;
+            currentCoinAmount++;
+            UIManager.instance.currentCoinText.text = currentCoinAmount.ToString();
             Destroy(coin.gameObject);
         }
     }
@@ -310,6 +316,15 @@ public class Player : MonoBehaviour
 
         transform.position = endPosition;
     }
+
+    //Distance Counter
+    public void Distance()
+    {
+        distanceTraveled++;
+        UIManager.instance.distanceText.text = distanceTraveled.ToString() + " m";
+    }
+    
+
 
 }
 

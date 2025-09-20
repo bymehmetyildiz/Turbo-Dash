@@ -40,9 +40,9 @@ public class GestureManager : MonoBehaviour
 
         if (!currentGesture.isOwned)
         {
-            if (player.coinAmount >= currentGesture.price)
+            if (player.totalCoinAmount >= currentGesture.price)
             {
-                player.coinAmount -= currentGesture.price;
+                player.totalCoinAmount -= currentGesture.price;
                 currentGesture.isOwned = true;
                 currentGesture.gesturePriceText.text = "Play";    
                 currentGesture.coin.SetActive(false);

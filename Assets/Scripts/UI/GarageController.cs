@@ -131,10 +131,10 @@ public class GarageController : MonoBehaviour
             upgradeButton.interactable = false;           
             return;
         }
-        else if (Player.instance.coinAmount >= activeVehicle.GetComponent<Vehicle>().upgradePrice 
+        else if (Player.instance.totalCoinAmount >= activeVehicle.GetComponent<Vehicle>().upgradePrice 
             && activeVehicle.GetComponent<Vehicle>().carIndex <= 3)
         {            
-            Player.instance.coinAmount -= activeVehicle.GetComponent<Vehicle>().upgradePrice;
+            Player.instance.totalCoinAmount -= activeVehicle.GetComponent<Vehicle>().upgradePrice;
             activeVehicle.GetComponent<Vehicle>().carIndex++;
             activeVehicle.GetComponent<Vehicle>().upgradePrice *= Mathf.RoundToInt(3);
             upgradePriceText.text = activeVehicle.GetComponent<Vehicle>().upgradePrice.ToString();
@@ -150,7 +150,7 @@ public class GarageController : MonoBehaviour
     {
         if (activeVehicle.GetComponent<Vehicle>().isUnlocked == false)
         {
-            if (Player.instance.coinAmount >= activeVehicle.GetComponent<Vehicle>().price)
+            if (Player.instance.totalCoinAmount >= activeVehicle.GetComponent<Vehicle>().price)
             {
                 activeVehicle.GetComponent<Vehicle>().isUnlocked = true;
 
@@ -170,7 +170,7 @@ public class GarageController : MonoBehaviour
                 else
                     vehicleProps.SetActive(false);
 
-                Player.instance.coinAmount -= activeVehicle.GetComponent<Vehicle>().price;
+                Player.instance.totalCoinAmount -= activeVehicle.GetComponent<Vehicle>().price;
                 Player.instance.vehicleIndex = activeVehicle.GetComponent<Vehicle>().vehicleIndex;
             }
         }

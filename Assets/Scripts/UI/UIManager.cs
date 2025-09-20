@@ -1,11 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using DG.Tweening;
 using Cinemachine;
-using System.Runtime.CompilerServices;
-using System;
+
 
 public class UIManager : MonoBehaviour
 {
@@ -44,6 +41,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] private RectTransform gestureMenu;
     [SerializeField] private float gestureFirstPos, gestureLastPos;
 
+    [Header("Gameplay Menu")]
+    public TMP_Text currentCoinText;
+    public TMP_Text distanceText;
+
     private void Awake()
     {
         if (instance == null)
@@ -56,7 +57,8 @@ public class UIManager : MonoBehaviour
         player = Player.instance;
         garageMenu.gameObject.SetActive(false);
         carDetails.anchoredPosition = new Vector2(carFirstPos, carDetails.anchoredPosition.y);
-
+        currentCoinText.text = 0.ToString();
+        distanceText.text = 0 + " m";
     }
 
     private void OnValidate()
@@ -150,6 +152,12 @@ public class UIManager : MonoBehaviour
             gameMenu.gameObject.SetActive(false);
         }
     }
+
+    public void MoveCoin()
+    {
+
+    }
+
 
 
 
