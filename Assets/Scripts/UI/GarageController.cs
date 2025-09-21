@@ -45,7 +45,7 @@ public class GarageController : MonoBehaviour
 
         if (!activeVehicle.GetComponent<Vehicle>().isUnlocked)
         {
-            vehiclePrice.text = activeVehicle.GetComponent<Vehicle>().price.ToString();
+            vehiclePrice.text = NumberFormatter.FormatNumber(activeVehicle.GetComponent<Vehicle>().price);
             lockedText.SetActive(true);
             vehicleProps.SetActive(false);
             lockedImage.SetActive(true);
@@ -88,7 +88,7 @@ public class GarageController : MonoBehaviour
 
         if (!activeVehicle.GetComponent<Vehicle>().isUnlocked)
         {
-            vehiclePrice.text = activeVehicle.GetComponent<Vehicle>().price.ToString();
+            vehiclePrice.text = NumberFormatter.FormatNumber(activeVehicle.GetComponent<Vehicle>().price);
             lockedText.SetActive(true);
             vehicleProps.SetActive(false);
             coinImage.SetActive(true);

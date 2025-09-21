@@ -12,7 +12,8 @@ public class FastHitState : PlayerState
     {
         base.Enter();   
         
-        player.transform.rotation = Quaternion.Euler(0f, 0f, 0f);      
+        player.transform.rotation = Quaternion.Euler(0f, 0f, 0f);    
+        UIManager.instance.UpdateScoreBoard(player.distanceTraveled);
     }
 
     public override void Exit()

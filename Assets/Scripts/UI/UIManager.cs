@@ -45,6 +45,11 @@ public class UIManager : MonoBehaviour
     public TMP_Text currentCoinText;
     public TMP_Text distanceText;
 
+    [Header("BestScore Menu")]
+    [SerializeField] public RectTransform bestScoreMenu;
+    [SerializeField] private float scoreFirstPos, scoreLastPos;
+    public ScoreBoard[] scoreBoard;
+
     private void Awake()
     {
         if (instance == null)
@@ -57,6 +62,7 @@ public class UIManager : MonoBehaviour
         player = Player.instance;
         garageMenu.gameObject.SetActive(false);
         carDetails.anchoredPosition = new Vector2(carFirstPos, carDetails.anchoredPosition.y);
+        gestureMenu.anchoredPosition = new Vector2(gestureFirstPos, gestureMenu.anchoredPosition.y);
         currentCoinText.text = 0.ToString();
         distanceText.text = 0 + " m";
     }
@@ -143,24 +149,62 @@ public class UIManager : MonoBehaviour
     {
         if (gestureMenu.anchoredPosition.x != gestureLastPos)
         {
-            gestureMenu.DOAnchorPosX(gestureLastPos, 0.5f).SetEase(Ease.InBack);
-            gameMenu.gameObject.SetActive(true);            
+            gestureMenu.DOAnchorPosX(gestureLastPos, 0.5f).SetEase(Ease.OutBack);
+            gameMenu.gameObject.SetActive(false);            
         }
         else
         {
-            gestureMenu.DOAnchorPosX(gestureFirstPos, 0.5f).SetEase(Ease.OutBack);
-            gameMenu.gameObject.SetActive(false);
+            gestureMenu.DOAnchorPosX(gestureFirstPos, 0.5f).SetEase(Ease.InBack);
+            gameMenu.gameObject.SetActive(true);
         }
     }
 
-    public void MoveCoin()
+    public void OpenScoreMenu()
     {
-
+        if(bestScoreMenu.anchoredPosition.x != scoreLastPos)
+        {
+            bestScoreMenu.DOAnchorPosX(scoreLastPos, 0.5f).SetEase(Ease.OutBack);
+            gameMenu.gameObject.SetActive(false);            
+        }
+        else
+        {
+            bestScoreMenu.DOAnchorPosX(scoreFirstPos, 0.5f).SetEase(Ease.InBack);
+            gameMenu.gameObject.SetActive(true);
+        }
     }
 
+    public void UpdateScoreBoard(int newScore)
+    {
+        // Check if new score qualifies for the board
+        for (int i = 0; i < scoreBoard.Length; i++)
+        {
+            if (newScore > scoreBoard[i].score)
+            {
+                // Shift scores down from the end to make space
+                for (int j = scoreBoard.Length - 1; j > i; j--)
+                {
+                    scoreBoard[j].score = scoreBoard[j - 1].score;
+                }
 
+                // Insert new score at position i
+                scoreBoard[i].score = newScore;
+                break; // stop after inserting
+            }
+        }
 
+        // Save and update UI for all entries
+        foreach (var entry in scoreBoard)
+        {
+            entry.SaveScore();
+            entry.UpdateScore();
+        }
+    }
 
+    [ContextMenu("Delete All Scores")]
+    public void DeleteAllSaves()
+    {
+        PlayerPrefs.DeleteAll();        
+    }
 
 }
 

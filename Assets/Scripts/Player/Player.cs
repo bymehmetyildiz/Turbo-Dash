@@ -257,7 +257,7 @@ public class Player : MonoBehaviour
         if(coin != null)
         {
             currentCoinAmount++;
-            UIManager.instance.currentCoinText.text = currentCoinAmount.ToString();
+            UIManager.instance.currentCoinText.text = NumberFormatter.FormatNumber(currentCoinAmount);
             Destroy(coin.gameObject);
         }
     }
@@ -321,7 +321,7 @@ public class Player : MonoBehaviour
     public void Distance()
     {
         distanceTraveled++;
-        UIManager.instance.distanceText.text = distanceTraveled.ToString() + " m";
+        UIManager.instance.distanceText.text = NumberFormatter.FormatNumber(distanceTraveled) + " m";
     }
     
 
