@@ -44,6 +44,9 @@ public class UIManager : MonoBehaviour
     [Header("Gameplay Menu")]
     public TMP_Text currentCoinText;
     public TMP_Text distanceText;
+    public GameObject coinImgPrefab;
+    public RectTransform target;
+    public GameObject coinParent;
 
     [Header("BestScore Menu")]
     [SerializeField] public RectTransform bestScoreMenu;
@@ -172,6 +175,33 @@ public class UIManager : MonoBehaviour
             gameMenu.gameObject.SetActive(true);
         }
     }
+
+    public void MoveCoinImg(Vector3 worldPos)
+    {
+        // Convert world position to screen space
+        Vector3 screenPos = Camera.main.WorldToScreenPoint(worldPos);
+
+        // Convert screen space to UI local position
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(
+            coinParent.GetComponent<RectTransform>(),
+            screenPos,
+            Camera.main,
+            out Vector2 localPos
+        );
+
+        // Instantiate the coin at this position
+        RectTransform coin = Instantiate(coinImgPrefab, coinParent.transform).GetComponent<RectTransform>();
+        coin.localPosition = localPos;
+
+        // Animate it to target (coin counter UI in top-left)
+        coin.DOMove(target.position, 0.5f).SetEase(Ease.InQuad).OnComplete(() =>
+        {
+            player.currentCoinAmount++;
+            currentCoinText.text = NumberFormatter.FormatNumber(player.currentCoinAmount);
+            Destroy(coin.gameObject);
+        });
+    }
+
 
     public void UpdateScoreBoard(int newScore)
     {

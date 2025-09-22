@@ -13,6 +13,7 @@ public class PlayerState
     
 
     protected float stateTimer;
+    protected float distanceTimer;
     protected bool triggerCalled;
 
     public PlayerState(StateMachine stateMachine, string animBoolName, Player player, CharacterController controller)
@@ -32,6 +33,7 @@ public class PlayerState
     public virtual void Update()
     {
         stateTimer -= Time.deltaTime;
+        distanceTimer -= Time.deltaTime;
     }
 
     public virtual void Exit()

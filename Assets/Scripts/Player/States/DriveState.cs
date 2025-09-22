@@ -55,5 +55,12 @@ public class DriveState : PlayerState
         if (stateTimer <= 0f)
             stateMachine.ChangeState(player.airState);
 
+        if (distanceTimer <= 0f)
+        {
+            distanceTimer = 0.25f;
+            player.Distance();
+
+        }
+
     }
 }

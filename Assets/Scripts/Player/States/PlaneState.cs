@@ -74,5 +74,11 @@ public class PlaneState : PlayerState
         {            
             stateMachine.ChangeState(player.airState);
         }
+
+        if (distanceTimer <= 0f)
+        {
+            distanceTimer = 0.25f;
+            player.Distance();
+        }
     }
 }

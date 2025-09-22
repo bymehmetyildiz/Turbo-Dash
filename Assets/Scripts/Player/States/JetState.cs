@@ -5,6 +5,7 @@ using UnityEngine;
 public class JetState : PlayerState
 {
     private float jetHeight = 10f;
+    
 
     public JetState(StateMachine stateMachine, string animBoolName, Player player, CharacterController controller)
         : base(stateMachine, animBoolName, player, controller)
@@ -73,5 +74,13 @@ public class JetState : PlayerState
         {            
             stateMachine.ChangeState(player.airState);
         }
+
+        if (distanceTimer <= 0f)
+        {
+            distanceTimer = 0.25f;
+            player.Distance();
+
+        }
+
     }
 }

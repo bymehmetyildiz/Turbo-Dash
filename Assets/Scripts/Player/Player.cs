@@ -254,10 +254,9 @@ public class Player : MonoBehaviour
     {
         Coin coin = other.GetComponent<Coin>();
 
-        if(coin != null)
+        if (coin != null)
         {
-            currentCoinAmount++;
-            UIManager.instance.currentCoinText.text = NumberFormatter.FormatNumber(currentCoinAmount);
+            UIManager.instance.MoveCoinImg(coin.transform.position);
             Destroy(coin.gameObject);
         }
     }
