@@ -13,6 +13,7 @@ public class UIManager : MonoBehaviour
 
     [Header("Menus")]
     public RectTransform upgradeMenu;
+    public RectTransform startMenu;
     public RectTransform gameMenu;
     public RectTransform garageMenu;
 
@@ -23,6 +24,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] private int[] upgradeCost;
     private bool isUpgradeMenuOpen = false;
     [SerializeField] private float firstPos, lastPos;
+
+    [Header("Start Menu")]
+    [SerializeField] private TMP_Text totalCoinText;
+    [SerializeField] private GameObject totalCoinBG;
 
     [Header("Shop Menu")]
     [SerializeField] private CinemachineVirtualCamera virtualCamera;
@@ -68,6 +73,14 @@ public class UIManager : MonoBehaviour
         gestureMenu.anchoredPosition = new Vector2(gestureFirstPos, gestureMenu.anchoredPosition.y);
         currentCoinText.text = 0.ToString();
         distanceText.text = 0 + " m";
+        gameMenu.gameObject.SetActive(false);
+        totalCoinBG.SetActive(true);
+        UpdateTotalCoin();
+    }
+
+    public void UpdateTotalCoin()
+    {
+        totalCoinText.text = NumberFormatter.FormatNumber(player.totalCoinAmount);
     }
 
     private void OnValidate()
@@ -87,7 +100,9 @@ public class UIManager : MonoBehaviour
         if(startButton.activeSelf)
             startButton.SetActive(false);
 
-        gameMenu.gameObject.SetActive(false);
+        startMenu.gameObject.SetActive(false);
+        gameMenu.gameObject.SetActive(true);
+        totalCoinBG.SetActive(false);
     }
 
     public void OpenUpgradeMenu()
@@ -96,13 +111,13 @@ public class UIManager : MonoBehaviour
         {
             upgradeMenu.DOAnchorPosX(firstPos, 0.5f).SetEase(Ease.OutBack);
             isUpgradeMenuOpen = true;
-            gameMenu.gameObject.SetActive(false);
+            startMenu.gameObject.SetActive(false);
         }
         else
         {
             upgradeMenu.DOAnchorPosX(lastPos, 0.5f).SetEase(Ease.InBack);
             isUpgradeMenuOpen = false;
-            gameMenu.gameObject.SetActive(true);
+            startMenu.gameObject.SetActive(true);
         }
 
     }
@@ -124,7 +139,7 @@ public class UIManager : MonoBehaviour
             virtualCamera.transform.DOMove(garageCamPos.position, 0.5f);
             virtualCamera.transform.DORotateQuaternion(garageCamPos.rotation, 0.5f);
 
-            gameMenu.gameObject.SetActive(false);
+            startMenu.gameObject.SetActive(false);
             isGarageOpen = true;
         }
         else
@@ -141,7 +156,7 @@ public class UIManager : MonoBehaviour
             DOVirtual.DelayedCall(0.5f, () =>
             {
                 virtualCamera.Follow = player.transform;
-                gameMenu.gameObject.SetActive(true);
+                startMenu.gameObject.SetActive(true);
                 isGarageOpen = false;
                 garageMenu.gameObject.SetActive(false);
             });
@@ -153,12 +168,12 @@ public class UIManager : MonoBehaviour
         if (gestureMenu.anchoredPosition.x != gestureLastPos)
         {
             gestureMenu.DOAnchorPosX(gestureLastPos, 0.5f).SetEase(Ease.OutBack);
-            gameMenu.gameObject.SetActive(false);            
+            startMenu.gameObject.SetActive(false);            
         }
         else
         {
             gestureMenu.DOAnchorPosX(gestureFirstPos, 0.5f).SetEase(Ease.InBack);
-            gameMenu.gameObject.SetActive(true);
+            startMenu.gameObject.SetActive(true);
         }
     }
 
@@ -166,13 +181,13 @@ public class UIManager : MonoBehaviour
     {
         if(bestScoreMenu.anchoredPosition.x != scoreLastPos)
         {
-            bestScoreMenu.DOAnchorPosX(scoreLastPos, 0.5f).SetEase(Ease.OutBack);
-            gameMenu.gameObject.SetActive(false);            
+            bestScoreMenu.DOAnchorPosX(scoreLastPos, 0.5f).SetEase(Ease.InBack);
+            startMenu.gameObject.SetActive(true);            
         }
         else
         {
-            bestScoreMenu.DOAnchorPosX(scoreFirstPos, 0.5f).SetEase(Ease.InBack);
-            gameMenu.gameObject.SetActive(true);
+            bestScoreMenu.DOAnchorPosX(scoreFirstPos, 0.5f).SetEase(Ease.OutBack);
+            startMenu.gameObject.SetActive(false);
         }
     }
 

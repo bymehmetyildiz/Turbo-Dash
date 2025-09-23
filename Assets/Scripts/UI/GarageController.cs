@@ -135,6 +135,7 @@ public class GarageController : MonoBehaviour
             && activeVehicle.GetComponent<Vehicle>().carIndex <= 3)
         {            
             Player.instance.totalCoinAmount -= activeVehicle.GetComponent<Vehicle>().upgradePrice;
+            UIManager.instance.UpdateTotalCoin();
             activeVehicle.GetComponent<Vehicle>().carIndex++;
             activeVehicle.GetComponent<Vehicle>().upgradePrice *= Mathf.RoundToInt(3);
             upgradePriceText.text = activeVehicle.GetComponent<Vehicle>().upgradePrice.ToString();
@@ -171,6 +172,7 @@ public class GarageController : MonoBehaviour
                     vehicleProps.SetActive(false);
 
                 Player.instance.totalCoinAmount -= activeVehicle.GetComponent<Vehicle>().price;
+                UIManager.instance.UpdateTotalCoin();
                 Player.instance.vehicleIndex = activeVehicle.GetComponent<Vehicle>().vehicleIndex;
             }
         }

@@ -115,7 +115,7 @@ public class VehicleController : MonoBehaviour
         Coin coin = other.GetComponent<Coin>();
         if (coin != null)
         {
-            player.totalCoinAmount++;
+            UIManager.instance.MoveCoinImg(coin.transform.position);
             Destroy(coin.gameObject);
         }
     }
