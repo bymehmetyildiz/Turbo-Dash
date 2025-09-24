@@ -56,10 +56,6 @@ public class Player : MonoBehaviour
     public int carIndex;
     public int colorIndex;
 
-
-    [Header("Collectibles")]
-    public int keys;
-
     [Header("Shield")]
     public GameObject shiledParticle;
     public bool isShielded = false;
@@ -67,6 +63,7 @@ public class Player : MonoBehaviour
     [Header("Coin")]
     public int currentCoinAmount;
     public int totalCoinAmount;
+    public ParticleSystem collectParticle;
 
     [Header("Distance")]
     public int distanceTraveled;
@@ -123,6 +120,8 @@ public class Player : MonoBehaviour
         {
             StartCoroutine(ActivateShield());
         }
+
+        CheckCoinOverlap();
     }
 
     //Check if Turn Animation Ended
@@ -250,14 +249,19 @@ public class Player : MonoBehaviour
 
 
     }
-    private void OnTriggerEnter(Collider other)
+    private void CheckCoinOverlap()
     {
-        Coin coin = other.GetComponent<Coin>();
-
-        if (coin != null)
+        Collider[] coins = Physics.OverlapSphere(transform.position, 1f, LayerMask.GetMask("Coin"));
+        foreach (Collider coin in coins)
         {
-            UIManager.instance.MoveCoinImg(coin.transform.position);
-            Destroy(coin.gameObject);
+            Coin c = coin.GetComponent<Coin>();
+            if (c != null)
+            {
+                UIManager.instance.MoveCoinImg(coin.transform.position);
+                ParticleSystem particle = Instantiate(collectParticle, transform.position, Quaternion.identity);
+                particle.transform.parent = transform;
+                Destroy(coin.gameObject);
+            }
         }
     }
 

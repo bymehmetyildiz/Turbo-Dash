@@ -1750,7 +1750,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 0
+    m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -4044,7 +4044,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 26.797, y: -12.011}
+  m_AnchoredPosition: {x: 32.4, y: -12.011}
   m_SizeDelta: {x: 210.577, y: 47.792}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &577619461
@@ -7526,7 +7526,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1044371378}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.094855055, y: 0.0030239853, z: -0.00028814084, w: 0.9954865}
+  m_LocalRotation: {x: 0.094855055, y: 0.0030239942, z: -0.00028814163, w: 0.9954865}
   m_LocalPosition: {x: 0, y: 2.9029999, z: -4.665}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -13417,7 +13417,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2089000822}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.094855055, y: 0.0030239853, z: -0.00028814084, w: 0.9954865}
+  m_LocalRotation: {x: 0.094855055, y: 0.0030239942, z: -0.00028814163, w: 0.9954865}
   m_LocalPosition: {x: 0, y: 2.9029999, z: -4.665}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -13470,8 +13470,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 47.13794, y: -12.011}
-  m_SizeDelta: {x: 59.778015, y: 59.778}
+  m_AnchoredPosition: {x: 53.452, y: -12.011}
+  m_SizeDelta: {x: 55.593, y: 55.593}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2105626573
 MonoBehaviour:
@@ -33539,6 +33539,12 @@ PrefabInstance:
       propertyPath: virtualCamera
       value: 
       objectReference: {fileID: 1044371379}
+    - target: {fileID: 8651806284149911528, guid: db73295f8cbda7a44ad3a3163e6e2861,
+        type: 3}
+      propertyPath: collectParticle
+      value: 
+      objectReference: {fileID: 5436931453338069056, guid: 4989f019e9e750c4fb1e828515a00be9,
+        type: 3}
     - target: {fileID: 8651806284149911528, guid: db73295f8cbda7a44ad3a3163e6e2861,
         type: 3}
       propertyPath: totalCoinAmount

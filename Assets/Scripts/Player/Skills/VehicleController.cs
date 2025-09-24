@@ -64,6 +64,7 @@ public class VehicleController : MonoBehaviour
     void Update()
     {
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        CheckCoinOverlap();
 
         if (Input.GetKeyDown(KeyCode.D) && currentLane < lanePositions.Length - 1 && !isChangingLane)        
             StartCoroutine(ChangeLane(currentLane + 1, 15));        
@@ -110,13 +111,21 @@ public class VehicleController : MonoBehaviour
        
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void CheckCoinOverlap()
     {
-        Coin coin = other.GetComponent<Coin>();
-        if (coin != null)
+        Collider[] coins = Physics.OverlapSphere(transform.position, 1f, LayerMask.GetMask("Coin"));
+        foreach (Collider coin in coins)
         {
-            UIManager.instance.MoveCoinImg(coin.transform.position);
-            Destroy(coin.gameObject);
+            Coin c = coin.GetComponent<Coin>();
+            if (c != null)
+            {
+                UIManager.instance.MoveCoinImg(coin.transform.position);
+
+                ParticleSystem particle = Instantiate(player.collectParticle, player.transform.position, Quaternion.identity);
+                particle.transform.parent = player.transform;
+
+                Destroy(coin.gameObject);
+            }
         }
     }
 

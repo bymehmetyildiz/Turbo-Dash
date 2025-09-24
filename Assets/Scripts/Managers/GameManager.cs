@@ -37,6 +37,12 @@ public class GameManager : MonoBehaviour
                 SpawnObstacle();
                 SpawnAircraft();
                 spawnTimer = 0f;
+
+                if(player.stateMachine.currentstate == player.planeState 
+                    || player.stateMachine.currentstate == player.jetState)
+                {
+                    SpawnCoinInAir();
+                }
             }
         }
 
@@ -138,7 +144,7 @@ public class GameManager : MonoBehaviour
         float[] lanes = { 1.2f, 0, -1.2f };
         Vector3 spawnPos = new Vector3(
         lane,
-        0.5f, // coin height
+        1f, // coin height
         zPos
         );
 
@@ -149,5 +155,19 @@ public class GameManager : MonoBehaviour
         }
 
     }
+
+    private void SpawnCoinInAir()
+    {
+        float[] lanes = new float[] { -3.5f, 0f, 3.5f };
+
+        Vector3 spawnPos = new Vector3( lanes[Random.Range(0, lanes.Length)], 10f, player.transform.position.z + spawnDistance);
+
+        for (int i = 0; i < coinPerRow; i++)
+        {
+            Vector3 pos = spawnPos + new Vector3(0, 0, i * coinSpacing);
+            Instantiate(coinPrefab, pos, Quaternion.identity);
+        }
+    }
+
 
 }
