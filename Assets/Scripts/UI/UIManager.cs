@@ -2,6 +2,7 @@ using UnityEngine;
 using TMPro;
 using DG.Tweening;
 using Cinemachine;
+using System.Collections;
 
 
 public class UIManager : MonoBehaviour
@@ -58,6 +59,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] private float scoreFirstPos, scoreLastPos;
     public ScoreBoard[] scoreBoard;
 
+    [Header("EndGame Menu")]
+    [SerializeField] private TMP_Text endGameCoinText;
+    [SerializeField] private GameObject endGamePanel;
+
+
     private void Awake()
     {
         if (instance == null)
@@ -74,14 +80,64 @@ public class UIManager : MonoBehaviour
         currentCoinText.text = 0.ToString();
         distanceText.text = 0 + " m";
         gameMenu.gameObject.SetActive(false);
+        endGamePanel.SetActive(false);
         totalCoinBG.SetActive(true);
         UpdateTotalCoin();
     }
 
+    // Update CoinText
     public void UpdateTotalCoin()
     {
         totalCoinText.text = NumberFormatter.FormatNumber(player.totalCoinAmount);
+        endGameCoinText.text = NumberFormatter.FormatNumber(player.totalCoinAmount);
+        currentCoinText.text = NumberFormatter.FormatNumber(player.currentCoinAmount);
     }
+
+    public void GameOverPanel()
+    {
+        StartCoroutine(EndGameCoinCounter());
+    }
+
+    private IEnumerator EndGameCoinCounter()
+    {
+        yield return new WaitForSeconds(3f);   
+        
+        endGamePanel.SetActive(true);
+        UpdateTotalCoin();
+        yield return new WaitForSeconds(2f);         
+
+        int target = player.totalCoinAmount + player.currentCoinAmount;
+        int step = Mathf.Max(1, player.currentCoinAmount / 100);
+
+        while (player.totalCoinAmount < target)
+        {
+            player.totalCoinAmount += step;
+            player.currentCoinAmount -= step;
+
+            if (player.totalCoinAmount > target)
+                player.totalCoinAmount = target;
+
+            if(player.currentCoinAmount < 0)
+                player.currentCoinAmount = 0;
+
+            RectTransform coin = Instantiate(coinImgPrefab, endGamePanel.transform).GetComponent<RectTransform>();
+            coin.localPosition = currentCoinText.gameObject.GetComponent<RectTransform>().anchoredPosition;
+
+            coin.DOMove(endGameCoinText.gameObject.GetComponent<RectTransform>().anchoredPosition, 0.5f)
+                .SetEase(Ease.InQuad)
+                .OnComplete(() =>
+                {
+                    Destroy(coin.gameObject);
+                });
+
+            UpdateTotalCoin();
+            yield return new WaitForSeconds(0.05f); 
+        }
+
+        player.currentCoinAmount = 0; // reset run coins after animation
+        currentCoinText.text = "0"; // reset UI
+    }
+
 
     private void OnValidate()
     {
