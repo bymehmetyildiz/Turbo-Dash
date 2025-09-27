@@ -61,8 +61,11 @@ public class UIManager : MonoBehaviour
 
     [Header("EndGame Menu")]
     [SerializeField] private TMP_Text endGameCoinText;
+    [SerializeField] private TMP_Text endGameScoreText;
     [SerializeField] private GameObject endGamePanel;
-
+    [SerializeField] private RectTransform coinSpawnPoint;
+    [SerializeField] private RectTransform targetPoint;
+    [SerializeField] private ParticleSystem confetti;
 
     private void Awake()
     {
@@ -104,6 +107,7 @@ public class UIManager : MonoBehaviour
         
         endGamePanel.SetActive(true);
         UpdateTotalCoin();
+        endGameScoreText.text = distanceText.text;
         yield return new WaitForSeconds(2f);         
 
         int target = player.totalCoinAmount + player.currentCoinAmount;
@@ -121,9 +125,9 @@ public class UIManager : MonoBehaviour
                 player.currentCoinAmount = 0;
 
             RectTransform coin = Instantiate(coinImgPrefab, endGamePanel.transform).GetComponent<RectTransform>();
-            coin.localPosition = currentCoinText.gameObject.GetComponent<RectTransform>().anchoredPosition;
+            coin.localPosition = coinSpawnPoint.localPosition;
 
-            coin.DOMove(endGameCoinText.gameObject.GetComponent<RectTransform>().anchoredPosition, 0.5f)
+            coin.DOMove(targetPoint.position, 0.5f)
                 .SetEase(Ease.InQuad)
                 .OnComplete(() =>
                 {
@@ -136,6 +140,9 @@ public class UIManager : MonoBehaviour
 
         player.currentCoinAmount = 0; // reset run coins after animation
         currentCoinText.text = "0"; // reset UI
+
+        yield return new WaitForSeconds(1f);
+        confetti.Play();
     }
 
 
