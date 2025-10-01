@@ -63,6 +63,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text endGameCoinText;
     [SerializeField] private TMP_Text endGameScoreText;
     [SerializeField] private GameObject endGamePanel;
+    [SerializeField] private GameObject adButton;
+    [SerializeField] private GameObject restartButton;
     [SerializeField] private RectTransform coinSpawnPoint;
     [SerializeField] private RectTransform targetPoint;
     [SerializeField] private ParticleSystem confetti;
@@ -86,6 +88,8 @@ public class UIManager : MonoBehaviour
         endGamePanel.SetActive(false);
         totalCoinBG.SetActive(true);
         UpdateTotalCoin();
+        adButton.SetActive(false);
+        restartButton.SetActive(false);
     }
 
     // Update CoinText
@@ -141,8 +145,16 @@ public class UIManager : MonoBehaviour
         player.currentCoinAmount = 0; // reset run coins after animation
         currentCoinText.text = "0"; // reset UI
 
+        if (player.currentCoinAmount > 0)
+        {
+            yield return new WaitForSeconds(1f);
+            confetti.Play();
+        }
         yield return new WaitForSeconds(1f);
-        confetti.Play();
+        adButton.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        restartButton.SetActive(true);
+
     }
 
 
