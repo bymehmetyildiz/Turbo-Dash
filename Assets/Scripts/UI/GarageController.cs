@@ -8,7 +8,7 @@ using Unity.VisualScripting;
 public class GarageController : MonoBehaviour
 {  
     [SerializeField] private GameObject[] vehicle;
-    [SerializeField] private GameObject activeVehicle;
+    public GameObject activeVehicle;
     [SerializeField] private GameObject vehicleLock;
     [SerializeField] private GameObject vehicleProps;
     [SerializeField] private TMP_Text vehicleName;
@@ -85,6 +85,7 @@ public class GarageController : MonoBehaviour
         activeVehicle = vehicle[index];
         ShowVehicleProps();
         vehicleName.text = activeVehicle.GetComponent<Vehicle>().vehicleName;
+        dropdownController.SetupColorOptions();
 
         if (!activeVehicle.GetComponent<Vehicle>().isUnlocked)
         {

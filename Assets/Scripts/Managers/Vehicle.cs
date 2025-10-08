@@ -16,6 +16,8 @@ public class Vehicle : MonoBehaviour
     public int price;
     public int upgradePrice;
 
+    public string[] colors;
+
 
 
     void Start()
@@ -48,10 +50,4 @@ public class Vehicle : MonoBehaviour
             activeCar.SetActive(true);
         }
     }
-
-   
-
-
-
-
 }

@@ -9,24 +9,27 @@ using TMPro;
 public class DropdownController : MonoBehaviour
 {
     public TMP_Dropdown dropdown;
-    
+    private GarageController garageController;
+
 
     void Start()
     {
         dropdown = GetComponent<TMP_Dropdown>();
         dropdown.options.Clear();
+        garageController = FindObjectOfType<GarageController>();
+        SetupColorOptions();
 
-        // Create colored options
-        dropdown.options.Add(new TMP_Dropdown.OptionData("Black", CreateColorSprite(Color.black)));
-        dropdown.options.Add(new TMP_Dropdown.OptionData("Blue", CreateColorSprite(Color.blue)));
-        dropdown.options.Add(new TMP_Dropdown.OptionData("Cyan", CreateColorSprite(Color.cyan)));
-        dropdown.options.Add(new TMP_Dropdown.OptionData("Green", CreateColorSprite(Color.green)));
-        dropdown.options.Add(new TMP_Dropdown.OptionData("Magenta", CreateColorSprite(Color.magenta)));
-        dropdown.options.Add(new TMP_Dropdown.OptionData("Red", CreateColorSprite(Color.red)));
-        dropdown.options.Add(new TMP_Dropdown.OptionData("Yellow", CreateColorSprite(Color.yellow)));
+    }
 
+    public void SetupColorOptions()
+    {
+        for (int i = 0; i < garageController.activeVehicle.GetComponent<Vehicle>().colors.Length; i++)
+        {
+            dropdown.options.
+                Add(new TMP_Dropdown.OptionData(garageController.activeVehicle.
+                GetComponent<Vehicle>().colors[i], CreateColorSprite(Color.black)));
+        }
         dropdown.RefreshShownValue();
-    
     }
 
     // Helper: makes a small square sprite in given color
