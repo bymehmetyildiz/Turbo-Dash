@@ -3075,7 +3075,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.56078434, g: 0.5058824, b: 0.46274513, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -7220,7 +7220,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d64999745982a64dba0c60dd7aaa805, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropdown: {fileID: 0}
+  dropdown: {fileID: 884161666}
+  garageController: {fileID: 644074055}
 --- !u!1 &887484021
 GameObject:
   m_ObjectHideFlags: 0
@@ -8324,7 +8325,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1044371378}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.094855055, y: 0.0030239853, z: -0.00028814084, w: 0.9954865}
+  m_LocalRotation: {x: 0.094855055, y: 0.0030239942, z: -0.00028814163, w: 0.9954865}
   m_LocalPosition: {x: 0, y: 2.9029999, z: -4.665}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -14167,7 +14168,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1260404449}
   m_HandleRect: {fileID: 1260404448}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0.9999997
   m_Size: 0.6613565
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -14855,7 +14856,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2089000822}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.094855055, y: 0.0030239853, z: -0.00028814084, w: 0.9954865}
+  m_LocalRotation: {x: 0.094855055, y: 0.0030239942, z: -0.00028814163, w: 0.9954865}
   m_LocalPosition: {x: 0, y: 2.9029999, z: -4.665}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -60523,6 +60524,10 @@ MonoBehaviour:
   - Black
   - Yellow
   - Red
+  colorValues:
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0.8679245, g: 0.6712314, b: 0.24154504, a: 0}
+  - {r: 1, g: 0, b: 0, a: 0}
 --- !u!33 &5463349138422844915
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -61345,6 +61350,10 @@ MonoBehaviour:
   - Blue
   - White
   - Red
+  colorValues:
+  - {r: 0, g: 0.34212565, b: 1, a: 0}
+  - {r: 1, g: 1, b: 1, a: 0}
+  - {r: 1, g: 0, b: 0, a: 0}
 --- !u!4 &5620331514758945231
 Transform:
   m_ObjectHideFlags: 0
@@ -74749,6 +74758,7 @@ MonoBehaviour:
   price: 17500
   upgradePrice: 0
   colors: []
+  colorValues: []
 --- !u!1 &6937486943104953571
 GameObject:
   m_ObjectHideFlags: 0
@@ -80256,6 +80266,7 @@ MonoBehaviour:
   price: 30000
   upgradePrice: 0
   colors: []
+  colorValues: []
 --- !u!4 &7711397435953870855
 Transform:
   m_ObjectHideFlags: 0
@@ -82306,6 +82317,10 @@ MonoBehaviour:
   - Red
   - Purple
   - Blue
+  colorValues:
+  - {r: 1, g: 0, b: 0, a: 0}
+  - {r: 0.5647059, g: 0.50980395, b: 0.46666667, a: 0}
+  - {r: 0, g: 0.3744688, b: 1, a: 0}
 --- !u!1 &8057859947113069466
 GameObject:
   m_ObjectHideFlags: 0
@@ -84760,6 +84775,10 @@ MonoBehaviour:
   - Blue
   - Yellow
   - Black
+  colorValues:
+  - {r: 0, g: 0.2192061, b: 1, a: 0}
+  - {r: 1, g: 0.8207309, b: 0, a: 0}
+  - {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &8285276286512827696
 GameObject:
   m_ObjectHideFlags: 0
@@ -86414,6 +86433,10 @@ MonoBehaviour:
   - Blue
   - Orange
   - White
+  colorValues:
+  - {r: 0, g: 0.43849897, b: 1, a: 0}
+  - {r: 0.9150943, g: 0.5363847, b: 0.28057137, a: 0}
+  - {r: 1, g: 1, b: 1, a: 0}
 --- !u!1 &8549387145797144268
 GameObject:
   m_ObjectHideFlags: 0
@@ -86611,6 +86634,7 @@ MonoBehaviour:
   price: 22500
   upgradePrice: 0
   colors: []
+  colorValues: []
 --- !u!4 &8593069948071628331
 Transform:
   m_ObjectHideFlags: 0
@@ -90737,6 +90761,14 @@ MonoBehaviour:
   - Lilac
   - Red
   - Yellow
+  colorValues:
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 0, g: 0.3540876, b: 1, a: 0}
+  - {r: 0, g: 0.9179597, b: 1, a: 0}
+  - {r: 0, g: 1, b: 0.013665199, a: 0}
+  - {r: 0.78431374, g: 0.63529414, b: 0.78431374, a: 0}
+  - {r: 1, g: 0, b: 0, a: 0}
+  - {r: 1, g: 0.7466961, b: 0, a: 0}
 --- !u!4 &9148013530622485066
 Transform:
   m_ObjectHideFlags: 0

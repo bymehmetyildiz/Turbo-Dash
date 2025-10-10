@@ -84,8 +84,10 @@ public class GarageController : MonoBehaviour
         vehicle[index].SetActive(true);
         activeVehicle = vehicle[index];
         ShowVehicleProps();
-        vehicleName.text = activeVehicle.GetComponent<Vehicle>().vehicleName;
         dropdownController.SetupColorOptions();
+        vehicleName.text = activeVehicle.GetComponent<Vehicle>().vehicleName;
+        dropdownController.dropdown.value = activeVehicle.GetComponent<Vehicle>().colorIndex;
+        dropdownController.dropdown.RefreshShownValue();
 
         if (!activeVehicle.GetComponent<Vehicle>().isUnlocked)
         {
@@ -101,6 +103,8 @@ public class GarageController : MonoBehaviour
             coinImage.SetActive(false);
             lockedText.SetActive(false);
             lockedImage.SetActive(false);
+
+            
 
             if (activeVehicle.GetComponent<Vehicle>().type == VehicleType.Modified)
                 vehicleProps.SetActive(true);
@@ -118,11 +122,19 @@ public class GarageController : MonoBehaviour
     public void SelectColor()
     {
         Vehicle vehicle = activeVehicle.GetComponent<Vehicle>();
+
+        // apply new color visually
         vehicle.SetupCar(vehicle.carIndex, dropdownController.dropdown.value);
+
+        // ? store selected color index in the vehicle itself
+        vehicle.colorIndex = dropdownController.dropdown.value;
+
+        // ? also store to player save data (as you already do)
         Player.instance.vehicleIndex = activeVehicle.GetComponent<Vehicle>().vehicleIndex;
         Player.instance.carIndex = vehicle.carIndex;
         Player.instance.colorIndex = dropdownController.dropdown.value;
     }
+
 
     public void Upgrade()
     {

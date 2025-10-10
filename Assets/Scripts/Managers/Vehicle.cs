@@ -17,6 +17,7 @@ public class Vehicle : MonoBehaviour
     public int upgradePrice;
 
     public string[] colors;
+    public Color[] colorValues;
 
 
 
