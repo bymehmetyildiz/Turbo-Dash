@@ -3,6 +3,7 @@ using TMPro;
 using DG.Tweening;
 using Cinemachine;
 using System.Collections;
+using UnityEngine.UI;
 
 
 public class UIManager : MonoBehaviour
@@ -53,6 +54,7 @@ public class UIManager : MonoBehaviour
     public GameObject coinImgPrefab;
     public RectTransform target;
     public GameObject coinParent;
+    [SerializeField] private Image timerImg;
 
     [Header("BestScore Menu")]
     [SerializeField] public RectTransform bestScoreMenu;
@@ -90,6 +92,7 @@ public class UIManager : MonoBehaviour
         UpdateTotalCoin();
         adButton.SetActive(false);
         restartButton.SetActive(false);
+        timerImg.gameObject.SetActive(false);
     }
 
     // Update CoinText
@@ -319,6 +322,32 @@ public class UIManager : MonoBehaviour
             entry.UpdateScore();
         }
     }
+
+    // Skill Timer
+    
+    public void StartDriveStateCounter(float _timer)
+    {
+        StartCoroutine(DriveStateCounter(_timer));
+    }
+
+    private IEnumerator DriveStateCounter(float _timer)
+    {
+        timerImg.gameObject.SetActive(true);
+        timerImg.fillAmount = 1f;
+
+        float totalTime = _timer;
+
+        while (_timer > 0)
+        {
+            _timer -= Time.deltaTime;  // decrease timer each frame
+            timerImg.fillAmount = _timer / totalTime; // update fill based on remaining time
+            yield return null; // wait until next frame
+        }
+
+        timerImg.fillAmount = 0f;
+        timerImg.gameObject.SetActive(false);
+    }
+
 
     [ContextMenu("Delete All Scores")]
     public void DeleteAllSaves()

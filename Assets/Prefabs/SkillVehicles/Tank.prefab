@@ -541,11 +541,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 15
   playerPosition: {fileID: 540281735278834345}
+  isUnlocked: 0
   currentLane: 1
   vehicleType: 1
   bomb: {fileID: 5530778049764458590, guid: d94c6ea711e945c4caf5a7bcad8b96a2, type: 3}
   bombPos: {fileID: 1166355821581316787}
   canShoot: 1
+  cars:
+    colors: []
+  carIndex: 0
+  colorIndex: 0
 --- !u!1 &7664493310477572307
 GameObject:
   m_ObjectHideFlags: 0

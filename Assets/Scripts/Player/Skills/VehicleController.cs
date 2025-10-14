@@ -107,8 +107,6 @@ public class VehicleController : MonoBehaviour
             gameObject.SetActive(false);
             player.stateMachine.ChangeState(player.airState);
         }
-
-       
     }
 
     private void CheckCoinOverlap()
@@ -190,7 +188,6 @@ public class VehicleController : MonoBehaviour
             DestroyImmediate(col);
         }
     }
-
 }
 
 public enum VehicleType

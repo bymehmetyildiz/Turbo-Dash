@@ -109,18 +109,15 @@ public class Obstacles : MonoBehaviour
 
     private IEnumerator Shoot()
     {
-        if (player.isStarted)
+        isShooting = true;
+
+        while (IsPlayerDetected() && player.isStarted)
         {
-            isShooting = true;
-
-            while (IsPlayerDetected())
-            {
-                Instantiate(cannonBall, cannonPos.position, Quaternion.identity);
-                yield return new WaitForSeconds(3f);
-            }
-
-            isShooting = false;
+            Instantiate(cannonBall, cannonPos.position, Quaternion.identity);
+            yield return new WaitForSeconds(3f);
         }
+
+        isShooting = false;
     }
 
     private bool IsPlayerDetected()

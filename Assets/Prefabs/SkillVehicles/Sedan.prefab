@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6180106662551401397}
   - component: {fileID: 761309731165694525}
   - component: {fileID: 5633736203451163729}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_Sedan_01A_Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 1765159464595649679}
   - component: {fileID: 8463462292652598589}
   - component: {fileID: 4845429098020272371}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_Sedan_01A_Wheel_F.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -212,7 +212,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6177862803353453049}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_Sedan_01C
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -257,7 +257,7 @@ GameObject:
   - component: {fileID: 4105889481247637027}
   - component: {fileID: 885212382655881852}
   - component: {fileID: 3604421514553359360}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_Sedan_01B_Door_F.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -341,7 +341,7 @@ GameObject:
   - component: {fileID: 7074113360548001909}
   - component: {fileID: 6870021277862425934}
   - component: {fileID: 762665447243596889}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_Sedan_01B_Blinkers.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -424,7 +424,7 @@ GameObject:
   - component: {fileID: 2361027256651246233}
   - component: {fileID: 420256293333172346}
   - component: {fileID: 5050108992192110502}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_Sedan_01A_Blinkers.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -509,7 +509,7 @@ GameObject:
   - component: {fileID: 163716622121189902}
   - component: {fileID: 6769591449074377732}
   - component: {fileID: 8316004887406510643}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_Sedan_01C_Wheel_F.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -628,7 +628,7 @@ GameObject:
   - component: {fileID: 6854459933675086512}
   - component: {fileID: 7646151551708007204}
   - component: {fileID: 7103291033648187151}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_Sedan_01C_Wheel_R.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -743,7 +743,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3501364332993946477}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wheels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -780,7 +780,7 @@ GameObject:
   - component: {fileID: 8285116472418151021}
   - component: {fileID: 4379737483912679067}
   - component: {fileID: 5612954897357904046}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_Sedan_01A_Blinkers.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -863,7 +863,7 @@ GameObject:
   - component: {fileID: 6341603363769755773}
   - component: {fileID: 5591340483573349469}
   - component: {fileID: 8846754014085221378}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_Sedan_01B_Blinkers.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -946,7 +946,7 @@ GameObject:
   - component: {fileID: 7462275763144078295}
   - component: {fileID: 7705014841247556655}
   - component: {fileID: 4907848425662613116}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_Sedan_01A_Door_R.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1030,7 +1030,7 @@ GameObject:
   - component: {fileID: 4741809438675079243}
   - component: {fileID: 4903238896872147311}
   - component: {fileID: 7771219322406203188}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_Sedan_01B_Sun_Roof
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1113,7 +1113,7 @@ GameObject:
   - component: {fileID: 3839758462157102906}
   - component: {fileID: 3954016074125438679}
   - component: {fileID: 8620196172082479678}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_Sedan_01C_Sun_Roof
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1196,7 +1196,7 @@ GameObject:
   - component: {fileID: 7749746406129103283}
   - component: {fileID: 8732490106707351661}
   - component: {fileID: 3490254542674734420}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_Sedan_01C_Door_R.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1280,7 +1280,7 @@ GameObject:
   - component: {fileID: 15171994572621907}
   - component: {fileID: 3320056750619447865}
   - component: {fileID: 1829439015785574904}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_Sedan_01C_Door_R.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1364,7 +1364,7 @@ GameObject:
   - component: {fileID: 7439359058821626209}
   - component: {fileID: 2892990719583454940}
   - component: {fileID: 6574874799442784636}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_Sedan_01A_Sun_Roof
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1449,7 +1449,7 @@ GameObject:
   - component: {fileID: 8019833473471906858}
   - component: {fileID: 4989785827659169843}
   - component: {fileID: 8954622972953679952}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_Sedan_01B_Wheel_F.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1566,7 +1566,7 @@ GameObject:
   - component: {fileID: 9219451505409912200}
   - component: {fileID: 4480873587255923809}
   - component: {fileID: 2044291344542465931}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_Sedan_01B_Door_R.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1650,7 +1650,7 @@ GameObject:
   - component: {fileID: 115225967090694671}
   - component: {fileID: 7280801055758617855}
   - component: {fileID: 7742083116647907312}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_Sedan_01C_Blinkers.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1733,7 +1733,7 @@ GameObject:
   - component: {fileID: 5963188331321003530}
   - component: {fileID: 851106499111819657}
   - component: {fileID: 6847953589995917495}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_Sedan_01A_Door_F.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1819,7 +1819,7 @@ GameObject:
   - component: {fileID: 1580122992060881934}
   - component: {fileID: 5860035081326036521}
   - component: {fileID: 2961797618314548540}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_Sedan_01C_Wheel_F.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1938,7 +1938,7 @@ GameObject:
   - component: {fileID: 5539335988604672515}
   - component: {fileID: 7350166572511215761}
   - component: {fileID: 4283080551287069694}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_Sedan_01B_Wheel_F.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2053,7 +2053,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 539430146690509998}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PlayerPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2069,7 +2069,7 @@ Transform:
   m_GameObject: {fileID: 5458900938273444403}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.26, y: 1.57, z: -0.29}
+  m_LocalPosition: {x: -0.26, y: 1.745, z: 0.075}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2084,7 +2084,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 863115712969302638}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wheels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2123,7 +2123,7 @@ GameObject:
   - component: {fileID: 1008763023918604146}
   - component: {fileID: 6591294075821164602}
   - component: {fileID: 6682479470330984262}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_Sedan_01B_Wheel_R.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2242,7 +2242,7 @@ GameObject:
   - component: {fileID: 2335932587236384148}
   - component: {fileID: 6862745552421377963}
   - component: {fileID: 4924711501895361894}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_Sedan_01A_Wheel_R.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2359,7 +2359,7 @@ GameObject:
   - component: {fileID: 4853913489702656221}
   - component: {fileID: 7962939523138770526}
   - component: {fileID: 3163038867963729990}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_Sedan_01B_Headlights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2442,7 +2442,7 @@ GameObject:
   - component: {fileID: 3105561751586878573}
   - component: {fileID: 5696697970042432309}
   - component: {fileID: 8337759819736821030}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_Sedan_01B_Taillights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2525,7 +2525,7 @@ GameObject:
   - component: {fileID: 2141540309722687417}
   - component: {fileID: 418655909786538000}
   - component: {fileID: 3326626827946310058}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_Sedan_01B_Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2609,7 +2609,7 @@ GameObject:
   - component: {fileID: 2006046980397125562}
   - component: {fileID: 8539432208600950641}
   - component: {fileID: 4432327564036206458}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_Sedan_01C_Headlights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2692,7 +2692,7 @@ GameObject:
   - component: {fileID: 931953232906248035}
   - component: {fileID: 6948659612596011344}
   - component: {fileID: 6539808461431374169}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_Sedan_01C_Door_F.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2774,7 +2774,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7466552762102307999}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_Sedan_01A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2821,7 +2821,7 @@ GameObject:
   - component: {fileID: 508028384321137945}
   - component: {fileID: 2819079715811088347}
   - component: {fileID: 6812218975890955773}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_Sedan_01A_Wheel_F.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2940,7 +2940,7 @@ GameObject:
   - component: {fileID: 6698901978166748191}
   - component: {fileID: 8187306378678579947}
   - component: {fileID: 1603979253980991209}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_Sedan_01C_Wheel_R.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3057,7 +3057,7 @@ GameObject:
   - component: {fileID: 9201079458949534696}
   - component: {fileID: 2630234290118230917}
   - component: {fileID: 4840702461540704611}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_Sedan_01A_Headlights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3138,7 +3138,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 85536055693948035}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_Sedan_01B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3183,7 +3183,7 @@ GameObject:
   - component: {fileID: 2771247570514003}
   - component: {fileID: 4110840908874976525}
   - component: {fileID: 839780001976619705}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_Sedan_01A_Door_F.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3267,7 +3267,7 @@ GameObject:
   - component: {fileID: 5492227591957129789}
   - component: {fileID: 4671600570565162623}
   - component: {fileID: 3694430933908582603}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_Sedan_01A_Door_R.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3351,7 +3351,7 @@ GameObject:
   - component: {fileID: 8300488169979588885}
   - component: {fileID: 9020138559505971015}
   - component: {fileID: 5904317086824904105}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_Sedan_01C_Blinkers.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3434,7 +3434,7 @@ GameObject:
   - component: {fileID: 7264783629854172654}
   - component: {fileID: 1264487245862639607}
   - component: {fileID: 3570983597665064419}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_Sedan_01C_Taillights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3517,7 +3517,7 @@ GameObject:
   - component: {fileID: 1247916746546813457}
   - component: {fileID: 1326475192188636740}
   - component: {fileID: 6008662764560021789}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_Sedan_01C_Door_F.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3602,9 +3602,9 @@ GameObject:
   - component: {fileID: 2161577792641298187}
   - component: {fileID: 3010626107631490116}
   - component: {fileID: 1639607973740479143}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sedan
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3619,7 +3619,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.12449837, y: 0.06594828, z: 37.54}
-  m_LocalScale: {x: 0.65, y: 0.65, z: 0.65}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 539430146690509998}
@@ -3688,7 +3688,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0045c26ab9370d44f9de22e94ce8e2ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 20
   playerPosition: {fileID: 539430146690509998}
   isUnlocked: 0
   currentLane: 1
@@ -3717,7 +3717,7 @@ GameObject:
   - component: {fileID: 7109923210968805204}
   - component: {fileID: 5441349818533098781}
   - component: {fileID: 2806810214611268481}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_Sedan_01B_Door_R.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3801,7 +3801,7 @@ GameObject:
   - component: {fileID: 8568619591849178624}
   - component: {fileID: 6868938416665846997}
   - component: {fileID: 9036454294780946839}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_Sedan_01B_Door_F.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3885,7 +3885,7 @@ GameObject:
   - component: {fileID: 8380827962935310502}
   - component: {fileID: 6957831690447404097}
   - component: {fileID: 7865594805352124294}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_Sedan_01C_Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3967,7 +3967,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6218636550828302937}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wheels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4004,7 +4004,7 @@ GameObject:
   - component: {fileID: 3838965088034080301}
   - component: {fileID: 5755760846408038779}
   - component: {fileID: 1618446091993618536}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_Sedan_01A_Taillights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4087,7 +4087,7 @@ GameObject:
   - component: {fileID: 2518378892475433266}
   - component: {fileID: 7602081151911801578}
   - component: {fileID: 1120957605441126226}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_Sedan_01B_Steering_Wheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4170,7 +4170,7 @@ GameObject:
   - component: {fileID: 4668078948583115086}
   - component: {fileID: 2209729375901809339}
   - component: {fileID: 7412273987375126151}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_Sedan_01C_Steering_Wheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4253,7 +4253,7 @@ GameObject:
   - component: {fileID: 926755199677309744}
   - component: {fileID: 1962891730504581990}
   - component: {fileID: 7350964525067594266}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_Sedan_01A_Steering_Wheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4338,7 +4338,7 @@ GameObject:
   - component: {fileID: 2845719260676450898}
   - component: {fileID: 4287990625941356848}
   - component: {fileID: 4354268871409060946}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_Sedan_01A_Wheel_R.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4457,7 +4457,7 @@ GameObject:
   - component: {fileID: 7126908960158614949}
   - component: {fileID: 256894535610841991}
   - component: {fileID: 5694498610821904568}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_Sedan_01B_Wheel_R.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}

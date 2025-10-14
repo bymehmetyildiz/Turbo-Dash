@@ -8502,6 +8502,7 @@ MonoBehaviour:
     type: 3}
   target: {fileID: 1596401330}
   coinParent: {fileID: 1746777205}
+  timerImg: {fileID: 1096554937}
   bestScoreMenu: {fileID: 1192105934}
   scoreFirstPos: 500
   scoreLastPos: -500
@@ -8562,6 +8563,98 @@ Transform:
   - {fileID: 694015006}
   m_Father: {fileID: 589588559}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!1 &1096554936
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1096554939}
+  - component: {fileID: 1096554938}
+  - component: {fileID: 1096554937}
+  - component: {fileID: 1096554940}
+  m_Layer: 5
+  m_Name: SkillTimer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1096554937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1096554936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: a822bb5e20107274caf42de01a7d20c4, type: 3}
+  m_Type: 3
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 0
+  m_FillOrigin: 2
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1096554938
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1096554936}
+  m_CullTransparentMesh: 1
+--- !u!224 &1096554939
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1096554936}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 1746777206}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -90, y: -265}
+  m_SizeDelta: {x: 180.74, y: 180.74}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!111 &1096554940
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1096554936}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 481b45cd044e0bc4ab1215fce70e84a0, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 481b45cd044e0bc4ab1215fce70e84a0, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1001 &1098525067
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13285,6 +13378,7 @@ RectTransform:
   - {fileID: 765009986}
   - {fileID: 836618747}
   - {fileID: 999511949}
+  - {fileID: 1096554939}
   m_Father: {fileID: 1054141307}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -14168,7 +14262,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1260404449}
   m_HandleRect: {fileID: 1260404448}
   m_Direction: 2
-  m_Value: 0.9999997
+  m_Value: 1
   m_Size: 0.6613565
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -62318,7 +62412,7 @@ PrefabInstance:
     - target: {fileID: 8651806284149911528, guid: db73295f8cbda7a44ad3a3163e6e2861,
         type: 3}
       propertyPath: vehicleIndex
-      value: 1
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8651806284149911528, guid: db73295f8cbda7a44ad3a3163e6e2861,
         type: 3}
@@ -62343,45 +62437,51 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8651806284149911528, guid: db73295f8cbda7a44ad3a3163e6e2861,
         type: 3}
-      propertyPath: vehiclePrefab.Array.data[1]
-      value: 
-      objectReference: {fileID: 4424638016580486371, guid: ece6691f68d5b474abb25cceced8c24f,
-        type: 3}
-    - target: {fileID: 8651806284149911528, guid: db73295f8cbda7a44ad3a3163e6e2861,
-        type: 3}
-      propertyPath: vehiclePrefab.Array.data[2]
-      value: 
-      objectReference: {fileID: 3170296634657658256, guid: c4bd2ae991e225947897458aa6bb1c32,
-        type: 3}
-    - target: {fileID: 8651806284149911528, guid: db73295f8cbda7a44ad3a3163e6e2861,
-        type: 3}
-      propertyPath: vehiclePrefab.Array.data[3]
-      value: 
-      objectReference: {fileID: 418709165712628864, guid: cdfec83b4b9b7924d8720f132b46bcc3,
-        type: 3}
-    - target: {fileID: 8651806284149911528, guid: db73295f8cbda7a44ad3a3163e6e2861,
-        type: 3}
-      propertyPath: vehiclePrefab.Array.data[4]
-      value: 
-      objectReference: {fileID: 2858048430079573522, guid: 8828a21a4c384614ab7773bb2b4e1ecc,
-        type: 3}
-    - target: {fileID: 8651806284149911528, guid: db73295f8cbda7a44ad3a3163e6e2861,
-        type: 3}
-      propertyPath: vehiclePrefab.Array.data[5]
+      propertyPath: vehiclePrefab.Array.data[0]
       value: 
       objectReference: {fileID: 8058564246008581332, guid: e5f9247aa2b521044b068cea1a036ffd,
         type: 3}
     - target: {fileID: 8651806284149911528, guid: db73295f8cbda7a44ad3a3163e6e2861,
         type: 3}
-      propertyPath: vehiclePrefab.Array.data[6]
+      propertyPath: vehiclePrefab.Array.data[1]
+      value: 
+      objectReference: {fileID: 2858048430079573522, guid: 8828a21a4c384614ab7773bb2b4e1ecc,
+        type: 3}
+    - target: {fileID: 8651806284149911528, guid: db73295f8cbda7a44ad3a3163e6e2861,
+        type: 3}
+      propertyPath: vehiclePrefab.Array.data[2]
       value: 
       objectReference: {fileID: 741417307800751155, guid: f2fdb5ac56d7271458fcfc28dab06204,
         type: 3}
     - target: {fileID: 8651806284149911528, guid: db73295f8cbda7a44ad3a3163e6e2861,
         type: 3}
-      propertyPath: vehiclePrefab.Array.data[7]
+      propertyPath: vehiclePrefab.Array.data[3]
+      value: 
+      objectReference: {fileID: 3170296634657658256, guid: c4bd2ae991e225947897458aa6bb1c32,
+        type: 3}
+    - target: {fileID: 8651806284149911528, guid: db73295f8cbda7a44ad3a3163e6e2861,
+        type: 3}
+      propertyPath: vehiclePrefab.Array.data[4]
       value: 
       objectReference: {fileID: 8454632046220766069, guid: 9cf01839d5b649343a410f5ff349dea6,
+        type: 3}
+    - target: {fileID: 8651806284149911528, guid: db73295f8cbda7a44ad3a3163e6e2861,
+        type: 3}
+      propertyPath: vehiclePrefab.Array.data[5]
+      value: 
+      objectReference: {fileID: 4424638016580486371, guid: ece6691f68d5b474abb25cceced8c24f,
+        type: 3}
+    - target: {fileID: 8651806284149911528, guid: db73295f8cbda7a44ad3a3163e6e2861,
+        type: 3}
+      propertyPath: vehiclePrefab.Array.data[6]
+      value: 
+      objectReference: {fileID: 9139794482837106823, guid: d6c28f1afb813b040a3a8bb382a09e10,
+        type: 3}
+    - target: {fileID: 8651806284149911528, guid: db73295f8cbda7a44ad3a3163e6e2861,
+        type: 3}
+      propertyPath: vehiclePrefab.Array.data[7]
+      value: 
+      objectReference: {fileID: 418709165712628864, guid: cdfec83b4b9b7924d8720f132b46bcc3,
         type: 3}
     - target: {fileID: 8651806284149911528, guid: db73295f8cbda7a44ad3a3163e6e2861,
         type: 3}

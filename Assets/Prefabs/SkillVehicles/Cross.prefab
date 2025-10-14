@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8148153716607444652}
   - component: {fileID: 3045156966150538715}
   - component: {fileID: 2703836467685517803}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_SUV_02C_Headlights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 3286483165505997819}
   - component: {fileID: 6976251312105617480}
   - component: {fileID: 4321570719531917243}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_SUV_02B_Steering_Wheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 104126153609182428}
   - component: {fileID: 2534497372565503945}
   - component: {fileID: 1865611255204847985}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_SUV_02B_Door_R.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -263,7 +263,7 @@ GameObject:
   - component: {fileID: 4351496962803145048}
   - component: {fileID: 353955759749767735}
   - component: {fileID: 9128478086123704480}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_SUV_02A_Wheel_R.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -382,7 +382,7 @@ GameObject:
   - component: {fileID: 8331227933500699397}
   - component: {fileID: 8831795286269469390}
   - component: {fileID: 2282381227580386185}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_SUV_02B_Wheel_R.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -499,7 +499,7 @@ GameObject:
   - component: {fileID: 2570390543765924336}
   - component: {fileID: 2834897360506809102}
   - component: {fileID: 6773797091950350793}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_SUV_02A_Door_R.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -583,7 +583,7 @@ GameObject:
   - component: {fileID: 1176959393621616229}
   - component: {fileID: 8345493375463137994}
   - component: {fileID: 902846012240843089}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_SUV_02A_Headlights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -668,7 +668,7 @@ GameObject:
   - component: {fileID: 3344321741947896378}
   - component: {fileID: 89345332060954014}
   - component: {fileID: 5660589676405937640}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_SUV_02A_Wheel_R.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -785,7 +785,7 @@ GameObject:
   - component: {fileID: 6985234392242312173}
   - component: {fileID: 3750159675734520703}
   - component: {fileID: 9187092971814737624}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_SUV_02B_Headlights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -866,7 +866,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8182638271245871989}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_SUV_02B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -907,7 +907,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8060285931411265738}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wheels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -944,7 +944,7 @@ GameObject:
   - component: {fileID: 8584608825295895552}
   - component: {fileID: 2561745615510149402}
   - component: {fileID: 7738507216633054144}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_SUV_02C_Steering_Wheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1027,7 +1027,7 @@ GameObject:
   - component: {fileID: 7571274566864883278}
   - component: {fileID: 8123126774053723543}
   - component: {fileID: 3823578979727618048}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_SUV_02C_Trunk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1113,7 +1113,7 @@ GameObject:
   - component: {fileID: 1313953923000541069}
   - component: {fileID: 3175624231330439310}
   - component: {fileID: 4219035777980409732}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_SUV_02C_Wheel_F.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1231,9 +1231,9 @@ GameObject:
   - component: {fileID: 4792346884873934220}
   - component: {fileID: 4826125709514479213}
   - component: {fileID: 194569329403212}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cross
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1248,7 +1248,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.00798893, y: 0.06594753, z: 10.27485}
-  m_LocalScale: {x: 0.65, y: 0.65, z: 0.65}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1901856440573050718}
@@ -1317,7 +1317,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0045c26ab9370d44f9de22e94ce8e2ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 20
   playerPosition: {fileID: 1901856440573050718}
   isUnlocked: 0
   currentLane: 1
@@ -1346,7 +1346,7 @@ GameObject:
   - component: {fileID: 5320444264175173677}
   - component: {fileID: 5425468222477469653}
   - component: {fileID: 2684628504838453131}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_SUV_02A_Taillights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1431,7 +1431,7 @@ GameObject:
   - component: {fileID: 7320805927856549470}
   - component: {fileID: 1452805241280847507}
   - component: {fileID: 5672143501135561632}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_SUV_02C_Wheel_R.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1548,7 +1548,7 @@ GameObject:
   - component: {fileID: 8213080754875867111}
   - component: {fileID: 7429384643828083726}
   - component: {fileID: 3965567678173655531}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_SUV_02B_Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1634,7 +1634,7 @@ GameObject:
   - component: {fileID: 6517066671829025828}
   - component: {fileID: 1347946839487029821}
   - component: {fileID: 8012437877484361002}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_SUV_02B_Wheel_R.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1749,7 +1749,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1901856440573050718}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PlayerPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1765,7 +1765,7 @@ Transform:
   m_GameObject: {fileID: 4578185239685651546}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.38, y: 1.67, z: -0.09}
+  m_LocalPosition: {x: -0.38, y: 1.852, z: 0.459}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1782,7 +1782,7 @@ GameObject:
   - component: {fileID: 1176347476299241739}
   - component: {fileID: 662348215776128026}
   - component: {fileID: 8027635899710971575}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_SUV_02A_Door_F.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1864,7 +1864,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4851043891655091821}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wheels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1901,7 +1901,7 @@ GameObject:
   - component: {fileID: 5288991150104732995}
   - component: {fileID: 8515202704659840453}
   - component: {fileID: 7676262089965037789}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_SUV_02B_Door_F.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1983,7 +1983,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6629052606775507927}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_SUV_02C
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2028,7 +2028,7 @@ GameObject:
   - component: {fileID: 8458219448720641889}
   - component: {fileID: 1966380949830654426}
   - component: {fileID: 5717215780086796217}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_SUV_02C_Wheel_F.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2147,7 +2147,7 @@ GameObject:
   - component: {fileID: 8253687535682685008}
   - component: {fileID: 64912385341208382}
   - component: {fileID: 5768564424313680286}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_SUV_02B_Wheel_F.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2264,7 +2264,7 @@ GameObject:
   - component: {fileID: 2468401283593149135}
   - component: {fileID: 6762240678774990211}
   - component: {fileID: 7373676818531194776}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_SUV_02A_Trunk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2348,7 +2348,7 @@ GameObject:
   - component: {fileID: 4607610940839686346}
   - component: {fileID: 2851953645770850708}
   - component: {fileID: 3991016949366076227}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_SUV_02B_Trunk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2434,7 +2434,7 @@ GameObject:
   - component: {fileID: 4110496767465938043}
   - component: {fileID: 7359586244979754544}
   - component: {fileID: 1400602064231544634}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_SUV_02A_Wheel_F.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2551,7 +2551,7 @@ GameObject:
   - component: {fileID: 2153801001872698104}
   - component: {fileID: 3582960637926859478}
   - component: {fileID: 628008310376121}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_SUV_02B_Door_F.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2635,7 +2635,7 @@ GameObject:
   - component: {fileID: 6375245196890355411}
   - component: {fileID: 6638942268646500681}
   - component: {fileID: 303892543242634835}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_SUV_02A_Door_F.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2719,7 +2719,7 @@ GameObject:
   - component: {fileID: 5071773760941387840}
   - component: {fileID: 2896416646080530524}
   - component: {fileID: 3306460727394668943}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_SUV_02A_Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2803,7 +2803,7 @@ GameObject:
   - component: {fileID: 188051268302551674}
   - component: {fileID: 2755220924009357914}
   - component: {fileID: 5156085346417935660}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_SUV_02A_Steering_Wheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2886,7 +2886,7 @@ GameObject:
   - component: {fileID: 2765238758267132559}
   - component: {fileID: 101427830172402555}
   - component: {fileID: 6758374846498080969}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_SUV_02B_Taillights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2967,7 +2967,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8581878956085216605}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wheels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3004,7 +3004,7 @@ GameObject:
   - component: {fileID: 2896309506087496318}
   - component: {fileID: 8812288773040602898}
   - component: {fileID: 3547058741045382690}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_SUV_02C_Door_F.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3088,7 +3088,7 @@ GameObject:
   - component: {fileID: 755162732458940877}
   - component: {fileID: 8685736667618602109}
   - component: {fileID: 3521365943314487820}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_SUV_02C_Taillights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3171,7 +3171,7 @@ GameObject:
   - component: {fileID: 4516956025754566848}
   - component: {fileID: 3482483059642016551}
   - component: {fileID: 1094931193608115320}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_SUV_02C_Door_R.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3255,7 +3255,7 @@ GameObject:
   - component: {fileID: 8593309062243271812}
   - component: {fileID: 4700417558687893820}
   - component: {fileID: 6497292449126480171}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_SUV_02C_Door_F.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3339,7 +3339,7 @@ GameObject:
   - component: {fileID: 515433528144119456}
   - component: {fileID: 5470479457636527956}
   - component: {fileID: 677297080956094417}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_SUV_02C_Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3423,7 +3423,7 @@ GameObject:
   - component: {fileID: 430494793610888846}
   - component: {fileID: 3869808176058208227}
   - component: {fileID: 4361782109193611742}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_SUV_02C_Door_R.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3509,7 +3509,7 @@ GameObject:
   - component: {fileID: 7710796094932841034}
   - component: {fileID: 1249760325330160391}
   - component: {fileID: 888509072908508969}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_SUV_02B_Wheel_F.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3626,7 +3626,7 @@ GameObject:
   - component: {fileID: 5577672229712034828}
   - component: {fileID: 5929385712430810892}
   - component: {fileID: 1646595122084189377}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_SUV_02B_Door_R.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3712,7 +3712,7 @@ GameObject:
   - component: {fileID: 2360541209745968321}
   - component: {fileID: 8953692800633230699}
   - component: {fileID: 7771676387021562241}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_SUV_02A_Wheel_F.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3827,7 +3827,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5381648845848037158}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_SUV_02A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3872,7 +3872,7 @@ GameObject:
   - component: {fileID: 8036045635843174462}
   - component: {fileID: 295161708019309162}
   - component: {fileID: 3795085958537236345}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_SUV_02C_Wheel_R.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3989,7 +3989,7 @@ GameObject:
   - component: {fileID: 1245801580147845654}
   - component: {fileID: 7018828991924338527}
   - component: {fileID: 4324832689597017190}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_SUV_02A_Door_R.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,9 +19,18 @@ public class DriveState : PlayerState
         player.transform.localPosition = Vector3.zero; // snap exactly to seat
 
         stateTimer = 10f;
+
+        UIManager.instance.StartDriveStateCounter(stateTimer);
        
         controller.height = 0.1f;
         controller.radius = 0.1f;
+
+        player.virtualCamera.m_Lens.FieldOfView = 45;
+        var body = player.virtualCamera.GetCinemachineComponent<CinemachineTransposer>();
+        if (body != null)
+        {
+            body.m_FollowOffset = new Vector3(0f, 3f, -10f);
+        }
     }
 
     public override void Exit()
@@ -37,8 +47,15 @@ public class DriveState : PlayerState
         player.transform.position = new Vector3(player.lanePositions[player.currentLane], player.transform.position.y, player.transform.position.z);
 
         player.StartCoroutine(player.ActivateShield());
-    
-        
+
+        player.virtualCamera.m_Lens.FieldOfView = 30;
+        var body = player.virtualCamera.GetCinemachineComponent<CinemachineTransposer>();
+        if (body != null)
+        {
+            body.m_FollowOffset = new Vector3(0f, 2f, -10f);
+        }
+
+
     }
 
     public override void Update()

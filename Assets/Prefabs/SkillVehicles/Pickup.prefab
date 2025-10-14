@@ -745,11 +745,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 20
   playerPosition: {fileID: 9178902284919232434}
+  isUnlocked: 0
   currentLane: 1
   vehicleType: 0
   bomb: {fileID: 0}
   bombPos: {fileID: 0}
   canShoot: 1
+  cars:
+    colors: []
+  carIndex: 0
+  colorIndex: 0
 --- !u!1 &4639970755674817204
 GameObject:
   m_ObjectHideFlags: 0

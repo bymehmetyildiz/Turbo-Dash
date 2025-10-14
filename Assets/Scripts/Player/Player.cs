@@ -206,33 +206,46 @@ public class Player : MonoBehaviour
         {
             if (isShielded)
                 return;
-           
-            if (obstacle.obstacleType == ObstacleType.Explosive)
-            {
-                if (isShielded)
-                    return; // ignore collision when shielded
 
-                stateMachine.ChangeState(fastHitState);
-                StartCoroutine(DeathBounce());
-                isStarted = false;
-                jetPack.SetActive(false);
-                obstacle.anim.SetBool("Attack", true);
-                obstacle.Explode();
-            }
-            else if (stateMachine.currentstate == jetState)
+            if (obstacle != null)
             {
-                stateMachine.ChangeState(fastHitState);
-                StartCoroutine(DeathBounce());
-                isStarted = false;
-                jetPack.SetActive(false);
-                obstacle.PushRigidBodies(hit.point, 20f, 10f);
+                Vector3 directionToObstacle = hit.point - transform.position;
+                float forwardDot = Vector3.Dot(transform.forward, directionToObstacle.normalized);
+                float distance = directionToObstacle.magnitude;
+
+                // Only count as hit if mostly in front of player and very close
+                if (forwardDot > 0.5f && distance < 1f)
+                {
+                    if (obstacle.obstacleType == ObstacleType.Explosive)
+                    {
+                        if (isShielded)
+                            return; // ignore collision when shielded
+
+                        stateMachine.ChangeState(fastHitState);
+                        StartCoroutine(DeathBounce());
+                        isStarted = false;
+                        jetPack.SetActive(false);
+                        obstacle.anim.SetBool("Attack", true);
+                        obstacle.Explode();
+                    }
+                    else if (stateMachine.currentstate == jetState)
+                    {
+                        stateMachine.ChangeState(fastHitState);
+                        StartCoroutine(DeathBounce());
+                        isStarted = false;
+                        jetPack.SetActive(false);
+                        obstacle.PushRigidBodies(hit.point, 20f, 10f);
+                    }
+                    else
+                    {
+                        stateMachine.ChangeState(hitState);
+                        isStarted = false;
+                        obstacle.ActivateRigidbodies();
+                    }
+                }
             }
-            else
-            {
-                stateMachine.ChangeState(hitState);
-                isStarted = false;
-                obstacle.ActivateRigidbodies();
-            }
+
+            
         }
 
         Projectile projectile = hit.gameObject.GetComponent<Projectile>();
@@ -252,7 +265,8 @@ public class Player : MonoBehaviour
 
     private void CheckCoinOverlap()
     {
-        Collider[] coins = Physics.OverlapSphere(transform.position, 1f, LayerMask.GetMask("Coin"));
+        Collider[] coins = Physics.OverlapSphere(transform.position + Vector3.up * 0.5f, 0.3f, LayerMask.GetMask("Coin"));
+
         foreach (Collider coin in coins)
         {
             Coin c = coin.GetComponent<Coin>();
@@ -270,7 +284,7 @@ public class Player : MonoBehaviour
     public void InstantiateCar()
     {
         activeVehicle = Instantiate(vehiclePrefab[vehicleIndex],
-        new Vector3(lanePositions[currentLane], 0, transform.position.z), Quaternion.identity);
+        new Vector3(lanePositions[currentLane], 0.065f, transform.position.z), Quaternion.identity);
         activeVehicle.GetComponent<VehicleController>().SetupCar(carIndex, colorIndex);
     }
 

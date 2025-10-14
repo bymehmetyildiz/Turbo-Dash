@@ -13,6 +13,7 @@ public class HitState : PlayerState
         base.Enter();
         UIManager.instance.UpdateScoreBoard(player.distanceTraveled);
         UIManager.instance.GameOverPanel();
+        player.isStarted = false;
     }
 
     public override void Exit()

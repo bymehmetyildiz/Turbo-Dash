@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7895784188075119647}
   - component: {fileID: 8337627532097893363}
   - component: {fileID: 3349676961319384398}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_Lawnmower_01A_Steering_Wheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,9 +95,9 @@ GameObject:
   - component: {fileID: 2499428821087284684}
   - component: {fileID: 4609634037040456128}
   - component: {fileID: 441904886210712226}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Lawnmower
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -181,7 +181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0045c26ab9370d44f9de22e94ce8e2ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 20
   playerPosition: {fileID: 8928037675923342186}
   isUnlocked: 0
   currentLane: 1
@@ -202,7 +202,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1258141339966750084}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Wheels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -241,7 +241,7 @@ GameObject:
   - component: {fileID: 6216671818522800941}
   - component: {fileID: 2659964051693652487}
   - component: {fileID: 2761509960776529809}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_Lawnmower_01A_Wheel_F.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -360,7 +360,7 @@ GameObject:
   - component: {fileID: 8907265887484607592}
   - component: {fileID: 151016331700926343}
   - component: {fileID: 3092068122358683802}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_Lawnmower_01A_Wheel_R.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -479,7 +479,7 @@ GameObject:
   - component: {fileID: 8476055651121423198}
   - component: {fileID: 5412993368104136263}
   - component: {fileID: 1102100978422506404}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_Lawnmower_01A_Wheel_R.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -598,7 +598,7 @@ GameObject:
   - component: {fileID: 5449745883880133127}
   - component: {fileID: 6169892368004610495}
   - component: {fileID: 1276526387234458471}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_Lawnmower_01A_Wheel_F.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -713,7 +713,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8928037675923342186}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PlayerPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -729,7 +729,7 @@ Transform:
   m_GameObject: {fileID: 7869592398546834000}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.426, z: -0.744}
+  m_LocalPosition: {x: -0.074, y: 1.586, z: -0.518}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -746,7 +746,7 @@ GameObject:
   - component: {fileID: 4306805676047741104}
   - component: {fileID: 29270684031401387}
   - component: {fileID: 2997260497109073593}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TSP_Lawnmower_01A_Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
