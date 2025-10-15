@@ -379,6 +379,22 @@ public class UIManager : MonoBehaviour
         driveCounterCoroutine = null;
     }
 
+    // States
+    public void SwitchToPlaneState()
+    {
+        if (!player.isChangingLane && player.isStarted && player.stateMachine.currentstate == player.moveState)
+        {
+            player.stateMachine.ChangeState(player.planeState);
+        }
+    }
+    public void SwitchToJetState()
+    {
+        if (!player.isChangingLane && player.isStarted && player.stateMachine.currentstate == player.moveState)
+        {
+            player.stateMachine.ChangeState(player.jetState);
+        }
+    }
+
 
     [ContextMenu("Delete All Scores")]
     public void DeleteAllSaves()

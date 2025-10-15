@@ -6527,7 +6527,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6119649207731435828
 Transform:
   m_ObjectHideFlags: 0
@@ -9919,19 +9919,38 @@ MonoBehaviour:
   - 1.2
   currentLane: 1
   jumpHeight: -3
+  tankReloadDur: 3
   jetPack: {fileID: 2734216405090288251}
   plane: {fileID: 5467697751569452511}
+  planeReloadDur: 3
   vehiclePrefab:
+  - {fileID: 8058564246008581332, guid: e5f9247aa2b521044b068cea1a036ffd, type: 3}
+  - {fileID: 2858048430079573522, guid: 8828a21a4c384614ab7773bb2b4e1ecc, type: 3}
+  - {fileID: 741417307800751155, guid: f2fdb5ac56d7271458fcfc28dab06204, type: 3}
+  - {fileID: 3170296634657658256, guid: c4bd2ae991e225947897458aa6bb1c32, type: 3}
+  - {fileID: 8454632046220766069, guid: 9cf01839d5b649343a410f5ff349dea6, type: 3}
+  - {fileID: 4424638016580486371, guid: ece6691f68d5b474abb25cceced8c24f, type: 3}
   - {fileID: 9139794482837106823, guid: d6c28f1afb813b040a3a8bb382a09e10, type: 3}
-  - {fileID: 7078512193388702134, guid: b1a656a1027a83044aaa5c9b2615c48e, type: 3}
+  - {fileID: 418709165712628864, guid: cdfec83b4b9b7924d8720f132b46bcc3, type: 3}
+  - {fileID: 2511322659368089099, guid: ec84a0ebf59f7a241840b46f306206be, type: 3}
   activeVehicle: {fileID: 0}
-  vehicleIndex: 0
+  vehicleIndex: 8
   carIndex: 0
   colorIndex: 0
-  keys: 0
+  carDriveDur: 10
+  jetDriveDur: 10
+  tankDriveDur: 10
+  planeFlyDur: 10
   shiledParticle: {fileID: 5805404756945119342}
   isShielded: 0
-  coinAmount: 0
+  currentCoinAmount: 0
+  totalCoinAmount: 10000
+  collectParticle: {fileID: 5436931453338069056, guid: 4989f019e9e750c4fb1e828515a00be9,
+    type: 3}
+  distanceTraveled: 0
+  highScore: 0
+  virtualCamera: {fileID: 0}
+  danceIndex: 2
 --- !u!1 &7311360032936379147
 GameObject:
   m_ObjectHideFlags: 0

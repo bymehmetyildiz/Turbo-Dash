@@ -268,7 +268,7 @@ public class Player : MonoBehaviour
 
     private void CheckCoinOverlap()
     {
-        Collider[] coins = Physics.OverlapSphere(transform.position + Vector3.up * 0.5f, 0.3f, LayerMask.GetMask("Coin"));
+        Collider[] coins = Physics.OverlapSphere(transform.position, 0.5f, LayerMask.GetMask("Coin"));
 
         foreach (Collider coin in coins)
         {

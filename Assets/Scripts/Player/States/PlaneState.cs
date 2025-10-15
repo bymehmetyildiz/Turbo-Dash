@@ -62,11 +62,13 @@ public class PlaneState : PlayerState
         }
 
         // Lane change
-        if (Input.GetKeyDown(KeyCode.D) && player.currentLane < player.lanePositions.Length - 1 && !player.isChangingLane)
+        if ((Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) 
+            && player.currentLane < player.lanePositions.Length - 1 && !player.isChangingLane)
         {
             player.StartCoroutine(player.ChangeLane(player.currentLane + 1, 0, -15, 0.3f));
         }
-        else if (Input.GetKeyDown(KeyCode.A) && player.currentLane > 0 && !player.isChangingLane)
+        else if ((Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) 
+            && player.currentLane > 0 && !player.isChangingLane)
         {
             player.StartCoroutine(player.ChangeLane(player.currentLane - 1, 0, 15, 0.3f));
         }

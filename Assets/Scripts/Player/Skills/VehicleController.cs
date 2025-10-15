@@ -66,9 +66,9 @@ public class VehicleController : MonoBehaviour
         transform.Translate(Vector3.forward * player.moveSpeed * speed * Time.deltaTime);
         CheckCoinOverlap();
 
-        if (Input.GetKeyDown(KeyCode.D) && currentLane < lanePositions.Length - 1 && !isChangingLane)        
+        if ((Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) && currentLane < lanePositions.Length - 1 && !isChangingLane)        
             StartCoroutine(ChangeLane(currentLane + 1, 15));        
-        else if (Input.GetKeyDown(KeyCode.A) && currentLane > 0 && !isChangingLane)        
+        else if ((Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) && currentLane > 0 && !isChangingLane)        
             StartCoroutine(ChangeLane(currentLane - 1, -15));
 
         if (vehicleType == VehicleType.Tank && Input.GetKeyDown(KeyCode.Mouse0) && canShoot)
