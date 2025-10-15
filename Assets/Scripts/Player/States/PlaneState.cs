@@ -13,9 +13,10 @@ public class PlaneState : PlayerState
     public override void Enter()
     {
         base.Enter();
-        stateTimer = 10f;
+        stateTimer = player.planeFlyDur;
         player.plane.SetActive(true);
         player.lanePositions = new float[] { -3.5f, 0f, 3.5f };
+        UIManager.instance.StartDriveStateCounter(stateTimer);
     }
 
     public override void Exit()
@@ -24,6 +25,7 @@ public class PlaneState : PlayerState
         player.StartCoroutine(player.ActivateShield());
         player.plane.SetActive(false);
         player.lanePositions = new float[] { -1.2f, 0f, 1.2f };
+        UIManager.instance.StopDriveStateCounter();
     }
 
     public override void Update()

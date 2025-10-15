@@ -55,6 +55,7 @@ public class UIManager : MonoBehaviour
     public RectTransform target;
     public GameObject coinParent;
     [SerializeField] private Image timerImg;
+    private Coroutine driveCounterCoroutine;
 
     [Header("BestScore Menu")]
     [SerializeField] public RectTransform bestScoreMenu;
@@ -110,15 +111,20 @@ public class UIManager : MonoBehaviour
 
     private IEnumerator EndGameCoinCounter()
     {
-        yield return new WaitForSeconds(3f);   
-        
+        yield return new WaitForSeconds(3f);
+
         endGamePanel.SetActive(true);
         UpdateTotalCoin();
         endGameScoreText.text = distanceText.text;
-        yield return new WaitForSeconds(2f);         
+        yield return new WaitForSeconds(2f);
 
         int target = player.totalCoinAmount + player.currentCoinAmount;
-        int step = Mathf.Max(1, player.currentCoinAmount / 100);
+        int totalToAdd = player.currentCoinAmount;
+        int step = Mathf.Max(1, totalToAdd / 100); // each step adds at least 1 coin
+
+        // How many animated coins we actually show
+        int maxAnimatedCoins = 30;
+        int animatedCoins = 0;
 
         while (player.totalCoinAmount < target)
         {
@@ -128,37 +134,43 @@ public class UIManager : MonoBehaviour
             if (player.totalCoinAmount > target)
                 player.totalCoinAmount = target;
 
-            if(player.currentCoinAmount < 0)
+            if (player.currentCoinAmount < 0)
                 player.currentCoinAmount = 0;
+          
+            if (animatedCoins < maxAnimatedCoins)
+            {
+                RectTransform coin = Instantiate(coinImgPrefab, endGamePanel.transform).GetComponent<RectTransform>();
+                coin.localPosition = coinSpawnPoint.localPosition;
 
-            RectTransform coin = Instantiate(coinImgPrefab, endGamePanel.transform).GetComponent<RectTransform>();
-            coin.localPosition = coinSpawnPoint.localPosition;
+                coin.DOMove(targetPoint.position, 0.5f)
+                    .SetEase(Ease.InQuad)
+                    .OnComplete(() => Destroy(coin.gameObject));
 
-            coin.DOMove(targetPoint.position, 0.5f)
-                .SetEase(Ease.InQuad)
-                .OnComplete(() =>
-                {
-                    Destroy(coin.gameObject);
-                });
+                animatedCoins++;
+                yield return new WaitForSeconds(0.05f);
+            }
+            else
+            {         
+                break;
+            }
 
             UpdateTotalCoin();
-            yield return new WaitForSeconds(0.05f); 
         }
+       
+        player.totalCoinAmount = target;
+        player.currentCoinAmount = 0;
+        UpdateTotalCoin();
 
-        player.currentCoinAmount = 0; // reset run coins after animation
-        currentCoinText.text = "0"; // reset UI
+        currentCoinText.text = "0";
 
-        if (player.currentCoinAmount > 0)
-        {
-            yield return new WaitForSeconds(1f);
-            confetti.Play();
-        }
+        yield return new WaitForSeconds(1f);
+        confetti.Play();
         yield return new WaitForSeconds(1f);
         adButton.SetActive(true);
         yield return new WaitForSeconds(2f);
         restartButton.SetActive(true);
-
     }
+
 
 
     private void OnValidate()
@@ -324,11 +336,29 @@ public class UIManager : MonoBehaviour
     }
 
     // Skill Timer
-    
+
     public void StartDriveStateCounter(float _timer)
     {
-        StartCoroutine(DriveStateCounter(_timer));
+        // If one is already running, stop it first
+        if (driveCounterCoroutine != null)
+            StopCoroutine(driveCounterCoroutine);
+
+        driveCounterCoroutine = StartCoroutine(DriveStateCounter(_timer));
     }
+
+    public void StopDriveStateCounter()
+    {
+        if (driveCounterCoroutine != null)
+        {
+            StopCoroutine(driveCounterCoroutine);
+            driveCounterCoroutine = null;
+        }
+
+        timerImg.gameObject.SetActive(false);
+        timerImg.fillAmount = 1f;
+    }
+
+
 
     private IEnumerator DriveStateCounter(float _timer)
     {
@@ -339,13 +369,14 @@ public class UIManager : MonoBehaviour
 
         while (_timer > 0)
         {
-            _timer -= Time.deltaTime;  // decrease timer each frame
-            timerImg.fillAmount = _timer / totalTime; // update fill based on remaining time
-            yield return null; // wait until next frame
+            _timer -= Time.deltaTime;
+            timerImg.fillAmount = _timer / totalTime;
+            yield return null;
         }
 
         timerImg.fillAmount = 0f;
         timerImg.gameObject.SetActive(false);
+        driveCounterCoroutine = null;
     }
 
 

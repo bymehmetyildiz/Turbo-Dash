@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlaneController : MonoBehaviour
 {
+    Player player = Player.instance;
+
     [SerializeField] private GameObject prop;
     [SerializeField] private float propSpeed;
 
@@ -40,7 +42,7 @@ public class PlaneController : MonoBehaviour
         canDropBomb = false;
         Instantiate(bombPrefab, bomb.transform.position, Quaternion.Euler(-90,90,90));
         bomb.SetActive(false);
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(player.planeReloadDur);
         bomb.SetActive(true);
         canDropBomb = true;
     }

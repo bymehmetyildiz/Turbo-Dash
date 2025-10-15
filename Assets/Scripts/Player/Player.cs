@@ -45,9 +45,13 @@ public class Player : MonoBehaviour
     public int currentLane = 1;
     public float jumpHeight = -10f;
 
+    [Header("Tank")]
+    public float tankReloadDur = 3f;
+
     [Header("Fly")]
     public GameObject jetPack;
     public GameObject plane;
+    public float planeReloadDur = 3f;
 
     [Header("Drive")]
     public GameObject[] vehiclePrefab;
@@ -55,6 +59,10 @@ public class Player : MonoBehaviour
     public int vehicleIndex;
     public int carIndex;
     public int colorIndex;
+    public float carDriveDur = 10f;
+    public float jetDriveDur = 10f;
+    public float tankDriveDur = 10f;
+    public float planeFlyDur = 10f;
 
     [Header("Shield")]
     public GameObject shiledParticle;
@@ -116,11 +124,6 @@ public class Player : MonoBehaviour
             anim.speed += Time.deltaTime * 0.001f;
         }
 
-        if(Input.GetKeyDown(KeyCode.V))
-        {
-            StartCoroutine(ActivateShield());
-        }
-
         CheckCoinOverlap();
     }
 
@@ -141,7 +144,7 @@ public class Player : MonoBehaviour
                 elapsed += Time.deltaTime;
                 yield return null;
             }
-            transform.rotation = endRotation;        
+            transform.rotation = endRotation;  
     }
 
     // Change Lane with a hop

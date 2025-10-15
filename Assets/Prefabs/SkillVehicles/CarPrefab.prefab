@@ -127,8 +127,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0045c26ab9370d44f9de22e94ce8e2ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
+  speed: 1.2
   playerPosition: {fileID: 6414462386430332910}
+  isUnlocked: 0
   currentLane: 1
   vehicleType: 2
   bomb: {fileID: 0}

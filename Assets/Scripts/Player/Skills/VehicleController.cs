@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class VehicleController : MonoBehaviour
 {
-    public float speed = 10f;
+    public float speed = 1f;
     public Transform playerPosition;
     private Player player;
     public bool isUnlocked = false;
@@ -63,7 +63,7 @@ public class VehicleController : MonoBehaviour
 
     void Update()
     {
-        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        transform.Translate(Vector3.forward * player.moveSpeed * speed * Time.deltaTime);
         CheckCoinOverlap();
 
         if (Input.GetKeyDown(KeyCode.D) && currentLane < lanePositions.Length - 1 && !isChangingLane)        
@@ -79,7 +79,7 @@ public class VehicleController : MonoBehaviour
     {
         canShoot = false;
         Instantiate(bomb, bombPos.position, Quaternion.Euler(-90, 90, 90));        
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(player.tankReloadDur);
         canShoot = true;
     }
 

@@ -15,9 +15,10 @@ public class JetState : PlayerState
     public override void Enter()
     {
         base.Enter();
-        stateTimer = 10f;
+        stateTimer = player.jetDriveDur;
         player.jetPack.SetActive(true);
         player.lanePositions = new float[] { -3.5f, 0f, 3.5f };
+        UIManager.instance.StartDriveStateCounter(stateTimer);
     }
 
     public override void Exit()
@@ -26,6 +27,7 @@ public class JetState : PlayerState
         player.StartCoroutine(player.ActivateShield());
         player.jetPack.SetActive(false);
         player.lanePositions = new float[] { -1.2f, 0f, 1.2f };
+        UIManager.instance.StopDriveStateCounter();
     }
 
     public override void Update()

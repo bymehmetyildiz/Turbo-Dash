@@ -18,7 +18,7 @@ public class DriveState : PlayerState
         player.transform.SetParent(player.activeVehicle.GetComponent<VehicleController>().playerPosition);
         player.transform.localPosition = Vector3.zero; // snap exactly to seat
 
-        stateTimer = 10f;
+        stateTimer = player.carDriveDur;
 
         UIManager.instance.StartDriveStateCounter(stateTimer);
        
@@ -55,7 +55,7 @@ public class DriveState : PlayerState
             body.m_FollowOffset = new Vector3(0f, 2f, -10f);
         }
 
-
+        UIManager.instance.StopDriveStateCounter();
     }
 
     public override void Update()
