@@ -43,7 +43,10 @@ public class GroundedState : PlayerState
         {
             stateMachine.ChangeState(player.planeState);
         }
-       
+        else if (Input.GetKeyDown(KeyCode.T) && !player.isChangingLane && player.isStarted)
+        {
+            stateMachine.ChangeState(player.tankState);
+        }
 
     }
 }

@@ -27,6 +27,7 @@ public class Player : MonoBehaviour
     public JetState jetState;
     public DriveState driveState;
     public PlaneState planeState;
+    public TankState tankState;
 
     public GestureState gestureState;
 
@@ -46,7 +47,9 @@ public class Player : MonoBehaviour
     public float jumpHeight = -10f;
 
     [Header("Tank")]
-    public float tankReloadDur = 3f;
+    public float tankReloadDur = 3f; 
+    public GameObject tankPrefab;
+    public GameObject tank;
 
     [Header("Fly")]
     public GameObject jetPack;
@@ -101,6 +104,7 @@ public class Player : MonoBehaviour
         jetState = new JetState(stateMachine, "Fly", this, controller);
         driveState = new DriveState(stateMachine, "Drive", this, controller);
         planeState = new PlaneState(stateMachine, "Drive", this, controller);
+        tankState = new TankState(stateMachine, "Drive", this, controller);
 
         gestureState = new GestureState(stateMachine, "Dance", this, controller);
     }
@@ -291,7 +295,15 @@ public class Player : MonoBehaviour
         activeVehicle.GetComponent<VehicleController>().SetupCar(carIndex, colorIndex);
     }
 
+    //InstantiateTank
+    public void InstantiateTank()
+    {
+        tank = Instantiate(tankPrefab,
+        new Vector3(lanePositions[currentLane], 0.065f, transform.position.z), Quaternion.identity);
+    }
+
     public void DestroyCar() => Destroy(activeVehicle);
+    public void DestroyTank() => Destroy(tank);
 
     //Shield Mode
     public IEnumerator ActivateShield()

@@ -43,6 +43,8 @@ public class UpdateManager : MonoBehaviour
 
     private void Start()
     {
+        player = Player.instance;
+
         carExpText.text = player.carDriveDur + " sec -> " + (player.carDriveDur + 2f);
         carPriceText.text = currentCarPrice.ToString();
 
