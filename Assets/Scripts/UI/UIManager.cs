@@ -4,6 +4,7 @@ using DG.Tweening;
 using Cinemachine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public class UIManager : MonoBehaviour
@@ -18,6 +19,9 @@ public class UIManager : MonoBehaviour
     public RectTransform startMenu;
     public RectTransform gameMenu;
     public RectTransform garageMenu;
+    public RectTransform pauseMenu;
+    public RectTransform settingsMenu;
+    public CanvasGroup FadePanel;
 
     [Header("Upgrade Menu")]
     [SerializeField] private TMP_Text[] upgradeText;
@@ -81,6 +85,9 @@ public class UIManager : MonoBehaviour
     }
     void Start()
     {
+        FadePanel.alpha = 1f;
+        FadePanel.DOFade(0f, 1f);
+
         player = Player.instance;
         garageMenu.gameObject.SetActive(false);
         carDetails.anchoredPosition = new Vector2(carFirstPos, carDetails.anchoredPosition.y);
@@ -94,6 +101,9 @@ public class UIManager : MonoBehaviour
         adButton.SetActive(false);
         restartButton.SetActive(false);
         timerImg.gameObject.SetActive(false);
+        pauseMenu.gameObject.transform.localScale = Vector3.zero;
+        settingsMenu.transform.localPosition = new Vector3(0, 1000, 0);
+        settingsMenu.gameObject.SetActive(false);
     }
 
     // Update CoinText
@@ -271,15 +281,77 @@ public class UIManager : MonoBehaviour
     {
         if(bestScoreMenu.anchoredPosition.x != scoreLastPos)
         {
-            bestScoreMenu.DOAnchorPosX(scoreLastPos, 0.5f).SetEase(Ease.InBack);
+            bestScoreMenu
+                .DOAnchorPosX(scoreLastPos, 0.5f)
+                .SetEase(Ease.InBack);
+
             startMenu.gameObject.SetActive(true);            
         }
         else
         {
-            bestScoreMenu.DOAnchorPosX(scoreFirstPos, 0.5f).SetEase(Ease.OutBack);
+            bestScoreMenu
+                .DOAnchorPosX(scoreFirstPos, 0.5f)
+                .SetEase(Ease.OutBack);
+
             startMenu.gameObject.SetActive(false);
         }
     }
+
+    public void OpenPauseMenu()
+    {
+        if (pauseMenu.localScale == Vector3.zero)
+        {
+            pauseMenu.DOScale(Vector3.one, 0.5f)
+                .SetEase(Ease.OutBack)
+                .SetUpdate(true);
+
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            pauseMenu.DOScale(Vector3.zero, 0.5f)
+                .SetEase(Ease.InBack)
+                .SetUpdate(true)
+                .OnComplete(() =>
+                {
+                    Time.timeScale = 1f;
+                });
+        }
+    }
+
+    public void RestartGame()
+    {
+        FadePanel.DOFade(1f, 1f)
+            .SetUpdate(true)
+            .OnComplete(() =>
+            {
+                Time.timeScale = 1f;
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            });
+    }
+
+    public void OpenSettings()
+    {
+        if (settingsMenu.anchoredPosition.y != 0)
+        {
+            settingsMenu.DOAnchorPosY(0, 0.5f)
+                .SetUpdate(true)
+                .SetEase(Ease.OutBack);
+            settingsMenu.gameObject.SetActive(true);
+        }
+        else
+        {
+            settingsMenu.DOAnchorPosY(1000, 0.5f)
+                .SetUpdate(true)
+                .SetEase(Ease.InBack)
+                .OnComplete(() =>
+                {
+                    settingsMenu.gameObject.SetActive(false);
+                });
+        }
+    }
+
+
 
     public void MoveCoinImg(Vector3 worldPos)
     {
@@ -336,7 +408,6 @@ public class UIManager : MonoBehaviour
     }
 
     // Skill Timer
-
     public void StartDriveStateCounter(float _timer)
     {
         // If one is already running, stop it first
