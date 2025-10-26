@@ -32,7 +32,7 @@ public class PlaneController : MonoBehaviour
     {
         prop.transform.Rotate(propSpeed * Time.deltaTime, 0, 0);
 
-        if (Input.GetKeyDown(KeyCode.Mouse0) && canDropBomb)        
+        if ((Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Space)) && canDropBomb)        
             StartCoroutine(ReleaseBomb());
         
     }

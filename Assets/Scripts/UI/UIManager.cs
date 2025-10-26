@@ -76,6 +76,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] private RectTransform targetPoint;
     [SerializeField] private ParticleSystem confetti;
 
+    [Header("Controls Menu")]
+    public RectTransform controlsMenu;
+    public bool isControlsShown;
+
+
     private void Awake()
     {
         if (instance == null)
@@ -104,6 +109,10 @@ public class UIManager : MonoBehaviour
         pauseMenu.gameObject.transform.localScale = Vector3.zero;
         settingsMenu.transform.localPosition = new Vector3(0, 1000, 0);
         settingsMenu.gameObject.SetActive(false);
+        controlsMenu.anchoredPosition = new Vector2(0, -1100);
+
+        if (!isControlsShown)
+            OpenControls();
     }
 
     // Update CoinText
@@ -350,6 +359,25 @@ public class UIManager : MonoBehaviour
                 });
         }
     }
+
+    public void OpenControls()
+    {
+        if (controlsMenu.anchoredPosition.y != 0)
+        {
+            controlsMenu.DOAnchorPosY(0, 0.5f)
+                .SetUpdate(true)
+                .SetEase(Ease.OutBack);
+        }
+        else
+        {
+            controlsMenu.DOAnchorPosY(-1100, 0.5f)
+               .SetUpdate(true)
+               .SetEase(Ease.InBack);
+        }
+
+
+    }
+
 
 
 

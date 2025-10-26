@@ -71,7 +71,7 @@ public class VehicleController : MonoBehaviour
         else if ((Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) && currentLane > 0 && !isChangingLane)        
             StartCoroutine(ChangeLane(currentLane - 1, -15));
 
-        if (vehicleType == VehicleType.Tank && Input.GetKeyDown(KeyCode.Mouse0) && canShoot)
+        if (vehicleType == VehicleType.Tank && (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Space))   && canShoot)
             StartCoroutine(ReleaseBomb());
     }
 

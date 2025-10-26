@@ -30,7 +30,6 @@ public class GroundedState : PlayerState
         {
             player.verticalVelocity += player.gravity * Time.deltaTime;
         }
-
         if (Input.GetKeyDown(KeyCode.J) && !player.isChangingLane && player.isStarted)
         {
             stateMachine.ChangeState(player.jetState);
@@ -39,7 +38,7 @@ public class GroundedState : PlayerState
         {
             stateMachine.ChangeState(player.driveState);
         }
-        else if(Input.GetKeyDown(KeyCode.H) && !player.isChangingLane && player.isStarted)
+        else if (Input.GetKeyDown(KeyCode.H) && !player.isChangingLane && player.isStarted)
         {
             stateMachine.ChangeState(player.planeState);
         }
