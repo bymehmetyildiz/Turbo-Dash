@@ -251,8 +251,6 @@ public class Player : MonoBehaviour
                     }
                 }
             }
-
-            
         }
 
         Projectile projectile = hit.gameObject.GetComponent<Projectile>();
@@ -266,8 +264,6 @@ public class Player : MonoBehaviour
             isStarted = false;
             jetPack.SetActive(false);
         }
-
-
     }
 
     private void CheckCoinOverlap()
