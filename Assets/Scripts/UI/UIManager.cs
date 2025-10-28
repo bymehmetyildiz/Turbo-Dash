@@ -90,6 +90,8 @@ public class UIManager : MonoBehaviour
     }
     void Start()
     {
+        SaveManager.instance.LoadGame();
+
         FadePanel.alpha = 1f;
         FadePanel.DOFade(0f, 1f);
 
@@ -102,7 +104,6 @@ public class UIManager : MonoBehaviour
         gameMenu.gameObject.SetActive(false);
         endGamePanel.SetActive(false);
         totalCoinBG.SetActive(true);
-        UpdateTotalCoin();
         adButton.SetActive(false);
         restartButton.SetActive(false);
         timerImg.gameObject.SetActive(false);
@@ -111,8 +112,16 @@ public class UIManager : MonoBehaviour
         settingsMenu.gameObject.SetActive(false);
         controlsMenu.anchoredPosition = new Vector2(0, -1100);
 
+        isControlsShown = PlayerPrefs.GetInt("IsControlShown", 0) == 1;
+
         if (!isControlsShown)
-            OpenControls();
+        {
+            OpenControls();                // show controls only once
+            MarkControlsAsShown();         // mark them as shown so they won't open again automatically
+        }
+
+        UpdateTotalCoin();
+
     }
 
     // Update CoinText
@@ -334,6 +343,7 @@ public class UIManager : MonoBehaviour
             .SetUpdate(true)
             .OnComplete(() =>
             {
+                SaveManager.instance.SaveGame();
                 Time.timeScale = 1f;
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             });
@@ -374,8 +384,13 @@ public class UIManager : MonoBehaviour
                .SetUpdate(true)
                .SetEase(Ease.InBack);
         }
+    }
 
-
+    public void MarkControlsAsShown()
+    {
+        isControlsShown = true;
+        PlayerPrefs.SetInt("IsControlShown", 1);
+        PlayerPrefs.Save();
     }
 
 

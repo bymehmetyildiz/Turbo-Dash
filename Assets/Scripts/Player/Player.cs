@@ -40,7 +40,7 @@ public class Player : MonoBehaviour
     public Vector3 moveDirection;
 
     [Header("Move")]
-    public float moveSpeed = 5f;    
+    public float moveSpeed = 15f;    
     public bool isChangingLane = false;
     public float[] lanePositions = { -1.2f, 0f, 1.2f };
     public int currentLane = 1;
@@ -115,6 +115,8 @@ public class Player : MonoBehaviour
         jetPack.SetActive(false);
         shiledParticle.SetActive(false);
         plane.SetActive(false);
+
+        SaveManager.instance.LoadGame();
     }
 
     
@@ -207,64 +209,53 @@ public class Player : MonoBehaviour
     // Collider
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        Obstacles obstacle = hit.gameObject.GetComponent<Obstacles>();
+        // 0) Fast layer/tag bailouts
+        int obstacleMask = LayerMask.GetMask("Obstacle");
+        if (((1 << hit.collider.gameObject.layer) & obstacleMask) == 0)
+            return;
 
-        if (obstacle != null)
+        // 1) Ignore ground: for ground the surface normal points mostly up
+        //    (normal.y close to 1). Walls have small normal.y.
+        if (hit.normal.y > 0.5f)
+            return;
+
+        // 2) From here on we know it's a wall-like hit (i.e., obstacle)
+        if (isShielded) return;
+
+        // Optional: also ensure player was moving forward relative to facing
+        Vector3 horizontalMove = new Vector3(hit.moveDirection.x, 0f, hit.moveDirection.z);
+        if (Vector3.Dot(transform.forward, horizontalMove.normalized) < 0.25f)
+            return;
+
+        var obstacle = hit.collider.GetComponent<Obstacles>();
+        if (obstacle == null) return;
+
+        // 3) Handle by type / current state
+        if (obstacle.obstacleType == ObstacleType.Explosive)
         {
-            if (isShielded)
-                return;
-
-            if (obstacle != null)
-            {
-                Vector3 directionToObstacle = hit.point - transform.position;
-                float forwardDot = Vector3.Dot(transform.forward, directionToObstacle.normalized);
-                float distance = directionToObstacle.magnitude;
-
-                // Only count as hit if mostly in front of player and very close
-                if (forwardDot > 0.5f && distance < 1f)
-                {
-                    if (obstacle.obstacleType == ObstacleType.Explosive)
-                    {
-                        if (isShielded)
-                            return; // ignore collision when shielded
-
-                        stateMachine.ChangeState(fastHitState);
-                        StartCoroutine(DeathBounce());
-                        isStarted = false;
-                        jetPack.SetActive(false);
-                        obstacle.anim.SetBool("Attack", true);
-                        obstacle.Explode();
-                    }
-                    else if (stateMachine.currentstate == jetState)
-                    {
-                        stateMachine.ChangeState(fastHitState);
-                        StartCoroutine(DeathBounce());
-                        isStarted = false;
-                        jetPack.SetActive(false);
-                        obstacle.PushRigidBodies(hit.point, 20f, 10f);
-                    }
-                    else
-                    {
-                        stateMachine.ChangeState(hitState);
-                        isStarted = false;
-                        obstacle.ActivateRigidbodies();
-                    }
-                }
-            }
-        }
-
-        Projectile projectile = hit.gameObject.GetComponent<Projectile>();
-        if (projectile != null)
-        {
-            if (isShielded)
-                return;
-
             stateMachine.ChangeState(fastHitState);
             StartCoroutine(DeathBounce());
             isStarted = false;
             jetPack.SetActive(false);
+            obstacle.anim.SetBool("Attack", true);
+            obstacle.Explode();
+        }
+        else if (stateMachine.currentstate == jetState)
+        {
+            stateMachine.ChangeState(fastHitState);
+            StartCoroutine(DeathBounce());
+            isStarted = false;
+            jetPack.SetActive(false);
+            obstacle.PushRigidBodies(hit.point, 20f, 10f);
+        }
+        else
+        {
+            stateMachine.ChangeState(hitState);
+            isStarted = false;
+            obstacle.ActivateRigidbodies();
         }
     }
+
 
     private void CheckCoinOverlap()
     {
@@ -351,6 +342,9 @@ public class Player : MonoBehaviour
     {
         distanceTraveled++;
         UIManager.instance.distanceText.text = NumberFormatter.FormatNumber(distanceTraveled) + " m";
+
+        if (controller.isGrounded)
+            AudioManager.instance.PlayFootstep();
     }
     
 
