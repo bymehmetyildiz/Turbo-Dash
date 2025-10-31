@@ -254,6 +254,7 @@ public class Player : MonoBehaviour
             isStarted = false;
             obstacle.ActivateRigidbodies();
         }
+
     }
 
 
