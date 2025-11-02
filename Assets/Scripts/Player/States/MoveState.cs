@@ -35,19 +35,26 @@ public class MoveState : GroundedState
 
         if ((Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) && player.currentLane < player.lanePositions.Length - 1 && !player.isChangingLane)
         {
-            player.StartCoroutine(player.ChangeLane(player.currentLane + 1, 0.5f, 0, 0.1f));                    
+            player.StartCoroutine(player.ChangeLane(player.currentLane + 1, 0.5f, 0, 0.1f));
+            AudioManager.instance.PlaySound(1);
+            AudioManager.instance.PlaySound(6);
         }
         else if ((Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) && player.currentLane > 0 && !player.isChangingLane)
         {
-            player.StartCoroutine(player.ChangeLane(player.currentLane - 1, 0.5f, 0, 0.1f));                      
+            player.StartCoroutine(player.ChangeLane(player.currentLane - 1, 0.5f, 0, 0.1f));
+            AudioManager.instance.PlaySound(1);
+            AudioManager.instance.PlaySound(6);
         }
         else if((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow)) && controller.isGrounded && !player.isChangingLane)
         {
             stateMachine.ChangeState(player.jumpState);
+            AudioManager.instance.PlaySound(2);
+            AudioManager.instance.PlaySound(3);
         }
         else if ((Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow)) && controller.isGrounded && !player.isChangingLane)
         {
             stateMachine.ChangeState(player.slideState);
+            AudioManager.instance.PlaySound(5);
         }
 
       

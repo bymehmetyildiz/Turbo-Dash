@@ -254,7 +254,7 @@ public class Player : MonoBehaviour
             isStarted = false;
             obstacle.ActivateRigidbodies();
         }
-
+        AudioManager.instance.PlaySound(7);
     }
 
 
@@ -336,6 +336,9 @@ public class Player : MonoBehaviour
         }
 
         transform.position = endPosition;
+
+        yield return new WaitForSeconds(0.5f);
+        AudioManager.instance.PlaySound(8);
     }
 
     //Distance Counter

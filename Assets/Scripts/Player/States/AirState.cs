@@ -35,16 +35,24 @@ public class AirState : PlayerState
             player.transform.position.z), 0.1f);
         }
 
-        if (Input.GetKeyDown(KeyCode.D) && player.currentLane < player.lanePositions.Length - 1 && !player.isChangingLane)
+        if ((Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) && player.currentLane < player.lanePositions.Length - 1 && !player.isChangingLane)
         {
             player.StartCoroutine(player.ChangeLane(player.currentLane + 1, 0, 0, 0.1f));
+            AudioManager.instance.PlaySound(1);
+            AudioManager.instance.PlaySound(6);
         }
-        else if (Input.GetKeyDown(KeyCode.A) && player.currentLane > 0 && !player.isChangingLane)
+        else if ((Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) && player.currentLane > 0 && !player.isChangingLane)
         {
             player.StartCoroutine(player.ChangeLane(player.currentLane - 1, 0, 0, 0.1f));
+            AudioManager.instance.PlaySound(1);
+            AudioManager.instance.PlaySound(6);
         }
 
         if (controller.isGrounded)
+        {
             stateMachine.ChangeState(player.moveState);
+            AudioManager.instance.PlaySound(4);
+        }
+
     }
 }

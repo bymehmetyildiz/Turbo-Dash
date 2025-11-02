@@ -49,6 +49,7 @@ public class Projectile : MonoBehaviour
                 player.StartCoroutine(player.DeathBounce());
                 player.isStarted = false;
                 player.jetPack.SetActive(false);
+                AudioManager.instance.PlaySound(7);
             }
         }
 
