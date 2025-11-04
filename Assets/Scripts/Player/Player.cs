@@ -239,6 +239,7 @@ public class Player : MonoBehaviour
             jetPack.SetActive(false);
             obstacle.anim.SetBool("Attack", true);
             obstacle.Explode();
+            AudioManager.instance.PlaySound(9);
         }
         else if (stateMachine.currentstate == jetState)
         {

@@ -78,6 +78,7 @@ public class VehicleController : MonoBehaviour
     private IEnumerator ReleaseBomb()
     {
         canShoot = false;
+        AudioManager.instance.PlaySound(10);
         Instantiate(bomb, bombPos.position, Quaternion.Euler(-90, 90, 90));        
         yield return new WaitForSeconds(player.tankReloadDur);
         canShoot = true;

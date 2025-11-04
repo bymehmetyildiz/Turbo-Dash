@@ -40,11 +40,13 @@ public class PlaneController : MonoBehaviour
     private IEnumerator ReleaseBomb()
     {
         canDropBomb = false;
+        AudioManager.instance.PlaySound(10);
         Instantiate(bombPrefab, bomb.transform.position, Quaternion.Euler(-90,90,90));
         bomb.SetActive(false);
         yield return new WaitForSeconds(player.planeReloadDur);
         bomb.SetActive(true);
         canDropBomb = true;
+        
     }
 
     

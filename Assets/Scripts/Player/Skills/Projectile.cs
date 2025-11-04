@@ -52,7 +52,7 @@ public class Projectile : MonoBehaviour
                 AudioManager.instance.PlaySound(7);
             }
         }
-
+        AudioManager.instance.PlaySound(9);
         Destroy(gameObject, 0.1f);
     }
 }

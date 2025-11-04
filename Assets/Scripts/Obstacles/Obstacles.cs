@@ -17,6 +17,8 @@ public class Obstacles : MonoBehaviour
     [SerializeField] private Transform cannonPos;
     private bool isShooting;
 
+    [SerializeField] private AudioSource collapse;
+
     private void Start()
     {
         rbs = GetComponentsInChildren<Rigidbody>();
@@ -105,18 +107,18 @@ public class Obstacles : MonoBehaviour
 
         Instantiate(explosion, transform.position, Quaternion.identity);
         Destroy(gameObject);
+        AudioManager.instance.PlaySound(9);
     }
 
     private IEnumerator Shoot()
     {
         isShooting = true;
-
+        AudioManager.instance.PlaySound(10);
         while (IsPlayerDetected() && player.isStarted)
         {
             Instantiate(cannonBall, cannonPos.position, Quaternion.identity);
             yield return new WaitForSeconds(3f);
         }
-
         isShooting = false;
     }
 
