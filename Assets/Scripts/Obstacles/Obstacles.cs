@@ -48,6 +48,13 @@ public class Obstacles : MonoBehaviour
         foreach (Rigidbody rb in rbs)
         {
             rb.isKinematic = false;
+            rb.AddForce(Vector3.forward * 2, ForceMode.Impulse);
+        }
+
+
+        if (!collapse.isPlaying)
+        {
+            collapse.Play();
         }
     }
 
@@ -69,6 +76,12 @@ public class Obstacles : MonoBehaviour
             // Push away from the explosion point
             rb.AddExplosionForce(explosionForce, explosionPoint, explosionRadius, 1f, ForceMode.Impulse);
         }
+
+        if (!collapse.isPlaying)
+        {
+            collapse.Play();
+        }
+
     }
 
 
@@ -87,9 +100,9 @@ public class Obstacles : MonoBehaviour
             }
         }
 
-        if (obstacleType == ObstacleType.Armed && IsPlayerDetected() && !isShooting)        
+        if (obstacleType == ObstacleType.Armed && player.isStarted && IsPlayerDetected() && !isShooting)
             StartCoroutine(Shoot());
-        
+
     }
 
     private bool IsPlayerPast()

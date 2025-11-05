@@ -46,6 +46,7 @@ public class Player : MonoBehaviour
     public int currentLane = 1;
     public float jumpHeight = -10f;
 
+
     [Header("Tank")]
     public float tankReloadDur = 3f; 
     public GameObject tankPrefab;
@@ -235,11 +236,11 @@ public class Player : MonoBehaviour
         {
             stateMachine.ChangeState(fastHitState);
             StartCoroutine(DeathBounce());
+            AudioManager.instance.PlaySound(9);
             isStarted = false;
             jetPack.SetActive(false);
             obstacle.anim.SetBool("Attack", true);
             obstacle.Explode();
-            AudioManager.instance.PlaySound(9);
         }
         else if (stateMachine.currentstate == jetState)
         {
