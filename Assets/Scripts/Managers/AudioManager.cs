@@ -25,6 +25,8 @@ public class AudioManager : MonoBehaviour
         audioSource[index].Play();
     }
 
+    public void StopSound(int index) => audioSource[index].Stop();
+
     public void PlayFootstep()
     {
         if (audioSource[0].isPlaying == false)

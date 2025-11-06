@@ -17,8 +17,6 @@ public class Obstacles : MonoBehaviour
     [SerializeField] private Transform cannonPos;
     private bool isShooting;
 
-    [SerializeField] private AudioSource collapse;
-
     private void Start()
     {
         rbs = GetComponentsInChildren<Rigidbody>();
@@ -50,12 +48,6 @@ public class Obstacles : MonoBehaviour
             rb.isKinematic = false;
             rb.AddForce(Vector3.forward * 2, ForceMode.Impulse);
         }
-
-
-        if (!collapse.isPlaying)
-        {
-            collapse.Play();
-        }
     }
 
     public void PushRigidBodies(Vector3 explosionPoint, float explosionForce, float explosionRadius)
@@ -76,12 +68,6 @@ public class Obstacles : MonoBehaviour
             // Push away from the explosion point
             rb.AddExplosionForce(explosionForce, explosionPoint, explosionRadius, 1f, ForceMode.Impulse);
         }
-
-        if (!collapse.isPlaying)
-        {
-            collapse.Play();
-        }
-
     }
 
 

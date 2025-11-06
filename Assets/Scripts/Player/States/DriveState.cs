@@ -1,10 +1,13 @@
 using Cinemachine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class DriveState : PlayerState
 {
+    private int engineSoundIndex;
+
     public DriveState(StateMachine stateMachine, string animBoolName, Player player, CharacterController controller) : base(stateMachine, animBoolName, player, controller)
     {
     }
@@ -31,6 +34,16 @@ public class DriveState : PlayerState
         {
             body.m_FollowOffset = new Vector3(0f, 3f, -10f);
         }
+
+        if (player.vehicleIndex < 7)
+            engineSoundIndex = 12;
+        else if (player.vehicleIndex == 7)
+            engineSoundIndex = 13;
+        else
+            engineSoundIndex = 14;
+
+        AudioManager.instance.PlaySound(engineSoundIndex);
+
     }
 
     public override void Exit()
@@ -56,6 +69,8 @@ public class DriveState : PlayerState
         }
 
         UIManager.instance.StopDriveStateCounter();
+
+        AudioManager.instance.StopSound(engineSoundIndex);
     }
 
     public override void Update()
