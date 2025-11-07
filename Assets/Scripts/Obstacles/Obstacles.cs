@@ -17,6 +17,8 @@ public class Obstacles : MonoBehaviour
     [SerializeField] private Transform cannonPos;
     private bool isShooting;
 
+    public AudioSource collapse;
+
     private void Start()
     {
         rbs = GetComponentsInChildren<Rigidbody>();
@@ -28,7 +30,7 @@ public class Obstacles : MonoBehaviour
 
         player = FindObjectOfType<Player>();
         anim = GetComponentInChildren<Animator>();
-       
+    
     }
 
     public void ActivateRigidbodies()
@@ -133,6 +135,8 @@ public class Obstacles : MonoBehaviour
 
         return false;
     }
+
+ 
 }
 
 public enum ObstacleType

@@ -2802,7 +2802,7 @@ GameObject:
   - component: {fileID: 207030039}
   m_Layer: 0
   m_Name: Island_Block01
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2887,7 +2887,7 @@ GameObject:
   - component: {fileID: 208433748}
   m_Layer: 0
   m_Name: Island_Block02
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2972,7 +2972,7 @@ GameObject:
   - component: {fileID: 215544460}
   m_Layer: 0
   m_Name: Island_Block03
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3545,7 +3545,7 @@ GameObject:
   - component: {fileID: 244822509}
   m_Layer: 0
   m_Name: Island_Block03
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3640,7 +3640,7 @@ GameObject:
   - component: {fileID: 268471892}
   m_Layer: 0
   m_Name: island_Blocks
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6226,7 +6226,7 @@ GameObject:
   - component: {fileID: 528738055}
   m_Layer: 0
   m_Name: Island_Block05
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6980,7 +6980,7 @@ GameObject:
   - component: {fileID: 589588559}
   m_Layer: 0
   m_Name: Island (3)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6994,7 +6994,7 @@ Transform:
   m_GameObject: {fileID: 589588558}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -105}
+  m_LocalPosition: {x: 0.08, y: 0, z: -105}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7983,7 +7983,7 @@ GameObject:
   - component: {fileID: 658057508}
   m_Layer: 0
   m_Name: Island (2)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7997,7 +7997,7 @@ Transform:
   m_GameObject: {fileID: 658057507}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 210}
+  m_LocalPosition: {x: 0.08, y: 0, z: 210}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8160,7 +8160,7 @@ GameObject:
   - component: {fileID: 671976784}
   m_Layer: 0
   m_Name: Island (1)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8174,7 +8174,7 @@ Transform:
   m_GameObject: {fileID: 671976783}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 105}
+  m_LocalPosition: {x: 0.08, y: 0, z: 105}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8471,6 +8471,12 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 756644098}
   m_SourcePrefab: {fileID: 100100000, guid: fd12eabccce8d164293536fd85047b34, type: 3}
+--- !u!1 &689314487 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7297069706564547675, guid: db73295f8cbda7a44ad3a3163e6e2861,
+    type: 3}
+  m_PrefabInstance: {fileID: 5767040712237696666}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &691774315
 GameObject:
   m_ObjectHideFlags: 0
@@ -8577,7 +8583,7 @@ GameObject:
   - component: {fileID: 694015007}
   m_Layer: 0
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8707,7 +8713,7 @@ GameObject:
   - component: {fileID: 694908150}
   m_Layer: 0
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11375,7 +11381,7 @@ GameObject:
   - component: {fileID: 887484023}
   m_Layer: 0
   m_Name: Island_Block01
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11740,7 +11746,7 @@ GameObject:
   - component: {fileID: 905400067}
   m_Layer: 0
   m_Name: Island_Block02
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11899,7 +11905,7 @@ GameObject:
   - component: {fileID: 911035527}
   m_Layer: 0
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13392,7 +13398,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1044371378}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.094855055, y: 0.0030239853, z: -0.00028814084, w: 0.9954865}
+  m_LocalRotation: {x: 0.094855055, y: 0.0030239942, z: -0.00028814163, w: 0.9954865}
   m_LocalPosition: {x: 0, y: 2.9029999, z: -4.665}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -13409,7 +13415,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1050184008}
-  - component: {fileID: 1050184007}
   - component: {fileID: 1050184005}
   m_Layer: 0
   m_Name: AudioManager
@@ -13446,14 +13451,8 @@ MonoBehaviour:
   - {fileID: 896793950}
   - {fileID: 1033005199}
   - {fileID: 226221531}
---- !u!81 &1050184007
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1050184004}
-  m_Enabled: 1
+  - {fileID: 1658619022}
+  - {fileID: 1057769112}
 --- !u!4 &1050184008
 Transform:
   m_ObjectHideFlags: 0
@@ -13482,6 +13481,8 @@ Transform:
   - {fileID: 896793949}
   - {fileID: 1033005200}
   - {fileID: 226221532}
+  - {fileID: 1658619023}
+  - {fileID: 1057769113}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1054141303
@@ -13754,6 +13755,134 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1056935819}
   m_CullTransparentMesh: 1
+--- !u!1 &1057769111
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1057769113}
+  - component: {fileID: 1057769112}
+  m_Layer: 0
+  m_Name: CoinCollect
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &1057769112
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1057769111}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: ffb159a21c8a04135a5616979c828fab, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.5
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &1057769113
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1057769111}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 436.76965, y: -417.05124, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1050184008}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1069200562
 GameObject:
   m_ObjectHideFlags: 0
@@ -14105,7 +14234,7 @@ GameObject:
   - component: {fileID: 1094961716}
   m_Layer: 0
   m_Name: island_Blocks
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15172,7 +15301,7 @@ GameObject:
   - component: {fileID: 1149463958}
   m_Layer: 0
   m_Name: Island
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15186,7 +15315,7 @@ Transform:
   m_GameObject: {fileID: 1149463957}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.08, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -16991,7 +17120,7 @@ GameObject:
   - component: {fileID: 1244932633}
   m_Layer: 0
   m_Name: Island_Block04
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17535,7 +17664,7 @@ GameObject:
   - component: {fileID: 1261489451}
   m_Layer: 0
   m_Name: Island_Block04
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17621,7 +17750,7 @@ GameObject:
   - component: {fileID: 1263970843}
   m_Layer: 0
   m_Name: Island_Block03
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19151,7 +19280,7 @@ GameObject:
   - component: {fileID: 1444125517}
   m_Layer: 0
   m_Name: Island_Block05
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -20451,7 +20580,7 @@ GameObject:
   - component: {fileID: 1635472398}
   m_Layer: 0
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -20580,7 +20709,7 @@ GameObject:
   - component: {fileID: 1648803794}
   m_Layer: 0
   m_Name: Island_Block04
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -20788,6 +20917,134 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1658230383}
   m_CullTransparentMesh: 1
+--- !u!1 &1658619021
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1658619023}
+  - component: {fileID: 1658619022}
+  m_Layer: 0
+  m_Name: WallCrash
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &1658619022
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1658619021}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 681af37bb565db94b83996500c80c8c2, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.5
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &1658619023
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1658619021}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 436.76965, y: -417.05124, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1050184008}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &1660520578 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7877472787483111375, guid: 337b5d29dc5b85d43bfedfc77ac0c5f9,
@@ -20817,7 +21074,7 @@ GameObject:
   - component: {fileID: 1661632263}
   m_Layer: 0
   m_Name: island_Blocks
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -23839,7 +24096,7 @@ GameObject:
   - component: {fileID: 2054588434}
   m_Layer: 0
   m_Name: Island_Block05
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24088,7 +24345,7 @@ GameObject:
   - component: {fileID: 2072999849}
   m_Layer: 0
   m_Name: Island_Block01
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24543,7 +24800,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2089000822}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.094855055, y: 0.0030239853, z: -0.00028814084, w: 0.9954865}
+  m_LocalRotation: {x: 0.094855055, y: 0.0030239942, z: -0.00028814163, w: 0.9954865}
   m_LocalPosition: {x: 0, y: 2.9029999, z: -4.665}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -24977,7 +25234,7 @@ GameObject:
   - component: {fileID: 2120678195}
   m_Layer: 0
   m_Name: Island_Block02
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33611,6 +33868,14 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5767040712237696666}
   m_PrefabAsset: {fileID: 0}
+--- !u!81 &1327674206212794348
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 689314487}
+  m_Enabled: 1
 --- !u!114 &1328986385094773517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40582,7 +40847,7 @@ GameObject:
   - component: {fileID: 7734549890964917272}
   m_Layer: 0
   m_Name: Island_Block05
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41011,7 +41276,7 @@ GameObject:
   - component: {fileID: 3691757637396574520}
   m_Layer: 0
   m_Name: Island_Block02
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41687,7 +41952,7 @@ GameObject:
   - component: {fileID: 5135810862984039666}
   m_Layer: 0
   m_Name: Island_Block03
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -69051,7 +69316,7 @@ GameObject:
   - component: {fileID: 833020269739464085}
   m_Layer: 0
   m_Name: Island_Block04
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -72754,7 +73019,7 @@ PrefabInstance:
     - target: {fileID: 8651806284149911528, guid: db73295f8cbda7a44ad3a3163e6e2861,
         type: 3}
       propertyPath: vehicleIndex
-      value: 0
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8651806284149911528, guid: db73295f8cbda7a44ad3a3163e6e2861,
         type: 3}
@@ -72784,7 +73049,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7297069706564547675, guid: db73295f8cbda7a44ad3a3163e6e2861,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1327674206212794348}
   m_SourcePrefab: {fileID: 100100000, guid: db73295f8cbda7a44ad3a3163e6e2861, type: 3}
 --- !u!1 &5767167458672883996
 GameObject:
@@ -100123,7 +100392,7 @@ GameObject:
   - component: {fileID: 5006512736139437160}
   m_Layer: 0
   m_Name: island_Blocks
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -108758,7 +109027,7 @@ GameObject:
   - component: {fileID: 2662571526918175940}
   m_Layer: 0
   m_Name: Island_Block01
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

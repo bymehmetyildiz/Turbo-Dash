@@ -99,6 +99,7 @@ public class VehicleController : MonoBehaviour
             {
                 Vector3 hitPoint = collision.contacts[0].point;
                 obstacle.PushRigidBodies(hitPoint, 30f, 10f);
+                AudioManager.instance.PlaySound(15);
             }   
         }
 

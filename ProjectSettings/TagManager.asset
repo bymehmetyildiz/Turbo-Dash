@@ -9,6 +9,7 @@ TagManager:
   - Menu
   - Obstacle
   - FxTemporaire
+  - Ground
   layers:
   - Default
   - TransparentFX
