@@ -38,12 +38,14 @@ public class Planes : MonoBehaviour
         {
             Instantiate(explosion, transform.position, Quaternion.identity);
             player.stateMachine.ChangeState(player.airState);
+            AudioManager.instance.PlaySound(9);
             Destroy(gameObject);
         }
 
         if (collision.gameObject.GetComponent<Projectile>() != null)
         {
-            Instantiate(explosion, transform.position, Quaternion.identity);            
+            Instantiate(explosion, transform.position, Quaternion.identity);
+            AudioManager.instance.PlaySound(9);
             Destroy(gameObject);
         }
     }

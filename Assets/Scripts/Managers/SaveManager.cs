@@ -18,8 +18,7 @@ public class SaveManager : MonoBehaviour
             Debug.LogWarning("SaveGame: Player not found.");
             return;
         }
-
-        PlayerPrefs.SetFloat("MoveSpeed", p.moveSpeed);
+      
         PlayerPrefs.SetFloat("TankReloadDur", p.tankReloadDur);
         PlayerPrefs.SetFloat("PlaneReloadDur", p.planeReloadDur);
         PlayerPrefs.SetInt("VehicleIndex", p.vehicleIndex);
@@ -43,8 +42,7 @@ public class SaveManager : MonoBehaviour
             Debug.LogWarning("LoadGame: Player not found yet. Try calling again later.");
             return;
         }
-
-        if (PlayerPrefs.HasKey("MoveSpeed")) p.moveSpeed = PlayerPrefs.GetFloat("MoveSpeed");
+    
         if (PlayerPrefs.HasKey("TankReloadDur")) p.tankReloadDur = PlayerPrefs.GetFloat("TankReloadDur");
         if (PlayerPrefs.HasKey("PlaneReloadDur")) p.planeReloadDur = PlayerPrefs.GetFloat("PlaneReloadDur");
         if (PlayerPrefs.HasKey("VehicleIndex")) p.vehicleIndex = PlayerPrefs.GetInt("VehicleIndex");
