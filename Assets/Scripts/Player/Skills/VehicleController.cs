@@ -120,7 +120,7 @@ public class VehicleController : MonoBehaviour
             if (c != null)
             {
                 UIManager.instance.MoveCoinImg(coin.transform.position);
-
+                AudioManager.instance.PlayCoin();
                 ParticleSystem particle = Instantiate(player.collectParticle, player.transform.position, Quaternion.identity);
                 particle.transform.parent = player.transform;
 

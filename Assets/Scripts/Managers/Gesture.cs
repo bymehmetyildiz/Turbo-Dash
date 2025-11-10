@@ -14,17 +14,7 @@ public class Gesture : MonoBehaviour
     public bool isOwned = false;
     public bool isPlaying = false;
     public GameObject coin;
-
-    void Start()
-    {
-        
-    }
-
-    
-    void Update()
-    {
-        
-    }
+ 
 
     private void OnEnable()
     {

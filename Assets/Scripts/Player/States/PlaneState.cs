@@ -17,6 +17,7 @@ public class PlaneState : PlayerState
         player.plane.SetActive(true);
         player.lanePositions = new float[] { -3.5f, 0f, 3.5f };
         UIManager.instance.StartDriveStateCounter(stateTimer);
+        AudioManager.instance.PlaySound(17);
     }
 
     public override void Exit()
@@ -26,6 +27,7 @@ public class PlaneState : PlayerState
         player.plane.SetActive(false);
         player.lanePositions = new float[] { -1.2f, 0f, 1.2f };
         UIManager.instance.StopDriveStateCounter();
+        AudioManager.instance.StopSound(17);
     }
 
     public override void Update()

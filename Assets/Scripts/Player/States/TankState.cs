@@ -31,6 +31,8 @@ public class TankState : PlayerState
         {
             body.m_FollowOffset = new Vector3(0f, 3f, -10f);
         }
+
+        AudioManager.instance.PlaySound(18);
     }
 
     public override void Exit()
@@ -56,6 +58,7 @@ public class TankState : PlayerState
         }
 
         UIManager.instance.StopDriveStateCounter();
+        AudioManager.instance.StopSound(18);
     }
 
     public override void Update()

@@ -269,10 +269,10 @@ public class Player : MonoBehaviour
             Coin c = coin.GetComponent<Coin>();
             if (c != null)
             {
+                AudioManager.instance.PlayCoin();
                 UIManager.instance.MoveCoinImg(coin.transform.position);
                 ParticleSystem particle = Instantiate(collectParticle, transform.position, Quaternion.identity);
                 particle.transform.parent = transform;
-                AudioManager.instance.PlaySound(16);
                 Destroy(coin.gameObject);
             }
         }

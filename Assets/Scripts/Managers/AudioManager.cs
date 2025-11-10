@@ -5,6 +5,7 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
+    float lastCoinSoundTime;
 
     public AudioSource[] audioSource;
 
@@ -23,6 +24,17 @@ public class AudioManager : MonoBehaviour
         }
 
         audioSource[index].Play();
+    }
+
+
+
+    public void PlayCoin()
+    {
+        if (Time.time - lastCoinSoundTime < 0.05f)
+            return; // prevents spam faster than 20 sounds per second
+
+        lastCoinSoundTime = Time.time;
+        audioSource[16].PlayOneShot(audioSource[16].clip);
     }
 
     public void StopSound(int index) => audioSource[index].Stop();

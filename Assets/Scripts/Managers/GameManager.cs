@@ -46,6 +46,11 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        if(spawnInterval > 0.8f && player.isStarted)
+        {
+            spawnInterval -= Time.deltaTime * 0.001f; // Gradually decrease spawn interval to increase difficulty
+        }
+
     }
 
     private void SpawnPlatform()

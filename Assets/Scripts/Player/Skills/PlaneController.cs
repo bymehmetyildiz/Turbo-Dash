@@ -13,7 +13,6 @@ public class PlaneController : MonoBehaviour
     [SerializeField] private GameObject bombPrefab;
     public bool canDropBomb = true;
 
-
     void Start()
     {
         canDropBomb = true;
@@ -27,14 +26,12 @@ public class PlaneController : MonoBehaviour
             bomb.SetActive(true);
     }
 
-
     void Update()
     {
         prop.transform.Rotate(propSpeed * Time.deltaTime, 0, 0);
 
         if ((Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Space)) && canDropBomb)        
             StartCoroutine(ReleaseBomb());
-        
     }
 
     private IEnumerator ReleaseBomb()
@@ -46,9 +43,5 @@ public class PlaneController : MonoBehaviour
         yield return new WaitForSeconds(player.planeReloadDur);
         bomb.SetActive(true);
         canDropBomb = true;
-        
     }
-
-    
-
 }
