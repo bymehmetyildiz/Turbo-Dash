@@ -74,7 +74,11 @@ public class OfferManager : MonoBehaviour
     public void SwitchToJetState()
     {
         if (!player.isChangingLane && player.isStarted && player.stateMachine.currentstate == player.moveState)
+        {
             player.stateMachine.ChangeState(player.jetState);
+            AudioManager.instance.PlaySound(20);
+        }
+
     }
 
     public void SwitchToTankState()

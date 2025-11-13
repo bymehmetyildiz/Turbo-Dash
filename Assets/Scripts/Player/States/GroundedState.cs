@@ -33,6 +33,7 @@ public class GroundedState : PlayerState
         if (Input.GetKeyDown(KeyCode.J) && !player.isChangingLane && player.isStarted)
         {
             stateMachine.ChangeState(player.jetState);
+            AudioManager.instance.PlaySound(20);
         }
         else if (Input.GetKeyDown(KeyCode.K) && !player.isChangingLane && player.isStarted)
         {

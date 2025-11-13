@@ -19,6 +19,7 @@ public class JetState : PlayerState
         player.jetPack.SetActive(true);
         player.lanePositions = new float[] { -3.5f, 0f, 3.5f };
         UIManager.instance.StartDriveStateCounter(stateTimer);
+        AudioManager.instance.PlaySound(21);
     }
 
     public override void Exit()
@@ -28,11 +29,15 @@ public class JetState : PlayerState
         player.jetPack.SetActive(false);
         player.lanePositions = new float[] { -1.2f, 0f, 1.2f };
         UIManager.instance.StopDriveStateCounter();
+        AudioManager.instance.StopSound(21);
+        AudioManager.instance.PlaySound(22);
     }
 
     public override void Update()
     {
         base.Update();
+
+        
 
         Quaternion targetRotation;
 

@@ -80,6 +80,9 @@ public class UIManager : MonoBehaviour
     public RectTransform controlsMenu;
     public bool isControlsShown;
 
+    [Header("Settings Menu")]
+    public RectTransform deleteSaveMenu;
+
 
     private void Awake()
     {
@@ -112,6 +115,8 @@ public class UIManager : MonoBehaviour
         settingsMenu.gameObject.SetActive(false);
         controlsMenu.anchoredPosition = new Vector2(0, -1100);
 
+        deleteSaveMenu.localScale = Vector2.zero;
+
         isControlsShown = PlayerPrefs.GetInt("IsControlShown", 0) == 1;
 
         if (!isControlsShown)
@@ -121,6 +126,8 @@ public class UIManager : MonoBehaviour
         }
 
         UpdateTotalCoin();
+
+
 
     }
 
@@ -370,6 +377,23 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void DeletePanel()
+    {
+        if(deleteSaveMenu.localScale == Vector3.zero)
+        {
+            deleteSaveMenu.DOScale(Vector3.one, 0.5f)
+                .SetUpdate(true)
+                .SetEase(Ease.OutBack);
+        }
+        else
+        {
+            deleteSaveMenu.DOScale(Vector3.zero, 0.5f)
+                .SetUpdate(true)
+                .SetEase(Ease.InBack);
+        }
+    }
+
+
     public void OpenControls()
     {
         if (controlsMenu.anchoredPosition.y != 0)
@@ -496,7 +520,14 @@ public class UIManager : MonoBehaviour
     [ContextMenu("Delete All Scores")]
     public void DeleteAllSaves()
     {
-        PlayerPrefs.DeleteAll();        
+        FadePanel.DOFade(1f, 1f)
+            .SetUpdate(true)
+            .OnComplete(() =>
+            {
+                Time.timeScale = 1f;
+                PlayerPrefs.DeleteAll();
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            });
     }
 
 }
