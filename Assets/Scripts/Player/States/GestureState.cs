@@ -32,6 +32,7 @@ public class GestureState : PlayerState
         controller.radius = 0.25f;        
 
         GestureManager.instance.currentGesture.isPlaying = false;
+        GestureManager.instance.currentGesture.audioSource.Stop();
         GestureManager.instance.currentGesture.gesturePriceText.text = "Play";
         GestureManager.instance.currentGesture = null;
     }

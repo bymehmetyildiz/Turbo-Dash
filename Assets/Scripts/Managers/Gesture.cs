@@ -14,11 +14,19 @@ public class Gesture : MonoBehaviour
     public bool isOwned = false;
     public bool isPlaying = false;
     public GameObject coin;
- 
+    public AudioSource audioSource;
+
 
     private void OnEnable()
     {
         gestureNameText.text = gestureName;
         gesturePriceText.text = price.ToString();
+        audioSource = GetComponentInChildren<AudioSource>();
+    }
+
+    public void PlayGesture()
+    {
+        if (isOwned && audioSource != null && !audioSource.isPlaying)
+            audioSource.Play();
     }
 }

@@ -5098,7 +5098,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitEffect: {fileID: 7717370513742289159, guid: 6665f874cdb213a4db59c96ac8457c1d,
     type: 3}
-  speed: 75
+  speed: 150
 --- !u!136 &5045500784679146186
 CapsuleCollider:
   m_ObjectHideFlags: 0

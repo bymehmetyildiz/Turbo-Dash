@@ -165,7 +165,7 @@ public class GestureManager : MonoBehaviour
     /// </summary>
     public void OnCurrentGestureFinished()
     {
-        if (currentGesture == null) return;
+        if (currentGesture == null) return;   
         currentGesture.isPlaying = false;
         RefreshGestureUI(currentGesture);
     }
