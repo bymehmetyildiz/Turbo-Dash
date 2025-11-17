@@ -30,15 +30,17 @@ public class PlaneController : MonoBehaviour
     {
         prop.transform.Rotate(propSpeed * Time.deltaTime, 0, 0);
 
-        if ((Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Space)) && canDropBomb)        
+        if (UnifiedInput.Fire && canDropBomb)
             StartCoroutine(ReleaseBomb());
     }
+
 
     private IEnumerator ReleaseBomb()
     {
         canDropBomb = false;
         AudioManager.instance.PlaySound(10);
-        Instantiate(bombPrefab, bomb.transform.position, Quaternion.Euler(-90,90,90));
+        GameObject bombObject = Instantiate(bombPrefab, bomb.transform.position, Quaternion.Euler(-90,90,90));
+        bombObject.GetComponent<Projectile>().speed = 150;
         bomb.SetActive(false);
         yield return new WaitForSeconds(player.planeReloadDur);
         bomb.SetActive(true);

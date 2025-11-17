@@ -66,20 +66,26 @@ public class VehicleController : MonoBehaviour
         transform.Translate(Vector3.forward * player.moveSpeed * speed * Time.deltaTime);
         CheckCoinOverlap();
 
-        if ((Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) && currentLane < lanePositions.Length - 1 && !isChangingLane)        
-            StartCoroutine(ChangeLane(currentLane + 1, 15));        
-        else if ((Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) && currentLane > 0 && !isChangingLane)        
+        // RIGHT
+        if (UnifiedInput.MoveRight && currentLane < lanePositions.Length - 1 && !isChangingLane)
+            StartCoroutine(ChangeLane(currentLane + 1, 15));
+
+        // LEFT
+        else if (UnifiedInput.MoveLeft && currentLane > 0 && !isChangingLane)
             StartCoroutine(ChangeLane(currentLane - 1, -15));
 
-        if (vehicleType == VehicleType.Tank && (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Space))   && canShoot)
+        // TANK SHOOT
+        if (vehicleType == VehicleType.Tank && UnifiedInput.Fire && canShoot)
             StartCoroutine(ReleaseBomb());
     }
+
 
     private IEnumerator ReleaseBomb()
     {
         canShoot = false;
-        AudioManager.instance.PlaySound(10);
-        Instantiate(bomb, bombPos.position, Quaternion.Euler(-90, 90, 90));        
+        AudioManager.instance.PlaySound(10);        
+        GameObject bombObject = Instantiate(bomb, bombPos.position, Quaternion.Euler(-90, 90, 90));
+        bombObject.GetComponent<Projectile>().speed = 75;
         yield return new WaitForSeconds(player.tankReloadDur);
         canShoot = true;
     }

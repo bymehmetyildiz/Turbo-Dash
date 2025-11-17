@@ -156,6 +156,7 @@ public class GestureManager : MonoBehaviour
                 RefreshGestureUI(currentGesture);
 
                 SaveLastSelected(currentGesture);
+                currentGesture.PlayGesture();
             }
         }
     }

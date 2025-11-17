@@ -316,6 +316,7 @@ public class Player : MonoBehaviour
 
         float duration = 1f; // slightly longer for the hop
         float elapsed = 0f;
+ 
 
         float hopHeight = 2.5f; // how high the hop goes
 

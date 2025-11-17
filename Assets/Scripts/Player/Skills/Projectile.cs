@@ -5,7 +5,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     [SerializeField] private ParticleSystem hitEffect;
-    [SerializeField] private float speed;
+    public float speed;
 
     void Start()
     {
