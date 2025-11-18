@@ -6,6 +6,7 @@ using Unity.Burst.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
+using CrazyGames;
 
 public class Player : MonoBehaviour
 {
@@ -257,6 +258,7 @@ public class Player : MonoBehaviour
             obstacle.ActivateRigidbodies();
         }
         AudioManager.instance.PlaySound(7);
+        CrazySDK.Game.GameplayStop();
     }
 
 

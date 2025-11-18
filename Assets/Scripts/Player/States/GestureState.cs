@@ -17,7 +17,7 @@ public class GestureState : PlayerState
         controller.height = 0.1f;
         controller.radius = 0.1f;
         player.anim.SetInteger("DanceIndex", player.danceIndex);
-       
+        AudioManager.instance.mainMenuBGM.Pause();
 
     }
 
@@ -37,6 +37,8 @@ public class GestureState : PlayerState
             GestureManager.instance.currentGesture.audioSource.Stop();
         GestureManager.instance.currentGesture.gesturePriceText.text = "Play";
         GestureManager.instance.currentGesture = null;
+
+        AudioManager.instance.mainMenuBGM.Play();
     }
 
     public override void Update()

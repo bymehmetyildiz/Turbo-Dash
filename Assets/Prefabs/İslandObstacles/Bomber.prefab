@@ -15100,7 +15100,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.12, y: 0.06594765, z: 12.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5955936799180869976}
   m_Father: {fileID: 0}
@@ -15144,6 +15144,7 @@ MonoBehaviour:
     type: 3}
   cannonBall: {fileID: 0}
   cannonPos: {fileID: 0}
+  collapse: {fileID: 0}
 --- !u!1 &4465705600848715039
 GameObject:
   m_ObjectHideFlags: 0

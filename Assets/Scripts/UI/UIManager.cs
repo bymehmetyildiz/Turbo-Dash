@@ -5,10 +5,17 @@ using Cinemachine;
 using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using CrazyGames;
+using System.Runtime.InteropServices;
 
 
 public class UIManager : MonoBehaviour
 {
+#if UNITY_WEBGL && !UNITY_EDITOR
+[DllImport("__Internal")]
+private static extern int IsMobileBrowser();
+#endif
+
     public static UIManager instance;
 
     private Player player;
@@ -75,9 +82,12 @@ public class UIManager : MonoBehaviour
     [SerializeField] private RectTransform coinSpawnPoint;
     [SerializeField] private RectTransform targetPoint;
     [SerializeField] private ParticleSystem confetti;
+    private int tempCoin;
 
     [Header("Controls Menu")]
     public RectTransform controlsMenu;
+    public GameObject mobileControls;
+    public GameObject desktopControls;
     public bool isControlsShown;
 
     [Header("Settings Menu")]
@@ -117,6 +127,8 @@ public class UIManager : MonoBehaviour
 
         deleteSaveMenu.localScale = Vector2.zero;
 
+        CrazySDK.Game.GameplayStop();
+
         isControlsShown = PlayerPrefs.GetInt("IsControlShown", 0) == 1;
 
         if (!isControlsShown)
@@ -124,11 +136,10 @@ public class UIManager : MonoBehaviour
             OpenControls();                // show controls only once
             MarkControlsAsShown();         // mark them as shown so they won't open again automatically
         }
+        // Detect device type (mobile or desktop)
+        
 
         UpdateTotalCoin();
-
-
-
     }
 
     // Update CoinText
@@ -144,10 +155,80 @@ public class UIManager : MonoBehaviour
         StartCoroutine(EndGameCoinCounter());
     }
 
+    public void DoubleCoins()
+    {
+        CrazySDK.Ad.RequestAd(CrazyAdType.Rewarded, () =>
+        {
+            // ad started
+        }, (error) =>
+        {
+            // ad error
+        }, () =>
+        {
+            player.currentCoinAmount = tempCoin;
+            StartCoroutine(DoubleCoinsRoutine());
+        });
+    }
+
+    private IEnumerator DoubleCoinsRoutine()
+    {
+        adButton.SetActive(false);
+        restartButton.SetActive(false);
+        player.currentCoinAmount = tempCoin;
+        UpdateTotalCoin();
+        int target = player.totalCoinAmount + player.currentCoinAmount;
+        int totalToAdd = player.currentCoinAmount;
+        int step = Mathf.Max(1, totalToAdd / 100); // each step adds at least 1 coin
+
+        // How many animated coins we actually show
+        int maxAnimatedCoins = 30;
+        int animatedCoins = 0;
+
+        while (player.totalCoinAmount < target)
+        {
+            player.totalCoinAmount += step;
+            player.currentCoinAmount -= step;
+
+            if (player.totalCoinAmount > target)
+                player.totalCoinAmount = target;
+
+            if (player.currentCoinAmount < 0)
+                player.currentCoinAmount = 0;
+
+            if (animatedCoins < maxAnimatedCoins)
+            {
+                RectTransform coin = Instantiate(coinImgPrefab, endGamePanel.transform).GetComponent<RectTransform>();
+                AudioManager.instance.PlaySound(16);
+                coin.localPosition = coinSpawnPoint.localPosition;
+
+                coin.DOMove(targetPoint.position, 0.5f)
+                    .SetEase(Ease.InQuad)
+                    .OnComplete(() => Destroy(coin.gameObject));
+
+                animatedCoins++;
+                yield return new WaitForSeconds(0.05f);
+            }
+            else
+            {
+                break;
+            }
+
+            UpdateTotalCoin();
+        }
+
+        player.totalCoinAmount = target;
+        player.currentCoinAmount = 0;
+        UpdateTotalCoin();
+        currentCoinText.text = "0";        
+        yield return new WaitForSeconds(2f);
+        RestartGame();
+    }
+
+
     private IEnumerator EndGameCoinCounter()
     {
         yield return new WaitForSeconds(3f);
-
+        tempCoin = player.currentCoinAmount;
         endGamePanel.SetActive(true);
         UpdateTotalCoin();
         endGameScoreText.text = distanceText.text;
@@ -175,6 +256,7 @@ public class UIManager : MonoBehaviour
             if (animatedCoins < maxAnimatedCoins)
             {
                 RectTransform coin = Instantiate(coinImgPrefab, endGamePanel.transform).GetComponent<RectTransform>();
+                AudioManager.instance.PlaySound(16);
                 coin.localPosition = coinSpawnPoint.localPosition;
 
                 coin.DOMove(targetPoint.position, 0.5f)
@@ -200,6 +282,8 @@ public class UIManager : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
         confetti.Play();
+        CrazySDK.Game.HappyTime();
+        AudioManager.instance.PlaySound(23);
         yield return new WaitForSeconds(1f);
         adButton.SetActive(true);
         yield return new WaitForSeconds(2f);
@@ -228,6 +312,8 @@ public class UIManager : MonoBehaviour
         startMenu.gameObject.SetActive(false);
         gameMenu.gameObject.SetActive(true);
         totalCoinBG.SetActive(false);
+
+        CrazySDK.Game.GameplayStart();
     }
 
     public void OpenUpgradeMenu()
@@ -329,6 +415,7 @@ public class UIManager : MonoBehaviour
             pauseMenu.DOScale(Vector3.one, 0.5f)
                 .SetEase(Ease.OutBack)
                 .SetUpdate(true);
+            CrazySDK.Game.GameplayStop();
 
             Time.timeScale = 0f;
         }
@@ -340,6 +427,7 @@ public class UIManager : MonoBehaviour
                 .OnComplete(() =>
                 {
                     Time.timeScale = 1f;
+                    CrazySDK.Game.GameplayStart();
                 });
         }
     }
@@ -396,6 +484,18 @@ public class UIManager : MonoBehaviour
 
     public void OpenControls()
     {
+        bool isMobile = false;
+
+#if UNITY_WEBGL && !UNITY_EDITOR
+isMobile = IsMobileBrowser() == 1;
+#else
+        isMobile = (UnityEngine.SystemInfo.deviceType == DeviceType.Handheld);
+
+#endif
+
+        mobileControls.SetActive(isMobile);
+        desktopControls.SetActive(!isMobile);
+
         if (controlsMenu.anchoredPosition.y != 0)
         {
             controlsMenu.DOAnchorPosY(0, 0.5f)
@@ -416,9 +516,6 @@ public class UIManager : MonoBehaviour
         PlayerPrefs.SetInt("IsControlShown", 1);
         PlayerPrefs.Save();
     }
-
-
-
 
     public void MoveCoinImg(Vector3 worldPos)
     {
@@ -529,6 +626,5 @@ public class UIManager : MonoBehaviour
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             });
     }
-
 }
 

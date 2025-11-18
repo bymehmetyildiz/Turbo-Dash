@@ -29,7 +29,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.057, y: 0.06792128, z: 7.142}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4107034290525967134}
   - {fileID: 3529293295210532151}
@@ -54,8 +54,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.8046582, y: 1.069784, z: 1.6102204}
-  m_Center: {x: 0.005140543, y: 0.8225023, z: -0.07805133}
+  m_Size: {x: 0.80010414, y: 1.3703425, z: 1.6102203}
+  m_Center: {x: 0.007417464, y: 0.6722234, z: -0.07805138}
 --- !u!114 &1718508212619341659
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74,6 +74,7 @@ MonoBehaviour:
   cannonBall: {fileID: 5161706959308958796, guid: d93a3614d791f0d4c9ead32bafe0cebc,
     type: 3}
   cannonPos: {fileID: 3529293295210532151}
+  collapse: {fileID: 0}
 --- !u!1 &4182701493289983719
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
 {
@@ -8,11 +9,47 @@ public class AudioManager : MonoBehaviour
     float lastCoinSoundTime;
 
     public AudioSource[] audioSource;
+    public AudioSource mainMenuBGM;
+
+    public Slider SFXslider;
+    public Slider musicSlider;
 
     private void Awake()
     {
         if (instance == null) instance = this;
         else { Destroy(gameObject); return; }
+    }
+
+    private void Start()
+    {
+        if(PlayerPrefs.HasKey("SFXVolume"))        
+            SFXslider.value = PlayerPrefs.GetFloat("SFXVolume");
+        else
+            SFXslider.value = 1f;
+
+        if(PlayerPrefs.HasKey("MusicVolume"))        
+            musicSlider.value = PlayerPrefs.GetFloat("MusicVolume");
+        else
+            musicSlider.value = 1f;
+
+        SetSFXVolume();
+        SetMusicVolume();
+        mainMenuBGM.Play();
+    }
+
+    public void SetSFXVolume()
+    {
+        for (int i = 0; i < audioSource.Length; i++)
+        {
+            audioSource[i].volume = SFXslider.value;
+        }
+        PlayerPrefs.SetFloat("SFXVolume", SFXslider.value);
+    }
+
+    public void SetMusicVolume()
+    {
+        mainMenuBGM.volume = musicSlider.value;
+        PlayerPrefs.SetFloat("MusicVolume", musicSlider.value);
     }
 
     public void PlaySound(int index)

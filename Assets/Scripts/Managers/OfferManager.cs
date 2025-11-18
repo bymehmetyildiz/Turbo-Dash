@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using CrazyGames;
 
 public class OfferManager : MonoBehaviour
 {
@@ -67,23 +68,49 @@ public class OfferManager : MonoBehaviour
     // State switchers
     public void SwitchToPlaneState()
     {
-        if (!player.isChangingLane && player.isStarted && player.stateMachine.currentstate == player.moveState)
-            player.stateMachine.ChangeState(player.planeState);
+        CrazySDK.Ad.RequestAd(CrazyAdType.Rewarded, () =>
+        {
+            // ad started
+        }, (error) =>
+        {
+            // ad error
+        }, () =>
+        {
+            if (player.isStarted && player.stateMachine.currentstate == player.moveState)
+                player.stateMachine.ChangeState(player.planeState);
+        });
     }
 
     public void SwitchToJetState()
     {
-        if (!player.isChangingLane && player.isStarted && player.stateMachine.currentstate == player.moveState)
+        CrazySDK.Ad.RequestAd(CrazyAdType.Rewarded, () => 
         {
-            player.stateMachine.ChangeState(player.jetState);
-            AudioManager.instance.PlaySound(20);
-        }
-
+            // ad started
+        }, (error) =>
+        {
+            // ad error
+        }, () =>
+        {
+            if (player.isStarted && player.stateMachine.currentstate == player.moveState)
+            {
+                player.stateMachine.ChangeState(player.jetState);
+                AudioManager.instance.PlaySound(20);
+            }
+        });
     }
 
     public void SwitchToTankState()
     {
-        if (!player.isChangingLane && player.isStarted && player.stateMachine.currentstate == player.moveState)
-            player.stateMachine.ChangeState(player.tankState);
+        CrazySDK.Ad.RequestAd(CrazyAdType.Rewarded, () =>
+        {
+            // ad started
+        }, (error) =>
+        {
+            // ad error
+        }, () =>
+        {
+            if (player.isStarted && player.stateMachine.currentstate == player.moveState)
+                player.stateMachine.ChangeState(player.tankState);
+        });
     }
 }
