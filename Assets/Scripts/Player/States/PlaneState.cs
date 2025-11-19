@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlaneState : PlayerState
 {
-    private float planeHeight = 10;
+    private float planeHeight = 10.5f;
 
     public PlaneState(StateMachine stateMachine, string animBoolName, Player player, CharacterController controller) : base(stateMachine, animBoolName, player, controller)
     {

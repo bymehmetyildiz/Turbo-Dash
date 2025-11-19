@@ -28,7 +28,7 @@ public class PlaneController : MonoBehaviour
 
     void Update()
     {
-        prop.transform.Rotate(propSpeed * Time.deltaTime, 0, 0);
+        prop.transform.Rotate(0, 0, propSpeed * Time.deltaTime);
 
         if (UnifiedInput.Fire && canDropBomb)
             StartCoroutine(ReleaseBomb());

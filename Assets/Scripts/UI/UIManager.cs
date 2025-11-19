@@ -137,7 +137,7 @@ private static extern int IsMobileBrowser();
             MarkControlsAsShown();         // mark them as shown so they won't open again automatically
         }
         // Detect device type (mobile or desktop)
-        
+        tempCoin = 0;
 
         UpdateTotalCoin();
     }
@@ -280,12 +280,12 @@ private static extern int IsMobileBrowser();
 
         currentCoinText.text = "0";
 
-        yield return new WaitForSeconds(1f);
-        confetti.Play();
+        yield return new WaitForSeconds(1f);      
         CrazySDK.Game.HappyTime();
         AudioManager.instance.PlaySound(23);
         yield return new WaitForSeconds(1f);
-        adButton.SetActive(true);
+        if(tempCoin > 0)
+            adButton.SetActive(true);
         yield return new WaitForSeconds(2f);
         restartButton.SetActive(true);
     }
