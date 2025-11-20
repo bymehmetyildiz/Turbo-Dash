@@ -29,6 +29,10 @@ public class VehicleController : MonoBehaviour
 
     private GameObject activeCar;
 
+    // optimization
+    private Collider[] coinOverlapBuffer = new Collider[32];
+    private int coinLayerMask;
+
     private void OnEnable()
     {
         canShoot = true;
@@ -38,6 +42,7 @@ public class VehicleController : MonoBehaviour
     {
         player = FindObjectOfType<Player>();
         currentLane = player.currentLane;
+        coinLayerMask = LayerMask.GetMask("Coin");
     }
 
     public void SetupCar(int _carIndex, int _colorIndex)
@@ -119,17 +124,18 @@ public class VehicleController : MonoBehaviour
 
     private void CheckCoinOverlap()
     {
-        Collider[] coins = Physics.OverlapSphere(transform.position, 1f, LayerMask.GetMask("Coin"));
-        foreach (Collider coin in coins)
+        int count = Physics.OverlapSphereNonAlloc(transform.position, 1f, coinOverlapBuffer, coinLayerMask);
+        for (int i = 0; i < count; i++)
         {
+            var coin = coinOverlapBuffer[i];
+            if (coin == null) continue;
+
             Coin c = coin.GetComponent<Coin>();
             if (c != null)
             {
                 UIManager.instance.MoveCoinImg(coin.transform.position);
                 AudioManager.instance.PlayCoin();
-                ParticleSystem particle = Instantiate(player.collectParticle, player.transform.position, Quaternion.identity);
-                particle.transform.parent = player.transform;
-
+                player.PlayCollectParticleAt(player.transform.position);
                 Destroy(coin.gameObject);
             }
         }

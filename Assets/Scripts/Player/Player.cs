@@ -86,6 +86,11 @@ public class Player : MonoBehaviour
     public CinemachineVirtualCamera virtualCamera;
     public int danceIndex;
 
+    // --- Optimization fields ---
+    private int coinLayerMask;
+    private Collider[] coinOverlapBuffer = new Collider[32];
+    private ParticleSystem pooledCollectParticle;
+
     private void Awake()
     {
         if (instance == null)
@@ -109,6 +114,9 @@ public class Player : MonoBehaviour
         tankState = new TankState(stateMachine, "Drive", this, controller);
 
         gestureState = new GestureState(stateMachine, "Dance", this, controller);
+
+        // cache layer mask to avoid calling GetMask every frame
+        coinLayerMask = LayerMask.GetMask("Coin");
     }
 
     void Start()
@@ -211,28 +219,28 @@ public class Player : MonoBehaviour
     // Collider
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        // 0) Fast layer/tag bailouts
+        //0) Fast layer/tag bailouts
         int obstacleMask = LayerMask.GetMask("Obstacle");
-        if (((1 << hit.collider.gameObject.layer) & obstacleMask) == 0)
+        if (((1 << hit.collider.gameObject.layer) & obstacleMask) ==0)
             return;
 
-        // 1) Ignore ground: for ground the surface normal points mostly up
-        //    (normal.y close to 1). Walls have small normal.y.
-        if (hit.normal.y > 0.5f)
+        //1) Ignore ground: for ground the surface normal points mostly up
+        // (normal.y close to1). Walls have small normal.y.
+        if (hit.normal.y >0.5f)
             return;
 
-        // 2) From here on we know it's a wall-like hit (i.e., obstacle)
+        //2) From here on we know it's a wall-like hit (i.e., obstacle)
         if (isShielded) return;
 
         // Optional: also ensure player was moving forward relative to facing
-        Vector3 horizontalMove = new Vector3(hit.moveDirection.x, 0f, hit.moveDirection.z);
-        if (Vector3.Dot(transform.forward, horizontalMove.normalized) < 0.25f)
+        Vector3 horizontalMove = new Vector3(hit.moveDirection.x,0f, hit.moveDirection.z);
+        if (Vector3.Dot(transform.forward, horizontalMove.normalized) <0.25f)
             return;
 
         var obstacle = hit.collider.GetComponent<Obstacles>();
         if (obstacle == null) return;
 
-        // 3) Handle by type / current state
+        //3) Handle by type / current state
         if (obstacle.obstacleType == ObstacleType.Explosive)
         {
             stateMachine.ChangeState(fastHitState);
@@ -249,7 +257,7 @@ public class Player : MonoBehaviour
             StartCoroutine(DeathBounce());
             isStarted = false;
             jetPack.SetActive(false);
-            obstacle.PushRigidBodies(hit.point, 20f, 10f);
+            obstacle.PushRigidBodies(hit.point,20f,10f);
         }
         else
         {
@@ -264,27 +272,48 @@ public class Player : MonoBehaviour
 
     private void CheckCoinOverlap()
     {
-        Collider[] coins = Physics.OverlapSphere(transform.position, 0.5f, LayerMask.GetMask("Coin"));
+        // Use non-alloc overlap to reduce GC pressure
+        int count = Physics.OverlapSphereNonAlloc(transform.position, 0.5f, coinOverlapBuffer, coinLayerMask);
 
-        foreach (Collider coin in coins)
+        for (int i = 0; i < count; i++)
         {
-            Coin c = coin.GetComponent<Coin>();
+            var coinCollider = coinOverlapBuffer[i];
+            if (coinCollider == null) continue;
+
+            Coin c = coinCollider.GetComponent<Coin>();
             if (c != null)
             {
                 AudioManager.instance.PlayCoin();
-                UIManager.instance.MoveCoinImg(coin.transform.position);
-                ParticleSystem particle = Instantiate(collectParticle, transform.position, Quaternion.identity);
-                particle.transform.parent = transform;
-                Destroy(coin.gameObject);
+                UIManager.instance.MoveCoinImg(coinCollider.transform.position);
+                PlayCollectParticleAt(transform.position);
+                Destroy(coinCollider.gameObject);
             }
         }
+    }
+
+    // Play or lazily create a pooled collect particle at given position
+    public void PlayCollectParticleAt(Vector3 pos)
+    {
+        if (collectParticle == null) return;
+
+        if (pooledCollectParticle == null)
+        {
+            pooledCollectParticle = Instantiate(collectParticle, pos, Quaternion.identity);
+            pooledCollectParticle.transform.parent = transform;
+        }
+        else
+        {
+            pooledCollectParticle.transform.position = pos;
+        }
+
+        pooledCollectParticle.Play();
     }
 
     //Instantiate Car
     public void InstantiateCar()
     {
         activeVehicle = Instantiate(vehiclePrefab[vehicleIndex],
-        new Vector3(lanePositions[currentLane], 0.065f, transform.position.z), Quaternion.identity);
+        new Vector3(lanePositions[currentLane],0.065f, transform.position.z), Quaternion.identity);
         activeVehicle.GetComponent<VehicleController>().SetupCar(carIndex, colorIndex);
     }
 
@@ -292,7 +321,7 @@ public class Player : MonoBehaviour
     public void InstantiateTank()
     {
         tank = Instantiate(tankPrefab,
-        new Vector3(lanePositions[currentLane], 0.065f, transform.position.z), Quaternion.identity);
+        new Vector3(lanePositions[currentLane],0.065f, transform.position.z), Quaternion.identity);
     }
 
     public void DestroyCar() => Destroy(activeVehicle);
@@ -306,7 +335,7 @@ public class Player : MonoBehaviour
         shiledParticle.SetActive(true);
         yield return new WaitForSeconds(3f);
         shiledParticle.SetActive(false);
-        controller.excludeLayers = 0;
+        controller.excludeLayers =0;
         isShielded = false;
     }
 
@@ -314,13 +343,13 @@ public class Player : MonoBehaviour
     public IEnumerator DeathBounce()
     {
         Vector3 startPosition = transform.position;
-        Vector3 endPosition = transform.position + Vector3.back * 5;
+        Vector3 endPosition = transform.position + Vector3.back *5;
 
-        float duration = 1f; // slightly longer for the hop
-        float elapsed = 0f;
+        float duration =1f; // slightly longer for the hop
+        float elapsed =0f;
  
 
-        float hopHeight = 2.5f; // how high the hop goes
+        float hopHeight =2.5f; // how high the hop goes
 
         while (elapsed < duration)
         {
@@ -356,8 +385,5 @@ public class Player : MonoBehaviour
         if (controller.isGrounded)
             AudioManager.instance.PlayFootstep();
     }
-    
-
-
 }
 
