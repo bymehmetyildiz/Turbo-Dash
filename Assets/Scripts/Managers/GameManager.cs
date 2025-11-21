@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using CrazyGames;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,6 +19,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject coinPrefab;
     [SerializeField] private int coinPerRow;
     [SerializeField] private float coinSpacing;
+
+    private void Awake()
+    {
+        CrazySDK.Init(() => { /** initialization finished callback */ });
+    }
 
     void Start()
     {
