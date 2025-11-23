@@ -76,6 +76,7 @@ private static extern int IsMobileBrowser();
     [Header("EndGame Menu")]
     [SerializeField] private TMP_Text endGameCoinText;
     [SerializeField] private TMP_Text endGameScoreText;
+    [SerializeField] private TMP_Text endGameButtonText;
     [SerializeField] private GameObject endGamePanel;
     [SerializeField] private GameObject adButton;
     [SerializeField] private GameObject restartButton;
@@ -93,7 +94,6 @@ private static extern int IsMobileBrowser();
     [Header("Settings Menu")]
     public RectTransform deleteSaveMenu;
 
-
     private void Awake()
     {
         if (instance == null)
@@ -103,6 +103,15 @@ private static extern int IsMobileBrowser();
     }
     void Start()
     {
+        if (CrazySDK.IsAvailable)
+        {
+            CrazySDK.Init(() =>
+            {
+                Debug.Log("CrazySDK initialized");
+            });
+        }
+
+
         SaveManager.instance.LoadGame();
 
         FadePanel.alpha = 1f;
@@ -123,11 +132,9 @@ private static extern int IsMobileBrowser();
         pauseMenu.gameObject.transform.localScale = Vector3.zero;
         settingsMenu.transform.localPosition = new Vector3(0, 1000, 0);
         settingsMenu.gameObject.SetActive(false);
-        controlsMenu.anchoredPosition = new Vector2(0, -1100);
+        controlsMenu.anchoredPosition = new Vector2(0, -1510);
 
         deleteSaveMenu.localScale = Vector2.zero;
-
-        CrazySDK.Game.GameplayStop();
 
         isControlsShown = PlayerPrefs.GetInt("IsControlShown", 0) == 1;
 
@@ -284,10 +291,21 @@ private static extern int IsMobileBrowser();
         CrazySDK.Game.HappyTime();
         AudioManager.instance.PlaySound(23);
         yield return new WaitForSeconds(1f);
-        if(tempCoin > 0)
+        if (tempCoin > 0)
+        {
             adButton.SetActive(true);
-        yield return new WaitForSeconds(2f);
-        restartButton.SetActive(true);
+            yield return new WaitForSeconds(0.5f);
+            restartButton.SetActive(true);
+            endGameButtonText.text = "No Thanks";
+        }
+        else
+        {
+            adButton.SetActive(false);            
+            restartButton.SetActive(true);
+            endGameButtonText.text = "Return";
+        }
+
+            
     }
 
 
@@ -438,9 +456,35 @@ private static extern int IsMobileBrowser();
             .SetUpdate(true)
             .OnComplete(() =>
             {
-                SaveManager.instance.SaveGame();
-                Time.timeScale = 1f;
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                int chance = Random.Range(0, 100); // 0-99
+                bool showAd = (chance < 50);       // 50% chance
+
+                if (showAd)
+                {
+                    CrazySDK.Ad.RequestAd(CrazyAdType.Midgame, () =>
+                    {
+                        // Ad started
+                    },
+                    (error) =>
+                    {
+                        SaveManager.instance.SaveGame();
+                        Time.timeScale = 1f;
+                        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                    },
+                    () =>
+                    {
+                        SaveManager.instance.SaveGame();
+                        Time.timeScale = 1f;
+                        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                    });
+                }
+                else
+                {
+                    // No ad
+                    SaveManager.instance.SaveGame();
+                    Time.timeScale = 1f;
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                }
             });
     }
 
@@ -504,7 +548,7 @@ isMobile = IsMobileBrowser() == 1;
         }
         else
         {
-            controlsMenu.DOAnchorPosY(-1100, 0.5f)
+            controlsMenu.DOAnchorPosY(-1510, 0.5f)
                .SetUpdate(true)
                .SetEase(Ease.InBack);
         }

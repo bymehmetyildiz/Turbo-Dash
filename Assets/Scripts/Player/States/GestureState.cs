@@ -47,8 +47,5 @@ public class GestureState : PlayerState
 
         if (triggerCalled)
             stateMachine.ChangeState(player.idleState);
-
-
-
     }
 }

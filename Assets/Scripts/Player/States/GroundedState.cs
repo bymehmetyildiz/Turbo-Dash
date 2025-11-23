@@ -30,23 +30,23 @@ public class GroundedState : PlayerState
         {
             player.verticalVelocity += player.gravity * Time.deltaTime;
         }
-        if (Input.GetKeyDown(KeyCode.J) && !player.isChangingLane && player.isStarted)
-        {
-            stateMachine.ChangeState(player.jetState);
-            AudioManager.instance.PlaySound(20);
-        }
-        else if (Input.GetKeyDown(KeyCode.K) && !player.isChangingLane && player.isStarted)
-        {
-            stateMachine.ChangeState(player.driveState);
-        }
-        else if (Input.GetKeyDown(KeyCode.H) && !player.isChangingLane && player.isStarted)
-        {
-            stateMachine.ChangeState(player.planeState);
-        }
-        else if (Input.GetKeyDown(KeyCode.T) && !player.isChangingLane && player.isStarted)
-        {
-            stateMachine.ChangeState(player.tankState);
-        }
+        //if (Input.GetKeyDown(KeyCode.J) && !player.isChangingLane && player.isStarted)
+        //{
+        //    stateMachine.ChangeState(player.jetState);
+        //    AudioManager.instance.PlaySound(20);
+        //}
+        //else if (Input.GetKeyDown(KeyCode.K) && !player.isChangingLane && player.isStarted)
+        //{
+        //    stateMachine.ChangeState(player.driveState);
+        //}
+        //else if (Input.GetKeyDown(KeyCode.H) && !player.isChangingLane && player.isStarted)
+        //{
+        //    stateMachine.ChangeState(player.planeState);
+        //}
+        //else if (Input.GetKeyDown(KeyCode.T) && !player.isChangingLane && player.isStarted)
+        //{
+        //    stateMachine.ChangeState(player.tankState);
+        //}
 
     }
 }

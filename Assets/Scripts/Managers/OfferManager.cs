@@ -7,7 +7,7 @@ public class OfferManager : MonoBehaviour
     private Player player;
 
     [SerializeField] private GameObject jet, tank, plane;
-    [SerializeField] private ParticleSystem offerEffect;
+    
 
     [Header("Offer Distances (meters)")]
     [SerializeField] private float jetInterval = 83f;
@@ -57,10 +57,7 @@ public class OfferManager : MonoBehaviour
 
     private IEnumerator ActivateOffer(GameObject offer)
     {
-        offer.SetActive(true);
-        offerEffect.gameObject.transform.parent = offer.transform;
-        offerEffect.gameObject.transform.localPosition = Vector3.zero;
-        offerEffect.Play();
+        offer.SetActive(true);       
         yield return new WaitForSeconds(5f);
         offer.SetActive(false);
     }
@@ -68,49 +65,67 @@ public class OfferManager : MonoBehaviour
     // State switchers
     public void SwitchToPlaneState()
     {
-        CrazySDK.Ad.RequestAd(CrazyAdType.Rewarded, () =>
-        {
-            // ad started
-        }, (error) =>
-        {
-            // ad error
-        }, () =>
-        {
-            if (player.isStarted && player.stateMachine.currentstate == player.moveState)
-                player.stateMachine.ChangeState(player.planeState);
-        });
+        CrazySDK.Ad.RequestAd(
+                CrazyAdType.Rewarded,
+                () =>
+                {
+                    Debug.Log("Rewarded ad started");
+                },
+                (error) =>
+                {
+                    Debug.Log("Rewarded ad error: " + error);
+                },
+                () =>
+                {
+                    if (player.isStarted && player.stateMachine.currentstate == player.moveState)
+                        player.stateMachine.ChangeState(player.planeState);
+                }
+        );
     }
 
     public void SwitchToJetState()
     {
-        CrazySDK.Ad.RequestAd(CrazyAdType.Rewarded, () => 
-        {
-            // ad started
-        }, (error) =>
-        {
-            // ad error
-        }, () =>
-        {
-            if (player.isStarted && player.stateMachine.currentstate == player.moveState)
-            {
-                player.stateMachine.ChangeState(player.jetState);
-                AudioManager.instance.PlaySound(20);
-            }
-        });
+        CrazySDK.Ad.RequestAd(
+                CrazyAdType.Rewarded,
+                () =>
+                {
+                    Debug.Log("Rewarded ad started");
+                },
+                (error) =>
+                {
+                    Debug.Log("Rewarded ad error: " + error);
+                },
+                () =>
+                {
+                    Debug.Log("Rewarded COMPLETED");
+                    if (player.isStarted && player.stateMachine.currentstate == player.moveState)
+                    {
+                        player.stateMachine.ChangeState(player.jetState);
+                        AudioManager.instance.PlaySound(20);
+                    }
+                }
+        );
+
     }
 
     public void SwitchToTankState()
     {
-        CrazySDK.Ad.RequestAd(CrazyAdType.Rewarded, () =>
-        {
-            // ad started
-        }, (error) =>
-        {
-            // ad error
-        }, () =>
-        {
-            if (player.isStarted && player.stateMachine.currentstate == player.moveState)
-                player.stateMachine.ChangeState(player.tankState);
-        });
+        CrazySDK.Ad.RequestAd(
+               CrazyAdType.Rewarded,
+               () =>
+               {
+                   Debug.Log("Rewarded ad started");
+               },
+               (error) =>
+               {
+                   Debug.Log("Rewarded ad error: " + error);
+               },
+               () =>
+               {
+                   Debug.Log("Rewarded COMPLETED");
+                   if (player.isStarted && player.stateMachine.currentstate == player.moveState)
+                       player.stateMachine.ChangeState(player.tankState);
+               }
+       );
     }
 }

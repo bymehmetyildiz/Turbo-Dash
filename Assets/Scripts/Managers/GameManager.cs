@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using CrazyGames;
+using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -20,17 +22,44 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int coinPerRow;
     [SerializeField] private float coinSpacing;
 
-    private void Awake()
-    {
-        CrazySDK.Init(() => { /** initialization finished callback */ });
-    }
+    public TMP_Text adblockText;
+
 
     void Start()
     {
+        if (CrazySDK.IsAvailable)
+        {
+            CrazySDK.Init(() =>
+            {
+                Debug.Log("CrazySDK initialized");
+            });
+            CheckAdblock();
+        }
+
+
         player = FindObjectOfType<Player>();
+        
     }
 
-    
+    private async void CheckAdblock()
+    {
+        if (MainDemoScene.UseAsyncMethods)
+        {
+            bool adblockPresent = await CrazySDK.Ad.HasAdblockAsync();
+            adblockText.text = "Has adblock: " + adblockPresent + " (async)";
+        }
+        else
+        {
+            CrazySDK.Ad.HasAdblock(
+                (adblockPresent) =>
+                {
+                    adblockText.text = "Has adblock: " + adblockPresent;
+                }
+            );
+        }
+    }
+
+
     void Update()
     {
         SpawnPlatform();

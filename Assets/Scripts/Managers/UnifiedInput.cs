@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public static class UnifiedInput
@@ -24,7 +25,7 @@ public static class UnifiedInput
 
     public static bool Fire =>
     Input.GetKeyDown(KeyCode.Mouse0) ||
-    Input.GetKeyDown(KeyCode.Space) ||
-    MobileInputController.instance.Tap;
+    MobileInputController.instance.Tap ||
+    Input.GetKeyDown(KeyCode.Space);
 
 }
