@@ -40,7 +40,7 @@ public class PlaneController : MonoBehaviour
         canDropBomb = false;
         AudioManager.instance.PlaySound(10);
         GameObject bombObject = Instantiate(bombPrefab, bomb.transform.position, Quaternion.Euler(-90,90,90));
-        bombObject.GetComponent<Projectile>().speed = 150;
+        bombObject.GetComponent<Projectile>().speed = 1.25f;
         bomb.SetActive(false);
         yield return new WaitForSeconds(player.planeReloadDur);
         bomb.SetActive(true);

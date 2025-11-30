@@ -22,9 +22,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int coinPerRow;
     [SerializeField] private float coinSpacing;
 
-    public TMP_Text adblockText;
-
-
     void Start()
     {
         if (CrazySDK.IsAvailable)
@@ -33,31 +30,30 @@ public class GameManager : MonoBehaviour
             {
                 Debug.Log("CrazySDK initialized");
             });
-            CheckAdblock();
+            //CheckAdblock();
         }
-
 
         player = FindObjectOfType<Player>();
         
     }
 
-    private async void CheckAdblock()
-    {
-        if (MainDemoScene.UseAsyncMethods)
-        {
-            bool adblockPresent = await CrazySDK.Ad.HasAdblockAsync();
-            adblockText.text = "Has adblock: " + adblockPresent + " (async)";
-        }
-        else
-        {
-            CrazySDK.Ad.HasAdblock(
-                (adblockPresent) =>
-                {
-                    adblockText.text = "Has adblock: " + adblockPresent;
-                }
-            );
-        }
-    }
+    //private async void CheckAdblock()
+    //{
+    //    if (MainDemoScene.UseAsyncMethods)
+    //    {
+    //        bool adblockPresent = await CrazySDK.Ad.HasAdblockAsync();
+    //        adblockText.text = "Has adblock: " + adblockPresent + " (async)";
+    //    }
+    //    else
+    //    {
+    //        CrazySDK.Ad.HasAdblock(
+    //            (adblockPresent) =>
+    //            {
+    //                adblockText.text = "Has adblock: " + adblockPresent;
+    //            }
+    //        );
+    //    }
+    //}
 
 
     void Update()

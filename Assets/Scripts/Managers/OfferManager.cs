@@ -65,6 +65,13 @@ public class OfferManager : MonoBehaviour
     // State switchers
     public void SwitchToPlaneState()
     {
+        if (player.isStarted && player.stateMachine.currentstate == player.moveState)
+        {
+            player.stateMachine.ChangeState(player.planeState);
+            plane.SetActive(false);
+        }
+
+        /*
         CrazySDK.Ad.RequestAd(
                 CrazyAdType.Rewarded,
                 () =>
@@ -80,11 +87,19 @@ public class OfferManager : MonoBehaviour
                     if (player.isStarted && player.stateMachine.currentstate == player.moveState)
                         player.stateMachine.ChangeState(player.planeState);
                 }
-        );
+        );*/
     }
 
     public void SwitchToJetState()
     {
+        if (player.isStarted && player.stateMachine.currentstate == player.moveState)
+        {
+            player.stateMachine.ChangeState(player.jetState);
+            AudioManager.instance.PlaySound(20);
+            jet.SetActive(false);
+        }
+
+        /*
         CrazySDK.Ad.RequestAd(
                 CrazyAdType.Rewarded,
                 () =>
@@ -105,11 +120,20 @@ public class OfferManager : MonoBehaviour
                     }
                 }
         );
+        */
 
     }
 
     public void SwitchToTankState()
     {
+        if (player.isStarted && player.stateMachine.currentstate == player.moveState)
+        {
+            player.stateMachine.ChangeState(player.tankState);
+            tank.SetActive(false);
+        }
+
+
+        /*
         CrazySDK.Ad.RequestAd(
                CrazyAdType.Rewarded,
                () =>
@@ -127,5 +151,6 @@ public class OfferManager : MonoBehaviour
                        player.stateMachine.ChangeState(player.tankState);
                }
        );
+        */
     }
 }
