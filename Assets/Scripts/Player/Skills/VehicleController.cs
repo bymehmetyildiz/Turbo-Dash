@@ -90,7 +90,7 @@ public class VehicleController : MonoBehaviour
         canShoot = false;
         AudioManager.instance.PlaySound(10);        
         GameObject bombObject = Instantiate(bomb, bombPos.position, Quaternion.Euler(-90, 90, 90));
-        bombObject.GetComponent<Projectile>().speed = 75;
+        bombObject.GetComponent<Projectile>().speed = 0.75f;
         yield return new WaitForSeconds(player.tankReloadDur);
         canShoot = true;
     }

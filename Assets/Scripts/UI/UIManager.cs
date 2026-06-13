@@ -237,9 +237,10 @@ private static extern int IsMobileBrowser();
         yield return new WaitForSeconds(3f);
         tempCoin = player.currentCoinAmount;
         endGamePanel.SetActive(true);
+        endGamePanel.SetActive(true);
         UpdateTotalCoin();
         endGameScoreText.text = distanceText.text;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
 
         int target = player.totalCoinAmount + player.currentCoinAmount;
         int totalToAdd = player.currentCoinAmount;
@@ -287,23 +288,23 @@ private static extern int IsMobileBrowser();
 
         currentCoinText.text = "0";
 
-        yield return new WaitForSeconds(1f);      
+        yield return new WaitForSeconds(0.5f);      
         CrazySDK.Game.HappyTime();
         AudioManager.instance.PlaySound(23);
-        yield return new WaitForSeconds(1f);
-        if (tempCoin > 0)
-        {
-            adButton.SetActive(true);
-            yield return new WaitForSeconds(0.5f);
-            restartButton.SetActive(true);
-            endGameButtonText.text = "No Thanks";
-        }
-        else
-        {
+        //yield return new WaitForSeconds(0.5f);
+        //if (tempCoin > 0)
+        //{
+        //    adButton.SetActive(true);
+        //    yield return new WaitForSeconds(0.5f);
+        //    restartButton.SetActive(true);
+        //    endGameButtonText.text = "No Thanks";
+        //}
+        //else
+        //{
             adButton.SetActive(false);            
             restartButton.SetActive(true);
             endGameButtonText.text = "Return";
-        }
+        //}
 
             
     }
@@ -456,35 +457,35 @@ private static extern int IsMobileBrowser();
             .SetUpdate(true)
             .OnComplete(() =>
             {
-                int chance = Random.Range(0, 100); // 0-99
-                bool showAd = (chance < 50);       // 50% chance
+                //int chance = Random.Range(0, 100); // 0-99
+                //bool showAd = (chance < 50);       // 50% chance
 
-                if (showAd)
-                {
-                    CrazySDK.Ad.RequestAd(CrazyAdType.Midgame, () =>
-                    {
-                        // Ad started
-                    },
-                    (error) =>
-                    {
-                        SaveManager.instance.SaveGame();
-                        Time.timeScale = 1f;
-                        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-                    },
-                    () =>
-                    {
-                        SaveManager.instance.SaveGame();
-                        Time.timeScale = 1f;
-                        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-                    });
-                }
-                else
-                {
+                //if (showAd)
+                //{
+                //    CrazySDK.Ad.RequestAd(CrazyAdType.Midgame, () =>
+                //    {
+                //        // Ad started
+                //    },
+                //    (error) =>
+                //    {
+                //        SaveManager.instance.SaveGame();
+                //        Time.timeScale = 1f;
+                //        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                //    },
+                //    () =>
+                //    {
+                //        SaveManager.instance.SaveGame();
+                //        Time.timeScale = 1f;
+                //        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                //    });
+                //}
+                //else
+                //{
                     // No ad
                     SaveManager.instance.SaveGame();
                     Time.timeScale = 1f;
                     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-                }
+                //}
             });
     }
 
