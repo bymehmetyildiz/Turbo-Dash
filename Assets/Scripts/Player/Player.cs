@@ -78,6 +78,21 @@ public class Player : MonoBehaviour
     public int totalCoinAmount;
     public ParticleSystem collectParticle;
 
+    [Header("Fun Feel")]
+    public int combo;
+    public int bestCombo;
+    public float comboTimeout = 2.5f;
+    public float magnetRadius = 3.5f;
+    public float magnetPullSpeed = 16f;
+    public float nearMissRadius = 1.05f;
+    public float nearMissCooldown = 0.35f;
+    public float rewardSpeedBoost = 2f;
+    public float rewardBoostDuration = 1.25f;
+    private float comboTimer;
+    private float nearMissTimer;
+    private float baseAnimSpeed = 1f;
+    private Coroutine rewardBoostCoroutine;
+
     [Header("Distance")]
     public int distanceTraveled;
     public int highScore;
@@ -140,6 +155,7 @@ public class Player : MonoBehaviour
             anim.speed += Time.deltaTime * 0.001f;
         }
 
+        TickFunFeel();
         CheckCoinOverlap();
     }
 
@@ -283,12 +299,115 @@ public class Player : MonoBehaviour
             Coin c = coinCollider.GetComponent<Coin>();
             if (c != null)
             {
-                AudioManager.instance.PlayCoin();
-                UIManager.instance.MoveCoinImg(coinCollider.transform.position);
-                PlayCollectParticleAt(transform.position);
-                Destroy(coinCollider.gameObject);
+                CollectCoin(c, coinCollider.transform.position);
             }
         }
+    }
+
+    public void CollectCoin(Coin coin, Vector3 worldPos)
+    {
+        if (coin == null)
+            return;
+
+        combo++;
+        comboTimer = comboTimeout;
+        bestCombo = Mathf.Max(bestCombo, combo);
+
+        AudioManager.instance.PlayCoin();
+        UIManager.instance.MoveCoinImg(worldPos);
+        PlayCollectParticleAt(transform.position);
+
+        if (combo > 0 && combo % 8 == 0)
+            StartRewardBoost();
+
+        Destroy(coin.gameObject);
+    }
+
+    public void RegisterNearMiss(Vector3 obstaclePosition)
+    {
+        if (!isStarted || isShielded || nearMissTimer > 0f)
+            return;
+
+        nearMissTimer = nearMissCooldown;
+        combo += 2;
+        comboTimer = comboTimeout;
+        bestCombo = Mathf.Max(bestCombo, combo);
+        PlayCollectParticleAt(obstaclePosition);
+
+        if (combo % 6 == 0)
+            StartRewardBoost();
+    }
+
+    public int GetCoinRewardAmount()
+    {
+        if (combo >= 24)
+            return 4;
+
+        if (combo >= 16)
+            return 3;
+
+        if (combo >= 8)
+            return 2;
+
+        return 1;
+    }
+
+    private void TickFunFeel()
+    {
+        if (nearMissTimer > 0f)
+            nearMissTimer -= Time.deltaTime;
+
+        if (!isStarted)
+            return;
+
+        if (comboTimer > 0f)
+        {
+            comboTimer -= Time.deltaTime;
+            if (comboTimer <= 0f)
+                combo = 0;
+        }
+
+        PullNearbyCoins();
+    }
+
+    private void PullNearbyCoins()
+    {
+        int count = Physics.OverlapSphereNonAlloc(transform.position, magnetRadius, coinOverlapBuffer, coinLayerMask);
+
+        for (int i = 0; i < count; i++)
+        {
+            Collider coinCollider = coinOverlapBuffer[i];
+            if (coinCollider == null)
+                continue;
+
+            coinCollider.transform.position = Vector3.MoveTowards(
+                coinCollider.transform.position,
+                transform.position + Vector3.up * 0.35f,
+                magnetPullSpeed * Time.deltaTime
+            );
+        }
+    }
+
+    private void StartRewardBoost()
+    {
+        if (rewardBoostCoroutine != null)
+            StopCoroutine(rewardBoostCoroutine);
+
+        rewardBoostCoroutine = StartCoroutine(RewardBoost());
+    }
+
+    private IEnumerator RewardBoost()
+    {
+        float originalSpeed = moveSpeed;
+        baseAnimSpeed = Mathf.Max(1f, anim.speed);
+        moveSpeed += rewardSpeedBoost;
+        anim.speed = baseAnimSpeed * 1.08f;
+
+        yield return new WaitForSeconds(rewardBoostDuration);
+
+        moveSpeed = Mathf.Max(originalSpeed, moveSpeed - rewardSpeedBoost);
+        anim.speed = baseAnimSpeed;
+        rewardBoostCoroutine = null;
     }
 
     // Play or lazily create a pooled collect particle at given position

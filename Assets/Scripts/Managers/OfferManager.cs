@@ -7,6 +7,7 @@ public class OfferManager : MonoBehaviour
     private Player player;
 
     [SerializeField] private GameObject jet, tank, plane;
+    [SerializeField] private bool requireRewardedAdForOffers = false;
     
 
     [Header("Offer Distances (meters)")]
@@ -65,67 +66,44 @@ public class OfferManager : MonoBehaviour
     // State switchers
     public void SwitchToPlaneState()
     {
-        CrazySDK.Ad.RequestAd(
-                CrazyAdType.Rewarded,
-                () =>
-                {
-                    Debug.Log("Rewarded ad started");
-                },
-                (error) =>
-                {
-                    Debug.Log("Rewarded ad error: " + error);
-                },
-                () =>
-                {
-                    if (player.isStarted && player.stateMachine.currentstate == player.moveState)
-                        player.stateMachine.ChangeState(player.planeState);
-                }
-        );
+        ActivateOfferPower(() => player.stateMachine.ChangeState(player.planeState));
     }
 
     public void SwitchToJetState()
     {
-        CrazySDK.Ad.RequestAd(
-                CrazyAdType.Rewarded,
-                () =>
-                {
-                    Debug.Log("Rewarded ad started");
-                },
-                (error) =>
-                {
-                    Debug.Log("Rewarded ad error: " + error);
-                },
-                () =>
-                {
-                    Debug.Log("Rewarded COMPLETED");
-                    if (player.isStarted && player.stateMachine.currentstate == player.moveState)
-                    {
-                        player.stateMachine.ChangeState(player.jetState);
-                        AudioManager.instance.PlaySound(20);
-                    }
-                }
-        );
+        ActivateOfferPower(() =>
+        {
+            player.stateMachine.ChangeState(player.jetState);
+            AudioManager.instance.PlaySound(20);
+        });
 
     }
 
     public void SwitchToTankState()
     {
+        ActivateOfferPower(() => player.stateMachine.ChangeState(player.tankState));
+    }
+
+    private void ActivateOfferPower(System.Action activate)
+    {
+        if (!player.isStarted || player.stateMachine.currentstate != player.moveState)
+            return;
+
+        if (!requireRewardedAdForOffers || !CrazySDK.IsAvailable)
+        {
+            activate?.Invoke();
+            return;
+        }
+
         CrazySDK.Ad.RequestAd(
-               CrazyAdType.Rewarded,
-               () =>
-               {
-                   Debug.Log("Rewarded ad started");
-               },
-               (error) =>
-               {
-                   Debug.Log("Rewarded ad error: " + error);
-               },
-               () =>
-               {
-                   Debug.Log("Rewarded COMPLETED");
-                   if (player.isStarted && player.stateMachine.currentstate == player.moveState)
-                       player.stateMachine.ChangeState(player.tankState);
-               }
-       );
+            CrazyAdType.Rewarded,
+            () => Debug.Log("Rewarded ad started"),
+            (error) => Debug.Log("Rewarded ad error: " + error),
+            () =>
+            {
+                if (player.isStarted && player.stateMachine.currentstate == player.moveState)
+                    activate?.Invoke();
+            }
+        );
     }
 }

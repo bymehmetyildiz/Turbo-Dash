@@ -16,7 +16,8 @@ public class PlaneController : MonoBehaviour
     void Start()
     {
         canDropBomb = true;
-        bomb.SetActive(true);
+        if (bomb != null)
+            bomb.SetActive(true);
     }
 
     void OnEnable()
@@ -28,7 +29,8 @@ public class PlaneController : MonoBehaviour
 
     void Update()
     {
-        prop.transform.Rotate(0, 0, propSpeed * Time.deltaTime);
+        if (prop != null)
+            prop.transform.Rotate(0, 0, propSpeed * Time.deltaTime);
 
         if (UnifiedInput.Fire && canDropBomb)
             StartCoroutine(ReleaseBomb());
@@ -38,12 +40,56 @@ public class PlaneController : MonoBehaviour
     private IEnumerator ReleaseBomb()
     {
         canDropBomb = false;
-        AudioManager.instance.PlaySound(10);
-        GameObject bombObject = Instantiate(bombPrefab, bomb.transform.position, Quaternion.Euler(-90,90,90));
-        bombObject.GetComponent<Projectile>().speed = 150;
-        bomb.SetActive(false);
+
+        // Ensure player reference
+        if (player == null)
+        {
+            player = Player.instance;
+            if (player == null)
+            {
+                Debug.LogWarning("PlaneController.ReleaseBomb: Player.instance is null. Aborting bomb release.");
+                canDropBomb = true;
+                yield break;
+            }
+        }
+
+        // Ensure bombPrefab reference
+        if (bombPrefab == null)
+        {
+            Debug.LogWarning("PlaneController.ReleaseBomb: bombPrefab is null. Aborting bomb release.");
+            canDropBomb = true;
+            yield break;
+        }
+
+        // Ensure bomb reference
+        Vector3 spawnPosition = bomb != null ? bomb.transform.position : transform.position;
+
+        GameObject bombObject = Instantiate(bombPrefab, spawnPosition, Quaternion.Euler(-90, 90, 90));
+        if (bombObject != null)
+        {
+            Projectile projectile = bombObject.GetComponent<Projectile>();
+            if (projectile != null)
+            {
+                projectile.speed = 150;
+            }
+            else
+            {
+                Debug.LogWarning("PlaneController.ReleaseBomb: bombPrefab is missing Projectile component.");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("PlaneController.ReleaseBomb: Instantiate returned null.");
+        }
+
+        if (bomb != null)
+            bomb.SetActive(false);
+
         yield return new WaitForSeconds(player.planeReloadDur);
-        bomb.SetActive(true);
+
+        if (bomb != null)
+            bomb.SetActive(true);
+
         canDropBomb = true;
     }
 }

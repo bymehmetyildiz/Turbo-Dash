@@ -18,6 +18,7 @@ public class Obstacles : MonoBehaviour
     private bool isShooting;
 
     public AudioSource collapse;
+    private bool nearMissAwarded;
 
     private void Start()
     {
@@ -91,6 +92,8 @@ public class Obstacles : MonoBehaviour
         if (obstacleType == ObstacleType.Armed && player.isStarted && IsPlayerDetected() && !isShooting)
             StartCoroutine(Shoot());
 
+        CheckNearMiss();
+
     }
 
     private bool IsPlayerPast()
@@ -134,6 +137,23 @@ public class Obstacles : MonoBehaviour
         }
 
         return false;
+    }
+
+    private void CheckNearMiss()
+    {
+        if (nearMissAwarded || player == null || !player.isStarted)
+            return;
+
+        float zDelta = transform.position.z - player.transform.position.z;
+        if (zDelta < -1.25f || zDelta > 1.25f)
+            return;
+
+        float xDelta = Mathf.Abs(transform.position.x - player.transform.position.x);
+        if (xDelta > player.nearMissRadius && xDelta < 1.85f)
+        {
+            nearMissAwarded = true;
+            player.RegisterNearMiss(transform.position);
+        }
     }
 
  

@@ -133,10 +133,7 @@ public class VehicleController : MonoBehaviour
             Coin c = coin.GetComponent<Coin>();
             if (c != null)
             {
-                UIManager.instance.MoveCoinImg(coin.transform.position);
-                AudioManager.instance.PlayCoin();
-                player.PlayCollectParticleAt(player.transform.position);
-                Destroy(coin.gameObject);
+                player.CollectCoin(c, coin.transform.position);
             }
         }
     }

@@ -581,8 +581,13 @@ isMobile = IsMobileBrowser() == 1;
         // Animate it to target (coin counter UI in top-left)
         coin.DOMove(target.position, 0.5f).SetEase(Ease.InQuad).OnComplete(() =>
         {
-            player.currentCoinAmount++;
+            int reward = player.GetCoinRewardAmount();
+            player.currentCoinAmount += reward;
             currentCoinText.text = NumberFormatter.FormatNumber(player.currentCoinAmount);
+
+            if (player.combo >= 8)
+                currentCoinText.text += "  x" + reward;
+
             Destroy(coin.gameObject);
         });
     }
