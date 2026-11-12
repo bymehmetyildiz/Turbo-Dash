@@ -4,31 +4,26 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
-    private Player player;
-
-    private void Start()
-    {
-        player = FindObjectOfType<Player>();
-    }
-
     private void Update()
     {
         transform.Rotate(0f, 180 * Time.deltaTime, 0f);
 
         if(IsPlayerPast())
-            Destroy(gameObject);
+            Release();
     }
 
     private bool IsPlayerPast()
     {
-        if (player.transform.position.z > transform.position.z + 15)
-            return true;
-
-        return false;
+        Player player = Player.instance;
+        return player != null && player.transform.position.z > transform.position.z + 15;
     }
 
-  
-
+    // Coins go back to the pool instead of being destroyed
+    public void Release()
+    {
+        if (GameManager.Instance != null)
+            GameManager.Instance.ReleaseCoin(gameObject);
+        else
+            Destroy(gameObject);
+    }
 }
-
-

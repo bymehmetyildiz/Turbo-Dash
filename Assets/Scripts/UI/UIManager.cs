@@ -3,6 +3,7 @@ using TMPro;
 using DG.Tweening;
 using Cinemachine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Runtime.InteropServices;
@@ -84,6 +85,7 @@ private static extern int IsMobileBrowser();
     [SerializeField] private ParticleSystem confetti;
     private int tempCoin;
     private bool isNewBestScore;
+    private readonly Stack<RectTransform> uiCoinPool = new Stack<RectTransform>(); // reused fly-to-counter icons
     private bool watchedRewardedAd;
 
     [Header("Controls Menu")]
@@ -612,7 +614,14 @@ isMobile = IsMobileBrowser() == 1;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(parentRect, screenPos, uiCamera, out Vector2 localPos);
 
         // Instantiate the coin at this position
-        RectTransform coin = Instantiate(coinImgPrefab, coinParent.transform).GetComponent<RectTransform>();
+        RectTransform coin = null;
+        while (uiCoinPool.Count > 0 && coin == null)
+            coin = uiCoinPool.Pop();
+
+        if (coin == null)
+            coin = Instantiate(coinImgPrefab, coinParent.transform).GetComponent<RectTransform>();
+
+        coin.gameObject.SetActive(true);
         coin.localPosition = localPos;
 
         // Animate it to target (coin counter UI in top-left)
@@ -625,7 +634,8 @@ isMobile = IsMobileBrowser() == 1;
             if (reward > 1)
                 currentCoinText.text += "  x" + reward;
 
-            Destroy(coin.gameObject);
+            coin.gameObject.SetActive(false);
+            uiCoinPool.Push(coin);
         });
     }
 

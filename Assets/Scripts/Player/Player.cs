@@ -118,6 +118,9 @@ public class Player : MonoBehaviour
 
     // --- Optimization fields ---
     private int coinLayerMask;
+    private int obstacleMask;
+    private bool distanceTextDirty;
+    private float nextDistanceTextTime;
     private Collider[] coinOverlapBuffer = new Collider[32];
     private ParticleSystem pooledCollectParticle;
 
@@ -147,6 +150,7 @@ public class Player : MonoBehaviour
 
         // cache layer mask to avoid calling GetMask every frame
         coinLayerMask = LayerMask.GetMask("Coin");
+        obstacleMask = LayerMask.GetMask("Obstacle");
     }
 
     void Start()
@@ -176,6 +180,15 @@ public class Player : MonoBehaviour
             anim.speed = Mathf.Lerp(1f, maxAnimSpeed, Difficulty01) * (boostTimer > 0f ? 1.08f : 1f);
 
             UpdateDistance();
+        }
+
+        // The distance changes every frame, but rewriting the label rebuilds the UI mesh.
+        // Ten updates a second look the same; the final value is always written once the run ends.
+        if (distanceTextDirty && (!isStarted || Time.unscaledTime >= nextDistanceTextTime))
+        {
+            distanceTextDirty = false;
+            nextDistanceTextTime = Time.unscaledTime + 0.1f;
+            UIManager.instance.distanceText.text = NumberFormatter.FormatNumber(distanceTraveled) + " m";
         }
 
         TickFunFeel();
@@ -266,7 +279,7 @@ public class Player : MonoBehaviour
         if (meters > distanceTraveled)
         {
             distanceTraveled = meters;
-            UIManager.instance.distanceText.text = NumberFormatter.FormatNumber(distanceTraveled) + " m";
+            distanceTextDirty = true;
         }
     }
 
@@ -347,7 +360,7 @@ public class Player : MonoBehaviour
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
         //0) Fast layer/tag bailouts
-        int obstacleMask = LayerMask.GetMask("Obstacle");
+        // (mask is cached: this callback also fires for the ground, every frame)
         if (((1 << hit.collider.gameObject.layer) & obstacleMask) ==0)
             return;
 
@@ -418,7 +431,7 @@ public class Player : MonoBehaviour
 
     public void CollectCoin(Coin coin, Vector3 worldPos)
     {
-        if (coin == null)
+        if (coin == null || !coin.gameObject.activeSelf)
             return;
 
         combo++;
@@ -432,7 +445,7 @@ public class Player : MonoBehaviour
         if (combo % comboPerBoost == 0)
             StartRewardBoost();
 
-        Destroy(coin.gameObject);
+        coin.Release();
     }
 
     public void RegisterNearMiss(Vector3 obstaclePosition)

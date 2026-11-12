@@ -35,9 +35,40 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int coinPerRow;
     [SerializeField] private float coinSpacing;
 
+    // Coin pool: a row is 10 coins every ~1 second, so creating and destroying them was a steady source of hitches
+    public static GameManager Instance { get; private set; }
+    private readonly Stack<GameObject> coinPool = new Stack<GameObject>();
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
+    private void SpawnPooledCoin(Vector3 pos)
+    {
+        GameObject coin = null;
+        while (coinPool.Count > 0 && coin == null)
+            coin = coinPool.Pop();
+
+        if (coin == null)
+            coin = Instantiate(coinPrefab);
+
+        coin.transform.SetPositionAndRotation(pos, Quaternion.identity);
+        coin.SetActive(true);
+    }
+
+    public void ReleaseCoin(GameObject coin)
+    {
+        if (coin == null || !coin.activeSelf)
+            return;
+
+        coin.SetActive(false);
+        coinPool.Push(coin);
+    }
+
     void Start()
     {
-        player = FindObjectOfType<Player>();
+        player = Player.instance != null ? Player.instance : FindObjectOfType<Player>();
 
         foreach (GameObject obstacle in obstacles)
         {
@@ -205,7 +236,7 @@ public class GameManager : MonoBehaviour
             }
 
             Vector3 pos = new Vector3(lanes[laneIndex], 1f, zPos + i * coinSpacing);
-            Instantiate(coinPrefab, pos, Quaternion.identity);
+            SpawnPooledCoin(pos);
         }
     }
 
@@ -250,7 +281,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < coinPerRow; i++)
         {
             Vector3 pos = spawnPos + new Vector3(0, 0, i * coinSpacing);
-            Instantiate(coinPrefab, pos, Quaternion.identity);
+            SpawnPooledCoin(pos);
         }
 
     }
@@ -266,7 +297,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < coinPerRow; i++)
         {
             Vector3 pos = spawnPos + new Vector3(0, 0, i * coinSpacing);
-            Instantiate(coinPrefab, pos, Quaternion.identity);
+            SpawnPooledCoin(pos);
         }
     }
 

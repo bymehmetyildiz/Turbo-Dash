@@ -20,7 +20,7 @@ public class Planes : MonoBehaviour
 
     void Start()
     {
-        player = FindObjectOfType<Player>();
+        player = Player.instance;
     }
 
     void Update()

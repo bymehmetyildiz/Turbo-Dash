@@ -30,7 +30,7 @@ public class Obstacles : MonoBehaviour
             rb.isKinematic = true;
         }
 
-        player = FindObjectOfType<Player>();
+        player = Player.instance;
         anim = GetComponentInChildren<Animator>();
     
     }

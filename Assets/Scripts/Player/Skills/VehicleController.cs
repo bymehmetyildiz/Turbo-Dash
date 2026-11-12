@@ -40,7 +40,7 @@ public class VehicleController : MonoBehaviour
 
     private void Start()
     {
-        player = FindObjectOfType<Player>();
+        player = Player.instance;
         currentLane = player.currentLane;
         coinLayerMask = LayerMask.GetMask("Coin");
     }
