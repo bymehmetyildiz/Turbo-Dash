@@ -68,41 +68,41 @@ public class UpdateManager : MonoBehaviour
     private void LoadUpgradeState()
     {
         // Durations / reloads (fallback = whatever is already on the player)
-        player.carDriveDur = PlayerPrefs.GetFloat(CarDurKey, player.carDriveDur);
-        player.jetDriveDur = PlayerPrefs.GetFloat(JetDurKey, player.jetDriveDur);
-        player.tankDriveDur = PlayerPrefs.GetFloat(TankDurKey, player.tankDriveDur);
-        player.tankReloadDur = PlayerPrefs.GetFloat(TankReloadKey, player.tankReloadDur);
-        player.planeFlyDur = PlayerPrefs.GetFloat(PlaneDurKey, player.planeFlyDur);
-        player.planeReloadDur = PlayerPrefs.GetFloat(PlaneReloadKey, player.planeReloadDur);
+        player.carDriveDur = GameData.GetFloat(CarDurKey, player.carDriveDur);
+        player.jetDriveDur = GameData.GetFloat(JetDurKey, player.jetDriveDur);
+        player.tankDriveDur = GameData.GetFloat(TankDurKey, player.tankDriveDur);
+        player.tankReloadDur = GameData.GetFloat(TankReloadKey, player.tankReloadDur);
+        player.planeFlyDur = GameData.GetFloat(PlaneDurKey, player.planeFlyDur);
+        player.planeReloadDur = GameData.GetFloat(PlaneReloadKey, player.planeReloadDur);
 
         // Prices (fallback = the serialized defaults set in the Inspector)
-        currentCarPrice = PlayerPrefs.GetInt(PriceCarKey, currentCarPrice);
-        currentJetPrice = PlayerPrefs.GetInt(PriceJetKey, currentJetPrice);
-        currentTankPrice = PlayerPrefs.GetInt(PriceTankKey, currentTankPrice);
-        currentTankReloadPrice = PlayerPrefs.GetInt(PriceTankReloadKey, currentTankReloadPrice);
-        currentPlanePrice = PlayerPrefs.GetInt(PricePlaneKey, currentPlanePrice);
-        currentPlaneReloadPrice = PlayerPrefs.GetInt(PricePlaneReloadKey, currentPlaneReloadPrice);
+        currentCarPrice = GameData.GetInt(PriceCarKey, currentCarPrice);
+        currentJetPrice = GameData.GetInt(PriceJetKey, currentJetPrice);
+        currentTankPrice = GameData.GetInt(PriceTankKey, currentTankPrice);
+        currentTankReloadPrice = GameData.GetInt(PriceTankReloadKey, currentTankReloadPrice);
+        currentPlanePrice = GameData.GetInt(PricePlaneKey, currentPlanePrice);
+        currentPlaneReloadPrice = GameData.GetInt(PricePlaneReloadKey, currentPlaneReloadPrice);
     }
 
     private void SaveUpgradeState()
     {
         // Durations / reloads
-        PlayerPrefs.SetFloat(CarDurKey, player.carDriveDur);
-        PlayerPrefs.SetFloat(JetDurKey, player.jetDriveDur);
-        PlayerPrefs.SetFloat(TankDurKey, player.tankDriveDur);
-        PlayerPrefs.SetFloat(TankReloadKey, player.tankReloadDur);
-        PlayerPrefs.SetFloat(PlaneDurKey, player.planeFlyDur);
-        PlayerPrefs.SetFloat(PlaneReloadKey, player.planeReloadDur);
+        GameData.SetFloat(CarDurKey, player.carDriveDur);
+        GameData.SetFloat(JetDurKey, player.jetDriveDur);
+        GameData.SetFloat(TankDurKey, player.tankDriveDur);
+        GameData.SetFloat(TankReloadKey, player.tankReloadDur);
+        GameData.SetFloat(PlaneDurKey, player.planeFlyDur);
+        GameData.SetFloat(PlaneReloadKey, player.planeReloadDur);
 
         // Current prices
-        PlayerPrefs.SetInt(PriceCarKey, currentCarPrice);
-        PlayerPrefs.SetInt(PriceJetKey, currentJetPrice);
-        PlayerPrefs.SetInt(PriceTankKey, currentTankPrice);
-        PlayerPrefs.SetInt(PriceTankReloadKey, currentTankReloadPrice);
-        PlayerPrefs.SetInt(PricePlaneKey, currentPlanePrice);
-        PlayerPrefs.SetInt(PricePlaneReloadKey, currentPlaneReloadPrice);
+        GameData.SetInt(PriceCarKey, currentCarPrice);
+        GameData.SetInt(PriceJetKey, currentJetPrice);
+        GameData.SetInt(PriceTankKey, currentTankPrice);
+        GameData.SetInt(PriceTankReloadKey, currentTankReloadPrice);
+        GameData.SetInt(PricePlaneKey, currentPlanePrice);
+        GameData.SetInt(PricePlaneReloadKey, currentPlaneReloadPrice);
 
-        PlayerPrefs.Save();
+        GameData.Save();
     }
 
     private void RecomputeNextPrices()
@@ -244,21 +244,21 @@ public class UpdateManager : MonoBehaviour
     [ContextMenu("Reset Upgrades (Keep Coins)")]
     private void ResetUpgrades()
     {
-        PlayerPrefs.DeleteKey(CarDurKey);
-        PlayerPrefs.DeleteKey(JetDurKey);
-        PlayerPrefs.DeleteKey(TankDurKey);
-        PlayerPrefs.DeleteKey(TankReloadKey);
-        PlayerPrefs.DeleteKey(PlaneDurKey);
-        PlayerPrefs.DeleteKey(PlaneReloadKey);
+        GameData.DeleteKey(CarDurKey);
+        GameData.DeleteKey(JetDurKey);
+        GameData.DeleteKey(TankDurKey);
+        GameData.DeleteKey(TankReloadKey);
+        GameData.DeleteKey(PlaneDurKey);
+        GameData.DeleteKey(PlaneReloadKey);
 
-        PlayerPrefs.DeleteKey(PriceCarKey);
-        PlayerPrefs.DeleteKey(PriceJetKey);
-        PlayerPrefs.DeleteKey(PriceTankKey);
-        PlayerPrefs.DeleteKey(PriceTankReloadKey);
-        PlayerPrefs.DeleteKey(PricePlaneKey);
-        PlayerPrefs.DeleteKey(PricePlaneReloadKey);
+        GameData.DeleteKey(PriceCarKey);
+        GameData.DeleteKey(PriceJetKey);
+        GameData.DeleteKey(PriceTankKey);
+        GameData.DeleteKey(PriceTankReloadKey);
+        GameData.DeleteKey(PricePlaneKey);
+        GameData.DeleteKey(PricePlaneReloadKey);
 
-        PlayerPrefs.Save();
+        GameData.Save();
         LoadUpgradeState();
         RecomputeNextPrices();
         RefreshAllTexts();

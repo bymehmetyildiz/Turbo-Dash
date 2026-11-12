@@ -44,7 +44,7 @@ public class GarageController : MonoBehaviour
         LoadAllVehiclesFromPrefs();
 
         // Restore last viewed index (clamped)
-        index = Mathf.Clamp(PlayerPrefs.GetInt(KEY_LAST_INDEX, 0), 0, vehicle.Length - 1);
+        index = Mathf.Clamp(GameData.GetInt(KEY_LAST_INDEX, 0), 0, vehicle.Length - 1);
 
         vehicle[index].SetActive(true);
         activeVehicle = vehicle[index];
@@ -68,18 +68,18 @@ public class GarageController : MonoBehaviour
 
             // Default unlock for vehicle 0
             bool defaultUnlocked = (i == 0);
-            v.isUnlocked = PlayerPrefs.GetInt(K_Unlocked(i), defaultUnlocked ? 1 : 0) == 1;
+            v.isUnlocked = GameData.GetInt(K_Unlocked(i), defaultUnlocked ? 1 : 0) == 1;
 
             // If nothing equipped yet, auto-equip vehicle 0 on first boot
-            int defaultEquipped = (i == 0 && PlayerPrefs.HasKey(K_Equipped(0)) == false) ? 1 : 0;
-            v.isEquipped = PlayerPrefs.GetInt(K_Equipped(i), defaultEquipped) == 1;
+            int defaultEquipped = (i == 0 && GameData.HasKey(K_Equipped(0)) == false) ? 1 : 0;
+            v.isEquipped = GameData.GetInt(K_Equipped(i), defaultEquipped) == 1;
 
             // Upgrade level and price
-            v.carIndex = PlayerPrefs.GetInt(K_CarIndex(i), v.carIndex);
-            v.upgradePrice = PlayerPrefs.GetInt(K_UpgradePrice(i), v.upgradePrice);
+            v.carIndex = GameData.GetInt(K_CarIndex(i), v.carIndex);
+            v.upgradePrice = GameData.GetInt(K_UpgradePrice(i), v.upgradePrice);
 
             // Saved color
-            v.colorIndex = PlayerPrefs.GetInt(K_ColorIndex(i), v.colorIndex);
+            v.colorIndex = GameData.GetInt(K_ColorIndex(i), v.colorIndex);
 
             // Apply visuals to match saved upgrade + color
             v.SetupCar(v.carIndex, v.colorIndex);
@@ -92,12 +92,12 @@ public class GarageController : MonoBehaviour
     private void SaveVehicleToPrefs(int i)
     {
         var v = vehicle[i].GetComponent<Vehicle>();
-        PlayerPrefs.SetInt(K_Unlocked(i), v.isUnlocked ? 1 : 0);
-        PlayerPrefs.SetInt(K_Equipped(i), v.isEquipped ? 1 : 0);
-        PlayerPrefs.SetInt(K_CarIndex(i), v.carIndex);
-        PlayerPrefs.SetInt(K_UpgradePrice(i), v.upgradePrice);
-        PlayerPrefs.SetInt(K_ColorIndex(i), v.colorIndex);
-        PlayerPrefs.Save();
+        GameData.SetInt(K_Unlocked(i), v.isUnlocked ? 1 : 0);
+        GameData.SetInt(K_Equipped(i), v.isEquipped ? 1 : 0);
+        GameData.SetInt(K_CarIndex(i), v.carIndex);
+        GameData.SetInt(K_UpgradePrice(i), v.upgradePrice);
+        GameData.SetInt(K_ColorIndex(i), v.colorIndex);
+        GameData.Save();
     }
 
     private void SaveAllToPrefs()
@@ -105,8 +105,8 @@ public class GarageController : MonoBehaviour
         for (int i = 0; i < vehicle.Length; i++)
             SaveVehicleToPrefs(i);
 
-        PlayerPrefs.SetInt(KEY_LAST_INDEX, index);
-        PlayerPrefs.Save();
+        GameData.SetInt(KEY_LAST_INDEX, index);
+        GameData.Save();
     }
 
     private void EnsureSingleEquipped()
@@ -195,8 +195,8 @@ public class GarageController : MonoBehaviour
         dropdownController.dropdown.RefreshShownValue();
 
         // Save current selection
-        PlayerPrefs.SetInt(KEY_LAST_INDEX, index);
-        PlayerPrefs.Save();
+        GameData.SetInt(KEY_LAST_INDEX, index);
+        GameData.Save();
     }
 
     public void SelectColor()
@@ -309,8 +309,8 @@ public class GarageController : MonoBehaviour
 
             // Persist
             for (int i = 0; i < vehicle.Length; i++) SaveVehicleToPrefs(i);
-            PlayerPrefs.SetInt(KEY_LAST_INDEX, index);
-            PlayerPrefs.Save();
+            GameData.SetInt(KEY_LAST_INDEX, index);
+            GameData.Save();
             SaveManager.instance?.SaveGame();
         }
     }

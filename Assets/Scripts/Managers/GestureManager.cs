@@ -47,26 +47,26 @@ public class GestureManager : MonoBehaviour
         foreach (var g in gestures)
         {
             // Default is locked (0). No auto-owning any ID.
-            g.isOwned = PlayerPrefs.GetInt(K_Owned(g.gestureID), 0) == 1;
+            g.isOwned = GameData.GetInt(K_Owned(g.gestureID), 0) == 1;
             g.isPlaying = false;
         }
 
         // (Optional) restore last selected gesture id
-        int lastId = PlayerPrefs.GetInt(K_LastSelected, -1);
+        int lastId = GameData.GetInt(K_LastSelected, -1);
         currentGesture = GetGestureById(lastId);
     }
 
 
     private void SaveGestureOwned(Gesture g)
     {
-        PlayerPrefs.SetInt(K_Owned(g.gestureID), g.isOwned ? 1 : 0);
-        PlayerPrefs.Save();
+        GameData.SetInt(K_Owned(g.gestureID), g.isOwned ? 1 : 0);
+        GameData.Save();
     }
 
     private void SaveLastSelected(Gesture g)
     {
-        PlayerPrefs.SetInt(K_LastSelected, g.gestureID);
-        PlayerPrefs.Save();
+        GameData.SetInt(K_LastSelected, g.gestureID);
+        GameData.Save();
     }
 
     // -------------------- UI HELPERS --------------------
@@ -179,12 +179,12 @@ public class GestureManager : MonoBehaviour
 
         foreach (var g in gestures)
         {
-            PlayerPrefs.DeleteKey(K_Owned(g.gestureID));
+            GameData.DeleteKey(K_Owned(g.gestureID));
             g.isOwned = (g.gestureID == 0); // back to default free for id 0
             g.isPlaying = false;
         }
-        PlayerPrefs.DeleteKey(K_LastSelected);
-        PlayerPrefs.Save();
+        GameData.DeleteKey(K_LastSelected);
+        GameData.Save();
 
         RefreshAllGestureUI();
     }
@@ -197,10 +197,10 @@ public class GestureManager : MonoBehaviour
 
         // Delete only keys that correspond to actual gestures
         foreach (var g in gestures)
-            PlayerPrefs.DeleteKey(K_Owned(g.gestureID));
+            GameData.DeleteKey(K_Owned(g.gestureID));
 
-        PlayerPrefs.DeleteKey(K_LastSelected);
-        PlayerPrefs.Save();
+        GameData.DeleteKey(K_LastSelected);
+        GameData.Save();
 
         // Reset runtime: all locked, none playing
         foreach (var g in gestures)

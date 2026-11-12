@@ -19,19 +19,19 @@ public class SaveManager : MonoBehaviour
             return;
         }
       
-        PlayerPrefs.SetFloat("TankReloadDur", p.tankReloadDur);
-        PlayerPrefs.SetFloat("PlaneReloadDur", p.planeReloadDur);
-        PlayerPrefs.SetInt("VehicleIndex", p.vehicleIndex);
-        PlayerPrefs.SetInt("CarIndex", p.carIndex);
-        PlayerPrefs.SetInt("ColorIndex", p.colorIndex);
-        PlayerPrefs.SetFloat("CarDriveDur", p.carDriveDur);
-        PlayerPrefs.SetFloat("JetDriveDur", p.jetDriveDur);
-        PlayerPrefs.SetFloat("TankDriveDur", p.tankDriveDur);
-        PlayerPrefs.SetFloat("PlaneFlyDur", p.planeFlyDur);
-        PlayerPrefs.SetInt("TotalCoinAmount", p.totalCoinAmount);
-        PlayerPrefs.SetInt("IsControlShown", UIManager.instance != null && UIManager.instance.isControlsShown ? 1 : 0);
+        GameData.SetFloat("TankReloadDur", p.tankReloadDur);
+        GameData.SetFloat("PlaneReloadDur", p.planeReloadDur);
+        GameData.SetInt("VehicleIndex", p.vehicleIndex);
+        GameData.SetInt("CarIndex", p.carIndex);
+        GameData.SetInt("ColorIndex", p.colorIndex);
+        GameData.SetFloat("CarDriveDur", p.carDriveDur);
+        GameData.SetFloat("JetDriveDur", p.jetDriveDur);
+        GameData.SetFloat("TankDriveDur", p.tankDriveDur);
+        GameData.SetFloat("PlaneFlyDur", p.planeFlyDur);
+        GameData.SetInt("TotalCoinAmount", p.totalCoinAmount);
+        GameData.SetInt("IsControlShown", UIManager.instance != null && UIManager.instance.isControlsShown ? 1 : 0);
 
-        PlayerPrefs.Save();
+        GameData.Save();
     }
 
     public void LoadGame()
@@ -43,16 +43,16 @@ public class SaveManager : MonoBehaviour
             return;
         }
     
-        if (PlayerPrefs.HasKey("TankReloadDur")) p.tankReloadDur = PlayerPrefs.GetFloat("TankReloadDur");
-        if (PlayerPrefs.HasKey("PlaneReloadDur")) p.planeReloadDur = PlayerPrefs.GetFloat("PlaneReloadDur");
-        if (PlayerPrefs.HasKey("VehicleIndex")) p.vehicleIndex = PlayerPrefs.GetInt("VehicleIndex");
-        if (PlayerPrefs.HasKey("CarIndex")) p.carIndex = PlayerPrefs.GetInt("CarIndex");
-        if (PlayerPrefs.HasKey("ColorIndex")) p.colorIndex = PlayerPrefs.GetInt("ColorIndex");
-        if (PlayerPrefs.HasKey("CarDriveDur")) p.carDriveDur = PlayerPrefs.GetFloat("CarDriveDur");
-        if (PlayerPrefs.HasKey("JetDriveDur")) p.jetDriveDur = PlayerPrefs.GetFloat("JetDriveDur");
-        if (PlayerPrefs.HasKey("TankDriveDur")) p.tankDriveDur = PlayerPrefs.GetFloat("TankDriveDur");
-        if (PlayerPrefs.HasKey("PlaneFlyDur")) p.planeFlyDur = PlayerPrefs.GetFloat("PlaneFlyDur");
-        if (PlayerPrefs.HasKey("TotalCoinAmount")) p.totalCoinAmount = PlayerPrefs.GetInt("TotalCoinAmount");
+        if (GameData.HasKey("TankReloadDur")) p.tankReloadDur = GameData.GetFloat("TankReloadDur");
+        if (GameData.HasKey("PlaneReloadDur")) p.planeReloadDur = GameData.GetFloat("PlaneReloadDur");
+        if (GameData.HasKey("VehicleIndex")) p.vehicleIndex = GameData.GetInt("VehicleIndex");
+        if (GameData.HasKey("CarIndex")) p.carIndex = GameData.GetInt("CarIndex");
+        if (GameData.HasKey("ColorIndex")) p.colorIndex = GameData.GetInt("ColorIndex");
+        if (GameData.HasKey("CarDriveDur")) p.carDriveDur = GameData.GetFloat("CarDriveDur");
+        if (GameData.HasKey("JetDriveDur")) p.jetDriveDur = GameData.GetFloat("JetDriveDur");
+        if (GameData.HasKey("TankDriveDur")) p.tankDriveDur = GameData.GetFloat("TankDriveDur");
+        if (GameData.HasKey("PlaneFlyDur")) p.planeFlyDur = GameData.GetFloat("PlaneFlyDur");
+        if (GameData.HasKey("TotalCoinAmount")) p.totalCoinAmount = GameData.GetInt("TotalCoinAmount");
     }
 
     private void OnApplicationQuit()
@@ -96,26 +96,26 @@ public class SaveManager : MonoBehaviour
         // --- Garage (vehicles) keys ---
         for (int i = 0; i < 50; i++)
         {
-            PlayerPrefs.DeleteKey($"veh_{i}_unlocked");
-            PlayerPrefs.DeleteKey($"veh_{i}_equipped");
-            PlayerPrefs.DeleteKey($"veh_{i}_carIndex");
-            PlayerPrefs.DeleteKey($"veh_{i}_upgradePrice");
-            PlayerPrefs.DeleteKey($"veh_{i}_colorIndex");
+            GameData.DeleteKey($"veh_{i}_unlocked");
+            GameData.DeleteKey($"veh_{i}_equipped");
+            GameData.DeleteKey($"veh_{i}_carIndex");
+            GameData.DeleteKey($"veh_{i}_upgradePrice");
+            GameData.DeleteKey($"veh_{i}_colorIndex");
         }
-        PlayerPrefs.DeleteKey("garage_last_index");
+        GameData.DeleteKey("garage_last_index");
 
         // --- Gesture keys ---
         for (int i = 0; i < 50; i++)
-            PlayerPrefs.DeleteKey($"gesture_{i}_owned");
-        PlayerPrefs.DeleteKey("gesture_last_selected");
+            GameData.DeleteKey($"gesture_{i}_owned");
+        GameData.DeleteKey("gesture_last_selected");
 
         // --- Delete other known keys explicitly ---
-        foreach (var key in playerKeys) PlayerPrefs.DeleteKey(key);
-        foreach (var key in upgradeKeys) PlayerPrefs.DeleteKey(key);
+        foreach (var key in playerKeys) GameData.DeleteKey(key);
+        foreach (var key in upgradeKeys) GameData.DeleteKey(key);
 
         // --- Final full fallback wipe ---
-        PlayerPrefs.DeleteAll();
-        PlayerPrefs.Save();
+        GameData.DeleteAll();
+        GameData.Save();
 
         Debug.Log("✅ All saved data wiped. All gestures are now locked.");
     }

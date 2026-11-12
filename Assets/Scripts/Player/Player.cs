@@ -6,7 +6,6 @@ using Unity.Burst.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
-using CrazyGames;
 
 public class Player : MonoBehaviour
 {
@@ -394,14 +393,15 @@ public class Player : MonoBehaviour
             obstacle.ActivateRigidbodies();
         }
         AudioManager.instance.PlaySound(7);
-        CrazySDK.Game.GameplayStop();
     }
 
 
     private void CheckCoinOverlap()
     {
         // Use non-alloc overlap to reduce GC pressure
-        int count = Physics.OverlapSphereNonAlloc(transform.position, 0.5f, coinOverlapBuffer, coinLayerMask);
+        // A little more reach while flying, where the player hovers slightly above / below the coin line
+        bool flying = stateMachine.currentstate == planeState || stateMachine.currentstate == jetState;
+        int count = Physics.OverlapSphereNonAlloc(transform.position, flying ? 1f : 0.5f, coinOverlapBuffer, coinLayerMask);
 
         for (int i = 0; i < count; i++)
         {

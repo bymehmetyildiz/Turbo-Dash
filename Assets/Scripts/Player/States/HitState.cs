@@ -14,6 +14,7 @@ public class HitState : PlayerState
         UIManager.instance.UpdateScoreBoard(player.distanceTraveled);
         UIManager.instance.GameOverPanel();
         player.isStarted = false;
+        Platform.GameplayStop(); // every death passes through here, whatever caused it
     }
 
     public override void Exit()

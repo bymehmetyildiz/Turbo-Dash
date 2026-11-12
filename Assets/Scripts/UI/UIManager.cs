@@ -5,7 +5,6 @@ using Cinemachine;
 using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using CrazyGames;
 using System.Runtime.InteropServices;
 
 
@@ -84,6 +83,8 @@ private static extern int IsMobileBrowser();
     [SerializeField] private RectTransform targetPoint;
     [SerializeField] private ParticleSystem confetti;
     private int tempCoin;
+    private bool isNewBestScore;
+    private bool watchedRewardedAd;
 
     [Header("Controls Menu")]
     public RectTransform controlsMenu;
@@ -103,14 +104,6 @@ private static extern int IsMobileBrowser();
     }
     void Start()
     {
-        if (CrazySDK.IsAvailable)
-        {
-            CrazySDK.Init(() =>
-            {
-                Debug.Log("CrazySDK initialized");
-            });
-        }
-
 
         SaveManager.instance.LoadGame();
 
@@ -136,7 +129,7 @@ private static extern int IsMobileBrowser();
 
         deleteSaveMenu.localScale = Vector2.zero;
 
-        isControlsShown = PlayerPrefs.GetInt("IsControlShown", 0) == 1;
+        isControlsShown = GameData.GetInt("IsControlShown", 0) == 1;
 
         if (!isControlsShown)
         {
@@ -164,16 +157,19 @@ private static extern int IsMobileBrowser();
 
     public void DoubleCoins()
     {
-        CrazySDK.Ad.RequestAd(CrazyAdType.Rewarded, () =>
+        // Hide both buttons while the ad is requested so neither can be pressed twice
+        adButton.SetActive(false);
+        restartButton.SetActive(false);
+
+        Platform.ShowRewarded(() =>
         {
-            // ad started
-        }, (error) =>
-        {
-            // ad error
-        }, () =>
-        {
+            watchedRewardedAd = true; // no midgame ad right after a rewarded one
             player.currentCoinAmount = tempCoin;
             StartCoroutine(DoubleCoinsRoutine());
+        }, () =>
+        {
+            // No ad was shown: nothing is granted, the player can still leave
+            restartButton.SetActive(true);
         });
     }
 
@@ -295,8 +291,18 @@ private static extern int IsMobileBrowser();
         currentCoinText.text = "0";
 
         yield return new WaitForSeconds(0.5f);      
-        CrazySDK.Game.HappyTime();
+        if (isNewBestScore)
+            Platform.HappyTime();
         AudioManager.instance.PlaySound(23);
+
+        // Offer to double the run's coins for a rewarded ad (only where ads exist)
+        if (tempCoin > 0 && Platform.AdsAvailable)
+        {
+            adButton.SetActive(true);
+            restartButton.SetActive(true);
+            yield break;
+        }
+
         //yield return new WaitForSeconds(0.5f);
         //if (tempCoin > 0)
         //{
@@ -338,7 +344,7 @@ private static extern int IsMobileBrowser();
         gameMenu.gameObject.SetActive(true);
         totalCoinBG.SetActive(false);
 
-        CrazySDK.Game.GameplayStart();
+        Platform.GameplayStart();
     }
 
     public void OpenUpgradeMenu()
@@ -440,7 +446,7 @@ private static extern int IsMobileBrowser();
             pauseMenu.DOScale(Vector3.one, 0.5f)
                 .SetEase(Ease.OutBack)
                 .SetUpdate(true);
-            CrazySDK.Game.GameplayStop();
+            Platform.GameplayStop();
 
             Time.timeScale = 0f;
         }
@@ -452,7 +458,7 @@ private static extern int IsMobileBrowser();
                 .OnComplete(() =>
                 {
                     Time.timeScale = 1f;
-                    CrazySDK.Game.GameplayStart();
+                    if (player.isStarted) Platform.GameplayStart();
                 });
         }
     }
@@ -494,9 +500,21 @@ private static extern int IsMobileBrowser();
                         player.totalCoinAmount += player.currentCoinAmount;
                         player.currentCoinAmount = 0;
                     }
+                    bool diedThisRun = !player.isStarted && player.distanceTraveled > 0;
                     SaveManager.instance.SaveGame();
-                    Time.timeScale = 1f;
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                    Platform.GameplayStop();
+
+                    System.Action reload = () =>
+                    {
+                        Time.timeScale = 1f;
+                        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                    };
+
+                    // The break between two runs is the natural place for a midgame ad
+                    if (diedThisRun && !watchedRewardedAd)
+                        Platform.ShowMidgame(reload);
+                    else
+                        reload();
                 //}
             });
     }
@@ -570,8 +588,8 @@ isMobile = IsMobileBrowser() == 1;
     public void MarkControlsAsShown()
     {
         isControlsShown = true;
-        PlayerPrefs.SetInt("IsControlShown", 1);
-        PlayerPrefs.Save();
+        GameData.SetInt("IsControlShown", 1);
+        GameData.Save();
     }
 
     public void MoveCoinImg(Vector3 worldPos)
@@ -579,13 +597,19 @@ isMobile = IsMobileBrowser() == 1;
         // Convert world position to screen space
         Vector3 screenPos = Camera.main.WorldToScreenPoint(worldPos);
 
-        // Convert screen space to UI local position
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(
-            coinParent.GetComponent<RectTransform>(),
-            screenPos,
-            Camera.main,
-            out Vector2 localPos
-        );
+        // Convert screen space to UI local position.
+        // An overlay canvas must be given a null camera; passing Camera.main there shifts the result sideways.
+        RectTransform parentRect = coinParent.GetComponent<RectTransform>();
+        Canvas canvas = parentRect.GetComponentInParent<Canvas>();
+        Camera uiCamera = null;
+        if (canvas != null)
+        {
+            canvas = canvas.rootCanvas;
+            if (canvas.renderMode != RenderMode.ScreenSpaceOverlay)
+                uiCamera = canvas.worldCamera != null ? canvas.worldCamera : Camera.main;
+        }
+
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(parentRect, screenPos, uiCamera, out Vector2 localPos);
 
         // Instantiate the coin at this position
         RectTransform coin = Instantiate(coinImgPrefab, coinParent.transform).GetComponent<RectTransform>();
@@ -613,6 +637,9 @@ isMobile = IsMobileBrowser() == 1;
         {
             if (newScore > scoreBoard[i].score)
             {
+                if (i == 0)
+                    isNewBestScore = true;
+
                 // Shift scores down from the end to make space
                 for (int j = scoreBoard.Length - 1; j > i; j--)
                 {
@@ -684,7 +711,7 @@ isMobile = IsMobileBrowser() == 1;
             .OnComplete(() =>
             {
                 Time.timeScale = 1f;
-                PlayerPrefs.DeleteAll();
+                GameData.DeleteAll();
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             });
     }

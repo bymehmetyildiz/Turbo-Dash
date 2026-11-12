@@ -22,13 +22,13 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        if(PlayerPrefs.HasKey("SFXVolume"))        
-            SFXslider.value = PlayerPrefs.GetFloat("SFXVolume");
+        if(GameData.HasKey("SFXVolume"))        
+            SFXslider.value = GameData.GetFloat("SFXVolume");
         else
             SFXslider.value = 1f;
 
-        if(PlayerPrefs.HasKey("MusicVolume"))        
-            musicSlider.value = PlayerPrefs.GetFloat("MusicVolume");
+        if(GameData.HasKey("MusicVolume"))        
+            musicSlider.value = GameData.GetFloat("MusicVolume");
         else
             musicSlider.value = 1f;
 
@@ -43,13 +43,13 @@ public class AudioManager : MonoBehaviour
         {
             audioSource[i].volume = SFXslider.value;
         }
-        PlayerPrefs.SetFloat("SFXVolume", SFXslider.value);
+        GameData.SetFloat("SFXVolume", SFXslider.value);
     }
 
     public void SetMusicVolume()
     {
         mainMenuBGM.volume = musicSlider.value;
-        PlayerPrefs.SetFloat("MusicVolume", musicSlider.value);
+        GameData.SetFloat("MusicVolume", musicSlider.value);
     }
 
     public void PlaySound(int index)

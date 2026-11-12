@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlaneState : PlayerState
 {
-    private float planeHeight = 10.5f;
+    // Matches the centre of the enemy aircraft colliders (spawned at 9.5, centre ~9.8) and the air coins
+    private float planeHeight = 9.8f;
 
     public PlaneState(StateMachine stateMachine, string animBoolName, Player player, CharacterController controller) : base(stateMachine, animBoolName, player, controller)
     {

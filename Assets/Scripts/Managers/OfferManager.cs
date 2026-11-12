@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using CrazyGames;
 
 public class OfferManager : MonoBehaviour
 {
@@ -93,25 +92,20 @@ public class OfferManager : MonoBehaviour
         if (!player.isStarted || player.stateMachine.currentstate != player.moveState)
             return;
 
-        if (!requireRewardedAdForOffers || !CrazySDK.IsAvailable)
+        if (!requireRewardedAdForOffers || !Platform.AdsAvailable)
         {
             HideOffers();
             activate?.Invoke();
             return;
         }
 
-        CrazySDK.Ad.RequestAd(
-            CrazyAdType.Rewarded,
-            () => Debug.Log("Rewarded ad started"),
-            (error) => Debug.Log("Rewarded ad error: " + error),
-            () =>
+        Platform.ShowRewarded(() =>
+        {
+            if (player.isStarted && player.stateMachine.currentstate == player.moveState)
             {
-                if (player.isStarted && player.stateMachine.currentstate == player.moveState)
-                {
-                    HideOffers();
-                    activate?.Invoke();
-                }
+                HideOffers();
+                activate?.Invoke();
             }
-        );
+        });
     }
 }

@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using CrazyGames;
 using TMPro;
 using UnityEngine.SceneManagement;
 
@@ -38,15 +37,6 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        if (CrazySDK.IsAvailable)
-        {
-            CrazySDK.Init(() =>
-            {
-                Debug.Log("CrazySDK initialized");
-            });
-            //CheckAdblock();
-        }
-
         player = FindObjectOfType<Player>();
 
         foreach (GameObject obstacle in obstacles)
@@ -269,7 +259,9 @@ public class GameManager : MonoBehaviour
     {
         float[] lanes = new float[] { -3.5f, 0f, 3.5f };
 
-        Vector3 spawnPos = new Vector3( lanes[Random.Range(0, lanes.Length)], 10f, player.transform.position.z + spawnDistance);
+        // Coins sit on the line the player is actually flying on
+        float airCoinHeight = player.stateMachine.currentstate == player.planeState ? 9.8f : 10f;
+        Vector3 spawnPos = new Vector3( lanes[Random.Range(0, lanes.Length)], airCoinHeight, player.transform.position.z + spawnDistance);
 
         for (int i = 0; i < coinPerRow; i++)
         {

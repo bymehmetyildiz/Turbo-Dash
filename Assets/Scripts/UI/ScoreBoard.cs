@@ -22,9 +22,9 @@ public class ScoreBoard : MonoBehaviour
 
             // Load saved date, if exists
             string dateKey = "ScoreDate" + index;
-            if (PlayerPrefs.HasKey(dateKey))
+            if (GameData.HasKey(dateKey))
             {
-                dateText.text = PlayerPrefs.GetString(dateKey);
+                dateText.text = GameData.GetString(dateKey);
             }
             else
             {
@@ -40,16 +40,16 @@ public class ScoreBoard : MonoBehaviour
 
     public void SaveScore()
     {
-        PlayerPrefs.SetInt("Score" + index, score);
-        PlayerPrefs.SetString("ScoreDate" + index, System.DateTime.Now.ToString("dd MMM yyyy"));
+        GameData.SetInt("Score" + index, score);
+        GameData.SetString("ScoreDate" + index, System.DateTime.Now.ToString("dd MMM yyyy"));
     }
 
     public void LoadScore()
     {
         string scoreKey = "Score" + index;
-        if (PlayerPrefs.HasKey(scoreKey))
+        if (GameData.HasKey(scoreKey))
         {
-            score = PlayerPrefs.GetInt(scoreKey);
+            score = GameData.GetInt(scoreKey);
         }
     }
 }

@@ -100,7 +100,10 @@ public class VehicleController : MonoBehaviour
         canShoot = false;
         AudioManager.instance.PlaySound(10);        
         GameObject bombObject = Instantiate(bomb, bombPos.position, Quaternion.Euler(-90, 90, 90));
-        bombObject.GetComponent<Projectile>().speed = 0.75f;
+        Projectile projectile = bombObject.GetComponent<Projectile>();
+        projectile.speed = 0.75f;
+        projectile.firedByPlayer = true;
+        projectile.inheritedForwardSpeed = player.moveSpeed * speed; // the tank's own forward speed
         yield return new WaitForSeconds(player.tankReloadDur);
         canShoot = true;
     }

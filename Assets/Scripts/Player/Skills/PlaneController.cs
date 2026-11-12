@@ -12,6 +12,7 @@ public class PlaneController : MonoBehaviour
     [SerializeField] private GameObject bomb;
     [SerializeField] private GameObject bombPrefab;
     public bool canDropBomb = true;
+    [SerializeField] private float planeShotSpeed = 1.25f; // extra speed over the plane, in the Projectile's units
 
     void Start()
     {
@@ -70,7 +71,12 @@ public class PlaneController : MonoBehaviour
             Projectile projectile = bombObject.GetComponent<Projectile>();
             if (projectile != null)
             {
-                projectile.speed = 150;
+                // 150 units per frame used to throw the shot out of the world before it could be seen or hit anything.
+                // It now flies ahead of the plane at a visible speed, on top of the plane's own speed.
+                projectile.speed = planeShotSpeed;
+                projectile.firedByPlayer = true;
+                projectile.inheritedForwardSpeed = player.moveSpeed * 3f; // same multiplier PlaneState flies with
+                AudioManager.instance.PlaySound(10);
             }
             else
             {
