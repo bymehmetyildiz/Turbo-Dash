@@ -5,19 +5,20 @@ using CrazyGames;
 public class OfferManager : MonoBehaviour
 {
     private Player player;
-
     [SerializeField] private GameObject jet, tank, plane;
     [SerializeField] private bool requireRewardedAdForOffers = false;
-    
 
-    [Header("Offer Distances (meters)")]
-    [SerializeField] private float jetInterval = 83f;
-    [SerializeField] private float tankInterval = 137f;
-    [SerializeField] private float planeInterval = 177f;
+    // Offers come one at a time, in rotation, after a stretch of running on foot.
+    // Time spent inside a vehicle does not count, so power-ups can no longer be chained back to back.
+    [Header("Offer Timing (seconds on foot)")]
+    [SerializeField] private float firstOfferDelay = 30f;
+    [SerializeField] private float offerCooldown = 40f;
+    [SerializeField] private float offerVisibleDuration = 5f;
 
-    private float nextJetDistance;
-    private float nextTankDistance;
-    private float nextPlaneDistance;
+    private GameObject[] offerOrder;
+    private int nextOfferIndex;
+    private float offerTimer;
+    private Coroutine offerRoutine;
 
     void Start()
     {
@@ -27,40 +28,44 @@ public class OfferManager : MonoBehaviour
         plane.SetActive(false);
         tank.SetActive(false);
 
-        // initialize next trigger points
-        nextJetDistance = jetInterval;
-        nextTankDistance = tankInterval;
-        nextPlaneDistance = planeInterval;
+        offerOrder = new[] { jet, tank, plane };
+        offerTimer = firstOfferDelay;
     }
 
     void Update()
     {
-        float traveled = player.distanceTraveled;
+        if (!player.isStarted || !player.IsOnFoot || offerRoutine != null)
+            return;
 
-        if (traveled >= nextJetDistance)
-        {
-            StartCoroutine(ActivateOffer(jet));
-            nextJetDistance += jetInterval; // schedule the next trigger
-        }
+        offerTimer -= Time.deltaTime;
+        if (offerTimer > 0f)
+            return;
 
-        if (traveled >= nextTankDistance)
-        {
-            StartCoroutine(ActivateOffer(tank));
-            nextTankDistance += tankInterval;
-        }
-
-        if (traveled >= nextPlaneDistance)
-        {
-            StartCoroutine(ActivateOffer(plane));
-            nextPlaneDistance += planeInterval;
-        }
+        offerRoutine = StartCoroutine(ActivateOffer(offerOrder[nextOfferIndex]));
+        nextOfferIndex = (nextOfferIndex + 1) % offerOrder.Length;
+        offerTimer = offerCooldown;
     }
 
     private IEnumerator ActivateOffer(GameObject offer)
     {
-        offer.SetActive(true);       
-        yield return new WaitForSeconds(5f);
+        offer.SetActive(true);
+        yield return new WaitForSeconds(offerVisibleDuration);
         offer.SetActive(false);
+        offerRoutine = null;
+    }
+
+    private void HideOffers()
+    {
+        if (offerRoutine != null)
+        {
+            StopCoroutine(offerRoutine);
+            offerRoutine = null;
+        }
+
+        jet.SetActive(false);
+        plane.SetActive(false);
+        tank.SetActive(false);
+        offerTimer = offerCooldown;
     }
 
     // State switchers
@@ -76,7 +81,6 @@ public class OfferManager : MonoBehaviour
             player.stateMachine.ChangeState(player.jetState);
             AudioManager.instance.PlaySound(20);
         });
-
     }
 
     public void SwitchToTankState()
@@ -91,6 +95,7 @@ public class OfferManager : MonoBehaviour
 
         if (!requireRewardedAdForOffers || !CrazySDK.IsAvailable)
         {
+            HideOffers();
             activate?.Invoke();
             return;
         }
@@ -102,7 +107,10 @@ public class OfferManager : MonoBehaviour
             () =>
             {
                 if (player.isStarted && player.stateMachine.currentstate == player.moveState)
+                {
+                    HideOffers();
                     activate?.Invoke();
+                }
             }
         );
     }

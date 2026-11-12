@@ -234,13 +234,19 @@ private static extern int IsMobileBrowser();
 
     private IEnumerator EndGameCoinCounter()
     {
-        yield return new WaitForSeconds(3f);
+        // Short beat for the death animation, then straight to the result panel
+        yield return new WaitForSeconds(1.2f);
         tempCoin = player.currentCoinAmount;
-        endGamePanel.SetActive(true);
         endGamePanel.SetActive(true);
         UpdateTotalCoin();
         endGameScoreText.text = distanceText.text;
-        yield return new WaitForSeconds(1f);
+
+        // The player can leave right away; RestartGame banks whatever has not been counted yet
+        adButton.SetActive(false);
+        restartButton.SetActive(true);
+        endGameButtonText.text = "Return";
+
+        yield return new WaitForSeconds(0.3f);
 
         int target = player.totalCoinAmount + player.currentCoinAmount;
         int totalToAdd = player.currentCoinAmount;
@@ -453,7 +459,7 @@ private static extern int IsMobileBrowser();
 
     public void RestartGame()
     {
-        FadePanel.DOFade(1f, 1f)
+        FadePanel.DOFade(1f, 0.4f)
             .SetUpdate(true)
             .OnComplete(() =>
             {
@@ -482,6 +488,12 @@ private static extern int IsMobileBrowser();
                 //else
                 //{
                     // No ad
+                    // After a death, bank the coins the end-game counter has not moved over yet
+                    if (!player.isStarted && player.currentCoinAmount > 0)
+                    {
+                        player.totalCoinAmount += player.currentCoinAmount;
+                        player.currentCoinAmount = 0;
+                    }
                     SaveManager.instance.SaveGame();
                     Time.timeScale = 1f;
                     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -586,7 +598,7 @@ isMobile = IsMobileBrowser() == 1;
             player.currentCoinAmount += reward;
             currentCoinText.text = NumberFormatter.FormatNumber(player.currentCoinAmount);
 
-            if (player.combo >= 8)
+            if (reward > 1)
                 currentCoinText.text += "  x" + reward;
 
             Destroy(coin.gameObject);

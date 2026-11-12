@@ -35,24 +35,25 @@ public class AirState : PlayerState
             player.transform.position.z), 0.1f);
         }
 
-        if ((Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow)) && player.currentLane < player.lanePositions.Length - 1 && !player.isChangingLane)
+        player.TryLaneChange(0, 0, 0.1f, true);
+
+        // Swipe down in the air: drop fast and slide on landing
+        if (player.ConsumeInput(BufferedAction.Slide))
         {
-            player.StartCoroutine(player.ChangeLane(player.currentLane + 1, 0, 0, 0.1f));
-            AudioManager.instance.PlaySound(1);
-            AudioManager.instance.PlaySound(6);
-        }
-        else if ((Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow)) && player.currentLane > 0 && !player.isChangingLane)
-        {
-            player.StartCoroutine(player.ChangeLane(player.currentLane - 1, 0, 0, 0.1f));
-            AudioManager.instance.PlaySound(1);
-            AudioManager.instance.PlaySound(6);
+            player.verticalVelocity = Mathf.Min(player.verticalVelocity, -player.fastFallSpeed);
+            player.slideQueued = true;
         }
 
         if (controller.isGrounded)
         {
-            stateMachine.ChangeState(player.moveState);
             AudioManager.instance.PlaySound(4);
+            if (player.slideQueued)
+            {
+                stateMachine.ChangeState(player.slideState);
+                AudioManager.instance.PlaySound(5);
+            }
+            else
+                stateMachine.ChangeState(player.moveState);
         }
-
     }
 }

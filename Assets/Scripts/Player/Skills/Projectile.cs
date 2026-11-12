@@ -15,7 +15,8 @@ public class Projectile : MonoBehaviour
     
     void Update()
     {
-        transform.Translate(transform.forward * speed);
+        // speed was tuned as "units per frame at 60 FPS"; scale by time so it is the same on every device
+        transform.Translate(transform.forward * speed * 60f * Time.deltaTime);
     }
 
     private void OnCollisionEnter(Collision collision)

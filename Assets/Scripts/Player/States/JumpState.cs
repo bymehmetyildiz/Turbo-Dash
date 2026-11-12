@@ -17,6 +17,7 @@ public class JumpState : PlayerState
         base.Enter();
         player.verticalVelocity = Mathf.Sqrt(player.jumpHeight * player.gravity * player.gravityScale);
         stateTimer = 0.5f; // Duration of the jump state
+        player.slideQueued = false;
       
     }
 
@@ -44,25 +45,31 @@ public class JumpState : PlayerState
             player.transform.position.z), 0.1f);
         }
 
-        // When grounded, go back to MoveState
+        // When grounded, go back to MoveState (or straight into a queued slide)
         if (controller.isGrounded)
         {
             player.verticalVelocity = -5f; // Keeps player grounded
-            stateMachine.ChangeState(player.moveState);
+            if (player.slideQueued)
+            {
+                stateMachine.ChangeState(player.slideState);
+                AudioManager.instance.PlaySound(5);
+            }
+            else
+                stateMachine.ChangeState(player.moveState);
+            return;
         }
-        else if (Input.GetKeyDown(KeyCode.D) && player.currentLane < player.lanePositions.Length - 1 && !player.isChangingLane)
+
+        player.TryLaneChange(0, 0, 0.1f, true);
+
+        // Swipe down in the air: drop fast and slide on landing
+        if (player.ConsumeInput(BufferedAction.Slide))
         {
-            player.StartCoroutine(player.ChangeLane(player.currentLane + 1, 0, 0, 0.1f));            
+            player.verticalVelocity = Mathf.Min(player.verticalVelocity, -player.fastFallSpeed);
+            player.slideQueued = true;
         }
-        else if (Input.GetKeyDown(KeyCode.A) && player.currentLane > 0 && !player.isChangingLane)
-        {
-            player.StartCoroutine(player.ChangeLane(player.currentLane - 1, 0, 0, 0.1f));            
-        }
-        else if (stateTimer <= 0)
-        {
+
+        if (stateTimer <= 0)
             stateMachine.ChangeState(player.airState);
-        }
-        
     }
 }
 

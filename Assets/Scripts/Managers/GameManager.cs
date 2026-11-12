@@ -20,6 +20,17 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float zigZagCoinChance = 0.25f;
     private int obstacleRowsSpawned;
 
+    // Difficulty (driven by Player.Difficulty01, which follows the speed ramp)
+    private const float startSpawnInterval = 1.5f;
+    private const float minSpawnInterval = 0.85f;
+    [SerializeField] private float multipleChanceStart = 0.15f;   // full-width rows that force a jump / slide
+    [SerializeField] private float multipleChanceEnd = 0.4f;
+    [SerializeField] private float doubleBlockChanceStart = 0.4f; // rows with two of the three lanes blocked
+    [SerializeField] private float doubleBlockChanceEnd = 0.8f;
+    private readonly List<GameObject> singleObstacles = new List<GameObject>();
+    private readonly List<GameObject> multiObstacles = new List<GameObject>();
+    private bool lastRowWasMultiple;
+
     //Coins
     [SerializeField] private GameObject coinPrefab;
     [SerializeField] private int coinPerRow;
@@ -37,7 +48,18 @@ public class GameManager : MonoBehaviour
         }
 
         player = FindObjectOfType<Player>();
-        
+
+        foreach (GameObject obstacle in obstacles)
+        {
+            Obstacles o = obstacle != null ? obstacle.GetComponent<Obstacles>() : null;
+            if (o == null)
+                continue;
+
+            if (o.obstacleType == ObstacleType.Multiple)
+                multiObstacles.Add(obstacle);
+            else
+                singleObstacles.Add(obstacle);
+        }
     }
 
     //private async void CheckAdblock()
@@ -80,10 +102,8 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if(spawnInterval > 0.8f && player.isStarted)
-        {
-            spawnInterval -= Time.deltaTime * 0.001f; // Gradually decrease spawn interval to increase difficulty
-        }
+        // Rows come faster as the run speeds up
+        spawnInterval = Mathf.Lerp(startSpawnInterval, minSpawnInterval, player.Difficulty01);
 
     }
 
@@ -106,23 +126,38 @@ public class GameManager : MonoBehaviour
     private void SpawnObstacle()
     {
         float[] lanes = { -1.2f, 0f, 1.2f };
-
-        GameObject obstacle = obstacles[Random.Range(0, obstacles.Length)];
-        ObstacleType type = obstacle.GetComponent<Obstacles>().obstacleType;
+        float difficulty = player.Difficulty01;
         float rowZ = player.transform.position.z + spawnDistance;
         obstacleRowsSpawned++;
 
-        if (type == ObstacleType.Multiple)
+        // Full-width rows are the only ones that need a jump or a slide, so they get more common over time
+        bool spawnMultiple = multiObstacles.Count > 0
+            && obstacleRowsSpawned > 3
+            && !lastRowWasMultiple
+            && Random.value < Mathf.Lerp(multipleChanceStart, multipleChanceEnd, difficulty);
+
+        if (singleObstacles.Count == 0)
+            spawnMultiple = multiObstacles.Count > 0;
+
+        lastRowWasMultiple = spawnMultiple;
+
+        if (spawnMultiple)
         {
             // Always center lane, elevated
             Vector3 spawnPosMulti = new Vector3(0, 2.2f, rowZ);
-            Instantiate(obstacle, spawnPosMulti, Quaternion.identity);
-            SpawnCoinReward(rowZ + 8f, lanes[Random.Range(0, lanes.Length)]);
+            Instantiate(multiObstacles[Random.Range(0, multiObstacles.Count)], spawnPosMulti, Quaternion.identity);
+            SpawnCoinReward(rowZ + 8f, Random.Range(0, lanes.Length));
             return;
         }
 
+        if (singleObstacles.Count == 0)
+            return;
+
         int safeLaneIndex = Random.Range(0, lanes.Length);
-        int blockedCount = obstacleRowsSpawned < 3 ? 1 : Random.Range(1, 3);
+        int blockedCount = 1;
+        if (obstacleRowsSpawned >= 3 && Random.value < Mathf.Lerp(doubleBlockChanceStart, doubleBlockChanceEnd, difficulty))
+            blockedCount = 2;
+
         int spawned = 0;
 
         for (int i = 0; i < lanes.Length; i++)
@@ -130,58 +165,59 @@ public class GameManager : MonoBehaviour
             if (i == safeLaneIndex || spawned >= blockedCount)
                 continue;
 
-            GameObject rowObstacle = spawned == 0 ? obstacle : GetSingleObstacle();
             Vector3 spawnPos = new Vector3(lanes[i], 0, rowZ);
-            Instantiate(rowObstacle, spawnPos, Quaternion.identity);
+            Instantiate(GetSingleObstacle(), spawnPos, Quaternion.identity);
             spawned++;
         }
 
-        SpawnCoinReward(rowZ, lanes[safeLaneIndex]);
+        SpawnCoinReward(rowZ, safeLaneIndex);
     }
 
     private GameObject GetSingleObstacle()
     {
-        GameObject obstacle;
-        do
-        {
-            obstacle = obstacles[Random.Range(0, obstacles.Length)];
-        } while (obstacle.GetComponent<Obstacles>().obstacleType == ObstacleType.Multiple);
-
-        return obstacle;
+        return singleObstacles[Random.Range(0, singleObstacles.Count)];
     }
 
-    private void SpawnCoinReward(float zPos, float safeLane)
+    private void SpawnCoinReward(float zPos, int safeLaneIndex)
     {
         if (coinPrefab == null || Random.value > coinTrailChance)
             return;
 
         if (Random.value < zigZagCoinChance)
         {
-            SpawnZigZagCoins(zPos);
+            SpawnZigZagCoins(zPos, safeLaneIndex);
             return;
         }
 
-        SpawnCoin(zPos, safeLane);
+        float[] lanes = { -1.2f, 0f, 1.2f };
+        SpawnCoin(zPos, lanes[safeLaneIndex]);
     }
 
-    private void SpawnZigZagCoins(float zPos)
+    // Starts in the safe lane and stays there for the first coins, so the trail never leads into an obstacle
+    private void SpawnZigZagCoins(float zPos, int startLaneIndex)
     {
         float[] lanes = { -1.2f, 0f, 1.2f };
-        int laneIndex = Random.Range(0, lanes.Length);
-        int direction = Random.value > 0.5f ? 1 : -1;
+        int last = lanes.Length - 1;
+        int laneIndex = Mathf.Clamp(startLaneIndex, 0, last);
+        int direction = laneIndex == 0 ? 1 : laneIndex == last ? -1 : (Random.value > 0.5f ? 1 : -1);
         int amount = Mathf.Max(coinPerRow, 6);
 
         for (int i = 0; i < amount; i++)
         {
-            laneIndex = Mathf.Clamp(laneIndex + (i % 2 == 0 ? direction : 0), 0, lanes.Length - 1);
+            if (i >= 3 && i % 2 == 1)
+            {
+                laneIndex += direction;
+                if (laneIndex <= 0 || laneIndex >= last)
+                {
+                    laneIndex = Mathf.Clamp(laneIndex, 0, last);
+                    direction *= -1;
+                }
+            }
+
             Vector3 pos = new Vector3(lanes[laneIndex], 1f, zPos + i * coinSpacing);
             Instantiate(coinPrefab, pos, Quaternion.identity);
-
-            if (laneIndex == 0 || laneIndex == lanes.Length - 1)
-                direction *= -1;
         }
     }
-
 
     private void SpawnAircraft()
     {

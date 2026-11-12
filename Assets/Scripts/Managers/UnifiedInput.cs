@@ -24,7 +24,7 @@ public static class UnifiedInput
         MobileInputController.instance.SwipeDown;
 
     public static bool Fire =>
-    Input.GetKeyDown(KeyCode.Mouse0) ||
+    (Input.touchCount == 0 && Input.GetKeyDown(KeyCode.Mouse0)) || // touches also simulate a mouse click
     MobileInputController.instance.Tap ||
     Input.GetKeyDown(KeyCode.Space);
 

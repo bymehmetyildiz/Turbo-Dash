@@ -72,6 +72,7 @@ public class Player : MonoBehaviour
     [Header("Shield")]
     public GameObject shiledParticle;
     public bool isShielded = false;
+    public float shieldDuration = 1.5f;
 
     [Header("Coin")]
     public int currentCoinAmount;
@@ -81,17 +82,32 @@ public class Player : MonoBehaviour
     [Header("Fun Feel")]
     public int combo;
     public int bestCombo;
-    public float comboTimeout = 2.5f;
-    public float magnetRadius = 3.5f;
-    public float magnetPullSpeed = 16f;
-    public float nearMissRadius = 1.05f;
+    public float comboTimeout = 1.6f;
+    public float nearMissWindow = 0.35f;       // seconds before impact that still count as a late dodge
     public float nearMissCooldown = 0.35f;
+    public int nearMissComboBonus = 5;
+    public int comboPerBoost = 25;
     public float rewardSpeedBoost = 2f;
     public float rewardBoostDuration = 1.25f;
     private float comboTimer;
     private float nearMissTimer;
-    private float baseAnimSpeed = 1f;
-    private Coroutine rewardBoostCoroutine;
+    private float boostTimer;
+
+    [Header("Difficulty")]
+    public float maxMoveSpeed = 42f;
+    public float speedGainPerSecond = 0.085f;  // 25 -> 42 in ~200 seconds
+    public float maxAnimSpeed = 1.25f;
+    private float startMoveSpeed;
+
+    [Header("Input Buffer")]
+    public float inputBufferTime = 0.18f;
+    public float fastFallSpeed = 25f;
+    public bool slideQueued;
+    private BufferedAction bufferedAction;
+    private float bufferTimer;
+
+    private float runStartZ;
+    private bool runStartSet;
 
     [Header("Distance")]
     public int distanceTraveled;
@@ -140,6 +156,7 @@ public class Player : MonoBehaviour
         jetPack.SetActive(false);
         shiledParticle.SetActive(false);
         plane.SetActive(false);
+        startMoveSpeed = moveSpeed;
 
         SaveManager.instance.LoadGame();
     }
@@ -147,16 +164,111 @@ public class Player : MonoBehaviour
     
     void Update()
     {
+        CaptureInput();
+
         stateMachine.currentstate.Update();
 
         if (isStarted)
         {
-            moveSpeed += moveSpeed * Time.deltaTime * 0.001f;
-            anim.speed += Time.deltaTime * 0.001f;
+            // Speed ramps linearly up to a cap; the combo boost is tracked separately so it can never leak in.
+            if (BaseMoveSpeed < maxMoveSpeed)
+                moveSpeed += speedGainPerSecond * Time.deltaTime;
+
+            anim.speed = Mathf.Lerp(1f, maxAnimSpeed, Difficulty01) * (boostTimer > 0f ? 1.08f : 1f);
+
+            UpdateDistance();
         }
 
         TickFunFeel();
         CheckCoinOverlap();
+    }
+
+    // Speed without the temporary combo boost
+    public float BaseMoveSpeed => moveSpeed - (boostTimer > 0f ? rewardSpeedBoost : 0f);
+
+    // 0 at the start of a run, 1 once the speed cap is reached
+    public float Difficulty01 => Mathf.InverseLerp(startMoveSpeed, maxMoveSpeed, BaseMoveSpeed);
+
+    public bool IsOnFoot =>
+        stateMachine.currentstate == moveState || stateMachine.currentstate == jumpState ||
+        stateMachine.currentstate == airState || stateMachine.currentstate == slideState;
+
+    // ---------------- Input buffer ----------------
+    private void CaptureInput()
+    {
+        if (bufferTimer > 0f)
+        {
+            bufferTimer -= Time.unscaledDeltaTime;
+            if (bufferTimer <= 0f)
+                bufferedAction = BufferedAction.None;
+        }
+
+        if (MobileInputController.instance == null)
+            return;
+
+        if (UnifiedInput.MoveRight) Buffer(BufferedAction.Right);
+        else if (UnifiedInput.MoveLeft) Buffer(BufferedAction.Left);
+        else if (UnifiedInput.Jump) Buffer(BufferedAction.Jump);
+        else if (UnifiedInput.Slide) Buffer(BufferedAction.Slide);
+    }
+
+    private void Buffer(BufferedAction action)
+    {
+        bufferedAction = action;
+        bufferTimer = inputBufferTime;
+    }
+
+    public bool ConsumeInput(BufferedAction action)
+    {
+        if (bufferedAction != action)
+            return false;
+
+        bufferedAction = BufferedAction.None;
+        return true;
+    }
+
+    // Shared by every state so keyboard and swipe behave the same on foot, in the air and while flying.
+    public bool TryLaneChange(float hopHeight, float tiltAngle, float duration, bool playSound)
+    {
+        if (isChangingLane)
+            return false;
+
+        int dir;
+        if (bufferedAction == BufferedAction.Right) dir = 1;
+        else if (bufferedAction == BufferedAction.Left) dir = -1;
+        else return false;
+
+        bufferedAction = BufferedAction.None;
+
+        int target = currentLane + dir;
+        if (target < 0 || target >= lanePositions.Length)
+            return false;
+
+        StartCoroutine(ChangeLane(target, hopHeight, -dir * tiltAngle, duration));
+
+        if (playSound)
+        {
+            AudioManager.instance.PlaySound(1);
+            AudioManager.instance.PlaySound(6);
+        }
+        return true;
+    }
+
+    // Score is real distance along the track, not footsteps.
+    private void UpdateDistance()
+    {
+        if (!runStartSet)
+        {
+            runStartZ = transform.position.z;
+            runStartSet = true;
+        }
+
+        int meters = Mathf.FloorToInt(transform.position.z - runStartZ);
+        if (meters > distanceTraveled)
+        {
+            distanceTraveled = meters;
+            UIManager.instance.distanceText.text = NumberFormatter.FormatNumber(distanceTraveled) + " m";
+        }
     }
 
     //Check if Turn Animation Ended
@@ -317,7 +429,7 @@ public class Player : MonoBehaviour
         UIManager.instance.MoveCoinImg(worldPos);
         PlayCollectParticleAt(transform.position);
 
-        if (combo > 0 && combo % 8 == 0)
+        if (combo % comboPerBoost == 0)
             StartRewardBoost();
 
         Destroy(coin.gameObject);
@@ -325,28 +437,30 @@ public class Player : MonoBehaviour
 
     public void RegisterNearMiss(Vector3 obstaclePosition)
     {
-        if (!isStarted || isShielded || nearMissTimer > 0f)
+        if (!isStarted || isShielded || !IsOnFoot || nearMissTimer > 0f)
             return;
 
         nearMissTimer = nearMissCooldown;
-        combo += 2;
+        int before = combo;
+        combo += nearMissComboBonus;
         comboTimer = comboTimeout;
         bestCombo = Mathf.Max(bestCombo, combo);
-        PlayCollectParticleAt(obstaclePosition);
+        PlayCollectParticleAt(transform.position);
+        AudioManager.instance.PlayCoin();
 
-        if (combo % 6 == 0)
+        if (combo / comboPerBoost > before / comboPerBoost)
             StartRewardBoost();
     }
 
     public int GetCoinRewardAmount()
     {
-        if (combo >= 24)
+        if (combo >= 100)
             return 4;
 
-        if (combo >= 16)
+        if (combo >= 50)
             return 3;
 
-        if (combo >= 8)
+        if (combo >= 20)
             return 2;
 
         return 1;
@@ -357,6 +471,16 @@ public class Player : MonoBehaviour
         if (nearMissTimer > 0f)
             nearMissTimer -= Time.deltaTime;
 
+        if (boostTimer > 0f)
+        {
+            boostTimer -= Time.deltaTime;
+            if (boostTimer <= 0f)
+            {
+                boostTimer = 0f;
+                moveSpeed -= rewardSpeedBoost;
+            }
+        }
+
         if (!isStarted)
             return;
 
@@ -366,48 +490,15 @@ public class Player : MonoBehaviour
             if (comboTimer <= 0f)
                 combo = 0;
         }
-
-        PullNearbyCoins();
-    }
-
-    private void PullNearbyCoins()
-    {
-        int count = Physics.OverlapSphereNonAlloc(transform.position, magnetRadius, coinOverlapBuffer, coinLayerMask);
-
-        for (int i = 0; i < count; i++)
-        {
-            Collider coinCollider = coinOverlapBuffer[i];
-            if (coinCollider == null)
-                continue;
-
-            coinCollider.transform.position = Vector3.MoveTowards(
-                coinCollider.transform.position,
-                transform.position + Vector3.up * 0.35f,
-                magnetPullSpeed * Time.deltaTime
-            );
-        }
     }
 
     private void StartRewardBoost()
     {
-        if (rewardBoostCoroutine != null)
-            StopCoroutine(rewardBoostCoroutine);
+        // A boost that is already running is only extended; the speed bonus is applied exactly once.
+        if (boostTimer <= 0f)
+            moveSpeed += rewardSpeedBoost;
 
-        rewardBoostCoroutine = StartCoroutine(RewardBoost());
-    }
-
-    private IEnumerator RewardBoost()
-    {
-        float originalSpeed = moveSpeed;
-        baseAnimSpeed = Mathf.Max(1f, anim.speed);
-        moveSpeed += rewardSpeedBoost;
-        anim.speed = baseAnimSpeed * 1.08f;
-
-        yield return new WaitForSeconds(rewardBoostDuration);
-
-        moveSpeed = Mathf.Max(originalSpeed, moveSpeed - rewardSpeedBoost);
-        anim.speed = baseAnimSpeed;
-        rewardBoostCoroutine = null;
+        boostTimer = rewardBoostDuration;
     }
 
     // Play or lazily create a pooled collect particle at given position
@@ -452,7 +543,7 @@ public class Player : MonoBehaviour
         isShielded = true;
         controller.excludeLayers = LayerMask.GetMask("Obstacle");
         shiledParticle.SetActive(true);
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(shieldDuration);
         shiledParticle.SetActive(false);
         controller.excludeLayers =0;
         isShielded = false;
@@ -495,14 +586,20 @@ public class Player : MonoBehaviour
         AudioManager.instance.PlaySound(8);
     }
 
-    //Distance Counter
+    // Called by the run animation events and the vehicle states. Distance itself is measured in UpdateDistance().
     public void Distance()
     {
-        distanceTraveled++;
-        UIManager.instance.distanceText.text = NumberFormatter.FormatNumber(distanceTraveled) + " m";
-
-        if (controller.isGrounded)
+        if (stateMachine.currentstate == moveState && controller.isGrounded)
             AudioManager.instance.PlayFootstep();
     }
+}
+
+public enum BufferedAction
+{
+    None,
+    Left,
+    Right,
+    Jump,
+    Slide,
 }
 

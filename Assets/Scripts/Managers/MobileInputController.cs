@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MobileInputController : MonoBehaviour
@@ -7,8 +5,9 @@ public class MobileInputController : MonoBehaviour
     public static MobileInputController instance;
 
     private Vector2 startTouch;
-    private Vector2 swipeDelta;
-    private bool isSwiping;
+    private float startTime;
+    private bool isTracking;
+    private bool swipeFired;
 
     public bool SwipeLeft;
     public bool SwipeRight;
@@ -16,7 +15,8 @@ public class MobileInputController : MonoBehaviour
     public bool SwipeDown;
     public bool Tap;
 
-    private float deadZone = 80f; // minimum swipe distance in pixels
+    private const float maxTapDuration = 0.3f;
+    private float deadZone = 80f; // minimum swipe distance in pixels, rescaled to the screen every frame
 
     private void Awake()
     {
@@ -27,74 +27,84 @@ public class MobileInputController : MonoBehaviour
     {
         SwipeLeft = SwipeRight = SwipeUp = SwipeDown = Tap = false;
 
-        // ---------------------
-        // Detect mouse tap (editor only)
-        // ---------------------
-#if UNITY_EDITOR
-        if (Input.GetMouseButtonDown(0))
-        {
-            Tap = true;
-            isSwiping = true;
-            startTouch = Input.mousePosition;
-        }
-        else if (Input.GetMouseButtonUp(0))
-        {
-            ResetSwipe();
-        }
+        // 6% of the short screen side, so a swipe feels the same on every resolution
+        deadZone = Mathf.Max(30f, Mathf.Min(Screen.width, Screen.height) * 0.06f);
 
-        if (isSwiping)
-            swipeDelta = (Vector2)Input.mousePosition - startTouch;
-#endif
-
-        // ---------------------
-        // Detect touch (mobile)
-        // ---------------------
         if (Input.touchCount > 0)
         {
             Touch t = Input.GetTouch(0);
 
-            if (t.phase == TouchPhase.Began)
+            switch (t.phase)
             {
-                Tap = true;
-                isSwiping = true;
-                startTouch = t.position;
+                case TouchPhase.Began:
+                    Begin(t.position);
+                    break;
+                case TouchPhase.Moved:
+                case TouchPhase.Stationary:
+                    Track(t.position);
+                    break;
+                case TouchPhase.Ended:
+                    End(t.position, true);
+                    break;
+                case TouchPhase.Canceled:
+                    End(t.position, false);
+                    break;
             }
-            else if (t.phase == TouchPhase.Ended || t.phase == TouchPhase.Canceled)
-            {
-                ResetSwipe();
-            }
-
-            if (isSwiping)
-                swipeDelta = t.position - startTouch;
         }
-
-        // ---------------------
-        // Process swipe
-        // ---------------------
-        if (swipeDelta.magnitude > deadZone)
-        {
-            float x = swipeDelta.x;
-            float y = swipeDelta.y;
-
-            if (Mathf.Abs(x) > Mathf.Abs(y))
-            {
-                SwipeLeft = x < 0;
-                SwipeRight = x > 0;
-            }
-            else
-            {
-                SwipeUp = y > 0;
-                SwipeDown = y < 0;
-            }
-
-            ResetSwipe();
-        }
+#if UNITY_EDITOR
+        // Mouse stands in for a finger inside the editor
+        else if (Input.GetMouseButtonDown(0))
+            Begin(Input.mousePosition);
+        else if (Input.GetMouseButton(0))
+            Track(Input.mousePosition);
+        else if (Input.GetMouseButtonUp(0))
+            End(Input.mousePosition, true);
+#endif
     }
 
-    private void ResetSwipe()
+    private void Begin(Vector2 pos)
     {
-        startTouch = Vector2.zero;
-        swipeDelta = Vector2.zero;
-        isSwiping = false;
+        startTouch = pos;
+        startTime = Time.unscaledTime;
+        isTracking = true;
+        swipeFired = false;
+    }
+
+    // A swipe fires as soon as the finger has travelled far enough (no need to lift it), once per touch.
+    private void Track(Vector2 pos)
+    {
+        if (!isTracking || swipeFired)
+            return;
+
+        Vector2 delta = pos - startTouch;
+        if (delta.magnitude <= deadZone)
+            return;
+
+        if (Mathf.Abs(delta.x) > Mathf.Abs(delta.y))
+        {
+            SwipeLeft = delta.x < 0;
+            SwipeRight = delta.x > 0;
+        }
+        else
+        {
+            SwipeUp = delta.y > 0;
+            SwipeDown = delta.y < 0;
+        }
+
+        swipeFired = true;
+    }
+
+    // A tap is a short touch that never became a swipe, so swiping no longer fires the tank / plane weapon.
+    private void End(Vector2 pos, bool allowTap)
+    {
+        if (!isTracking)
+            return;
+
+        Track(pos);
+
+        if (allowTap && !swipeFired && Time.unscaledTime - startTime <= maxTapDuration)
+            Tap = true;
+
+        isTracking = false;
     }
 }

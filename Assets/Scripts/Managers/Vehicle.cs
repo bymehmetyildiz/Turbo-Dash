@@ -47,7 +47,17 @@ public class Vehicle : MonoBehaviour
             activeCar = null;
 
             // Activate chosen car
-            activeCar = cars.colors[_colorIndex].upgradeLevels[_carIndex];
+            // Saved indices can point past what this vehicle actually has, so clamp them
+            if (cars.colors.Length == 0)
+                return;
+
+            _colorIndex = Mathf.Clamp(_colorIndex, 0, cars.colors.Length - 1);
+            GameObject[] levels = cars.colors[_colorIndex].upgradeLevels;
+            if (levels.Length == 0)
+                return;
+
+            _carIndex = Mathf.Clamp(_carIndex, 0, levels.Length - 1);
+            activeCar = levels[_carIndex];
             activeCar.SetActive(true);
         }
     }

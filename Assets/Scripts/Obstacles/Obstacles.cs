@@ -19,6 +19,7 @@ public class Obstacles : MonoBehaviour
 
     public AudioSource collapse;
     private bool nearMissAwarded;
+    private bool threatened;
 
     private void Start()
     {
@@ -139,24 +140,35 @@ public class Obstacles : MonoBehaviour
         return false;
     }
 
+    // A near miss is a late dodge: the player was on a collision course inside the reaction window
+    // and still got past (by switching lane, jumping over or sliding under).
     private void CheckNearMiss()
     {
         if (nearMissAwarded || player == null || !player.isStarted)
             return;
 
         float zDelta = transform.position.z - player.transform.position.z;
-        if (zDelta < -1.25f || zDelta > 1.25f)
-            return;
 
-        float xDelta = Mathf.Abs(transform.position.x - player.transform.position.x);
-        if (xDelta > player.nearMissRadius && xDelta < 1.85f)
+        if (!threatened)
+        {
+            if (zDelta <= 0f || zDelta > player.moveSpeed * player.nearMissWindow || !player.IsOnFoot)
+                return;
+
+            bool sameLane = obstacleType == ObstacleType.Multiple
+                || Mathf.Abs(transform.position.x - player.transform.position.x) < 0.6f;
+
+            if (sameLane)
+                threatened = true;
+
+            return;
+        }
+
+        if (zDelta < -1.5f)
         {
             nearMissAwarded = true;
             player.RegisterNearMiss(transform.position);
         }
     }
-
- 
 }
 
 public enum ObstacleType

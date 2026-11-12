@@ -36,34 +36,24 @@ public class MoveState : GroundedState
                 0.1f);
         }
 
-        // ---- RIGHT ----
-        if (UnifiedInput.MoveRight && player.currentLane < player.lanePositions.Length - 1 && !player.isChangingLane)
-        {
-            player.StartCoroutine(player.ChangeLane(player.currentLane + 1, 0.5f, 0, 0.1f));
-            AudioManager.instance.PlaySound(1);
-            AudioManager.instance.PlaySound(6);
-        }
-        // ---- LEFT ----
-        else if (UnifiedInput.MoveLeft && player.currentLane > 0 && !player.isChangingLane)
-        {
-            player.StartCoroutine(player.ChangeLane(player.currentLane - 1, 0.5f, 0, 0.1f));
-            AudioManager.instance.PlaySound(1);
-            AudioManager.instance.PlaySound(6);
-        }
+        if (player.TryLaneChange(0.5f, 0, 0.1f, true))
+            return;
+
+        if (player.isChangingLane || !controller.isGrounded)
+            return;
+
         // ---- JUMP ----
-        else if (UnifiedInput.Jump && controller.isGrounded && !player.isChangingLane)
+        if (player.ConsumeInput(BufferedAction.Jump))
         {
             stateMachine.ChangeState(player.jumpState);
             AudioManager.instance.PlaySound(2);
             AudioManager.instance.PlaySound(3);
         }
         // ---- SLIDE ----
-        else if (UnifiedInput.Slide && controller.isGrounded && !player.isChangingLane)
+        else if (player.ConsumeInput(BufferedAction.Slide))
         {
             stateMachine.ChangeState(player.slideState);
             AudioManager.instance.PlaySound(5);
         }
     }
-
-
 }
