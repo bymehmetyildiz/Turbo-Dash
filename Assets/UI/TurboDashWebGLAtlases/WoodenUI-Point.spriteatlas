@@ -1,0 +1,118 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: WoodenUI-Point
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 0
+      maxTextureSize: 0
+      textureCompression: 0
+      filterMode: 0
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 4096
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_IgnorePlatformSupport: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    - serializedVersion: 3
+      m_BuildTarget: WebGL
+      m_MaxTextureSize: 4096
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: 29
+      m_TextureCompression: 1
+      m_CompressionQuality: 75
+      m_CrunchedCompression: 1
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 1
+      m_IgnorePlatformSupport: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 0
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 0
+      enableAlphaDilation: 1
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 21300000, guid: f0dcc7ca802316c4897ff865f9afb210, type: 3}
+    - {fileID: 21300000, guid: 2d2a2e81b6ada6245babccdedf694249, type: 3}
+    - {fileID: 21300000, guid: 330893227262ebb47a844b948d92431a, type: 3}
+    - {fileID: 21300000, guid: dce0629753f758e458dd400902f0e0d0, type: 3}
+    - {fileID: 21300000, guid: 1c0f18ddadcf9214f971909e6fd0c60a, type: 3}
+    - {fileID: 21300000, guid: 3eef8435cdf88e04aa05060ca6ef220f, type: 3}
+    - {fileID: 21300000, guid: efca6eea01707c241b2d831dfe51b93e, type: 3}
+    - {fileID: 21300000, guid: 6dbf3c32099882945a791aad2aa6e198, type: 3}
+    - {fileID: 21300000, guid: 1b919a595dd14044ea76110bb0d6f61f, type: 3}
+    - {fileID: 21300000, guid: 4f6eb38f0cef52a4982d54e43e8fc327, type: 3}
+    - {fileID: 21300000, guid: bbec58905598e994c8347f2a99a33c05, type: 3}
+    - {fileID: 21300000, guid: a53d6182e5bbdda418324d9732fd7860, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+    packedSpriteRenderDataKeys:
+    - bbec58905598e994c8347f2a99a33c05: 21300000
+    - 2d2a2e81b6ada6245babccdedf694249: 21300000
+    - 330893227262ebb47a844b948d92431a: 21300000
+    - 6dbf3c32099882945a791aad2aa6e198: 21300000
+    - a53d6182e5bbdda418324d9732fd7860: 21300000
+    - 3eef8435cdf88e04aa05060ca6ef220f: 21300000
+    - dce0629753f758e458dd400902f0e0d0: 21300000
+    - 1b919a595dd14044ea76110bb0d6f61f: 21300000
+    - f0dcc7ca802316c4897ff865f9afb210: 21300000
+    - efca6eea01707c241b2d831dfe51b93e: 21300000
+    - 1c0f18ddadcf9214f971909e6fd0c60a: 21300000
+    - 4f6eb38f0cef52a4982d54e43e8fc327: 21300000
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: bbec58905598e994c8347f2a99a33c05, type: 3}
+  - {fileID: 21300000, guid: 2d2a2e81b6ada6245babccdedf694249, type: 3}
+  - {fileID: 21300000, guid: 330893227262ebb47a844b948d92431a, type: 3}
+  - {fileID: 21300000, guid: 6dbf3c32099882945a791aad2aa6e198, type: 3}
+  - {fileID: 21300000, guid: a53d6182e5bbdda418324d9732fd7860, type: 3}
+  - {fileID: 21300000, guid: 3eef8435cdf88e04aa05060ca6ef220f, type: 3}
+  - {fileID: 21300000, guid: dce0629753f758e458dd400902f0e0d0, type: 3}
+  - {fileID: 21300000, guid: 1b919a595dd14044ea76110bb0d6f61f, type: 3}
+  - {fileID: 21300000, guid: f0dcc7ca802316c4897ff865f9afb210, type: 3}
+  - {fileID: 21300000, guid: efca6eea01707c241b2d831dfe51b93e, type: 3}
+  - {fileID: 21300000, guid: 1c0f18ddadcf9214f971909e6fd0c60a, type: 3}
+  - {fileID: 21300000, guid: 4f6eb38f0cef52a4982d54e43e8fc327, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - wooden_ui_check
+  - wooden_ui_table_2
+  - wooden_ui_paper_table
+  - wooden_ui_button_1
+  - wooden_ui_close
+  - wooden_ui_settings button
+  - wooden_ui_bar_01
+  - wooden_ui_play
+  - wooden_ui_table_1
+  - wooden_ui_button_8
+  - wooden_ui_bar_02
+  - wooden_ui_button_5
+  m_RenderDataMap: {}
+  m_Tag: WoodenUI-Point
+  m_IsVariant: 0
