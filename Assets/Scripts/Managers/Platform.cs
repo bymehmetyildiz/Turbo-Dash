@@ -70,6 +70,9 @@ public static class Platform
 
     public static bool AdsAvailable => Ready;
 
+    // True from the ad request until the SDK reports it finished or failed
+    public static bool AdInProgress { get; private set; }
+
     /// <summary>Rewarded ad. onReward runs only if the ad was watched to the end.</summary>
     public static void ShowRewarded(Action onReward, Action onFail = null)
     {
@@ -81,18 +84,25 @@ public static class Platform
 
         try
         {
+            AdInProgress = true;
             CrazySDK.Ad.RequestAd(
                 CrazyAdType.Rewarded,
                 () => { },
                 error =>
                 {
+                    AdInProgress = false;
                     Debug.Log("Rewarded ad error: " + error);
                     onFail?.Invoke();
                 },
-                () => onReward?.Invoke());
+                () =>
+                {
+                    AdInProgress = false;
+                    onReward?.Invoke();
+                });
         }
         catch (Exception e)
         {
+            AdInProgress = false;
             Debug.LogWarning("Rewarded ad request failed: " + e.Message);
             onFail?.Invoke();
         }
@@ -111,18 +121,25 @@ public static class Platform
 
         try
         {
+            AdInProgress = true;
             CrazySDK.Ad.RequestAd(
                 CrazyAdType.Midgame,
                 () => { },
                 error =>
                 {
+                    AdInProgress = false;
                     Debug.Log("Midgame ad error: " + error);
                     onDone?.Invoke();
                 },
-                () => onDone?.Invoke());
+                () =>
+                {
+                    AdInProgress = false;
+                    onDone?.Invoke();
+                });
         }
         catch (Exception e)
         {
+            AdInProgress = false;
             Debug.LogWarning("Midgame ad request failed: " + e.Message);
             onDone?.Invoke();
         }
