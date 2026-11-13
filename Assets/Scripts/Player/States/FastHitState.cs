@@ -16,7 +16,8 @@ public class FastHitState : PlayerState
         UIManager.instance.UpdateScoreBoard(player.distanceTraveled);
         UIManager.instance.GameOverPanel();
         player.isStarted = false;
-        Platform.GameplayStop(); // every death passes through here, whatever caused it
+        Platform.GameplayStop();
+        Platform.SadTime();
     }
 
     public override void Exit()

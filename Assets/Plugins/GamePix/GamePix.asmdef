@@ -1,0 +1,16 @@
+{
+    "name": "GamePix",
+    "rootNamespace": "",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [
+        "!TURBODASH_CRAZYGAMES"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

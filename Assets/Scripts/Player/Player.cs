@@ -167,6 +167,11 @@ public class Player : MonoBehaviour
     
     void Update()
     {
+        if (Platform.IsPaused)
+        {
+            bufferedAction = BufferedAction.None;
+            return;
+        }
         CaptureInput();
 
         stateMachine.currentstate.Update();

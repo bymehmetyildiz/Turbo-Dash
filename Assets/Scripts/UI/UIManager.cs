@@ -159,6 +159,7 @@ private static extern int IsMobileBrowser();
 
     public void DoubleCoins()
     {
+        if (Platform.IsPaused) return;
         // Hide both buttons while the ad is requested so neither can be pressed twice
         adButton.SetActive(false);
         restartButton.SetActive(false);
@@ -335,7 +336,8 @@ private static extern int IsMobileBrowser();
     }
 
     public void StartGame()
-    {        
+    {
+        if (Platform.IsPaused) return;
         if (player.isStarted == false)
             player.isStarted = true;
 
@@ -443,6 +445,7 @@ private static extern int IsMobileBrowser();
 
     public void OpenPauseMenu()
     {
+        if (Platform.IsPaused) return;
         if (pauseMenu.localScale == Vector3.zero)
         {
             pauseMenu.DOScale(Vector3.one, 0.5f)
@@ -467,6 +470,7 @@ private static extern int IsMobileBrowser();
 
     public void RestartGame()
     {
+        if (Platform.IsPaused) return;
         FadePanel.DOFade(1f, 0.4f)
             .SetUpdate(true)
             .OnComplete(() =>

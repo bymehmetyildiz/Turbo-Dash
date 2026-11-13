@@ -1,3 +1,5 @@
+// CrazyGames integration preserved; excluded from the default GamePix build.
+#if TURBODASH_CRAZYGAMES
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -401,4 +403,6 @@ namespace CrazyGames
         public string max1024mb;
     }
 }
+#endif
+
 #endif

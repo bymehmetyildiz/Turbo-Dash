@@ -1,4 +1,6 @@
-﻿using System;
+// CrazyGames integration preserved; excluded from the default GamePix build.
+#if TURBODASH_CRAZYGAMES
+using System;
 using System.Globalization;
 using CrazyGames;
 using UnityEngine;
@@ -88,3 +90,5 @@ public class DataModuleDemo : MonoBehaviour
         Debug.Log("All keys deleted");
     }
 }
+
+#endif

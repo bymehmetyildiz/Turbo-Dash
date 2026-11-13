@@ -1,4 +1,6 @@
-﻿using System.Collections;
+// CrazyGames integration preserved; excluded from the default GamePix build.
+#if TURBODASH_CRAZYGAMES
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -77,3 +79,5 @@ namespace CrazyGames
         }
     }
 }
+
+#endif

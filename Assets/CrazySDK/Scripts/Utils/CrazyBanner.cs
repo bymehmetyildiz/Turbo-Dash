@@ -1,4 +1,6 @@
-﻿using System;
+// CrazyGames integration preserved; excluded from the default GamePix build.
+#if TURBODASH_CRAZYGAMES
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -102,3 +104,5 @@ namespace CrazyGames
         public bool IsVisible() => gameObject.activeInHierarchy;
     }
 }
+
+#endif

@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+// CrazyGames integration preserved; excluded from the default GamePix build.
+#if TURBODASH_CRAZYGAMES
+using UnityEngine;
 
 /**
  * Renders a placeholder for video ads in editor.
@@ -23,3 +25,5 @@ public class CrazyAdPreview : MonoBehaviour
         GUI.Label(new Rect(0, 0, Screen.width, Screen.height), labelText, guiStyle);
     }
 }
+
+#endif

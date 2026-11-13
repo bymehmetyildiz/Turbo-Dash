@@ -26,6 +26,7 @@ public class MobileInputController : MonoBehaviour
     private void Update()
     {
         SwipeLeft = SwipeRight = SwipeUp = SwipeDown = Tap = false;
+        if (Platform.IsPaused) { isTracking = false; return; }
 
         // 6% of the short screen side, so a swipe feels the same on every resolution
         deadZone = Mathf.Max(30f, Mathf.Min(Screen.width, Screen.height) * 0.06f);

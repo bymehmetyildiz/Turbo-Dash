@@ -1,3 +1,5 @@
+// CrazyGames integration preserved; excluded from the default GamePix build.
+#if TURBODASH_CRAZYGAMES
 namespace CrazyGames
 {
     public interface ITab
@@ -5,3 +7,5 @@ namespace CrazyGames
         void Render();
     }
 }
+
+#endif

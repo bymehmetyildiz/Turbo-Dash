@@ -1,4 +1,6 @@
-﻿using System.Globalization;
+// CrazyGames integration preserved; excluded from the default GamePix build.
+#if TURBODASH_CRAZYGAMES
+using System.Globalization;
 using System.Runtime.InteropServices;
 using UnityEngine;
 
@@ -160,3 +162,5 @@ namespace CrazyGames
 #endif
     }
 }
+
+#endif

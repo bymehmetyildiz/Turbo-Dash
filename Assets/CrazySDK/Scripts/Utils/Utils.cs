@@ -1,4 +1,6 @@
-﻿using System;
+// CrazyGames integration preserved; excluded from the default GamePix build.
+#if TURBODASH_CRAZYGAMES
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -74,3 +76,5 @@ namespace CrazyGames
         public const string SDK_NOT_INITIALIZED = "CrazySDK initialization required. Call CrazySDK.Init() and await its completion callback before using other SDK methods.";
     }
 }
+
+#endif

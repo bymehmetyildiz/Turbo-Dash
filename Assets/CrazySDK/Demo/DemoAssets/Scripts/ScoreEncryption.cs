@@ -1,3 +1,5 @@
+// CrazyGames integration preserved; excluded from the default GamePix build.
+#if TURBODASH_CRAZYGAMES
 using System;
 using System.Globalization;
 using System.Security.Cryptography;
@@ -63,3 +65,5 @@ namespace CrazyGames
         }
     }
 }
+
+#endif

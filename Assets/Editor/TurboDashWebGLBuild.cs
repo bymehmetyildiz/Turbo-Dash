@@ -1,4 +1,4 @@
-#if UNITY_EDITOR
+#if UNITY_EDITOR && TURBODASH_CRAZYGAMES
 using System;
 using System.Diagnostics;
 using System.IO;

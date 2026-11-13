@@ -1,3 +1,5 @@
+// CrazyGames integration preserved; excluded from the default GamePix build.
+#if TURBODASH_CRAZYGAMES
 using System.Runtime.InteropServices;
 using UnityEngine;
 
@@ -70,3 +72,15 @@ public class PlatformAudio : MonoBehaviour
 #endif
     }
 }
+
+#else
+using GamePix;
+using UnityEngine;
+
+// Gpx owns AudioListener.pause and restores the previous mute state after an ad.
+// Retain this type for existing scene/script references without starting a competing poller.
+public class PlatformAudio : MonoBehaviour
+{
+    public static bool MutedByPlatform => Gpx.IsGamePaused;
+}
+#endif

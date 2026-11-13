@@ -1,3 +1,5 @@
+// CrazyGames integration preserved; excluded from the default GamePix build.
+#if TURBODASH_CRAZYGAMES
 using System.IO;
 using System.Linq;
 using UnityEditor;
@@ -86,4 +88,6 @@ namespace CrazyGames
         }
     }
 }
+#endif
+
 #endif

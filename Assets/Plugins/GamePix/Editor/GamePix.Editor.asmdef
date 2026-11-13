@@ -1,0 +1,20 @@
+{
+    "name": "GamePix.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GamePix"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [
+        "!TURBODASH_CRAZYGAMES"
+    ],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

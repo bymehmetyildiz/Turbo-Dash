@@ -1,4 +1,6 @@
-﻿using UnityEditor;
+// CrazyGames integration preserved; excluded from the default GamePix build.
+#if TURBODASH_CRAZYGAMES
+using UnityEditor;
 
 namespace CrazyGames
 {
@@ -14,3 +16,5 @@ namespace CrazyGames
         }
     }
 }
+
+#endif
