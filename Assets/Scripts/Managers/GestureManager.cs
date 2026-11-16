@@ -47,6 +47,7 @@ public class GestureManager : MonoBehaviour
         foreach (var g in gestures)
         {
             // Default is locked (0). No auto-owning any ID.
+            g.price = EconomyBalance.GesturePrice(g.gestureID, g.price);
             g.isOwned = GameData.GetInt(K_Owned(g.gestureID), 0) == 1;
             g.isPlaying = false;
         }

@@ -175,6 +175,14 @@ public class Player : MonoBehaviour
         CaptureInput();
 
         stateMachine.currentstate.Update();
+        //if (Input.GetKeyDown(KeyCode.T))
+        //{
+        //    stateMachine.ChangeState(tankState);
+        //}
+        //if (Input.GetKeyDown(KeyCode.U))
+        //{
+        //    stateMachine.ChangeState(planeState);
+        //}
 
         if (isStarted)
         {

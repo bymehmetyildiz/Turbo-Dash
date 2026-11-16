@@ -73,9 +73,7 @@ public class PlaneController : MonoBehaviour
             {
                 // 150 units per frame used to throw the shot out of the world before it could be seen or hit anything.
                 // It now flies ahead of the plane at a visible speed, on top of the plane's own speed.
-                projectile.speed = planeShotSpeed;
-                projectile.firedByPlayer = true;
-                projectile.inheritedForwardSpeed = player.moveSpeed * 3f; // same multiplier PlaneState flies with
+                projectile.LaunchFromPlayer(planeShotSpeed * 60f, player.moveSpeed * 3f); // same multiplier PlaneState flies with
                 AudioManager.instance.PlaySound(10);
             }
             else

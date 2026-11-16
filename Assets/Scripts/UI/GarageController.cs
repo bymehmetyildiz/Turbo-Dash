@@ -76,7 +76,8 @@ public class GarageController : MonoBehaviour
 
             // Upgrade level and price
             v.carIndex = GameData.GetInt(K_CarIndex(i), v.carIndex);
-            v.upgradePrice = GameData.GetInt(K_UpgradePrice(i), v.upgradePrice);
+            v.price = EconomyBalance.VehiclePrice(v.vehicleName, v.price);
+            v.upgradePrice = EconomyBalance.VehicleUpgrade(v.carIndex);
 
             // Saved color
             v.colorIndex = GameData.GetInt(K_ColorIndex(i), v.colorIndex);
@@ -235,7 +236,7 @@ public class GarageController : MonoBehaviour
             UIManager.instance.UpdateTotalCoin();
 
             v.carIndex++;
-            v.upgradePrice *= 3; // your original logic
+            v.upgradePrice = EconomyBalance.VehicleUpgrade(v.carIndex);
 
             // Apply visuals
             v.SetupCar(v.carIndex, v.colorIndex);

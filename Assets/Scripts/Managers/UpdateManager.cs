@@ -24,30 +24,24 @@ public class UpdateManager : MonoBehaviour
     [SerializeField] private TMP_Text carExpText;
     [SerializeField] private TMP_Text carPriceText;
     [SerializeField] private int currentCarPrice;
-    private int nextCarPrice;
 
     [SerializeField] private TMP_Text jetExpText;
     [SerializeField] private TMP_Text jetPriceText;
     [SerializeField] private int currentJetPrice;
-    private int nextJetPrice;
 
     [SerializeField] private TMP_Text tankExpText;
     [SerializeField] private TMP_Text tankPriceText;
     [SerializeField] private TMP_Text tankReloadExpText;
     [SerializeField] private TMP_Text tankReloadPriceText;
     [SerializeField] private int currentTankPrice;
-    private int nextTankPrice;
     [SerializeField] private int currentTankReloadPrice;
-    private int nextTankReloadPrice;
 
     [SerializeField] private TMP_Text planeExpText;
     [SerializeField] private TMP_Text planePriceText;
     [SerializeField] private TMP_Text planeReloadExpText;
     [SerializeField] private TMP_Text planeReloadPriceText;
     [SerializeField] private int currentPlanePrice;
-    private int nextPlanePrice;
     [SerializeField] private int currentPlaneReloadPrice;
-    private int nextPlaneReloadPrice;
 
   
     void Start()
@@ -107,12 +101,12 @@ public class UpdateManager : MonoBehaviour
 
     private void RecomputeNextPrices()
     {
-        nextCarPrice = Mathf.RoundToInt(currentCarPrice * 1.5f);
-        nextJetPrice = Mathf.RoundToInt(currentJetPrice * 1.5f);
-        nextTankPrice = Mathf.RoundToInt(currentTankPrice * 1.5f);
-        nextTankReloadPrice = Mathf.RoundToInt(currentTankReloadPrice * 1.5f);
-        nextPlanePrice = Mathf.RoundToInt(currentPlanePrice * 1.5f);
-        nextPlaneReloadPrice = Mathf.RoundToInt(currentPlaneReloadPrice * 1.5f);
+        currentCarPrice = EconomyBalance.DurationPrice(400, player.carDriveDur);
+        currentJetPrice = EconomyBalance.DurationPrice(600, player.jetDriveDur);
+        currentTankPrice = EconomyBalance.DurationPrice(900, player.tankDriveDur);
+        currentTankReloadPrice = EconomyBalance.ReloadPrice(750, player.tankReloadDur);
+        currentPlanePrice = EconomyBalance.DurationPrice(1200, player.planeFlyDur);
+        currentPlaneReloadPrice = EconomyBalance.ReloadPrice(1000, player.planeReloadDur);
     }
 
     private void RefreshAllTexts()
@@ -144,7 +138,6 @@ public class UpdateManager : MonoBehaviour
         {
             player.totalCoinAmount -= currentCarPrice;
             player.carDriveDur += 2f;
-            currentCarPrice = nextCarPrice;
             RecomputeNextPrices();
             RefreshAllTexts();
 
@@ -162,7 +155,6 @@ public class UpdateManager : MonoBehaviour
         {
             player.totalCoinAmount -= currentJetPrice;
             player.jetDriveDur += 2f;
-            currentJetPrice = nextJetPrice;
             RecomputeNextPrices();
             RefreshAllTexts();
 
@@ -179,7 +171,6 @@ public class UpdateManager : MonoBehaviour
         {
             player.totalCoinAmount -= currentTankPrice;
             player.tankDriveDur += 2f;
-            currentTankPrice = nextTankPrice;
             RecomputeNextPrices();
             RefreshAllTexts();
 
@@ -196,7 +187,6 @@ public class UpdateManager : MonoBehaviour
         {
             player.totalCoinAmount -= currentTankReloadPrice;
             player.tankReloadDur -= 0.25f;
-            currentTankReloadPrice = nextTankReloadPrice;
             RecomputeNextPrices();
             RefreshAllTexts();
 
@@ -213,7 +203,6 @@ public class UpdateManager : MonoBehaviour
         {
             player.totalCoinAmount -= currentPlanePrice;
             player.planeFlyDur += 2f;
-            currentPlanePrice = nextPlanePrice;
             RecomputeNextPrices();
             RefreshAllTexts();
 
@@ -230,7 +219,6 @@ public class UpdateManager : MonoBehaviour
         {
             player.totalCoinAmount -= currentPlaneReloadPrice;
             player.planeReloadDur -= 0.25f;
-            currentPlaneReloadPrice = nextPlaneReloadPrice;
             RecomputeNextPrices();
             RefreshAllTexts();
 

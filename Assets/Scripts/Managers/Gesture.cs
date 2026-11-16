@@ -19,6 +19,7 @@ public class Gesture : MonoBehaviour
 
     private void OnEnable()
     {
+        price = EconomyBalance.GesturePrice(gestureID, price);
         gestureNameText.text = gestureName;
         gesturePriceText.text = price.ToString();
         audioSource = GetComponentInChildren<AudioSource>();

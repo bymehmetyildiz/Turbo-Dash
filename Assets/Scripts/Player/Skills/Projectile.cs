@@ -13,20 +13,66 @@ public class Projectile : MonoBehaviour
     public bool firedByPlayer;
 
     private bool hasHit;
+    private Vector3 travelDirection;
+
+    // Both arguments are world units per second. Configure before the first physics tick.
+    public void LaunchFromPlayer(float additionalSpeed, float forwardSpeed)
+    {
+        speed = Mathf.Abs(additionalSpeed) / 60f;
+        inheritedForwardSpeed = Mathf.Max(0f, forwardSpeed);
+        firedByPlayer = true;
+        ConfigureMotion();
+    }
 
     void Start()
     {
         Destroy(gameObject, 4f);
+        ConfigureMotion();
+    }
+
+    private void ConfigureMotion()
+    {
+
+        // The direction is fixed once, at launch. It used to be read from the rotation every frame, so as soon as
+        // physics nudged or spun the shot (it spawns touching the vehicle that fires it) it flew off sideways or backwards.
+        travelDirection = firedByPlayer
+            ? Vector3.forward
+            : transform.TransformDirection(transform.forward).normalized;
+
+        Rigidbody body = GetComponent<Rigidbody>();
+        if (body != null)
+        {
+            // This script moves the shot itself, every frame. With interpolation on, Unity overwrites the transform
+            // each frame with a pose blended between the last two physics steps, throwing away most of that movement:
+            // the shot crawled behind the tank at high frame rates and jumped in steps at low ones (WebGL).
+            body.interpolation = RigidbodyInterpolation.None;
+
+            if (firedByPlayer)
+            {
+                // Player shots are moved only by this script; hits are found by the sweep in Update
+                body.isKinematic = true;
+            }
+            else
+            {
+                body.constraints = RigidbodyConstraints.FreezeRotation;
+            }
+        }
     }
 
     void Update()
+    {
+        Advance(Time.deltaTime);
+    }
+
+    private void Advance(float deltaTime)
     {
         if (hasHit)
             return;
 
         // speed was tuned as "units per frame at 60 FPS"; scale by time so it is the same on every device
-        Vector3 step = transform.TransformDirection(transform.forward) * (speed * 60f * Time.deltaTime)
-                     + Vector3.forward * (inheritedForwardSpeed * Time.deltaTime);
+        // Player shots move along world +Z, independently of the model rotation.
+        float ownSpeed = firedByPlayer ? Mathf.Abs(speed) : speed;
+        Vector3 step = travelDirection * ((ownSpeed * 60f + inheritedForwardSpeed) * deltaTime);
 
         // Fast shots can cross a thin target between two frames, so sweep the path first
         float distance = step.magnitude;

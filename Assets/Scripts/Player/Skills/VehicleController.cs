@@ -101,9 +101,8 @@ public class VehicleController : MonoBehaviour
         AudioManager.instance.PlaySound(10);        
         GameObject bombObject = Instantiate(bomb, bombPos.position, Quaternion.Euler(-90, 90, 90));
         Projectile projectile = bombObject.GetComponent<Projectile>();
-        projectile.speed = 0.75f;
-        projectile.firedByPlayer = true;
-        projectile.inheritedForwardSpeed = player.moveSpeed * speed; // the tank's own forward speed
+        // 45 m/s on top of the tank's own forward speed
+        projectile.LaunchFromPlayer(45f, player.moveSpeed * speed);
         yield return new WaitForSeconds(player.tankReloadDur);
         canShoot = true;
     }
@@ -128,7 +127,7 @@ public class VehicleController : MonoBehaviour
         }
 
         Projectile projectile = collision.gameObject.GetComponent<Projectile>();
-        if (projectile != null)
+        if (projectile != null && !projectile.firedByPlayer) // the tank's own shell must not destroy the tank
         { 
             gameObject.SetActive(false);
             player.stateMachine.ChangeState(player.airState);
